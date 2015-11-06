@@ -1,0 +1,35 @@
+# compile files
+target/
+bin/
+build/
+dist/
+gen/
+
+# eclipse 
+.project
+.classpath
+.settings/
+
+# netbeans
+nbproject/
+buid.xml
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+out/
+
+# Gradle local
+.gradle
+/local.properties
+
+# Mac 
+.DS_Store
+
+# Temporary files
+*~
+
+# Others
+/captures
