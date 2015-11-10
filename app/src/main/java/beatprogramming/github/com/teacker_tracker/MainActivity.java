@@ -12,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         lista = (ListView)findViewById(R.id.lista);
 
         //Inicializar el adaptador con la fuente de datos
-        adaptador = new TareaArrayAdapter<Tarea>(
+        adaptador = new TareaArrayAdapter(
                 this,
                 DataSource.TAREAS);
 
@@ -113,4 +115,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

@@ -12,9 +12,9 @@ import java.util.List;
 /**
  * Created by Adrian on 07/11/2015.
  */
-public class TareaArrayAdapter <T> extends ArrayAdapter<T> {
+public class TareaArrayAdapter extends ArrayAdapter<Tarea> {
 
-    public TareaArrayAdapter(Context context, List<T> objects) {
+    public TareaArrayAdapter(Context context, List<Tarea> objects) {
         super(context, 0, objects);
     }
 
@@ -32,28 +32,21 @@ public class TareaArrayAdapter <T> extends ArrayAdapter<T> {
         if (null == convertView) {
             //Si no existe, entonces inflarlo con two_line_list_item.xml
             listItemView = inflater.inflate(
-                    android.R.layout.two_line_list_item,
+                    R.layout.image_list_item,
                     parent,
                     false);
         }
 
         //Obteniendo instancias de los text views
-        TextView titulo = (TextView)listItemView.findViewById(android.R.id.text1);
-        TextView subtitulo = (TextView)listItemView.findViewById(android.R.id.text2);
-
+        TextView titulo = (TextView)listItemView.findViewById(R.id.text1);
+        TextView subtitulo = (TextView)listItemView.findViewById(R.id.text2);
+        TextView hora = (TextView)listItemView.findViewById(R.id.hora);
         //Obteniendo instancia de la Tarea en la posición actual
-        T item = (T)getItem(position);
+        Tarea item = (Tarea)getItem(position);
 
-        //Dividir la cadena en Nombre y Hora
-        String cadenaBruta;
-        String subCadenas [];
-        String delimitador = ",";
-
-        cadenaBruta = item.toString();
-        subCadenas = cadenaBruta.split(delimitador,2);
-
-        titulo.setText(subCadenas[0]);
-        subtitulo.setText(subCadenas[1]);
+        titulo.setText(item.getNombre());
+        subtitulo.setText(item.getAux());
+        hora.setText(item.getHora());
 
         //Devolver al ListView la fila creada
         return listItemView;
