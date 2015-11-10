@@ -12,9 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    ListView lista;
+    ArrayAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Instancia del ListView
+        lista = (ListView)findViewById(R.id.lista);
+
+        //Inicializar el adaptador con la fuente de datos
+        adaptador = new TareaArrayAdapter<Tarea>(
+                this,
+                DataSource.TAREAS);
+
+        //Relacionando la lista con el adaptador
+        lista.setAdapter(adaptador);
     }
 
     @Override
