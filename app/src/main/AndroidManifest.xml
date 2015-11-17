@@ -18,6 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SubjectActivity"
+            android:label="@string/title_activity_subject" >
+        </activity>
+        <activity
+            android:name=".EditSubjectActivity"
+            android:label="@string/title_activity_edit_subject" >
+        </activity>
+        <activity
+            android:name=".ModifySubjectActivity"
+            android:label="@string/title_activity_modify_subject" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,6 +3,30 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- TITLE ACTIVITIES -->
+    <string name="title_activity_subject">Crear Asignatura</string>
+    <string name="title_activity_edit_subject">Asignaturas</string>
+    <string name="title_activity_modify_subject">Editar Asignatura</string>
+
+    <!-- SUBJECT ACTIVITY -->
+    <string name="subjectName">Nombre de la asignatura</string>
+    <string name="subjectDescription">Descripción de la asignatura</string>
+    <string name="subjectCurse">Curso de la asignatura</string>
+    <string name="subjectAula">Aula de la asignatura</string>
+    <string name="submit">CONFIRMAR</string>
+
+    <!-- ACTIVITY MAIN DRAWER -->
+    <string name="titleSubject">Asignatura</string>
+
+    <!-- EDIT SUBJECT ACTIVITY -->
+    <string name="subjects_editSubject">ASIGNATURAS</string>
+
+    <!-- MODIFY ACTIVITY -->
+    <string name="button_submit">EDITAR</string>
+    <string name="button_delete">BORRAR</string>
+
+
 </resources>
