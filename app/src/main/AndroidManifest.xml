@@ -30,6 +30,18 @@
             android:name=".ModifySubjectActivity"
             android:label="@string/title_activity_modify_subject" >
         </activity>
+        <activity
+            android:name=".ScoreActivity"
+            android:label="@string/title_activity_score" >
+        </activity>
+        <activity
+            android:name=".AddScoreActivity"
+            android:label="@string/title_activity_add_score" >
+        </activity>
+        <activity
+            android:name=".SubmitScoreActivity"
+            android:label="@string/title_activity_submit_score" >
+        </activity>
     </application>
 
 </manifest>

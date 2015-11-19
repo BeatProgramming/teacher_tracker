@@ -10,6 +10,9 @@
     <string name="title_activity_subject">Crear Asignatura</string>
     <string name="title_activity_edit_subject">Asignaturas</string>
     <string name="title_activity_modify_subject">Editar Asignatura</string>
+    <string name="title_activity_score">Calificar asignatura</string>
+    <string name="title_activity_add_score">Calificación alumno</string>
+    <string name="title_activity_submit_score">Añadir calificación</string>
 
     <!-- SUBJECT ACTIVITY -->
     <string name="subjectName">Nombre de la asignatura</string>
@@ -27,6 +30,12 @@
     <!-- MODIFY ACTIVITY -->
     <string name="button_submit">EDITAR</string>
     <string name="button_delete">BORRAR</string>
+
+    <!-- SUBMIT SCORE ACTIVITY -->
+    <string name="score">"Calificación</string>
+    <string name="scoreDescription">Añadir comentarios</string>
+    <string name="add_button">AÑADIR</string>
+
 
 
 </resources>

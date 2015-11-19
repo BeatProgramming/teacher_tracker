@@ -10,6 +10,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@android:drawable/ic_menu_view"
             android:title="Asignaturas" />
+        <item
+            android:id="@+id/nav_score"
+            android:icon="@android:drawable/ic_menu_upload"
+            android:title="Calificaciones" />
         <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
             android:title="Tools" />
     </group>

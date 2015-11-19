@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/item_subject"
+        android:id="@+id/item_name"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp" />
@@ -18,10 +18,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/item_edit"
-        android:layout_alignTop="@+id/item_subject"
+        android:id="@+id/item_first_name"
+        android:layout_alignTop="@+id/item_name"
         android:layout_centerHorizontal="true" />
 
 
 
 </RelativeLayout>
+
