@@ -1,14 +1,14 @@
-package beatprogramming.github.com.teacker_tracker;
+package beatprogramming.github.com.teacker_tracker.domain;
 
 /**
  * Created by Adrian on 07/11/2015.
  */
-public class Tarea {
+public class Task {
     private String nombre;
     private String aux;
     private String hora;
 
-    public Tarea(String nombre, String hora, String aux){
+    public Task(String nombre, String hora, String aux){
 
         this.nombre = nombre;
         this.aux = aux;

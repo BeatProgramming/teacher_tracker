@@ -6,18 +6,19 @@ package beatprogramming.github.com.teacker_tracker;
 import java.util.ArrayList;
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.domain.Task;
 
 
 public class DataSource {
-    static List TAREAS = new ArrayList<Tarea>();
+    final static List TASK = new ArrayList<Task>();
 
     static{
 
-        TAREAS.add(new Tarea("Trotar 30 minutos","08:00", "1º actividad"));
-        TAREAS.add(new Tarea("Estudiar análisis técnico","10:00", "2º actividad"));
-        TAREAS.add(new Tarea("Comer 4 rebanadas de manzana","10:30", "3º actividad"));
-        TAREAS.add(new Tarea("Asistir al taller de programación gráfica","15:45", "4º actividad"));
-        TAREAS.add(new Tarea("Consignarle a Marta","18:00", "5º actividad"));
+        TASK.add(new Task("Lengua 1º ESO","08:00", "A101"));
+        TASK.add(new Task("Lengua 2º ESO","10:00", "A003"));
+        TASK.add(new Task("Matematica 4º ESO","13:00", "A104"));
+        TASK.add(new Task("Ciencias sociales 1º ESO","16:00", "A102"));
+        TASK.add(new Task("Ciencias sociales 1º ESO","17:00", "A102"));
 
     }
 }

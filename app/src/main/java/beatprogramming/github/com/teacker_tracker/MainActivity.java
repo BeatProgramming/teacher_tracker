@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
@@ -29,8 +30,8 @@ public class MainActivity extends AppCompatActivity
 
     private static final String TAG = MainActivity.class.getName();
 
-    private ListView lista;
-    private ArrayAdapter adaptador;
+    private ListView lista_main;
+    private ArrayAdapter adaptador_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +57,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Instancia del ListView
-        lista = (ListView)findViewById(R.id.lista);
+        lista_main = (ListView)findViewById(R.id.listViewMain);
 
         //Inicializar el adaptador con la fuente de datos
-        adaptador = new TareaArrayAdapter(
+        adaptador_main = new TaskAdapter(
                 this,
-                DataSource.TAREAS);
+                DataSource.TASK);
 
         //Relacionando la lista con el adaptador
-        lista.setAdapter(adaptador);
+        lista_main.setAdapter(adaptador_main);
     }
 
     @Override
