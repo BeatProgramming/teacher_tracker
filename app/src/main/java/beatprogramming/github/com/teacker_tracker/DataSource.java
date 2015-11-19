@@ -1,6 +1,7 @@
 package beatprogramming.github.com.teacker_tracker;
 
-/**
+/** Clase que simula una base de datos para las asignaturas creadas por un usuario
+ *
  * Created by Adrian on 07/11/2015.
  */
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 
 
 public class DataSource {
+
     final static List TASK = new ArrayList<Task>();
 
     static{
