@@ -1,4 +1,4 @@
-package beatprogramming.github.com.teacker_tracker;
+package beatprogramming.github.com.teacker_tracker.util;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,6 +17,7 @@ import java.util.Map;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 
 /**
  * Created by malkomich on 13/11/15.
@@ -24,6 +25,8 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
 public class CSVManager {
 
     private static final String TAG = CSVManager.class.getName();
+
+    private static final String CSV_FILE = "/students.csv";
 
     private static final Integer NAME_POS_DEFAULT = 0;
     private static final Integer SURNAME_POS_DEFAULT = 1;
@@ -41,11 +44,16 @@ public class CSVManager {
     private String name;
     private String surname;
 
-    private Context context;
-
     private CSVManager(Context context) {
 
-        this.context = context;
+        if (context != null) {
+            name = context.getString(context.getResources().getIdentifier("csv_name", "string", context.getPackageName()));
+            surname = context.getString(context.getResources().getIdentifier("csv_surname", "string", context.getPackageName()));
+        } else {
+            name = NAME_HEADER_DEFAULT;
+            surname = SURNAME_HEADER_DEFAULT;
+        }
+
         setHeaderPositions();
     }
 
@@ -55,32 +63,37 @@ public class CSVManager {
         return manager;
     }
 
-    public void exportStudents(File directory, List<Student> students) {
+    public void exportStudents(File directory, List<Student> students) throws CSVException {
 
-        String path = directory.getAbsolutePath() + "/students.csv";
+        String path = directory.getAbsolutePath() + CSV_FILE;
         Log.d(TAG, path);
 
         FileWriter file = null;
         try {
             file = new FileWriter(path);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CSVException("Error accesing storage.");
         }
-        CSVWriter writer = new CSVWriter(file,',');
-        List<String[]> data  = toStringArray(students);
+        CSVWriter writer = new CSVWriter(file, ',');
+        List<String[]> data = toStringArray(students);
         writer.writeAll(data);
 
         try {
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new CSVException("Error closing file.");
         }
 
         Log.d(TAG, writer.toString());
 
     }
 
-
+    /*
+     * Get the list of items from a specific file located in a given path.
+     *
+     * @param path
+     * @return List of students
+     */
     public List<Student> importStudents(String path) {
 
         CSVReader csvReader = null;
@@ -127,14 +140,6 @@ public class CSVManager {
 
         headerPos = new HashMap<String, Integer>();
 
-        if(context != null) {
-            name = context.getString(context.getResources().getIdentifier("csv_name", "string", context.getPackageName()));
-            surname = context.getString(context.getResources().getIdentifier("csv_surname", "string", context.getPackageName()));
-        } else {
-            name = NAME_HEADER_DEFAULT;
-            surname = SURNAME_HEADER_DEFAULT;
-        }
-
         for (int i = 0; i < headers.size(); i++) {
             String value = headers.get(i);
             switch (value) {
@@ -162,12 +167,18 @@ public class CSVManager {
         setHeaderPositions(new ArrayList<String>());
     }
 
-    private static List<String[]> toStringArray(List<Student> students) {
+    /*
+     * Convert a list of items to a list of rows. That rows are arrays of strings,
+     * defining the values required.
+     */
+    private List<String[]> toStringArray(List<Student> students) {
         List<String[]> records = new ArrayList<String[]>();
-        //add header record
-        records.add(new String[]{"Nombre", "Apellidos"});
+
+        // Set headers
+        records.add(new String[]{name, surname});
+
         Iterator<Student> it = students.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Student student = it.next();
             records.add(new String[]{student.getName(), student.getSurname()});
         }

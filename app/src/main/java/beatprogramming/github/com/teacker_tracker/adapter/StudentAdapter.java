@@ -1,4 +1,4 @@
-package beatprogramming.github.com.teacker_tracker;
+package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
 /**

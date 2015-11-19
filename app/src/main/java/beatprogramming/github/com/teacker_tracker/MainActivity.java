@@ -13,12 +13,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_export_students) {
             exportStudentList();
         } else if (id == R.id.nav_manage_students) {
-            Intent intent = new Intent(this, NewStudents.class);
+            Intent intent = new Intent(this, NewStudentsActivity.class);
             startActivity(intent);
         }
 
@@ -112,6 +115,13 @@ public class MainActivity extends AppCompatActivity
         List<Student> studentsExample = new ArrayList<Student>();
         studentsExample.add(new Student("Juan Carlos", "González"));
         File dir = getExternalFilesDir(null);
-        CSVManager.getInstance(this).exportStudents(dir, studentsExample);
+        String outputMessage = null;
+        try {
+            CSVManager.getInstance(this).exportStudents(dir, studentsExample);
+            outputMessage = "Alumnos exportados a " + dir.getAbsolutePath();
+        } catch (CSVException e) {
+            outputMessage = e.getMessage();
+        }
+        Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
     }
 }

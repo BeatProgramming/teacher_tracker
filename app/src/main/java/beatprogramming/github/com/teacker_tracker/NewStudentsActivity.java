@@ -17,11 +17,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.adapter.StudentAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
-public class NewStudents extends AppCompatActivity {
+public class NewStudentsActivity extends AppCompatActivity {
 
-    private final String TAG =NewStudents.class.getName();
+    private final String TAG =NewStudentsActivity.class.getName();
 
     private StudentAdapter adapter;
     private List<Student> studentList = new ArrayList<Student>();
