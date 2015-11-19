@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Teacker_Tracker</string>
+    <string name="app_name">Teacker Tracker</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,6 +23,9 @@
 
     <!-- ACTIVITY MAIN DRAWER -->
     <string name="titleSubject">Asignatura</string>
+    <string name="students_title">Alumnos</string>
+    <string name="export_students">Exportar</string>
+    <string name="manage_students">Gestionar</string>
 
     <!-- EDIT SUBJECT ACTIVITY -->
     <string name="subjects_editSubject">ASIGNATURAS</string>
@@ -36,6 +39,12 @@
     <string name="scoreDescription">Añadir comentarios</string>
     <string name="add_button">AÑADIR</string>
 
+    <!-- STUDENTS ACTIVITY -->
+    <string name="title_activity_new_students">Alumnos</string>
+    <string name="student_name_label">Nombre</string>
+    <string name="student_surname_label">Apellidos</string>
 
-
+    <!-- CSV header labels -->
+    <string name="csv_name">Nombre</string>
+    <string name="csv_surname">Apellidos</string>
 </resources>

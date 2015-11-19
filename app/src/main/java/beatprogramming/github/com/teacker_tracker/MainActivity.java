@@ -3,7 +3,6 @@ package beatprogramming.github.com.teacker_tracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,16 +11,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.util.CSVManager;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView lista;
-    ArrayAdapter adaptador;
+    private static final String TAG = MainActivity.class.getName();
+
+    private ListView lista;
+    private ArrayAdapter adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +105,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow){
             Intent intent = new Intent(MainActivity.this,EditSubjectActivity.class);
@@ -106,10 +113,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_score) {
             Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_export_students) {
+            exportStudentList();
+        } else if (id == R.id.nav_manage_students) {
+            Intent intent = new Intent(this, NewStudentsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,4 +127,18 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    private void exportStudentList() {
+
+        List<Student> studentsExample = new ArrayList<Student>();
+        studentsExample.add(new Student("Juan Carlos", "González"));
+        File dir = getExternalFilesDir(null);
+        String outputMessage = null;
+        try {
+            CSVManager.getInstance(this).exportStudents(dir, studentsExample);
+            outputMessage = "Alumnos exportados a " + dir.getAbsolutePath();
+        } catch (CSVException e) {
+            outputMessage = e.getMessage();
+        }
+        Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
+    }
 }
