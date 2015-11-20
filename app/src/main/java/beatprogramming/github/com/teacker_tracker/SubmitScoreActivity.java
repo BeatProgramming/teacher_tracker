@@ -12,14 +12,16 @@ import android.widget.Toast;
 
 public class SubmitScoreActivity extends AppCompatActivity {
 
+    private final static String ALUMNO = "alumno";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_score);
 
         TextView pupil = (TextView) findViewById(R.id.pupil);
-        String nombre = getIntent().getExtras().getString("pupil");
-        pupil.setText("Alumno: " + nombre);
+        String name = getIntent().getExtras().getString(ALUMNO);
+        pupil.setText("ALUMNO" + ":" + name);
 
         Button button = (Button) findViewById(R.id.add_button);
         button.setOnClickListener(new View.OnClickListener() {

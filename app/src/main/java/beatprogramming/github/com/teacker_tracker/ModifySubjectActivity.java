@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 public class ModifySubjectActivity extends AppCompatActivity {
 
+    private final static String ASIGNATURA = "asignatura";
+    private final static String CURSO = "curso";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +22,8 @@ public class ModifySubjectActivity extends AppCompatActivity {
 
         EditText subject = (EditText) findViewById(R.id.subjectName);
         EditText curseSubject = (EditText) findViewById(R.id.subjectCurse);
-        String asignatura = getIntent().getExtras().getString("asignatura");
-        String curso = getIntent().getExtras().getString("curso");
+        String asignatura = getIntent().getExtras().getString(ASIGNATURA);
+        String curso = getIntent().getExtras().getString(CURSO);
         subject.setHint(asignatura);
         curseSubject.setHint(curso);
 

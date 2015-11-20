@@ -58,7 +58,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Obtiene una instancia de la Task en la posición actual
         Task item = (Task)getItem(position);
 
-        subject.setText(item.getNombre());
+        subject.setText(item.toString());
         classroom.setText(item.getAux());
         hour.setText(item.getHora());
 

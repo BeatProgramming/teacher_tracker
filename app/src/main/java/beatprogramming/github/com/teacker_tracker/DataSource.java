@@ -16,11 +16,11 @@ public class DataSource {
 
     static{
 
-        TASK.add(new Task("Lengua 1º ESO","08:00", "A101"));
-        TASK.add(new Task("Lengua 2º ESO","10:00", "A003"));
-        TASK.add(new Task("Matematica 4º ESO","13:00", "A104"));
-        TASK.add(new Task("Ciencias sociales 1º ESO","16:00", "A102"));
-        TASK.add(new Task("Ciencias sociales 1º ESO","17:00", "A102"));
+        TASK.add(new Task("Lengua", "2º ESO","08:00", "A101"));
+        TASK.add(new Task("Lengua", "2º ESO","10:00", "A003"));
+        TASK.add(new Task("Matemáticas", "1º ESO","13:00", "A104"));
+        TASK.add(new Task("Filosofía", "2º ESO","16:00", "A102"));
+        TASK.add(new Task("Filosofía", "2º ESO","17:00", "A102"));
 
     }
 }

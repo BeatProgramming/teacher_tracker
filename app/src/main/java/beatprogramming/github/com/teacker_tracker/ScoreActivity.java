@@ -13,19 +13,27 @@ import android.widget.SimpleCursorAdapter;
 
 public class ScoreActivity extends AppCompatActivity {
 
+    private final static String ID = "_id";
+    private final static String ASIGNATURA = "Asignatura";
+    private final static String CURSO = "Curso";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        createList();
+    }
+
+    public void createList(){
         ListView listview = (ListView) findViewById(R.id.subject_score_list_view);
 
-        String[] colSubjects = new String[]{"_id","Asignatura","Curso"};
+        String[] colSubjects = new String[]{ID,ASIGNATURA,CURSO};
         MatrixCursor cursor = new MatrixCursor(colSubjects);
         cursor.addRow(new Object[]{"0","Matemáticas","1 ESO"});
         cursor.addRow(new Object[]{"1","Lengua","2 ESO"});
         cursor.addRow(new Object[]{"2","Filosofía","2 ESO"});
-        String[] cols = {"Asignatura","Curso"};
+        String[] cols = {ASIGNATURA,CURSO};
         int[] viewSubjects = {R.id.item_subject,R.id.item_edit};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.subject_listview_entry,cursor,cols,viewSubjects,0);
 

@@ -14,32 +14,47 @@ import android.widget.TextView;
 
 public class AddScoreActivity extends AppCompatActivity {
 
+    private final static String ID = "_id";
+    private final static String NOMBRE = "nombre";
+    private final static String APELLIDO = "apellido";
+    private final static String ALUMNO = "alumno";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_score);
 
-        ListView listview = (ListView) findViewById(R.id.subject_add_score_list_view);
+        createList();
+    }
 
-        String[] colSubjects = new String[]{"_id","Nombre","Apellido"};
+    /**
+     * - Método que genera la lista de alumnos por asignatura listos para calificar.
+     */
+    public void createList(){
+        ListView listview = (ListView) findViewById(R.id.subject_add_score_list_view);
+        String[] colSubjects = new String[]{ID,NOMBRE,APELLIDO};
+
         MatrixCursor cursor = new MatrixCursor(colSubjects);
         cursor.addRow(new Object[]{"0","Adrián","Martín Gómez"});
         cursor.addRow(new Object[]{"1","Juan Carlos","González Cabrero"});
         cursor.addRow(new Object[]{"2","Óscar","Fernández Núñez"});
-        String[] cols = {"Nombre","Apellido"};
+        String[] cols = {NOMBRE,APELLIDO};
         int[] viewSubjects = {R.id.item_name,R.id.item_first_name};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.pupils_listview_entry,cursor,cols,viewSubjects,0);
+        SimpleCursorAdapter adapter =  new SimpleCursorAdapter(this,R.layout.pupils_listview_entry,cursor,cols,viewSubjects,0);
 
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(itemClickListener);
+
+
+
     }
 
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            TextView nombreText = (TextView) view.findViewById(R.id.item_name);
             Intent intent = new Intent(AddScoreActivity.this,SubmitScoreActivity.class);
-            TextView nombreText = (TextView) findViewById(R.id.item_name);
-            intent.putExtra("pupil",nombreText.getText());
+            intent.putExtra(ALUMNO,nombreText.getText());
             startActivity(intent);
         }
     };
