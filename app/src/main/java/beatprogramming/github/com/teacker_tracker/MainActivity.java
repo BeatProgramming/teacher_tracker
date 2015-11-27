@@ -2,7 +2,6 @@ package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,9 +18,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
+import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class MainActivity extends AppCompatActivity
@@ -40,14 +39,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent = new Intent(MainActivity.this,SubjectActivity.class);
-               startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -58,16 +49,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Instancia del ListView
-        lista_main = (ListView)findViewById(R.id.listViewMain);
+        // Create a new Fragment to be placed in the activity layout
+        TaskFragment firstFragment = new TaskFragment();
 
-        //Inicializa el adaptador con la fuente de datos
-        adaptador_main = new TaskAdapter(
-                this,
-                DataSource.TASK);
+        // In case this activity was started with special instructions from an
+        // Intent, pass the Intent's extras to the fragment as arguments
+        firstFragment.setArguments(getIntent().getExtras());
 
-        //Relacionando la lista con el adaptador
-        lista_main.setAdapter(adaptador_main);
+        // Add the fragment to the 'fragment_container' FrameLayout
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.coord_layout, firstFragment).commit();
     }
 
     @Override
@@ -111,8 +102,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow){
-            Intent intent = new Intent(MainActivity.this,EditSubjectActivity.class);
-            startActivity(intent);
+
+            SubjectFragment frag = new SubjectFragment();
+            Bundle args = new Bundle();
+            getSupportFragmentManager().beginTransaction().replace(R.id.coord_layout, frag).commit();
+
         } else if (id == R.id.nav_score) {
             Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
             startActivity(intent);

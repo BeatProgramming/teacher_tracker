@@ -36,7 +36,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Comprueba si el View no existe
         if (null == convertView) {
             listItemView = inflater.inflate(
-                    R.layout.listview_main_row,
+                    R.layout.listview_task_row,
                     parent,
                     false);
         }

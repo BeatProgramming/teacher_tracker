@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SubjectActivity extends AppCompatActivity {
+public class TempSubjectActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +20,7 @@ public class SubjectActivity extends AppCompatActivity {
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SubjectActivity.this,MainActivity.class);
+                Intent intent = new Intent(TempSubjectActivity.this,MainActivity.class);
                 Toast.makeText(getApplicationContext(), "NO DISPONIBLE", Toast.LENGTH_LONG).show();
                 startActivity(intent);
             }

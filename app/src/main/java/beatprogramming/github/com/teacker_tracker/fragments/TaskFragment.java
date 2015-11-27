@@ -1,6 +1,6 @@
-package beatprogramming.github.com.teacker_tracker;
+package beatprogramming.github.com.teacker_tracker.fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,16 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
+import beatprogramming.github.com.teacker_tracker.DataSource;
+import beatprogramming.github.com.teacker_tracker.R;
+import beatprogramming.github.com.teacker_tracker.TempSubjectActivity;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
+
 
 /**
  * Created by adrian on 27/11/2015.
  */
-public class FragmentoMain extends Fragment {
+public class TaskFragment extends ListFragment {
 
-    private ListView lista_main;
     private ArrayAdapter adaptador_main;
 
     @Override
@@ -25,17 +27,17 @@ public class FragmentoMain extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        FloatingActionButton fab = (FloatingActionButton) getView().findViewById(R.id.fab);
+        View view = inflater.inflate(R.layout.fragment_tasks, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),SubjectActivity.class);
+                Intent intent = new Intent(getActivity(),TempSubjectActivity.class);
                 startActivity(intent);
             }
         });
-
-        //Instancia del ListView
-        lista_main = (ListView)getView().findViewById(R.id.listViewMain);
 
         //Inicializa el adaptador con la fuente de datos
         adaptador_main = new TaskAdapter(
@@ -43,8 +45,8 @@ public class FragmentoMain extends Fragment {
                 DataSource.TASK);
 
         //Relacionando la lista con el adaptador
-        lista_main.setAdapter(adaptador_main);
-        return inflater.inflate(R.layout.content_main, container, false);
+        setListAdapter(adaptador_main);
+        return view;
     }
 
 }

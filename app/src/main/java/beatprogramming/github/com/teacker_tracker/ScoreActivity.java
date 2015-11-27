@@ -34,8 +34,8 @@ public class ScoreActivity extends AppCompatActivity {
         cursor.addRow(new Object[]{"1","Lengua","2 ESO"});
         cursor.addRow(new Object[]{"2","Filosofía","2 ESO"});
         String[] cols = {ASIGNATURA,CURSO};
-        int[] viewSubjects = {R.id.item_subject,R.id.item_edit};
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.subject_listview_entry,cursor,cols,viewSubjects,0);
+        int[] viewSubjects = {R.id.item_subject,R.id.item_course};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.listview_subject_row,cursor,cols,viewSubjects,0);
 
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(itemClickListener);

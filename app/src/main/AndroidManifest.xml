@@ -22,11 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SubjectActivity"
+            android:name=".TempSubjectActivity"
             android:label="@string/title_activity_subject"></activity>
-        <activity
-            android:name=".EditSubjectActivity"
-            android:label="@string/title_activity_edit_subject"></activity>
         <activity
             android:name=".ModifySubjectActivity"
             android:label="@string/title_activity_modify_subject"></activity>
