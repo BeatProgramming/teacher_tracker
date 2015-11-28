@@ -5,28 +5,43 @@ package beatprogramming.github.com.teacker_tracker.domain;
  */
 public class Subject {
 
-    private String course;
-    private String name;
+    private String curso;
+    private String nombre;
+    private String aula;
 
-    public Subject(String name, String course) {
-        this.course=course;
-        this.name=name;
+    public Subject(String nombre, String curso, String aula) {
+        this.curso=curso;
+        this.nombre=nombre;
+        this.aula=aula;
     }
 
-    public String getCourse() {
-        return course;
+    public String getAula() {
+        return aula;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setAula(String aula) {
+        this.aula = aula;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Override
+    public String toString(){
+        return this.nombre + " " + this.curso;
     }
 }

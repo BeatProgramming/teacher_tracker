@@ -52,7 +52,7 @@ public class NewStudentsActivity extends AppCompatActivity {
         }
 
         ListView studentsListView = (ListView) findViewById(R.id.list_students);
-        adapter = new StudentAdapter(this, R.layout.student_listview_item, studentList);
+        adapter = new StudentAdapter(this, R.layout.listview_student_item_row, studentList);
         studentsListView.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

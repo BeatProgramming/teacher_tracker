@@ -19,19 +19,19 @@ public class DataSource {
 
     static{
 
-        TASK.add(new Task("Lengua", "2º ESO","08:00", "A101"));
-        TASK.add(new Task("Lengua", "2º ESO","10:00", "A003"));
-        TASK.add(new Task("Matemáticas", "1º ESO","13:00", "A104"));
-        TASK.add(new Task("Filosofía", "2º ESO","16:00", "A102"));
-        TASK.add(new Task("Filosofía", "2º ESO","17:00", "A102"));
+        TASK.add(new Task(new Subject("Lengua", "2º ESO", "A101"),"08:00"));
+        TASK.add(new Task(new Subject("Lengua", "2º ESO", "A101"),"10:00"));
+        TASK.add(new Task(new Subject("Matemáticas", "1º ESO", "A103"), "12:00"));
+        TASK.add(new Task(new Subject("Filosofía", "2º ESO", "A106"),"16:00"));
+        TASK.add(new Task(new Subject("Filosofía", "2º ESO", "A106"),"17:00"));
 
     }
 
     static{
 
-        SUBJECT.add(new Subject("Lengua", "2º ESO"));
-        SUBJECT.add(new Subject("Matemáticas", "1º ESO"));
-        SUBJECT.add(new Subject("Filosofía", "2º ESO"));
+        SUBJECT.add(new Subject("Lengua", "2º ESO", "A101"));
+        SUBJECT.add(new Subject("Matemáticas", "1º ESO", "A103"));
+        SUBJECT.add(new Subject("Filosofía", "2º ESO", "A106"));
 
     }
 }

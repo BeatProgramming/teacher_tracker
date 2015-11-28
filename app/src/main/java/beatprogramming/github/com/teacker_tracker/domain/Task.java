@@ -1,44 +1,45 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import java.util.List;
+
 /**
  * Created by Adrian on 07/11/2015.
  */
 public class Task {
-    private String nombre;
-    private String curso;
-    private String aux;
+    private Subject tarea;
     private String hora;
+    private List<String> notas;
 
-    public Task(String nombre, String curso, String hora, String aux){
-
-        this.nombre = nombre;
-        this.aux = aux;
+    public Task(Subject tarea, String hora){
+        this.tarea=tarea;
         this.hora=hora;
-        this.curso=curso;
-
     }
 
-    public String getCurso() {
-        return curso;
+    public void addNota(String nota){
+        this.notas.add(nota);
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public List<String> getNotas() {
+        return notas;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public void setNotas(List<String> notas) {
+        this.notas = notas;
     }
-    public void setHora(String hora){
-        this.hora = hora;}
 
-    public void setAux(String aux){
-        this.aux=aux;
+    public Subject getTarea() {
+        return tarea;
     }
-    public String getNombre(){return nombre;}
-    public String getHora(){return hora;}
-    public String getAux() {return aux;}
 
-    @Override
-    public String toString(){return nombre+" "+curso;}
+    public void setTarea(Subject tarea) {
+        this.tarea = tarea;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 }

@@ -2,7 +2,6 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,21 +23,17 @@ public class SubjectFragment extends ListFragment {
     private final static String ASIGNATURA = "Asignatura";
     private final static String CURSO = "Curso";
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject, container);
-        createList();
+
+        SubjectAdapter adapter_subject = new SubjectAdapter(getActivity(), DataSource.SUBJECT);
+
+        setListAdapter(adapter_subject);
+
+        getListView().setOnItemClickListener(itemClickListener);
 
         return view;
-    }
-
-    public void createList(){
-
-        SubjectAdapter adapter = new SubjectAdapter(getActivity(), DataSource.SUBJECT);
-
-        setListAdapter(adapter);
-        getListView().setOnItemClickListener(itemClickListener);
     }
 
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {

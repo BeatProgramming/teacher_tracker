@@ -58,8 +58,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Obtiene una instancia de la Task en la posición actual
         Task item = (Task)getItem(position);
 
-        subject.setText(item.toString());
-        classroom.setText(item.getAux());
+        subject.setText(item.getTarea().toString());
+        classroom.setText(item.getTarea().getAula());
         hour.setText(item.getHora());
 
         //Devuelve al ListView la fila creada

@@ -45,8 +45,8 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
 
         Subject item = (Subject)getItem(position);
 
-        name.setText(item.getName());
-        course.setText(item.getCourse());
+        name.setText(item.getNombre());
+        course.setText(item.getCurso());
 
         //Devuelve al ListView la fila creada
         return listItemView;
