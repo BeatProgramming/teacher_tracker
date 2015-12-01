@@ -1,13 +1,17 @@
 package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -20,6 +24,8 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.fragments.ReviewFragment;
+import beatprogramming.github.com.teacker_tracker.fragments.StudentFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
@@ -49,16 +55,35 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Create a new Fragment to be placed in the activity layout
-        TaskFragment firstFragment = new TaskFragment();
+        Fragment frag;
+        final Intent intent = getIntent();
 
-        // In case this activity was started with special instructions from an
-        // Intent, pass the Intent's extras to the fragment as arguments
-        firstFragment.setArguments(getIntent().getExtras());
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            //uri = intent.getStringExtra("URI");
+            Uri uri = intent.getData();
 
-        // Add the fragment to the 'fragment_container' FrameLayout
+            Log.d(TAG, "path: " + uri.getPath());
+            Log.d(TAG, "encode path: " + uri.getEncodedPath());
+            Log.d(TAG, "complete path: " + uri.toString());
+
+            List<Student> newStudents = CSVManager.getInstance(this).importStudents(uri.getEncodedPath());
+
+            if (newStudents != null) {
+                // Add students to database.
+            }
+
+            frag = new StudentFragment();
+
+        } else {
+
+            frag = new TaskFragment();
+
+        }
+
+        frag.setArguments(getIntent().getExtras());
+
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.coord_layout, firstFragment).commit();
+                .add(R.id.fragment_container, frag).commit();
     }
 
     @Override
@@ -99,24 +124,27 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_gallery) {
+        Fragment frag;
 
-        } else if (id == R.id.nav_slideshow){
+        if (id == R.id.nav_subject) {
 
-            SubjectFragment frag = new SubjectFragment();
-            Bundle args = new Bundle();
-            getSupportFragmentManager().beginTransaction().replace(R.id.coord_layout, frag).commit();
+            frag = new SubjectFragment();
+            replaceFragment(frag);
 
         } else if (id == R.id.nav_score) {
-            Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.nav_manage) {
+
+            frag = new ReviewFragment();
+            replaceFragment(frag);
 
         } else if (id == R.id.nav_export_students) {
+
             exportStudentList();
+
         } else if (id == R.id.nav_manage_students) {
-            Intent intent = new Intent(this, NewStudentsActivity.class);
-            startActivity(intent);
+
+            frag = new StudentFragment();
+            replaceFragment(frag);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -138,4 +166,13 @@ public class MainActivity extends AppCompatActivity
         }
         Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
     }
+
+    public void replaceFragment(Fragment fragment) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 }

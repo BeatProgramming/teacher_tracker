@@ -12,28 +12,28 @@ import android.widget.ListView;
 
 import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.R;
-import beatprogramming.github.com.teacker_tracker.adapter.SubjectAdapter;
-import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.adapter.ReviewAdapter;
+import beatprogramming.github.com.teacker_tracker.domain.Review;
 
 /**
  * Created by malkomich on 27/11/15.
  */
-public class SubjectFragment extends ListFragment {
+public class ReviewFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate (R.layout.fragment_listview, container, false);
 
-        SubjectAdapter adapter_subject = new SubjectAdapter(getActivity(), R.layout.listview_subject_row, DataSource.SUBJECT);
+        ReviewAdapter adapter = new ReviewAdapter(getActivity(),R.layout.listview_review_row, DataSource.REVIEW);
 
-        setListAdapter(adapter_subject);
+        setListAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragment(new SubjectUpdateFragment());
+                replaceFragment(new ReviewUpdateFragment());
             }
         });
 
@@ -43,12 +43,12 @@ public class SubjectFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-        Subject subject = ((Subject) getListAdapter().getItem(position));
+        Review review = ((Review) getListAdapter().getItem(position));
 
-        Fragment fragment = new SubjectUpdateFragment();
+        Fragment fragment = new ScoreFragment();
 
         Bundle args = new Bundle();
-        args.putSerializable(SubjectUpdateFragment.SUBJECT, subject);
+        args.putSerializable(ScoreFragment.REVIEW, review);
         fragment.setArguments(args);
 
         replaceFragment(fragment);

@@ -1,14 +1,19 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Adrian on 07/11/2015.
  */
-public class Task {
+public class Task implements Serializable {
     private Subject tarea;
     private String hora;
     private List<String> notas;
+
+    public Task() {
+
+    }
 
     public Task(Subject tarea, String hora){
         this.tarea=tarea;

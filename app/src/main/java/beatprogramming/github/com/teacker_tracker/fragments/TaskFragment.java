@@ -1,17 +1,16 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
 
-import android.support.v4.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.R;
-import beatprogramming.github.com.teacker_tracker.TempSubjectActivity;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 
 
@@ -27,22 +26,20 @@ public class TaskFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_tasks, container, false);
+        View view = inflater.inflate(R.layout.fragment_listview, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),TempSubjectActivity.class);
-                startActivity(intent);
+                Toast.makeText(getContext(), "No implementado", Toast.LENGTH_SHORT).show();
             }
         });
 
         //Inicializa el adaptador con la fuente de datos
         adaptador_main = new TaskAdapter(
-                getActivity(),
-                DataSource.TASK);
+                getActivity(), R.layout.listview_task_row, DataSource.TASK);
 
         //Relacionando la lista con el adaptador
         setListAdapter(adaptador_main);

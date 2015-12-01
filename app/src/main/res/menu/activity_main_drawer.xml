@@ -2,18 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_subject"
             android:icon="@android:drawable/ic_menu_view"
             android:title="Asignaturas" />
         <item
             android:id="@+id/nav_score"
             android:icon="@android:drawable/ic_menu_upload"
             android:title="Calificaciones" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
     </group>
 
     <item android:title="@string/students_title">

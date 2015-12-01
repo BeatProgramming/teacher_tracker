@@ -1,32 +1,31 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
+import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
 /**
  * Created by malkomich on 13/11/15.
  */
-public class StudentAdapter extends ArrayAdapter {
+public class ScoreAdapter extends ArrayAdapter {
 
-    private final String TAG = StudentAdapter.class.getName();
+    private final String TAG = ScoreAdapter.class.getName();
 
     private final Context context;
     private final int resource;
-    private final List<Student> values;
+    private final List<Score> values;
 
 
-    public StudentAdapter(Context context, int resource, List objects) {
+    public ScoreAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
         this.resource = resource;
         this.context = context;
@@ -41,22 +40,17 @@ public class StudentAdapter extends ArrayAdapter {
 
         View rowView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
-        TextView nameTextView = (TextView) rowView.findViewById(R.id.item_student_name);
-        TextView surnameTextView = (TextView) rowView.findViewById(R.id.item_student_surname);
-        String name = values.get(position).getName();
-        String surname = values.get(position).getSurname();
+        TextView studentTextView = (TextView) rowView.findViewById(R.id.item_score_student);
+        TextView scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
 
-        nameTextView.setText(name);
-        surnameTextView.setText(surname);
+        Student student = values.get(position).getStudent();
+        String name = student.getSurname() + ", " + student.getName();
+        float score = values.get(position).getCalificacion();
 
-        Log.d(TAG, "name: " + name + ", surname: " + surname);
+        studentTextView.setText(name);
+        scoreTextView.setText(String.valueOf(score));
 
         return rowView;
-    }
-
-    public void addStudents(Student ...students) {
-        Collections.addAll(values, students);
-        notifyDataSetChanged();
     }
 
 }

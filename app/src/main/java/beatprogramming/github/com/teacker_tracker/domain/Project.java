@@ -5,18 +5,8 @@ package beatprogramming.github.com.teacker_tracker.domain;
  */
 public class Project extends Review{
 
-    private String descripcion;
-
-    public Project(Subject subject, String descripcion) {
-        super(subject);
-        this.descripcion=descripcion;
+    public Project(String name, Subject subject) {
+        super(name, subject);
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }
