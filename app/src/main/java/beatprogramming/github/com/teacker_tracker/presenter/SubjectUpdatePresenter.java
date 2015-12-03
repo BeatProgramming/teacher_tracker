@@ -14,7 +14,6 @@ public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
     private static String TAG = SubjectUpdatePresenter.class.getName();
 
     private SubjectUpdateView view;
-
     private SubjectDao subjectDao;
 
     public SubjectUpdatePresenter(SubjectUpdateView view) {

@@ -29,7 +29,8 @@ public class TaskPresenter implements OnLoadFinishListener {
     }
 
     public void onItemClicked(int position) {
-
+        Task task = view.getTaskFromAdapter(position);
+        view.loadTaskUpdateFragment(task);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class TaskPresenter implements OnLoadFinishListener {
     }
 
     public void onFloatingButtonClick() {
-
+        view.loadTaskUpdateFragment(null);
     }
 }

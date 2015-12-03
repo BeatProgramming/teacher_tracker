@@ -14,7 +14,6 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
     private static String TAG = TaskUpdatePresenter.class.getName();
 
     private TaskUpdateView view;
-
     private TaskDao taskDao;
 
     public TaskUpdatePresenter(TaskUpdateView view) {

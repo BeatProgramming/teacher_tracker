@@ -15,4 +15,8 @@ public interface ReviewUpdateView {
 
     void setSubjectItems(List<Subject> items);
 
+    void setSubjectId(int id);
+
+    void setTypeValue(String type);
+
 }

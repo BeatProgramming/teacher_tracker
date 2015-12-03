@@ -22,7 +22,8 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public void updateStudent(int id, String name, String surname, int iconResource, OnUpdateFinishListener listener) {
+    public void updateStudent(int id, String name, String surname, String iconPath,
+                              OnUpdateFinishListener listener) {
 
         try{
             if(id == 0) {

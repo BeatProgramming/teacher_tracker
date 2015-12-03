@@ -14,7 +14,6 @@ public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
     private static String TAG = StudentUpdatePresenter.class.getName();
 
     private StudentUpdateView view;
-
     private StudentDao studentDao;
 
     public StudentUpdatePresenter(StudentUpdateView view) {
@@ -22,7 +21,9 @@ public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
         studentDao = new StudentDaoImpl();
     }
 
-    // SUBMIT METHOD HERE
+    public void submit(int id, String name, String surname, String iconPath) {
+        studentDao.updateStudent(id, name, surname, iconPath, this);
+    }
 
     public void delete(int id) {
         studentDao.deleteStudent(id, this);

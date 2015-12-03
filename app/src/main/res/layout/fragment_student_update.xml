@@ -17,11 +17,17 @@
         android:text="0"/>
 
     <ImageView
-        android:id="@+id/icon_row"
+        android:id="@+id/student_icon"
         android:layout_width="@dimen/icon_big_dimen"
         android:layout_height="@dimen/icon_big_dimen"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:src="@drawable/user_default" />
+
+    <TextView
+        android:id="@+id/student_icon_path"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:id="@+id/name_row"

@@ -29,7 +29,8 @@ public class ReviewPresenter implements OnLoadFinishListener {
     }
 
     public void onItemClicked(int position) {
-
+        Review review = view.getReviewFromAdapter(position);
+        view.loadReviewUpdateFragment(review);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class ReviewPresenter implements OnLoadFinishListener {
     }
 
     public void onFloatingButtonClick() {
-
+        view.loadReviewUpdateFragment(null);
     }
 }

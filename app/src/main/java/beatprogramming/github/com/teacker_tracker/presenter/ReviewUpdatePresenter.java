@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,8 +22,10 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     private static String TAG = ReviewUpdatePresenter.class.getName();
 
-    private ReviewUpdateView view;
+    public static final int RADIO_EXAM = 0;
+    public static final int RADIO_PROJECT = 1;
 
+    private ReviewUpdateView view;
     private ReviewDao reviewDao;
     private SubjectDao subjectDao;
 
@@ -35,7 +39,9 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
         subjectDao.findSubjects(this);
     }
 
-    // SUBMIT METHOD HERE
+    public void submit(int id, String name, int subjectId, String typeValue) {
+        reviewDao.updateReview(id, name, subjectId, typeValue, this);
+    }
 
     public void delete(int id) {
         reviewDao.deleteReview(id, this);
@@ -59,5 +65,32 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setSubjectItems((List<Subject>) items);
+    }
+
+    public void onSubjectSelected(Object item) {
+        if(item != null) {
+            Subject subject = (Subject) item;
+            view.setSubjectId(subject.getId());
+        } else {
+            Log.d(TAG, "onSubjectSelected, nothing selected.");
+            // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
+        }
+
+    }
+
+    public void onTypeChanged(int type) {
+
+        String typeValue = null;
+        switch (type) {
+            case RADIO_EXAM:
+                typeValue = ReviewDaoImpl.EXAM;
+                break;
+            case RADIO_PROJECT:
+                typeValue = ReviewDaoImpl.PROJECT;
+                break;
+            default:
+                break;
+        }
+        view.setTypeValue(typeValue);
     }
 }

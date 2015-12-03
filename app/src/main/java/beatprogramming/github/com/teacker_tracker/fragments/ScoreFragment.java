@@ -70,7 +70,6 @@ public class ScoreFragment extends ListFragment implements ScoreView {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
-
     }
 
     @Override

@@ -100,6 +100,21 @@ public class ImageGetter {
         return imageFile;
     }
 
+    /*
+     * Resize to avoid using too much memory loading big images (e.g.: 2560*1920)
+     */
+    private static Bitmap getImageResized(Context context, Uri selectedImage) {
+        Bitmap bm = null;
+        int[] sampleSizes = new int[]{5, 3, 2, 1};
+        int i = 0;
+        do {
+            bm = decodeBitmap(context, selectedImage, sampleSizes[i]);
+            Log.d(TAG, "resizer: new bitmap width = " + bm.getWidth());
+            i++;
+        } while (bm.getWidth() < DEFAULT_MIN_WIDTH_QUALITY && i < sampleSizes.length);
+        return bm;
+    }
+
     private static Bitmap decodeBitmap(Context context, Uri theUri, int sampleSize) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = sampleSize;
@@ -118,21 +133,6 @@ public class ImageGetter {
                 actuallyUsableBitmap.getWidth() + " " + actuallyUsableBitmap.getHeight());
 
         return actuallyUsableBitmap;
-    }
-
-    /*
-     * Resize to avoid using too much memory loading big images (e.g.: 2560*1920)
-     */
-    private static Bitmap getImageResized(Context context, Uri selectedImage) {
-        Bitmap bm = null;
-        int[] sampleSizes = new int[]{5, 3, 2, 1};
-        int i = 0;
-        do {
-            bm = decodeBitmap(context, selectedImage, sampleSizes[i]);
-            Log.d(TAG, "resizer: new bitmap width = " + bm.getWidth());
-            i++;
-        } while (bm.getWidth() < DEFAULT_MIN_WIDTH_QUALITY && i < sampleSizes.length);
-        return bm;
     }
 
 

@@ -49,10 +49,11 @@ public class StudentAdapter extends ArrayAdapter {
 
         String name = values.get(position).getName();
         String surname = values.get(position).getSurname();
-//        Drawable icon = values.get(position).getIconResource();
-
-//        if(icon != null)
-//            iconButton.setImageDrawable(icon);
+        String iconPath = values.get(position).getIconPath();
+        if(iconPath != null) {
+            Drawable icon = Drawable.createFromPath(iconPath);
+            iconButton.setImageDrawable(icon);
+        }
 
         nameTextView.setText(name);
         surnameTextView.setText(surname);
@@ -60,11 +61,6 @@ public class StudentAdapter extends ArrayAdapter {
         Log.d(TAG, "name: " + name + ", surname: " + surname);
 
         return rowView;
-    }
-
-    public void addStudents(Student... students) {
-        Collections.addAll(values, students);
-        notifyDataSetChanged();
     }
 
 }

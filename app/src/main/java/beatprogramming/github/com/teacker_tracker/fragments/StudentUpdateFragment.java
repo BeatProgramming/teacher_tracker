@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentUpdatePresenter;
+import beatprogramming.github.com.teacker_tracker.util.FileUtil;
 import beatprogramming.github.com.teacker_tracker.util.ImageGetter;
 import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
 
@@ -37,9 +39,10 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     private StudentUpdatePresenter presenter;
 
     private TextView idTextView;
-    private ImageView iconButton;
-    private EditText nameValue;
-    private EditText surnameValue;
+    private EditText nameEditText;
+    private EditText surnameEditText;
+    private ImageView iconImageView;
+    private TextView iconPathTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,11 +68,12 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
         // Identify all fields of the form.
         idTextView = (TextView) view.findViewById(R.id.studentId);
-        iconButton = (ImageView) view.findViewById(R.id.icon_row);
-        nameValue = (EditText) view.findViewById(R.id.name_field);
-        surnameValue = (EditText) view.findViewById(R.id.surname_field);
+        nameEditText = (EditText) view.findViewById(R.id.name_field);
+        surnameEditText = (EditText) view.findViewById(R.id.surname_field);
+        iconImageView = (ImageView) view.findViewById(R.id.student_icon);
+        iconPathTextView = (TextView) view.findViewById(R.id.student_icon_path);
 
-        iconButton.setOnClickListener(new View.OnClickListener() {
+        iconImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent chooseImageIntent = ImageGetter.getPickImageIntent(getActivity());
@@ -82,15 +86,14 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
             Student student = (Student) args.getSerializable(STUDENT);
 
-            // PENDING HOW TO IMPLEMENT IMAGE ATTRIBUTE FOR STUDENT, NEEDED TO KNOW HOW THE IMAGE
-            // IS SAVED AND HOW TO REFERENCE IT
+            String iconPath = student.getIconPath();
+            if(iconPath != null) {
+                iconPathTextView.setText(iconPath);
+                iconImageView.setImageDrawable(Drawable.createFromPath(iconPath));
+            }
 
-//            Drawable icon = student.getIconResource();
-//            if(icon != null)
-//                iconButton.setImageDrawable(icon);
-
-            nameValue.setText(student.getName());
-            surnameValue.setText(student.getSurname());
+            nameEditText.setText(student.getName());
+            surnameEditText.setText(student.getSurname());
 
         }
 
@@ -121,7 +124,10 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
         switch (v.getId()) {
             case R.id.button:
-                // CALL PRESENTER SUBMIT METHOD
+                presenter.submit(Integer.parseInt(idTextView.getText().toString()),
+                        nameEditText.getText().toString(),
+                        surnameEditText.getText().toString(),
+                        iconPathTextView.getText().toString());
                 break;
             case R.id.button_delete:
                 presenter.delete(Integer.parseInt(idTextView.getText().toString()));
@@ -144,10 +150,14 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
         switch (requestCode) {
             case IMAGE_INTENT:
                 Bitmap bitmap = ImageGetter.getImageFromResult(getActivity(), resultCode, imageReturnedIntent);
+
                 if (bitmap != null) {
+                    String imagePath = FileUtil.getImagePath(getContext(), bitmap);
+                    Log.d(TAG, "onActivityResult, bitmap Path: " + imagePath);
+
                     Drawable d = new BitmapDrawable(getResources(), bitmap);
-//                    student.setIconResource(d);
-                    iconButton.setImageDrawable(d);
+                    iconPathTextView.setText(imagePath);
+                    iconImageView.setImageDrawable(d);
                 }
                 break;
             default:

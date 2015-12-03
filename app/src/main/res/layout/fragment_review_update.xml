@@ -33,6 +33,12 @@
             android:text="@string/review_type_project" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/review_type_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
     <EditText
         android:id="@+id/review_name"
         android:layout_width="wrap_content"
@@ -51,6 +57,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/review_name" />
+
+    <TextView
+        android:id="@+id/review_subject_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/button"

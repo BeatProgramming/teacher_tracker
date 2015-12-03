@@ -29,7 +29,8 @@ public class StudentPresenter implements OnLoadFinishListener {
     }
 
     public void onItemClicked(int position) {
-
+        Student student = view.getStudentFromAdapter(position);
+        view.loadStudentUpdateFragment(student);
     }
 
     @Override
@@ -38,6 +39,6 @@ public class StudentPresenter implements OnLoadFinishListener {
     }
 
     public void onFloatingButtonClick() {
-
+        view.loadStudentUpdateFragment(null);
     }
 }

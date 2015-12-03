@@ -13,6 +13,9 @@ public class ReviewDaoImpl implements ReviewDao {
 
     private static String TAG = ReviewDaoImpl.class.getName();
 
+    public static final String EXAM = "Exam";
+    public static final String PROJECT = "Project";
+
     @Override
     public void findReviews(OnLoadFinishListener listener) {
 
