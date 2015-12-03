@@ -12,6 +12,8 @@ import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListene
  */
 public class TaskDaoImpl implements TaskDao {
 
+    private static String TAG = TaskDaoImpl.class.getName();
+
     @Override
     public void findTasks(OnLoadFinishListener listener) {
 

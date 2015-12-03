@@ -26,6 +26,8 @@ import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
  */
 public class StudentFragment extends ListFragment implements StudentView {
 
+    private static String TAG = StudentFragment.class.getName();
+
     private FragmentCallback callback;
 
     private ProgressBar progressBar;

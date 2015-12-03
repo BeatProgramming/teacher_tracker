@@ -11,6 +11,8 @@ import beatprogramming.github.com.teacker_tracker.view.TaskUpdateView;
  */
 public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener {
 
+    private static String TAG = TaskUpdatePresenter.class.getName();
+
     private TaskUpdateView view;
 
     private TaskDao taskDao;

@@ -14,6 +14,8 @@ import beatprogramming.github.com.teacker_tracker.persistence.ReviewDaoImpl;
  */
 public class ReviewPresenter implements OnLoadFinishListener {
 
+    private static String TAG = ReviewPresenter.class.getName();
+
     private ReviewView view;
     private ReviewDao reviewDao;
 

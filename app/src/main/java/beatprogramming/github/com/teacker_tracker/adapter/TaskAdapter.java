@@ -20,6 +20,8 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
  */
 public class TaskAdapter extends ArrayAdapter<Task> {
 
+    private static String TAG = TaskAdapter.class.getName();
+
     private Context context;
     private int resource;
 

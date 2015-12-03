@@ -10,6 +10,8 @@ import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListene
  */
 public class SubjectDaoImpl implements SubjectDao {
 
+    private static String TAG = SubjectDaoImpl.class.getName();
+
     @Override
     public void findSubjects(OnLoadFinishListener listener) {
 

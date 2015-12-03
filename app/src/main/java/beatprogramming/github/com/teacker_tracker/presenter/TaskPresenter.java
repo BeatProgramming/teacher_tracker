@@ -14,6 +14,8 @@ import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
  */
 public class TaskPresenter implements OnLoadFinishListener {
 
+    private static String TAG = TaskPresenter.class.getName();
+
     private TaskView view;
     private TaskDao subjectDao;
 

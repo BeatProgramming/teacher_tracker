@@ -26,6 +26,8 @@ import beatprogramming.github.com.teacker_tracker.view.ScoreView;
  */
 public class ScoreFragment extends ListFragment implements ScoreView {
 
+    private static String TAG = ScoreFragment.class.getName();
+
     public static final String REVIEW = "Prueba";
 
     private FragmentCallback callback;

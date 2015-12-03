@@ -28,6 +28,8 @@ import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
  */
 public class StudentUpdateFragment extends Fragment implements StudentUpdateView, View.OnClickListener {
 
+    private static String TAG = StudentUpdateFragment.class.getName();
+
     public static final String STUDENT = "BUNDLE_STUDENT";
     private static final int IMAGE_INTENT = 666;
 

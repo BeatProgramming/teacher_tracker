@@ -7,6 +7,8 @@ import beatprogramming.github.com.teacker_tracker.view.ScoreView;
  */
 public class ScorePresenter {
 
+    private static String TAG = ScorePresenter.class.getName();
+
     private ScoreView view;
 
     public ScorePresenter(ScoreView view) {

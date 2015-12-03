@@ -10,6 +10,8 @@ import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListene
  */
 public class StudentDaoImpl implements StudentDao {
 
+    private static String TAG = StudentDaoImpl.class.getName();
+
     @Override
     public void findStudents(OnLoadFinishListener listener) {
 

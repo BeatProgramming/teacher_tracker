@@ -4,11 +4,14 @@ import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
+import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
  */
 public class ReviewDaoImpl implements ReviewDao {
+
+    private static String TAG = ReviewDaoImpl.class.getName();
 
     @Override
     public void findReviews(OnLoadFinishListener listener) {

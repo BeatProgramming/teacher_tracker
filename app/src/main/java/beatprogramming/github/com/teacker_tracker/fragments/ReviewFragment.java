@@ -18,6 +18,7 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.ReviewAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
+import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
 
@@ -25,6 +26,8 @@ import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
  * Created by malkomich on 27/11/15.
  */
 public class ReviewFragment extends ListFragment implements ReviewView {
+
+    private static String TAG = ReviewFragment.class.getName();
 
     private FragmentCallback callback;
 

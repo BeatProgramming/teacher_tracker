@@ -27,12 +27,12 @@ import beatprogramming.github.com.teacker_tracker.R;
  */
 public class ImageGetter {
 
-    private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;        // min pixels
-    private static final String TAG = "ImagePicker";
+    private static final String TAG = ImageGetter.class.getName();
+
+    // Default width pixels
+    private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;
+
     private static final String TEMP_IMAGE_NAME = "tempImage";
-
-    public static int minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY;
-
 
     public static Intent getPickImageIntent(Context context) {
         Intent chooserIntent = null;
@@ -131,7 +131,7 @@ public class ImageGetter {
             bm = decodeBitmap(context, selectedImage, sampleSizes[i]);
             Log.d(TAG, "resizer: new bitmap width = " + bm.getWidth());
             i++;
-        } while (bm.getWidth() < minWidthQuality && i < sampleSizes.length);
+        } while (bm.getWidth() < DEFAULT_MIN_WIDTH_QUALITY && i < sampleSizes.length);
         return bm;
     }
 

@@ -11,12 +11,15 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 
 /**
  * Clase que modifica la clase ArrayAdapter para utilizarla en la actividad principal
  * Created by Adrian on 07/11/2015.
  */
 public class SubjectAdapter extends ArrayAdapter<Subject> {
+
+    private static String TAG = SubjectAdapter.class.getName();
 
     private Context context;
     private int resource;

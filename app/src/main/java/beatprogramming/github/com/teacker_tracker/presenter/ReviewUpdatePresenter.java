@@ -18,6 +18,8 @@ import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
  */
 public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener {
 
+    private static String TAG = ReviewUpdatePresenter.class.getName();
+
     private ReviewUpdateView view;
 
     private ReviewDao reviewDao;
