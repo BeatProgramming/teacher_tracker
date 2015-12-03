@@ -68,7 +68,7 @@ public class NotesActivity extends AppCompatActivity {
         String asignatura = getIntent().getExtras().getString("asignatura");
         String[] valores = new String[]{asignatura};
 
-        Cursor c = db.query("Tarea",campos,null,null,null,null,null);
+        Cursor c = db.query("Tarea",campos,"nombreAsignatura=?",valores,null,null,null);
 
         return c;
     }
