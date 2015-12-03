@@ -6,14 +6,14 @@
             android:title="Gallery" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@android:drawable/ic_menu_view"
+            android:icon="@android:drawable/ic_menu_edit"
             android:title="Asignaturas" />
         <item
             android:id="@+id/nav_score"
-            android:icon="@android:drawable/ic_menu_upload"
+            android:icon="@android:drawable/ic_menu_sort_by_size"
             android:title="Calificaciones" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_today"
+            android:title="Tareas" />
     </group>
 
     <item android:title="@string/students_title">

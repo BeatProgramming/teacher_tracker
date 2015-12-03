@@ -1,7 +1,9 @@
 package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,6 +19,7 @@ public class EditSubjectActivity extends AppCompatActivity {
     private final static String ID = "_id";
     private final static String ASIGNATURA = "Asignatura";
     private final static String CURSO = "Curso";
+    private final static String NOMBRE_ASIGNATURA = "nombre";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +33,23 @@ public class EditSubjectActivity extends AppCompatActivity {
      * - Método que muestra las asignaturas del usuario listas para ser editadas.
      */
     public void createList(){
+        //- Obtención del identificador de la lista
         ListView listview = (ListView) findViewById(R.id.subject_listview);
 
+        //- Obtención de las asignaturas
+        Cursor c = getAsignaturas();
+
+        //- Creación de la lista
         String[] colSubjects = new String[]{ID,ASIGNATURA,CURSO};
         MatrixCursor cursor = new MatrixCursor(colSubjects);
-        cursor.addRow(new Object[]{"0","Matemáticas","1 ESO"});
-        cursor.addRow(new Object[]{"1","Lengua","2 ESO"});
-        cursor.addRow(new Object[]{"2","Filosofía","2 ESO"});
+        if(c.moveToFirst()){
+            do{
+                cursor.addRow(new Object[]{c.getString(0),c.getString(1),c.getString(2)});
+            }while(c.moveToNext());
+        }
         String[] cols = {ASIGNATURA,CURSO};
         int[] viewSubjects = {R.id.item_subject,R.id.item_edit};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.subject_listview_entry,cursor,cols,viewSubjects,0);
-
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(itemClickListener);
     }
@@ -77,6 +86,25 @@ public class EditSubjectActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * - Método que obtiene todas las asignaturas del usuario
+     * - @return Asignaturas
+     */
+    public Cursor getAsignaturas(){
+        //- Conexión con la BD
+        BDHelper bd = new BDHelper(this);
+        SQLiteDatabase db = bd.getWritableDatabase();
+
+        //- Campos que queremos obtener al realizar la query
+        String[] campos = new String[] {ID,NOMBRE_ASIGNATURA,CURSO,};
+
+        //- Ejecución de la query
+        Cursor c = db.query(ASIGNATURA, campos, null, null, null, null, null);
+
+        //- Devolvemos el conjunto de Asignaturas
+        return c;
     }
 
 }

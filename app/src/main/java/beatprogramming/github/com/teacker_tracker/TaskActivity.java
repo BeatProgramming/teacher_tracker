@@ -12,26 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SubjectActivity extends AppCompatActivity {
+public class TaskActivity extends AppCompatActivity {
 
-    private final static String NOMBRE = "nombre";
-    private final static String CURSO = "curso";
-    private final static String DESCRIPCION = "descripcion";
-    private final static String ASIGNATURA = "Asignatura";
     private final static String VACIO = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_subject);
+        setContentView(R.layout.activity_task);
 
-        //- Creación de la asignatura
-        Button confirmar = (Button) findViewById(R.id.button);
+        Button confirmar = (Button) findViewById(R.id.button_add_task);
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createSubject();
-                Intent intent = new Intent(SubjectActivity.this,MainActivity.class);
+                createTask();
+                Intent intent = new Intent(TaskActivity.this,MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +35,7 @@ public class SubjectActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_subject, menu);
+        getMenuInflater().inflate(R.menu.menu_task, menu);
         return true;
     }
 
@@ -59,36 +54,37 @@ public class SubjectActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * - Método que crea una asignatura
-     */
-    public void createSubject(){
+    public void createTask(){
         //- Conexión con la BD
         BDHelper bd = new BDHelper(this);
         SQLiteDatabase db = bd.getWritableDatabase();
 
         //- Obtención de los datos de la asignatura
-        EditText nombre_asignatura = (EditText) findViewById(R.id.subjectName);
-        EditText curso_asignatura = (EditText) findViewById(R.id.subjectCurse);
-        EditText descripcion_asignatura = (EditText) findViewById(R.id.subjectDescription);
-        String nombreAsignatura = nombre_asignatura.getText().toString();
-        String cursoAsignatura = curso_asignatura.getText().toString();
-        String descripcionAsignatura = descripcion_asignatura.getText().toString();
-        ContentValues asignatura = new ContentValues();
-        asignatura.put(NOMBRE,nombreAsignatura);
-        asignatura.put(CURSO,cursoAsignatura);
-        asignatura.put(DESCRIPCION,descripcionAsignatura);
+        EditText hora_tarea = (EditText) findViewById(R.id.taskHour);
+        EditText descripcion_tarea = (EditText) findViewById(R.id.taskDescription);
+        EditText aula_tarea = (EditText) findViewById(R.id.taskRoom);
+        EditText asignatura_tarea = (EditText) findViewById(R.id.taskSubject);
+        String horaTarea = hora_tarea.getText().toString();
+        String descripcionTarea = descripcion_tarea.getText().toString();
+        String aulaTarea = aula_tarea.getText().toString();
+        String asignaturaTarea = asignatura_tarea.getText().toString();
+        ContentValues tarea = new ContentValues();
+        tarea.put("hora", horaTarea);
+        tarea.put("descripcion", descripcionTarea);
+        tarea.put("aula", aulaTarea);
+        tarea.put("nombreAsignatura", asignaturaTarea);
 
         //- Creación de la asignatura
-        db.insert(ASIGNATURA, null, asignatura);
+        db.insert("Tarea", null, tarea);
         db.close();
 
         //- Inserción de datos vacía para futuras creaciones
-        nombre_asignatura.setHint(VACIO);
-        curso_asignatura.setHint(VACIO);
-        descripcion_asignatura.setHint(VACIO);
+        hora_tarea.setHint(VACIO);
+        descripcion_tarea.setHint(VACIO);
+        aula_tarea.setHint(VACIO);
+        asignatura_tarea.setHint(VACIO);
 
         //- Mensaje de confirmación de la creación
-        Toast.makeText(this.getApplicationContext(),"ASIGNATURA CREADA CON EXITO",Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getApplicationContext(), "TAREA CREADA CON EXITO", Toast.LENGTH_LONG).show();
     }
 }

@@ -13,4 +13,14 @@
 
     </ListView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_create_exam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@android:drawable/ic_input_add"
+        android:layout_alignBottom="@+id/subject_add_score_list_view"
+        android:layout_alignRight="@+id/subject_add_score_list_view"
+        android:layout_alignEnd="@+id/subject_add_score_list_view" />
+
 </RelativeLayout>

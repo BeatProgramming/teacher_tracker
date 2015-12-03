@@ -1,6 +1,9 @@
 package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.MatrixCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -9,43 +12,43 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
-import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final String TAG = MainActivity.class.getName();
-
     private ListView lista_main;
-    private ArrayAdapter adaptador_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ScriptSQL sql = new ScriptSQL(this);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(MainActivity.this,SubjectActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, SubjectActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -59,16 +62,38 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //Instancia del ListView
-        lista_main = (ListView)findViewById(R.id.listViewMain);
+        lista_main = (ListView) findViewById(R.id.listViewMain);
 
-        //Inicializa el adaptador con la fuente de datos
-        adaptador_main = new TaskAdapter(
-                this,
-                DataSource.TASK);
+        Cursor c = getTask();
 
-        //Relacionando la lista con el adaptador
-        lista_main.setAdapter(adaptador_main);
+        //- Creación de la lista
+        String[] colSubjects = new String[]{"_id","hora","aula","nombreAsignatura"};
+        MatrixCursor cursor = new MatrixCursor(colSubjects);
+        if(c.moveToFirst()){
+            do{
+                cursor.addRow(new Object[]{c.getString(0),c.getString(1),
+                        c.getString(3),c.getString(4)});
+            }while(c.moveToNext());
+        }
+        String[] cols = {"hora","aula","nombreAsignatura"};
+        int[] viewSubjects = {R.id.hour_main,R.id.classroom_main,R.id.subject_main};
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.listview_main_row,cursor,cols,viewSubjects,0);
+        lista_main.setAdapter(adapter);
+        lista_main.setOnItemClickListener(itemClickListener);
+
     }
+
+    AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            TextView nombre_asignatura = (TextView) view.findViewById(R.id.subject_main);
+            String nombreAsignatura = nombre_asignatura.getText().toString();
+            Intent intent = new Intent(MainActivity.this,NotesActivity.class);
+            intent.putExtra("asignatura",nombreAsignatura);
+            Log.i("NOTE-ACTIVITY",nombreAsignatura);
+            startActivity(intent);
+        }
+    };
 
     @Override
     public void onBackPressed() {
@@ -117,7 +142,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(MainActivity.this,ScoreActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(MainActivity.this,TaskActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_export_students) {
             exportStudentList();
         } else if (id == R.id.nav_manage_students) {
@@ -143,5 +169,20 @@ public class MainActivity extends AppCompatActivity
             outputMessage = e.getMessage();
         }
         Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    public Cursor getTask(){
+        //- Conexión con la BD
+        BDHelper bd = new BDHelper(this);
+        SQLiteDatabase db = bd.getWritableDatabase();
+
+        //- Campos que queremos obtener al realizar la query
+        String[] campos = new String[] {"_id","hora","descripcion","aula","nombreAsignatura"};
+
+        //- Ejecución de la query
+        Cursor c = db.query("Tarea", campos, null, null, null, null, null);
+
+        //- Devolvemos el conjunto de Asignaturas
+        return c;
     }
 }

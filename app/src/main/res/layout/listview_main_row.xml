@@ -31,12 +31,5 @@
         android:layout_toRightOf="@+id/hour_main"
         android:layout_alignParentBottom="true" />
 
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/newNote"
-        android:src="@drawable/nota"
-        android:layout_centerInParent="@+id/subject_main"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/subject_main" />
+
 </RelativeLayout>

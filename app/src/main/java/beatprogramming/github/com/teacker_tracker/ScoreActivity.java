@@ -1,42 +1,57 @@
 package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class ScoreActivity extends AppCompatActivity {
 
     private final static String ID = "_id";
     private final static String ASIGNATURA = "Asignatura";
     private final static String CURSO = "Curso";
+    private final static String NOMBRE_ASIGNATURA = "nombre";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        //- Mostramos la lista de asignaturas creadas
         createList();
     }
 
+    /**
+     * - Método que crea la lista de asignaturas que existen y las muestra en la activity
+     */
     public void createList(){
+        //- Obtención del identificador de la lista
         ListView listview = (ListView) findViewById(R.id.subject_score_list_view);
 
+        //- Obtención de las asignaturas
+        Cursor c = getAsignaturas();
+
+        //- Creación de la lista
         String[] colSubjects = new String[]{ID,ASIGNATURA,CURSO};
         MatrixCursor cursor = new MatrixCursor(colSubjects);
-        cursor.addRow(new Object[]{"0","Matemáticas","1 ESO"});
-        cursor.addRow(new Object[]{"1","Lengua","2 ESO"});
-        cursor.addRow(new Object[]{"2","Filosofía","2 ESO"});
+        if(c.moveToFirst()){
+            do{
+                cursor.addRow(new Object[]{c.getString(0),c.getString(1),c.getString(2)});
+            }while(c.moveToNext());
+        }
         String[] cols = {ASIGNATURA,CURSO};
         int[] viewSubjects = {R.id.item_subject,R.id.item_edit};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.subject_listview_entry,cursor,cols,viewSubjects,0);
-
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(itemClickListener);
     }
@@ -44,7 +59,10 @@ public class ScoreActivity extends AppCompatActivity {
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            TextView nombreAsignatura = (TextView) view.findViewById(R.id.item_subject);
+            String nombre_Asignatura = nombreAsignatura.getText().toString();
             Intent intent = new Intent(ScoreActivity.this,AddScoreActivity.class);
+            intent.putExtra("NombreAsignatura",nombre_Asignatura);
             startActivity(intent);
         }
     };
@@ -69,5 +87,34 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * - Método que obtiene todas las asignaturas del usuario
+     * - @return Asignaturas
+     */
+    public Cursor getAsignaturas(){
+        //- Conexión con la BD
+        BDHelper bd = new BDHelper(this);
+        SQLiteDatabase db = bd.getWritableDatabase();
+
+        //- Campos que queremos obtener al realizar la query
+        String[] campos = new String[] {ID,NOMBRE_ASIGNATURA,CURSO};
+
+        //- Ejecución de la query
+        Cursor c = db.query(ASIGNATURA, campos, null, null, null, null, null);
+
+        //- Prueba(Borrar al entregar el prototipo
+        if(c.moveToFirst()){
+            do{
+                String id = c.getString(0);
+                String nombre = c.getString(1);
+                String curso = c.getString(2);
+                Log.i("Clase","NOMBRE: "+nombre+" CURSO: "+curso+ " ID: "+id);
+            }while(c.moveToNext());
+        }
+
+        //- Devolvemos el conjunto de Asignaturas
+        return c;
     }
 }

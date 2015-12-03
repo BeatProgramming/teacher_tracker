@@ -19,7 +19,6 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.adapter.StudentAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
-import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class NewStudentsActivity extends AppCompatActivity {
 
