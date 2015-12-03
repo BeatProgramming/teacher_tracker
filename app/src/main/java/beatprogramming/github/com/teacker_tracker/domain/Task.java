@@ -1,44 +1,60 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by Adrian on 07/11/2015.
  */
-public class Task {
-    private String nombre;
-    private String curso;
-    private String aux;
+public class Task implements Serializable {
+
+    private int id;
+    private Subject subject;
     private String hora;
+    private List<String> notas;
 
-    public Task(String nombre, String curso, String hora, String aux){
+    public Task() {
 
-        this.nombre = nombre;
-        this.aux = aux;
+    }
+
+    public Task(Subject tarea, String hora){
+        this.subject =tarea;
         this.hora=hora;
-        this.curso=curso;
-
     }
 
-    public String getCurso() {
-        return curso;
+    public void addNota(String nota){
+        this.notas.add(nota);
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public List<String> getNotas() {
+        return notas;
     }
 
-    public void setNombre(String nombre){
-        this.nombre = nombre;
+    public void setNotas(List<String> notas) {
+        this.notas = notas;
     }
-    public void setHora(String hora){
-        this.hora = hora;}
 
-    public void setAux(String aux){
-        this.aux=aux;
+    public Subject getSubject() {
+        return subject;
     }
-    public String getNombre(){return nombre;}
-    public String getHora(){return hora;}
-    public String getAux() {return aux;}
 
-    @Override
-    public String toString(){return nombre+" "+curso;}
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
 }

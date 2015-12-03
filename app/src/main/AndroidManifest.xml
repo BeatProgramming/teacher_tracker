@@ -21,39 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SubjectActivity"
-            android:label="@string/title_activity_subject"></activity>
-        <activity
-            android:name=".EditSubjectActivity"
-            android:label="@string/title_activity_edit_subject"></activity>
-        <activity
-            android:name=".ModifySubjectActivity"
-            android:label="@string/title_activity_modify_subject"></activity>
-        <activity
-            android:name=".ScoreActivity"
-            android:label="@string/title_activity_score"></activity>
-        <activity
-            android:name=".AddScoreActivity"
-            android:label="@string/title_activity_add_score"></activity>
-        <activity
-            android:name=".SubmitScoreActivity"
-            android:label="@string/title_activity_submit_score"></activity>
-        <activity
-            android:name=".NewStudentsActivity"
-            android:label="@string/title_activity_new_students"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter android:label="@string/app_name">
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="file" />
-                <data android:mimeType="*/*" />
-                <data android:pathPattern=".*\\.csv" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

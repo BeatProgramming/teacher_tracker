@@ -9,8 +9,20 @@
     <!-- Default file explore view dimensions -->
     <dimen name="file_explore_row_height">25dp</dimen>
     <dimen name="file_explore_text_size">23sp</dimen>
+
     <dimen name="student_name">100dp</dimen>
     <dimen name="student_surname">150dp</dimen>
     <dimen name="dialog_textsize">20sp</dimen>
     <dimen name="student_list_text_size">15sp</dimen>
+
+    <dimen name="subject_name">150dp</dimen>
+    <dimen name="subject_course">100dp</dimen>
+
+    <dimen name="score_student">250dp</dimen>
+    <dimen name="score_score">50dp</dimen>
+    <dimen name="review_name">150dp</dimen>
+    <dimen name="review_suject">100dp</dimen>
+    <dimen name="icon_dimen">50dp</dimen>
+    <dimen name="icon_big_dimen">100dp</dimen>
+
 </resources>

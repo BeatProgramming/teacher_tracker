@@ -31,7 +31,7 @@
     <string name="subjects_editSubject">ASIGNATURAS</string>
 
     <!-- MODIFY ACTIVITY -->
-    <string name="button_submit">EDITAR</string>
+    <string name="button_submit">GUARDAR</string>
     <string name="button_delete">BORRAR</string>
 
     <!-- SUBMIT SCORE ACTIVITY -->
@@ -47,4 +47,13 @@
     <!-- CSV header labels -->
     <string name="csv_name">Nombre</string>
     <string name="csv_surname">Apellidos</string>
+
+    <string name="reviewName">Nombre del examen o práctica</string>
+    <string name="review_type_exam">Examen</string>
+    <string name="review_type_project">Práctica</string>
+    <string name="image_intent_title">Selecciona una foto</string>
+    <string name="app_description">La comodidad en tus manos</string>
+    <string name="subject_section">Asignaturas</string>
+    <string name="task_section">Tareas</string>
+    <string name="score_section">Calificaciones</string>
 </resources>
