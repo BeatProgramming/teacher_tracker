@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +41,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         TextView subject = (TextView) listItemView.findViewById(R.id.subject_main);
         TextView classroom = (TextView) listItemView.findViewById(R.id.classroom_main);
         TextView hour = (TextView) listItemView.findViewById(R.id.hour_main);
-        ImageButton newNoteButton = (ImageButton) listItemView.findViewById(R.id.newNote);
+        ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNote);
 
         //Accion del newNoteButton
         newNoteButton.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +54,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Obtiene una instancia de la Task en la posición actual
         Task item = (Task) getItem(position);
 
-        subject.setText(item.getTarea().toString());
-        classroom.setText(item.getTarea().getAula());
+        subject.setText(item.getSubject().toString());
+        classroom.setText(item.getSubject().getAula());
         hour.setText(item.getHora());
 
         //Devuelve al ListView la fila creada

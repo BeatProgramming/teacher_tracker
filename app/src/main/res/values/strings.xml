@@ -51,4 +51,9 @@
     <string name="reviewName">Nombre del examen o práctica</string>
     <string name="review_type_exam">Examen</string>
     <string name="review_type_project">Práctica</string>
+    <string name="image_intent_title">Selecciona una foto</string>
+    <string name="app_description">La comodidad en tus manos</string>
+    <string name="subject_section">Asignaturas</string>
+    <string name="task_section">Tareas</string>
+    <string name="score_section">Calificaciones</string>
 </resources>

@@ -1,11 +1,13 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -19,10 +21,10 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
  */
 public class StudentAdapter extends ArrayAdapter {
 
-    private final String TAG = StudentAdapter.class.getName();
+    private static final String TAG = StudentAdapter.class.getName();
 
-    private final Context context;
-    private final int resource;
+    private Context context;
+    private int resource;
     private final List<Student> values;
 
 
@@ -41,10 +43,16 @@ public class StudentAdapter extends ArrayAdapter {
 
         View rowView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
+        ImageView iconButton = (ImageView) rowView.findViewById(R.id.item_student_icon);
         TextView nameTextView = (TextView) rowView.findViewById(R.id.item_student_name);
         TextView surnameTextView = (TextView) rowView.findViewById(R.id.item_student_surname);
+
         String name = values.get(position).getName();
         String surname = values.get(position).getSurname();
+//        Drawable icon = values.get(position).getIconResource();
+
+//        if(icon != null)
+//            iconButton.setImageDrawable(icon);
 
         nameTextView.setText(name);
         surnameTextView.setText(surname);
@@ -54,7 +62,7 @@ public class StudentAdapter extends ArrayAdapter {
         return rowView;
     }
 
-    public void addStudents(Student ...students) {
+    public void addStudents(Student... students) {
         Collections.addAll(values, students);
         notifyDataSetChanged();
     }

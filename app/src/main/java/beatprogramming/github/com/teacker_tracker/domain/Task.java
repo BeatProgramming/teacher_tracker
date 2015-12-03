@@ -7,7 +7,9 @@ import java.util.List;
  * Created by Adrian on 07/11/2015.
  */
 public class Task implements Serializable {
-    private Subject tarea;
+
+    private int id;
+    private Subject subject;
     private String hora;
     private List<String> notas;
 
@@ -16,7 +18,7 @@ public class Task implements Serializable {
     }
 
     public Task(Subject tarea, String hora){
-        this.tarea=tarea;
+        this.subject =tarea;
         this.hora=hora;
     }
 
@@ -32,12 +34,12 @@ public class Task implements Serializable {
         this.notas = notas;
     }
 
-    public Subject getTarea() {
-        return tarea;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setTarea(Subject tarea) {
-        this.tarea = tarea;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     public String getHora() {
@@ -46,5 +48,13 @@ public class Task implements Serializable {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 }

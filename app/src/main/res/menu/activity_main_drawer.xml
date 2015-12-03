@@ -3,20 +3,28 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_task"
+            android:icon="@drawable/task"
+            android:title="@string/task_section" />
+        <item
             android:id="@+id/nav_subject"
-            android:icon="@android:drawable/ic_menu_view"
-            android:title="Asignaturas" />
+            android:icon="@drawable/subject"
+            android:title="@string/subject_section" />
         <item
             android:id="@+id/nav_score"
-            android:icon="@android:drawable/ic_menu_upload"
-            android:title="Calificaciones" />
+            android:icon="@drawable/score"
+            android:title="@string/score_section" />
     </group>
 
     <item android:title="@string/students_title">
         <menu>
-            <item android:id="@+id/nav_export_students" android:icon="@android:drawable/ic_menu_agenda"
+            <item
+                android:id="@+id/nav_export_students"
+                android:icon="@drawable/export"
                 android:title="@string/export_students" />
-            <item android:id="@+id/nav_manage_students" android:icon="@android:drawable/ic_menu_view"
+            <item
+                android:id="@+id/nav_manage_students"
+                android:icon="@drawable/student"
                 android:title="@string/manage_students" />
         </menu>
     </item>

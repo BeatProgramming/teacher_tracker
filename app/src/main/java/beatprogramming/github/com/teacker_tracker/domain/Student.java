@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import android.graphics.drawable.Drawable;
+
 import java.io.Serializable;
 
 /**
@@ -7,8 +9,10 @@ import java.io.Serializable;
  */
 public class Student implements Serializable{
 
+    private int id;
     private String name;
     private String surname;
+    private Integer iconResource;
 
     public Student() {
 
@@ -35,4 +39,19 @@ public class Student implements Serializable{
         this.surname = surname;
     }
 
+    public Integer getIconResource() {
+        return iconResource;
+    }
+
+    public void setIconResource(Integer iconResource) {
+        this.iconResource = iconResource;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
+    }
 }

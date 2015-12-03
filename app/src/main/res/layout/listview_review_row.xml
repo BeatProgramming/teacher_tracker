@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/item_review_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="@dimen/icon_dimen"
+        android:layout_height="@dimen/icon_dimen" />
 
     <TextView
         android:id="@+id/item_review_name"

@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Score implements Serializable {
 
+    private int id;
     private float calificacion;
     private String comentario;
 
@@ -44,5 +45,13 @@ public class Score implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 }

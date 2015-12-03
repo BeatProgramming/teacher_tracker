@@ -9,6 +9,7 @@ import java.util.List;
  */
 public abstract class Review implements Serializable {
 
+    private int id;
     private String name;
     private Subject subject;
     private List<Score> scores = new ArrayList<Score>();
@@ -51,5 +52,13 @@ public abstract class Review implements Serializable {
 
     public void addScore(Score score) {
         scores.add(score);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 }

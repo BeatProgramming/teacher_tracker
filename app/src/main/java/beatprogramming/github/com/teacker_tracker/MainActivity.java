@@ -5,17 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -28,15 +24,13 @@ import beatprogramming.github.com.teacker_tracker.fragments.ReviewFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.StudentFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
+import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentCallback {
 
     private static final String TAG = MainActivity.class.getName();
-
-    private ListView lista_main;
-    private ArrayAdapter adaptador_main;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +55,6 @@ public class MainActivity extends AppCompatActivity
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             //uri = intent.getStringExtra("URI");
             Uri uri = intent.getData();
-
-            Log.d(TAG, "path: " + uri.getPath());
-            Log.d(TAG, "encode path: " + uri.getEncodedPath());
-            Log.d(TAG, "complete path: " + uri.toString());
 
             List<Student> newStudents = CSVManager.getInstance(this).importStudents(uri.getEncodedPath());
 
@@ -99,7 +89,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.fragment_task, menu);
         return true;
     }
 
@@ -167,12 +157,17 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    @Override
+    public void goBack() {
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
 }

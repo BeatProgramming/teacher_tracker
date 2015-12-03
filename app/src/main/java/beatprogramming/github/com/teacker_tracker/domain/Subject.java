@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class Subject implements Serializable {
 
+    private int id;
     private String nombre;
     private String descripcion;
     private String curso;
@@ -53,6 +54,14 @@ public class Subject implements Serializable {
 
     public void setAula(String aula) {
         this.aula = aula;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private void setId(int id) {
+        this.id = id;
     }
 
     @Override

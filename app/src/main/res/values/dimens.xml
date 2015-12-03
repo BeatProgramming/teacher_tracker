@@ -22,5 +22,7 @@
     <dimen name="score_score">50dp</dimen>
     <dimen name="review_name">150dp</dimen>
     <dimen name="review_suject">100dp</dimen>
+    <dimen name="icon_dimen">50dp</dimen>
+    <dimen name="icon_big_dimen">100dp</dimen>
 
 </resources>

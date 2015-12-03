@@ -1,48 +1,61 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
-import beatprogramming.github.com.teacker_tracker.DataSource;
+import java.util.List;
+
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.StudentAdapter;
+import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.view.StudentView;
+import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
 
 /**
  * Created by malkomich on 30/11/15.
  */
-public class StudentFragment extends ListFragment {
+public class StudentFragment extends ListFragment implements StudentView {
 
-    StudentAdapter adapter;
+    private FragmentCallback callback;
 
-    LayoutInflater inflater;
+    private ProgressBar progressBar;
+
+    private StudentPresenter presenter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new StudentPresenter(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        this.inflater = inflater;
-        View view = inflater.inflate (R.layout.fragment_listview, container, false);
+        View view = inflater.inflate(R.layout.fragment_listview, container, false);
 
-        adapter = new StudentAdapter(getActivity(),R.layout.listview_student_row, DataSource.STUDENT);
-
-        setListAdapter(adapter);
+        progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                createDialog().show();
+                presenter.onFloatingButtonClick();
             }
         });
 
@@ -50,28 +63,44 @@ public class StudentFragment extends ListFragment {
     }
 
     @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+        getListView().setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBar.setVisibility(View.INVISIBLE);
+        getListView().setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
+        presenter.onItemClicked(position);
     }
 
-    private AlertDialog.Builder createDialog() {
-        final View prompt = inflater.inflate(R.layout.student_prompt, null);
-
-        AlertDialog.Builder student_form = new AlertDialog.Builder(getContext());
-        student_form.setView(prompt);
-        student_form.create();
-        student_form.setCancelable(false).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                EditText nameValue = (EditText) prompt.findViewById(R.id.name_field);
-                EditText surnameValue = (EditText) prompt.findViewById(R.id.surname_field);
-                Student newStudent = new Student(nameValue.getText().toString(), surnameValue.getText().toString());
-                adapter.addStudents(newStudent);
-            }
-        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-        return student_form;
+    @Override
+    public void setItems(List<Student> items) {
+        setListAdapter(new StudentAdapter(getActivity(), R.layout.listview_student_row, items));
     }
+
+    @Override
+    public void loadStudentUpdateFragment(Student student) {
+        StudentUpdateFragment fragment = (student != null) ?
+                StudentUpdateFragment.newInstance(student) : new StudentUpdateFragment();
+        callback.replaceFragment(fragment);
+    }
+
+    @Override
+    public Student getStudentFromAdapter(int position) {
+        return (Student) getListAdapter().getItem(position);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        callback = (FragmentCallback) context;
+    }
+
 }
