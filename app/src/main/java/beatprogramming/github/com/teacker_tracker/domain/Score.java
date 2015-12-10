@@ -10,7 +10,6 @@ public class Score implements Serializable {
     private int id;
     private float calificacion;
     private String comentario;
-
     private Student student;
 
     public Score() {

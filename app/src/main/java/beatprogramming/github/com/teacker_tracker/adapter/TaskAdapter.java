@@ -1,6 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
+import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 
 /**
  * Clase que modifica la clase ArrayAdapter para utilizarla en la actividad principal
@@ -56,12 +58,13 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Obtiene una instancia de la Task en la posición actual
         Task item = (Task) getItem(position);
 
+        Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
+                .getDescription() + ", " + item.getNote());
+
         subject.setText(item.getSubject().toString());
         classroom.setText(item.getSubject().getAula());
-        hour.setText(item.getHora());
+        hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
 
-        //Devuelve al ListView la fila creada
         return listItemView;
-
     }
 }

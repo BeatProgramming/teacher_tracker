@@ -4,27 +4,32 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 import beatprogramming.github.com.teacker_tracker.fragments.ReviewFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.StudentFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
-import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 
 public class MainActivity extends AppCompatActivity
@@ -36,7 +41,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        BDHelper.init(this);
+
         setContentView(R.layout.activity_main);
+        ScriptSQL sql = new ScriptSQL(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -116,6 +125,10 @@ public class MainActivity extends AppCompatActivity
 
         Fragment frag;
 
+        if(id == R.id.nav_task) {
+            frag = new TaskFragment();
+            replaceFragment(frag);
+        }
         if (id == R.id.nav_subject) {
 
             frag = new SubjectFragment();
@@ -168,6 +181,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void goBack() {
         getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    @Override
+    public void showDialog(DialogFragment fragment) {
+        fragment.show(getSupportFragmentManager(), null);
     }
 
 }

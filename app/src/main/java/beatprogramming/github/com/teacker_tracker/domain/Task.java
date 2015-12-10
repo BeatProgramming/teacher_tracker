@@ -1,7 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Adrian on 07/11/2015.
@@ -9,29 +10,27 @@ import java.util.List;
 public class Task implements Serializable {
 
     private int id;
+    private String description;
     private Subject subject;
-    private String hora;
-    private List<String> notas;
+    private DateTime dateTime;
+    private String note;
 
     public Task() {
 
     }
 
-    public Task(Subject tarea, String hora){
-        this.subject =tarea;
-        this.hora=hora;
+    public Task(String name, Subject subject, DateTime dateTime) {
+        this.subject = subject;
+        this.description = description;
+        this.dateTime = dateTime;
     }
 
-    public void addNota(String nota){
-        this.notas.add(nota);
+    public String getDescription() {
+        return description;
     }
 
-    public List<String> getNotas() {
-        return notas;
-    }
-
-    public void setNotas(List<String> notas) {
-        this.notas = notas;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Subject getSubject() {
@@ -42,12 +41,20 @@ public class Task implements Serializable {
         this.subject = subject;
     }
 
-    public String getHora() {
-        return hora;
+    public DateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setHora(String hora) {
-        this.hora = hora;
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getId() {

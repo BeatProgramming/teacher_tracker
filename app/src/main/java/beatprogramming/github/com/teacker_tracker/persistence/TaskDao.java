@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
 
+import org.joda.time.DateTime;
+
 import java.util.GregorianCalendar;
 
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
@@ -13,9 +15,8 @@ public interface TaskDao {
 
     void findTasks(OnLoadFinishListener listener);
 
-    void updateTask(int id, int subjectId, GregorianCalendar dateTime, String course, String
-            classRoom,
-                       OnUpdateFinishListener listener);
+    void updateTask(int id, String description, DateTime dateTime, int subjectId,
+                    OnUpdateFinishListener listener);
 
     void deleteTask(int id, OnDeleteFinishListener listener);
 

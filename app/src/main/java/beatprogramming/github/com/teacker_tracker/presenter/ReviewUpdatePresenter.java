@@ -2,6 +2,8 @@ package beatprogramming.github.com.teacker_tracker.presenter;
 
 import android.util.Log;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import beatprogramming.github.com.teacker_tracker.persistence.ReviewDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDaoImpl;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
+import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
 /**
@@ -39,8 +42,10 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
         subjectDao.findSubjects(this);
     }
 
-    public void submit(int id, String name, int subjectId, String typeValue) {
-        reviewDao.updateReview(id, name, subjectId, typeValue, this);
+    public void submit(int id, String name, int subjectId, String dateTimeString,  String
+            typeValue) {
+        DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
+        reviewDao.updateReview(id, name, subjectId, dateTime, typeValue, this);
     }
 
     public void delete(int id) {

@@ -19,9 +19,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 
-/**
- * Created by malkomich on 13/11/15.
- */
+
 public class CSVManager {
 
     private static final String TAG = CSVManager.class.getName();

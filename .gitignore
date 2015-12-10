@@ -23,6 +23,7 @@ out/
 
 # Gradle local
 .gradle
+/gradlew
 /local.properties
 
 # Mac 

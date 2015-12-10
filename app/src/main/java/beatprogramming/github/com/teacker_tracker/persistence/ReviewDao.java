@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
 
+import org.joda.time.DateTime;
+
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -11,8 +13,8 @@ public interface ReviewDao {
 
     void findReviews(OnLoadFinishListener listener);
 
-    void updateReview(int id, String name, int subjectId, String type,
-                       OnUpdateFinishListener listener);
+    void updateReview(int id, String name, int subjectId, DateTime dateTime, String type,
+                      OnUpdateFinishListener listener);
 
     void deleteReview(int id, OnDeleteFinishListener listener);
 

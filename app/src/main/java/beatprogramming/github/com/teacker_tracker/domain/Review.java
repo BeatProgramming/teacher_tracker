@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +14,17 @@ public abstract class Review implements Serializable {
     private int id;
     private String name;
     private Subject subject;
+    private DateTime dateTime;
     private List<Score> scores = new ArrayList<Score>();
 
     public Review() {
 
     }
 
-    public Review(String name, Subject subject) {
+    public Review(String name, Subject subject, DateTime dateTime) {
         this.name = name;
         this.subject = subject;
+        this.dateTime = dateTime;
     }
 
     public String getName() {
@@ -39,6 +43,14 @@ public abstract class Review implements Serializable {
     public void setSubject(Subject subject) {
 
         this.subject = subject;
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public List<Score> getScores() {

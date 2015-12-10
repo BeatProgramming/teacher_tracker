@@ -1,6 +1,14 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.widget.EditText;
+
+import org.joda.time.DateTime;
+
+import beatprogramming.github.com.teacker_tracker.BDHelper;
 import beatprogramming.github.com.teacker_tracker.DataSource;
+import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -16,6 +24,8 @@ public class ReviewDaoImpl implements ReviewDao {
     public static final String EXAM = "Exam";
     public static final String PROJECT = "Project";
 
+    private final BDHelper databaseHelper = BDHelper.getInstance();
+
     @Override
     public void findReviews(OnLoadFinishListener listener) {
 
@@ -26,12 +36,21 @@ public class ReviewDaoImpl implements ReviewDao {
     }
 
     @Override
-    public void updateReview(int id, String name, int subjectId, String type, OnUpdateFinishListener listener) {
+    public void updateReview(int id, String name, int subjectId, DateTime dateTime, String type,
+                             OnUpdateFinishListener listener) {
 
         try{
             if(id == 0) {
 
-                // Here goes INSERT operation
+                SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+//                ContentValues examen = new ContentValues();
+//                examen.put("nombre",name);
+//                examen.put("fecha",dateTime);
+//                examen.put("idAsignatura", subjectId);
+//
+//                db.insert(EVALUACION, null, examen);
+//                db.close();
 
             } else {
 

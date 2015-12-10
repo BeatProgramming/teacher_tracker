@@ -47,6 +47,8 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     private EditText nameEditText;
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
+    private EditText dateEditText;
+    private EditText timeEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,8 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
         nameEditText = (EditText) view.findViewById(R.id.review_name);
         subjectSpinner = (Spinner) view.findViewById(R.id.review_subject);
         subjectIdTextView = (TextView) view.findViewById(R.id.review_subject_id);
+        dateEditText = (EditText) view.findViewById(R.id.taskDate);
+        timeEditText = (EditText) view.findViewById(R.id.taskHour);
 
         typeRadioGroup.setOnCheckedChangeListener(this);
         subjectSpinner.setOnItemSelectedListener(this);
@@ -119,7 +123,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     }
 
     @Override
-     public void setSubjectId(int id) {
+    public void setSubjectId(int id) {
         subjectIdTextView.setText(Integer.toString(id));
     }
 
@@ -149,6 +153,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         Integer.parseInt(subjectIdTextView.getText().toString()),
+                        dateEditText.getText().toString() + " " + timeEditText.getText().toString(),
                         typeValueTextView.getText().toString());
                 break;
             case R.id.button_delete:

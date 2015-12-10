@@ -1,10 +1,6 @@
 package beatprogramming.github.com.teacker_tracker;
 
-/**
- * Clase que simula una base de datos para las asignaturas creadas por un usuario
- * <p/>
- * Created by Adrian on 07/11/2015.
- */
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +13,11 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 
-
+/**
+ * Clase que simula una base de datos para las asignaturas creadas por un usuario
+ * <p/>
+ * Created by Adrian on 07/11/2015.
+ */
 public class DataSource {
 
     public final static List TASK = new ArrayList<Task>();
@@ -36,11 +36,11 @@ public class DataSource {
 
     static {
 
-        TASK.add(new Task((Subject) SUBJECT.get(0), "08:00"));
-        TASK.add(new Task((Subject) SUBJECT.get(0), "10:00"));
-        TASK.add(new Task((Subject) SUBJECT.get(1), "12:00"));
-        TASK.add(new Task((Subject) SUBJECT.get(2), "16:00"));
-        TASK.add(new Task((Subject) SUBJECT.get(2), "17:00"));
+        TASK.add(new Task("a",(Subject) SUBJECT.get(0), new DateTime()));
+        TASK.add(new Task("b", (Subject) SUBJECT.get(0), new DateTime()));
+        TASK.add(new Task("c", (Subject) SUBJECT.get(1), new DateTime()));
+        TASK.add(new Task("d", (Subject) SUBJECT.get(2), new DateTime()));
+        TASK.add(new Task("e", (Subject) SUBJECT.get(2), new DateTime()));
 
     }
 
@@ -62,9 +62,10 @@ public class DataSource {
 
     static {
 
-        REVIEW.add(new Exam("Parcial 1", (Subject) SUBJECT.get(0)));
-        REVIEW.add(new Exam("Final", (Subject) SUBJECT.get(1)));
-        REVIEW.add(new Project("Práctica final", (Subject) SUBJECT.get(2)));
+        REVIEW.add(new Exam("Parcial 1", (Subject) SUBJECT.get(0), new DateTime()));
+        REVIEW.add(new Exam("Final", (Subject) SUBJECT.get(1), new DateTime()));
+        REVIEW.add(new Project("Práctica final", (Subject) SUBJECT.get(2), new DateTime()));
 
     }
+
 }
