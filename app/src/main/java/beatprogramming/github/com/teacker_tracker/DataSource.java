@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker;
 
+import android.provider.BaseColumns;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
