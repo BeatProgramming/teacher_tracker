@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Teacker Tracker</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="action_settings">Configuración</string>
 
     <!-- SETTINGS -->
     <string name="action_settings_app">Configuración app</string>
@@ -25,7 +24,7 @@
     <string name="subjectDescription">Descripción de la asignatura</string>
     <string name="subjectCurse">Curso de la asignatura</string>
     <string name="subjectAula">Aula de la asignatura</string>
-    <string name="submit">CONFIRMAR</string>
+    <string name="submit">Confirmar</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
     <string name="titleSubject">Asignatura</string>
@@ -34,17 +33,17 @@
     <string name="manage_students">Gestionar</string>
 
     <!-- EDIT SUBJECT ACTIVITY -->
-    <string name="subjects_editSubject">ASIGNATURAS</string>
+    <string name="subjects_editSubject">Asignaturas</string>
 
     <!-- MODIFY ACTIVITY -->
-    <string name="button_submit">GUARDAR</string>
-    <string name="button_delete">BORRAR</string>
+    <string name="button_submit">Guardar</string>
+    <string name="button_delete">Borrar</string>
 
     <!-- SUBMIT SCORE ACTIVITY -->
     <string name="examName">Nombre exámen</string>
     <string name="examDate">Fecha exámen</string>
     <string name="examNameSubject">Nombre asignatura</string>
-    <string name="add_button">CONFIRMAR</string>
+    <string name="add_button">Confirmar</string>
 
     <!-- STUDENTS ACTIVITY -->
     <string name="title_activity_new_students">Alumnos</string>
