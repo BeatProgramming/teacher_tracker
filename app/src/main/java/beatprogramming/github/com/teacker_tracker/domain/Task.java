@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 import java.io.Serializable;
 
 /**
- * Created by Adrian on 07/11/2015.
+ * Clase que modela una tarea de la base de datos.
  */
 public class Task implements Serializable {
 

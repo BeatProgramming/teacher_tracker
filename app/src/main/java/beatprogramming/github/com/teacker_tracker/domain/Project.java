@@ -3,7 +3,7 @@ package beatprogramming.github.com.teacker_tracker.domain;
 import org.joda.time.DateTime;
 
 /**
- * Created by malkomich on 27/11/15.
+ * Clase que modela un proyecto, hereda de review.
  */
 public class Project extends Review{
 

@@ -3,7 +3,7 @@ package beatprogramming.github.com.teacker_tracker.domain;
 import org.joda.time.DateTime;
 
 /**
- * Created by adrian on 11/12/2015.
+ * Clase que modela un horario.
  */
 public class Schedule {
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by malkomich on 27/11/15.
+ * Clase que modela las review de la base de datos. Es una clase abstracta
  */
 public abstract class Review implements Serializable {
 

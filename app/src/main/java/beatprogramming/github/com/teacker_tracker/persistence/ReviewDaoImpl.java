@@ -34,8 +34,8 @@ public class ReviewDaoImpl implements ReviewDao {
     public static final String PROJECT = "Project";
 
     public static BDHelper db;
-    public static SQLiteDatabase sqldb;
-    public static Cursor c;
+    private static SQLiteDatabase sqldb;
+    private static Cursor c;
 
     private final BDHelper databaseHelper = BDHelper.getInstance();
 
@@ -43,13 +43,11 @@ public class ReviewDaoImpl implements ReviewDao {
      * Metodo que recupera todas las reviews de la base de datos
      *
      * @param listener
-     * @return reviews
      */
     @Override
     public void findReviews(OnLoadFinishListener listener) {
         db = BDHelper.getInstance();
         sqldb = db.getReadableDatabase();
-        c = sqldb.query("Review", null, null, null, null, null, null);
         c = sqldb.rawQuery("SELECT * FROM Review LEFT JOIN Subject " +
                 "ON Review.subjectId = Subject._id;", null);
 
@@ -104,6 +102,7 @@ public class ReviewDaoImpl implements ReviewDao {
             reviews.put("type", type);
             if(id == 0) {
                 sqldb.insert("Review", null, reviews);
+
             } else {
                 String[] x = new String[]{String.valueOf(id)};
                 sqldb.update("Review", reviews, "_id=?" , x);
