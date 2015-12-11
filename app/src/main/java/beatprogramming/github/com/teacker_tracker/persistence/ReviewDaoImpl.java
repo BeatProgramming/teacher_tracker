@@ -58,14 +58,14 @@ public class ReviewDaoImpl implements ReviewDao {
                 if (c.getString(c.getColumnIndex("type")) == "project"){
                     Subject s =  new Subject(c.getString(c.getColumnIndex("name")),
                             c.getString(c.getColumnIndex("description")),
-                            c.getString(c.getColumnIndex("curse")));
+                            c.getString(c.getColumnIndex("course")));
                     Project p = new Project(c.getString(c.getColumnIndex("name")),
                             s, new DateTime(c.getInt(c.getColumnIndex("dateTime"))));
                     reviews.add(p);
                 } else{
                     Subject s =  new Subject(c.getString(c.getColumnIndex("name")),
                             c.getString(c.getColumnIndex("description")),
-                            c.getString(c.getColumnIndex("curse")));
+                            c.getString(c.getColumnIndex("course")));
                     Exam e = new Exam(c.getString(c.getColumnIndex("name")),
                             s, new DateTime(c.getInt(c.getColumnIndex("dateTime"))));
                     reviews.add(e);

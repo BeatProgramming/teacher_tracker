@@ -45,7 +45,7 @@ public class SubjectDaoImpl implements SubjectDao {
             do{
                 Subject s = new Subject(c.getString(c.getColumnIndex("name")),
                         c.getString(c.getColumnIndex("description")),
-                        c.getString(c.getColumnIndex("curse")));
+                        c.getString(c.getColumnIndex("course")));
                 subjects.add(s);
             }while(c.moveToNext());
         }
