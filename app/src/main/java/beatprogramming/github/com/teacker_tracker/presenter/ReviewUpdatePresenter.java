@@ -7,10 +7,13 @@ import org.joda.time.DateTime;
 import java.io.Serializable;
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.fragments.DatePickerFragment;
+import beatprogramming.github.com.teacker_tracker.fragments.TimePickerFragment;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDaoImpl;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
@@ -21,7 +24,7 @@ import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 /**
  * Responsible object for handling all UI events on behalf of the view.
  */
-public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener {
+public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener, OnDateTimePickedListener {
 
     private static String TAG = ReviewUpdatePresenter.class.getName();
 
@@ -97,5 +100,25 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
                 break;
         }
         view.setTypeValue(typeValue);
+    }
+
+    public void showDatePicker() {
+        DatePickerFragment fragment = DatePickerFragment.newInstance(this);
+        view.showDialog(fragment);
+    }
+
+    public void showTimePicker() {
+        TimePickerFragment fragment = TimePickerFragment.newInstance(this);
+        view.showDialog(fragment);
+    }
+
+    @Override
+    public void onDatePicked(int year, int month, int day) {
+        view.setTaskDate(DateTimeFormatter.dateToString(year, month, day));
+    }
+
+    @Override
+    public void onTimePicked(int hour, int minute) {
+        view.setTaskTime(DateTimeFormatter.timeToString(hour, minute));
     }
 }

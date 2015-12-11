@@ -1,87 +1,91 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/subjectId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:visibility="gone"/>
-
-    <EditText
-        android:id="@+id/subjectName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:focusable="true"
-        android:hint="@string/subjectName"/>
-
-    <EditText
-        android:id="@+id/subjectDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/subjectName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/subjectName"
-        android:layout_below="@+id/subjectName"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:hint="@string/subjectDescription"/>
-
-    <EditText
-        android:id="@+id/subjectCurse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/subjectDescription"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/subjectDescription"
-        android:layout_below="@+id/subjectDescription"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:hint="@string/subjectCurse"/>
-
-    <EditText
-        android:id="@+id/subjectAula"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/subjectDescription"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/subjectDescription"
-        android:layout_below="@+id/subjectCurse"
-        android:layout_marginTop="20dp"
-        android:hint="@string/subjectAula"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/subjectAula"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:text="@string/button_submit"
-        android:textColor="#0D2A54"/>
-
-    <Button
-        android:id="@+id/button_delete"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="50dp"
-        android:text="@string/button_delete"
-        android:textColor="#FF0000"/>
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/subjectId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/subjectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="40dp"
+            android:focusable="true"
+            android:hint="@string/subjectName" />
+
+        <EditText
+            android:id="@+id/subjectDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/subjectName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/subjectName"
+            android:layout_below="@+id/subjectName"
+            android:layout_marginTop="20dp"
+            android:focusable="true"
+            android:hint="@string/subjectDescription" />
+
+        <EditText
+            android:id="@+id/subjectCurse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/subjectDescription"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/subjectDescription"
+            android:layout_below="@+id/subjectDescription"
+            android:layout_marginTop="20dp"
+            android:focusable="true"
+            android:hint="@string/subjectCurse" />
+
+        <EditText
+            android:id="@+id/subjectAula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/subjectDescription"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/subjectDescription"
+            android:layout_below="@+id/subjectCurse"
+            android:layout_marginTop="20dp"
+            android:hint="@string/subjectAula" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subjectAula"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/button_submit"
+            android:textColor="#0D2A54" />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button"
+            android:layout_marginTop="50dp"
+            android:text="@string/button_delete"
+            android:textColor="#FF0000" />
+
+    </RelativeLayout>
+
+</ScrollView>

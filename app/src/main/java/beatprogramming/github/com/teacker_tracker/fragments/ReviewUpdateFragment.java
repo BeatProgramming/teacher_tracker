@@ -2,8 +2,8 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +18,13 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.R;
-import beatprogramming.github.com.teacker_tracker.adapter.SubjectAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewUpdatePresenter;
-import beatprogramming.github.com.teacker_tracker.presenter.StudentUpdatePresenter;
+import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
 /**
@@ -47,8 +45,8 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     private EditText nameEditText;
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
-    private EditText dateEditText;
-    private EditText timeEditText;
+    private TextView dateTextView;
+    private TextView timeTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,11 +84,14 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
         nameEditText = (EditText) view.findViewById(R.id.review_name);
         subjectSpinner = (Spinner) view.findViewById(R.id.review_subject);
         subjectIdTextView = (TextView) view.findViewById(R.id.review_subject_id);
-        dateEditText = (EditText) view.findViewById(R.id.taskDate);
-        timeEditText = (EditText) view.findViewById(R.id.taskHour);
+        dateTextView = (TextView) view.findViewById(R.id.taskDate);
+        timeTextView = (TextView) view.findViewById(R.id.taskHour);
 
         typeRadioGroup.setOnCheckedChangeListener(this);
         subjectSpinner.setOnItemSelectedListener(this);
+
+        dateTextView.setOnClickListener(this);
+        timeTextView.setOnClickListener(this);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -98,13 +99,26 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
             Review review = (Review) args.getSerializable(REVIEW);
 
             idTextView.setText(Integer.toString(review.getId()));
+            dateTextView.setText(DateTimeFormatter.dateTimeToDateString(review.getDateTime()));
+            timeTextView.setText(DateTimeFormatter.dateTimeToTimeString(review.getDateTime()));
             if (review instanceof Exam)
                 typeRadioGroup.check(R.id.review_type_exam);
             else
                 typeRadioGroup.check(R.id.review_type_project);
 
             nameEditText.setText(review.getName());
-            subjectSpinner.setSelection(0);
+
+            int subjectId = review.getSubject().getId();
+            subjectIdTextView.setText(Integer.toString(subjectId));
+            if (subjectId > 0) {
+                for (int i = 0; i < subjectSpinner.getAdapter().getCount(); i++) {
+                    Subject subject = (Subject) subjectSpinner.getAdapter().getItem(i);
+                    if (subject.getId() == subjectId) {
+                        subjectSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
         }
 
         Button submit = (Button) view.findViewById(R.id.button);
@@ -153,7 +167,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         Integer.parseInt(subjectIdTextView.getText().toString()),
-                        dateEditText.getText().toString() + " " + timeEditText.getText().toString(),
+                        dateTextView.getText().toString() + " " + timeTextView.getText().toString(),
                         typeValueTextView.getText().toString());
                 break;
             case R.id.button_delete:
@@ -170,6 +184,11 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     }
 
     @Override
+    public void showDialog(DialogFragment fragment) {
+        callback.showDialog(fragment);
+    }
+
+    @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         int type = 0;
@@ -180,6 +199,12 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
             case R.id.review_type_project:
                 type = ReviewUpdatePresenter.RADIO_PROJECT;
                 break;
+            case R.id.taskDate:
+                presenter.showDatePicker();
+                break;
+            case R.id.taskHour:
+                presenter.showTimePicker();
+                break;
             default:
                 break;
         }
@@ -189,6 +214,16 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     @Override
     public void setError(String message) {
         showToastMessage(message);
+    }
+
+    @Override
+    public void setTaskDate(String dateString) {
+        dateTextView.setText(dateString);
+    }
+
+    @Override
+    public void setTaskTime(String timeString) {
+        timeTextView.setText(timeString);
     }
 
     private void showToastMessage(String message) {

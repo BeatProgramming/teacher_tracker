@@ -33,8 +33,8 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     private TaskUpdatePresenter presenter;
 
     private TextView idTextView;
-    private EditText dateEditText;
-    private EditText timeEditText;
+    private TextView dateTextView;
+    private TextView timeTextView;
     private EditText descriptionEditText;
     private Spinner subjectSpinner;
     private TextView subjectValueTextView;
@@ -70,14 +70,14 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
 
         // Identify all fields of the form.
         idTextView = (TextView) view.findViewById(R.id.tasktId);
-        dateEditText = (EditText) view.findViewById(R.id.taskDate);
-        timeEditText = (EditText) view.findViewById(R.id.taskHour);
+        dateTextView = (TextView) view.findViewById(R.id.taskDate);
+        timeTextView = (TextView) view.findViewById(R.id.taskHour);
         descriptionEditText = (EditText) view.findViewById(R.id.taskDescription);
         subjectSpinner = (Spinner) view.findViewById(R.id.taskSubject);
         subjectValueTextView = (TextView) view.findViewById(R.id.taskSubjectId);
 
-        timeEditText.setOnClickListener(this);
-        dateEditText.setOnClickListener(this);
+        timeTextView.setOnClickListener(this);
+        dateTextView.setOnClickListener(this);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -85,8 +85,8 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
             Task task = (Task) args.getSerializable(TASK);
 
             idTextView.setText(Integer.toString(task.getId()));
-            dateEditText.setText(DateTimeFormatter.dateTimeToDateString(task.getDateTime()));
-            timeEditText.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
+            dateTextView.setText(DateTimeFormatter.dateTimeToDateString(task.getDateTime()));
+            timeTextView.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
             descriptionEditText.setText(task.getDescription());
 
             int subjectId = task.getSubject().getId();
@@ -132,7 +132,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
             case R.id.button:
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         descriptionEditText.getText().toString(),
-                        dateEditText.getText().toString() + " " + timeEditText.getText().toString(),
+                        dateTextView.getText().toString() + " " + timeTextView.getText().toString(),
                         Integer.parseInt(subjectValueTextView.getText().toString()));
                 break;
             case R.id.button_delete:
@@ -167,12 +167,12 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
 
     @Override
     public void setTaskDate(String dateString) {
-        dateEditText.setText(dateString);
+        dateTextView.setText(dateString);
     }
 
     @Override
     public void setTaskTime(String timeString) {
-        timeEditText.setText(timeString);
+        timeTextView.setText(timeString);
     }
 
     private void showToastMessage(String message) {

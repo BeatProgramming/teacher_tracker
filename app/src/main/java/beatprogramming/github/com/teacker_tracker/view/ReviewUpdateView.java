@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.view;
 
+import android.support.v4.app.DialogFragment;
+
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
@@ -19,4 +21,9 @@ public interface ReviewUpdateView {
 
     void setTypeValue(String type);
 
+    void showDialog(DialogFragment fragment);
+
+    void setTaskDate(String dateString);
+
+    void setTaskTime(String timeString);
 }
