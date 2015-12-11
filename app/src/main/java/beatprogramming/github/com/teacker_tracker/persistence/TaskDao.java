@@ -15,7 +15,7 @@ public interface TaskDao {
 
     void findTasks(OnLoadFinishListener listener);
 
-    void updateTask(int id, String description, DateTime dateTime, int subjectId,
+    void updateTask(int id, String name,int subjectId,DateTime dateTime,String note,
                     OnUpdateFinishListener listener);
 
     void deleteTask(int id, OnDeleteFinishListener listener);

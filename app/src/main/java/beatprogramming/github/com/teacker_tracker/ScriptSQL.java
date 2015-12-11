@@ -98,6 +98,7 @@ public class ScriptSQL {
     public ScriptSQL(Context context){
         bdHelper =  new BDHelper(context);
         db = bdHelper.getWritableDatabase();
+
     }
 
 

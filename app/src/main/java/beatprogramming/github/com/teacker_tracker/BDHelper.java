@@ -27,10 +27,6 @@ public class BDHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //- Crear BD
-        //db.execSQL(ScriptSQL.CREATE_TAREA_SCRIPT);
-        //db.execSQL(ScriptSQL.CREATE_ASIGNATURA_SCRIPT);
-        //db.execSQL(ScriptSQL.CREATE_EVALUACION_SCRIPT);
-
         db.execSQL(ScriptBD.ASIGNATURA_SCRIPT);
         db.execSQL(ScriptBD.ALUMNO_SCRIPT);
         db.execSQL(ScriptBD.EVALUACION_SCRIPT);

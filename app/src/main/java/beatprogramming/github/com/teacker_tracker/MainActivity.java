@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
         BDHelper.init(this);
 
         setContentView(R.layout.activity_main);
-        ScriptSQL sql = new ScriptSQL(this);
+        //ScriptSQL sql = new ScriptSQL(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

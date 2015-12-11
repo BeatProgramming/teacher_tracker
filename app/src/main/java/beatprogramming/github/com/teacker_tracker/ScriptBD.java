@@ -16,7 +16,7 @@ public class ScriptBD {
     public static final String ID_ASIGNATURA = BaseColumns._ID;
     public static final String NOMBRE_ASIGNATURA = "name";
     public static final String DESCRIPCION_ASIGNATURA = "description";
-    public static final String CURSO_ASIGNATURA = "curse";
+    public static final String CURSO_ASIGNATURA = "course";
 
     //- Campos tabla ALUMNO
     public static final String ID_ALUMNO = BaseColumns._ID;
