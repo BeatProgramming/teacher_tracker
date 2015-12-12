@@ -30,14 +30,24 @@ public class ReviewDaoImpl implements ReviewDao {
 
     private static String TAG = ReviewDaoImpl.class.getName();
 
-    public static final String EXAM = "Exam";
-    public static final String PROJECT = "Project";
+    //Contantes de los campos de la tabla review
+    private static final String REVIEW = "review";
+    private static final String FINDQUERY = "SELECT * FROM Review LEFT JOIN Subject " +
+            "ON Review.subjectId = Subject._id;";
+    private static final String EXAM = "Exam";
+    private static final String PROJECT = "Project";
+    private static final String NAME = "name";
+    private static final String TYPE = "type";
+    private static final String DESCRIPTION = "description";
+    private static final String COURSE = "course";
+    private static final String DATETIME = "dateTime";
+    private static final String SUBJECTID = "subjectId";
+    private static final String CAMPOID = "_id=?";
 
-    public static BDHelper db;
+    //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
-
-    private final BDHelper databaseHelper = BDHelper.getInstance();
+    private final BDHelper db = BDHelper.getInstance();
 
     /**
      * Metodo que recupera todas las reviews de la base de datos
@@ -46,28 +56,26 @@ public class ReviewDaoImpl implements ReviewDao {
      */
     @Override
     public void findReviews(OnLoadFinishListener listener) {
-        db = BDHelper.getInstance();
         sqldb = db.getReadableDatabase();
-        c = sqldb.rawQuery("SELECT * FROM Review LEFT JOIN Subject " +
-                "ON Review.subjectId = Subject._id;", null);
+        c = sqldb.rawQuery(FINDQUERY, null);
 
         //Lista de reviews
         List reviews = new ArrayList<Review>();
         if(c.moveToFirst()){
             do{
-                if (c.getString(c.getColumnIndex("type")) == "project"){
-                    Subject s =  new Subject(c.getString(c.getColumnIndex("name")),
-                            c.getString(c.getColumnIndex("description")),
-                            c.getString(c.getColumnIndex("course")));
-                    Project p = new Project(c.getString(c.getColumnIndex("name")),
-                            s, new DateTime(c.getInt(c.getColumnIndex("dateTime"))));
+                if (c.getString(c.getColumnIndex(TYPE)) == PROJECT){
+                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+                            c.getString(c.getColumnIndex(DESCRIPTION)),
+                            c.getString(c.getColumnIndex(COURSE)));
+                    Project p = new Project(c.getString(c.getColumnIndex(NAME)),
+                            s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                     reviews.add(p);
                 } else{
-                    Subject s =  new Subject(c.getString(c.getColumnIndex("name")),
-                            c.getString(c.getColumnIndex("description")),
-                            c.getString(c.getColumnIndex("course")));
-                    Exam e = new Exam(c.getString(c.getColumnIndex("name")),
-                            s, new DateTime(c.getInt(c.getColumnIndex("dateTime"))));
+                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+                            c.getString(c.getColumnIndex(DESCRIPTION)),
+                            c.getString(c.getColumnIndex(COURSE)));
+                    Exam e = new Exam(c.getString(c.getColumnIndex(NAME)),
+                            s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                     reviews.add(e);
                 }
 
@@ -93,19 +101,18 @@ public class ReviewDaoImpl implements ReviewDao {
                              OnUpdateFinishListener listener) {
 
         try{
-            db = BDHelper.getInstance();
-            sqldb = databaseHelper.getWritableDatabase();
+            sqldb = db.getWritableDatabase();
 
             ContentValues reviews = new ContentValues();
-            reviews.put("subjectId", subjectId);
-            reviews.put("dateTime", dateTime.getMillis());
-            reviews.put("type", type);
+            reviews.put(SUBJECTID, subjectId);
+            reviews.put(DATETIME, dateTime.getMillis());
+            reviews.put(TYPE, type);
             if(id == 0) {
-                sqldb.insert("Review", null, reviews);
+                sqldb.insert(REVIEW, null, reviews);
 
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update("Review", reviews, "_id=?" , x);
+                sqldb.update(REVIEW, reviews, CAMPOID , x);
             }
             listener.onSuccess();
 
@@ -123,10 +130,11 @@ public class ReviewDaoImpl implements ReviewDao {
     @Override
     public void deleteReview(int id, OnDeleteFinishListener listener) {
 
-        sqldb = databaseHelper.getWritableDatabase();
+        sqldb = db.getWritableDatabase();
         if(id > 0) {
+            //- Borrar review
             String[] value = new String[]{String.valueOf(id)};
-            sqldb.delete("Review", "_id=?", value);
+            sqldb.delete(REVIEW, CAMPOID, value);
         }
         listener.onDeleteFinish();
 

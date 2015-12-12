@@ -62,7 +62,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 .getDescription() + ", " + item.getNote());
 
         subject.setText(item.getSubject().toString());
-        classroom.setText(item.getSubject().getAula());
+        classroom.setText("A101");
+        //classroom.setText(item.getSubject().getAula());
         hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
 
         return listItemView;

@@ -16,6 +16,10 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
+import beatprogramming.github.com.teacker_tracker.domain.Exam;
+import beatprogramming.github.com.teacker_tracker.domain.Project;
+import beatprogramming.github.com.teacker_tracker.domain.Review;
+import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 
 /**
@@ -24,53 +28,63 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 public class TaskDaoImpl implements TaskDao {
 
     private static String TAG = TaskDaoImpl.class.getName();
-    private static String TASK = "Task";
 
-    private final BDHelper databaseHelper = BDHelper.getInstance();
+    //Contantes de los campos de la tabla task
+    private static final String TASK = "Task";
+    private static final String FINDQUERY = "SELECT * FROM Task LEFT JOIN Subject " +
+            "ON Task.subjectId = Subject._id;";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String COURSE = "course";
+    private static final String DATETIME = "dateTime";
+    private static final String SUBJECTID = "subjectId";
+    private static final String NOTE = "note";
 
+    private final BDHelper db = BDHelper.getInstance();
+    private static SQLiteDatabase sqldb;
+    private static Cursor c;
+
+    /**
+     * Metodo que devuelte todas las tareas de la base de datos.
+     * @param listener
+     */
     @Override
     public void findTasks(OnLoadFinishListener listener) {
         //- Buscar todas las tareas
-        BDHelper bd = BDHelper.getInstance();
-        SQLiteDatabase sql = bd.getReadableDatabase();
+        sqldb = db.getReadableDatabase();
+        c = sqldb.rawQuery(FINDQUERY, null);
 
-        sql.query(TASK,null,null,null,null,null,null);
-
-        //- ELIMINAR
-        List<Task> tasks = new ArrayList<Task>();
-        //- Campos que queremos obtener al realizar la query
-        String[] campos = new String[] {"_id","hora","descripcion","idAsignatura", "nota"};
-        //- Ejecución de la query
-//        Cursor c = db.query("Tarea", campos, null, null, null, null, null);
-//
-//        if(c.moveToFirst()){
-//            do{
-//                Task task = new Task();
-//                task.setDateTime(c.getString(0));
-//                task.setDescription(c.getString(1));
-//                task.setSubject(c.getString(3));
-//                task.setNote(c.getString(2));
-//                Log.d(TAG, "findTasks, " + c.getString(0) + ", " + c.getString(1) + ", " + c
-//                        .getString(2) + ", " + c.getInt(3) + ", " + c.getString(4));
-//
-//                tasks.add(task);
-//            }while(c.moveToNext());
-//        }
-
-        listener.onLoadFinish(DataSource.TASK);
-
+        //Lista de tareas
+        List tasks = new ArrayList<Task>();
+        if(c.moveToFirst()){
+            do{
+                Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+                    c.getString(c.getColumnIndex(DESCRIPTION)),
+                    c.getString(c.getColumnIndex(COURSE)));
+                Task t = new Task(s,new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                tasks.add(t);
+            }while(c.moveToNext());
+        }
+        listener.onLoadFinish(tasks);
+        //listener.onLoadFinish(DataSource.TASK);
     }
 
+    /**
+     * Metodo que actualiza una tarea de la base de datos.
+     * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
+     * se crea una nueva tarea
+     * @param id
+     * @param name
+     * @param subjectId
+     * @param dateTime
+     * @param note
+     * @param listener
+     */
     @Override
     public void updateTask(int id, String name,int subjectId,DateTime dateTime,String note,
                            OnUpdateFinishListener listener) {
-        String NAME = "name";
-        String SUBJECTID = "subjectId";
-        String DATETIME = "dateTime";
-        String NOTE = "note";
 
-        BDHelper bd = BDHelper.getInstance();
-        SQLiteDatabase sql = bd.getWritableDatabase();
+        sqldb = db.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(NAME,name);
@@ -81,21 +95,12 @@ public class TaskDaoImpl implements TaskDao {
         try{
             if(id == 0) {
                 //- Insertar tarea
-                sql.insert(TASK,null,values);
-
-                //-ELIMINAR
-                SQLiteDatabase db = databaseHelper.getWritableDatabase();
-                ContentValues tarea = new ContentValues();
-//              tarea.put("hora", dateTime);
-                tarea.put("descripcion", note);
-                tarea.put("idAsignatura", subjectId);
-                long num = db.insert("Tarea", null, tarea);
-                db.close();
+                sqldb.insert(TASK, null, values);
 
             } else {
                 //- Actualizar tarea
                 String[] selectionArgs = new String[]{Integer.toString(id)};
-                sql.update(TASK,values, ScriptBD.ID_TAREA + "=?",selectionArgs);
+                sqldb.update(TASK,values, ScriptBD.ID_TAREA + "=?",selectionArgs);
             }
             listener.onSuccess();
 
@@ -105,15 +110,19 @@ public class TaskDaoImpl implements TaskDao {
 
     }
 
+    /**
+     * Metodo que borra una tarea de la base de datos
+     * @param id
+     * @param listener
+     */
     @Override
     public void deleteTask(int id, OnDeleteFinishListener listener) {
-        BDHelper bd = BDHelper.getInstance();
-        SQLiteDatabase sql = bd.getWritableDatabase();
+        sqldb = db.getWritableDatabase();
 
         if(id > 0) {
             //- Borrar tarea
             String[] selectionArgs = new String[]{Integer.toString(id)};
-            sql.delete(TASK,ScriptBD.ID_TAREA + "=?",selectionArgs);
+            sqldb.delete(TASK,ScriptBD.ID_TAREA + "=?",selectionArgs);
         }
         listener.onDeleteFinish();
 

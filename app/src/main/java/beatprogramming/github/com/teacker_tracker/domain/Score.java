@@ -11,15 +11,17 @@ public class Score implements Serializable {
     private float calificacion;
     private String comentario;
     private Student student;
+    private Review review;
 
     public Score() {
 
     }
 
-    public Score(float calificacion, String comentario, Student student) {
+    public Score(float calificacion, String comentario, Student student, Review review) {
         this.calificacion = calificacion;
         this.comentario = comentario;
         this.student = student;
+        this.review = review;
     }
 
     public String getComentario() {
@@ -52,5 +54,13 @@ public class Score implements Serializable {
 
     private void setId(int id) {
         this.id = id;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
     }
 }

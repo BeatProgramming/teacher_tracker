@@ -24,7 +24,15 @@ public class SubjectDaoImpl implements SubjectDao {
 
     private static String TAG = SubjectDaoImpl.class.getName();
 
-    private final BDHelper databaseHelper = BDHelper.getInstance();
+    //Contantes de los campos de la tabla subject
+    private static final String SUBJECT = "Subject";
+    private static final String FINDQUERY = "SELECT * FROM Subject";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String COURSE = "course";
+    private static final String CAMPOID = "_id=?";
+
+    private final BDHelper db = BDHelper.getInstance();
     private static SQLiteDatabase sqldb;
     private static Cursor c;
 
@@ -35,17 +43,16 @@ public class SubjectDaoImpl implements SubjectDao {
     @Override
     public void findSubjects(OnLoadFinishListener listener) {
 
-        sqldb = databaseHelper.getWritableDatabase();
-        c = sqldb.rawQuery("SELECT * FROM Subject LEFT JOIN Subject " +
-                "ON Review.subjectId = Subject._id;", null);
+        sqldb = db.getWritableDatabase();
+        c = sqldb.rawQuery(FINDQUERY, null);
 
         //Lista de subjects
         List subjects = new ArrayList<Subject>();
         if(c.moveToFirst()){
             do{
-                Subject s = new Subject(c.getString(c.getColumnIndex("name")),
-                        c.getString(c.getColumnIndex("description")),
-                        c.getString(c.getColumnIndex("course")));
+                Subject s = new Subject(c.getString(c.getColumnIndex(NAME)),
+                        c.getString(c.getColumnIndex(DESCRIPTION)),
+                        c.getString(c.getColumnIndex(COURSE)));
                 subjects.add(s);
             }while(c.moveToNext());
         }
@@ -67,18 +74,18 @@ public class SubjectDaoImpl implements SubjectDao {
     public void updateSubject(int id, String name, String description, String course, String classRoom, OnUpdateFinishListener listener) {
 
         try{
-            sqldb = databaseHelper.getWritableDatabase();
+            sqldb = db.getWritableDatabase();
 
             ContentValues subjects = new ContentValues();
-            subjects.put("name", name);
-            subjects.put("description", description);
-            subjects.put("course", course);
+            subjects.put(NAME, name);
+            subjects.put(DESCRIPTION, description);
+            subjects.put(COURSE, course);
 
             if(id == 0) {
-                sqldb.insert("Subject", null, subjects);
+                sqldb.insert(SUBJECT, null, subjects);
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update("Subject", subjects, "_id=?", x);
+                sqldb.update(SUBJECT, subjects, CAMPOID, x);
             }
             listener.onSuccess();
 
@@ -96,10 +103,10 @@ public class SubjectDaoImpl implements SubjectDao {
     @Override
     public void deleteSubject(int id, OnDeleteFinishListener listener) {
 
-        sqldb = databaseHelper.getWritableDatabase();
+        sqldb = db.getWritableDatabase();
         if(id > 0) {
             String[] value = new String[]{String.valueOf(id)};
-            sqldb.delete("Subject", "_id=?", value);
+            sqldb.delete(SUBJECT, CAMPOID, value);
         }
         listener.onDeleteFinish();
 

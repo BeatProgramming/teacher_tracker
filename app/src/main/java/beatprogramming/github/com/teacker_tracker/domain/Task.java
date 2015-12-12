@@ -19,9 +19,8 @@ public class Task implements Serializable {
 
     }
 
-    public Task(String name, Subject subject, DateTime dateTime) {
+    public Task(Subject subject, DateTime dateTime) {
         this.subject = subject;
-        this.description = description;
         this.dateTime = dateTime;
     }
 

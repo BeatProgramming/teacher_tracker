@@ -30,9 +30,9 @@ public class DataSource {
 
     static {
 
-        SUBJECT.add(new Subject("Lengua", "", "2º ESO", "A101"));
-        SUBJECT.add(new Subject("Matemáticas", "", "1º ESO", "A103"));
-        SUBJECT.add(new Subject("Filosofía", "", "2º ESO", "A106"));
+        SUBJECT.add(new Subject("Lengua", "", "2º ESO"));
+        SUBJECT.add(new Subject("Matemáticas", "", "1º ESO"));
+        SUBJECT.add(new Subject("Filosofía", "", "2º ESO"));
 
     }
 
