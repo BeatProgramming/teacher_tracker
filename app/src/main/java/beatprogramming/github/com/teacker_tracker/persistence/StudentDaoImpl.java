@@ -4,22 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
-import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Exam;
-import beatprogramming.github.com.teacker_tracker.domain.Project;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
-import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Alumno.
@@ -28,7 +21,7 @@ public class StudentDaoImpl implements StudentDao {
 
     private static String TAG = StudentDaoImpl.class.getName();
     private static String STUDENT = "Student";
-    private static final String FINDQUERY = "SELECT * FROM Stundet";
+    private static final String FINDQUERY = "SELECT * FROM Student";
     private static String NAME = "name";
     private static String SURNAME = "surname";
     private static String ICONPATH = "iconPath";
@@ -36,7 +29,11 @@ public class StudentDaoImpl implements StudentDao {
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
+
+    public StudentDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que devuelve todos los estudiantes de la base de datos
@@ -54,6 +51,7 @@ public class StudentDaoImpl implements StudentDao {
             do{
                 Student s =  new Student(c.getString(c.getColumnIndex(NAME)),
                             c.getString(c.getColumnIndex(SURNAME)));
+                s.setIconPath(c.getString(c.getColumnIndex(ICONPATH)));
                 students.add(s);
             }while(c.moveToNext());
         }

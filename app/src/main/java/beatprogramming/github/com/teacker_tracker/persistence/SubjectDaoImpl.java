@@ -3,15 +3,11 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
-import beatprogramming.github.com.teacker_tracker.DataSource;
-import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -32,9 +28,13 @@ public class SubjectDaoImpl implements SubjectDao {
     private static final String COURSE = "course";
     private static final String CAMPOID = "_id=?";
 
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
     private static SQLiteDatabase sqldb;
     private static Cursor c;
+
+    public SubjectDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que recupera todas las subjects de la base de datos

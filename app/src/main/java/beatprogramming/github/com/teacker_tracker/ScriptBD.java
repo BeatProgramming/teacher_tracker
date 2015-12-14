@@ -65,7 +65,7 @@ public class ScriptBD {
                     ID_ALUMNO + " integer primary key autoincrement," +
                     NOMBRE_ALUMNO + " text not null," +
                     APELLIDO_ALUMNO + " text not null," +
-                    ICONO_ALUMNO + " text not null)";
+                    ICONO_ALUMNO + " text null)";
 
     //- Creacion tabla EVALUACION
     public static final String EVALUACION_SCRIPT =
@@ -104,6 +104,6 @@ public class ScriptBD {
                     ID_HORARIO + " integer primary key autoincrement," +
                     ID_ASIGNATURA_HORARIO + " integer," +
                     FECHA_HORARIO + " integer," +
-                    CLASE_HORARIO + " text not null," +
+                    CLASE_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
 }

@@ -217,12 +217,12 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     }
 
     @Override
-    public void setTaskDate(String dateString) {
+    public void setReviewDate(String dateString) {
         dateTextView.setText(dateString);
     }
 
     @Override
-    public void setTaskTime(String timeString) {
+    public void setReviewTime(String timeString) {
         timeTextView.setText(timeString);
     }
 

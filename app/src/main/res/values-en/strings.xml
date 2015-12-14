@@ -32,7 +32,7 @@
     <string name="subjects_editSubject">Subjects</string>
     <string name="submit">Confirm</string>
     <string name="taskDate">Date</string>
-    <string name="taskDescription">Task description</string>
+    <string name="taskDescription">Task nombre</string>
     <string name="taskHour">Hour</string>
     <string name="taskRoom">Task room</string>
     <string name="taskSubject">Subject</string>

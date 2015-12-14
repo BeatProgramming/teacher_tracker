@@ -4,6 +4,7 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -14,9 +15,6 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Exam;
-import beatprogramming.github.com.teacker_tracker.domain.Project;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
@@ -38,7 +36,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
+
+    public ScheduleDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que devuelve todos los horarios de la base de datos.

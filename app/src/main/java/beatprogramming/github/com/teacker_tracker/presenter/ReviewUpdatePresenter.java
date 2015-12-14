@@ -114,11 +114,11 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     @Override
     public void onDatePicked(int year, int month, int day) {
-        view.setTaskDate(DateTimeFormatter.dateToString(year, month, day));
+        view.setReviewDate(DateTimeFormatter.dateToString(year, month, day));
     }
 
     @Override
     public void onTimePicked(int hour, int minute) {
-        view.setTaskTime(DateTimeFormatter.timeToString(hour, minute));
+        view.setReviewTime(DateTimeFormatter.timeToString(hour, minute));
     }
 }

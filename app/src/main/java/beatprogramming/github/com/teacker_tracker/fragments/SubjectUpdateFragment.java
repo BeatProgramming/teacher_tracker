@@ -79,7 +79,6 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
             nameEditText.setText(subject.getNombre());
             descriptionEditText.setText(subject.getDescripcion());
             courseEditText.setText(subject.getCurso());
-            classRoomEditText.setText(subject.getAula());
         }
 
         Button submit = (Button) view.findViewById(R.id.button);

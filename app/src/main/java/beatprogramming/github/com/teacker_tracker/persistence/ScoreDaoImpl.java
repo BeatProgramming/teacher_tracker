@@ -5,8 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +13,8 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Exam;
-import beatprogramming.github.com.teacker_tracker.domain.Project;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
-import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 public class ScoreDaoImpl implements ScoreDao {
 
@@ -36,7 +30,11 @@ public class ScoreDaoImpl implements ScoreDao {
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
+
+    public ScoreDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que devuelve todas las calificaciones de la base de datos.

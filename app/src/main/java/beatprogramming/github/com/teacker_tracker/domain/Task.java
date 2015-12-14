@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
 
     private int id;
-    private String description;
+    private String nombre;
     private Subject subject;
     private DateTime dateTime;
     private String note;
@@ -19,17 +19,18 @@ public class Task implements Serializable {
 
     }
 
-    public Task(Subject subject, DateTime dateTime) {
+    public Task(String nombre, Subject subject, DateTime dateTime) {
+        this.nombre = nombre;
         this.subject = subject;
         this.dateTime = dateTime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Subject getSubject() {

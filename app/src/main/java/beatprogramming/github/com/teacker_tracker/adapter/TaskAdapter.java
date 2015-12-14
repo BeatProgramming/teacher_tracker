@@ -59,7 +59,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         Task item = (Task) getItem(position);
 
         Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
-                .getDescription() + ", " + item.getNote());
+                .getNombre() + ", " + item.getNote());
 
         subject.setText(item.getSubject().toString());
         classroom.setText("A101");

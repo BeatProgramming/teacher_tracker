@@ -3,7 +3,6 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -11,14 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
-import beatprogramming.github.com.teacker_tracker.DataSource;
 import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Exam;
-import beatprogramming.github.com.teacker_tracker.domain.Project;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 
@@ -40,9 +35,13 @@ public class TaskDaoImpl implements TaskDao {
     private static final String SUBJECTID = "subjectId";
     private static final String NOTE = "note";
 
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
     private static SQLiteDatabase sqldb;
     private static Cursor c;
+
+    public TaskDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que devuelte todas las tareas de la base de datos.
@@ -58,10 +57,11 @@ public class TaskDaoImpl implements TaskDao {
         List tasks = new ArrayList<Task>();
         if(c.moveToFirst()){
             do{
+                String name = c.getString(c.getColumnIndex(DESCRIPTION));
                 Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
                     c.getString(c.getColumnIndex(DESCRIPTION)),
                     c.getString(c.getColumnIndex(COURSE)));
-                Task t = new Task(s,new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                Task t = new Task(name, s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 tasks.add(t);
             }while(c.moveToNext());
         }
@@ -77,11 +77,10 @@ public class TaskDaoImpl implements TaskDao {
      * @param name
      * @param subjectId
      * @param dateTime
-     * @param note
      * @param listener
      */
     @Override
-    public void updateTask(int id, String name,int subjectId,DateTime dateTime,String note,
+    public void updateTask(int id, String name, int subjectId, DateTime dateTime,
                            OnUpdateFinishListener listener) {
 
         sqldb = db.getWritableDatabase();
@@ -90,7 +89,6 @@ public class TaskDaoImpl implements TaskDao {
         values.put(NAME,name);
         values.put(SUBJECTID,subjectId);
         values.put(DATETIME,dateTime.getMillis());
-        values.put(NOTE, note);
 
         try{
             if(id == 0) {

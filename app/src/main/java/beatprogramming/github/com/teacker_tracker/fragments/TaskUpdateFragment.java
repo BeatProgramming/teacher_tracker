@@ -7,11 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
@@ -37,12 +40,18 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     private TextView timeTextView;
     private EditText descriptionEditText;
     private Spinner subjectSpinner;
-    private TextView subjectValueTextView;
+    private TextView subjectIdTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new TaskUpdatePresenter(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 
     /**
@@ -74,7 +83,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         timeTextView = (TextView) view.findViewById(R.id.taskHour);
         descriptionEditText = (EditText) view.findViewById(R.id.taskDescription);
         subjectSpinner = (Spinner) view.findViewById(R.id.taskSubject);
-        subjectValueTextView = (TextView) view.findViewById(R.id.taskSubjectId);
+        subjectIdTextView = (TextView) view.findViewById(R.id.taskSubjectId);
 
         timeTextView.setOnClickListener(this);
         dateTextView.setOnClickListener(this);
@@ -87,10 +96,10 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
             idTextView.setText(Integer.toString(task.getId()));
             dateTextView.setText(DateTimeFormatter.dateTimeToDateString(task.getDateTime()));
             timeTextView.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
-            descriptionEditText.setText(task.getDescription());
+            descriptionEditText.setText(task.getNombre());
 
             int subjectId = task.getSubject().getId();
-            subjectValueTextView.setText(Integer.toString(subjectId));
+            subjectIdTextView.setText(Integer.toString(subjectId));
             if (subjectId > 0) {
                 for (int i = 0; i < subjectSpinner.getAdapter().getCount(); i++) {
                     Subject subject = (Subject) subjectSpinner.getAdapter().getItem(i);
@@ -133,7 +142,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         descriptionEditText.getText().toString(),
                         dateTextView.getText().toString() + " " + timeTextView.getText().toString(),
-                        Integer.parseInt(subjectValueTextView.getText().toString()));
+                        Integer.parseInt(subjectIdTextView.getText().toString()));
                 break;
             case R.id.button_delete:
                 presenter.delete(Integer.parseInt(idTextView.getText().toString()));
@@ -158,6 +167,17 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     @Override
     public void setError(String message) {
         showToastMessage(message);
+    }
+
+    @Override
+    public void setSubjectItems(List<Subject> items) {
+        subjectSpinner.setAdapter(new ArrayAdapter<Subject>(getContext(),
+                R.layout.textview, items));
+    }
+
+    @Override
+    public void setSubjectId(int id) {
+        subjectIdTextView.setText(Integer.toString(id));
     }
 
     @Override

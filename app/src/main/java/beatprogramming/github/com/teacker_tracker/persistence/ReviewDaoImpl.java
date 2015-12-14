@@ -3,8 +3,6 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.EditText;
 
 import org.joda.time.DateTime;
 
@@ -12,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
-import beatprogramming.github.com.teacker_tracker.DataSource;
-import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -21,7 +17,6 @@ import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Project;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
@@ -34,8 +29,6 @@ public class ReviewDaoImpl implements ReviewDao {
     private static final String REVIEW = "review";
     private static final String FINDQUERY = "SELECT * FROM Review LEFT JOIN Subject " +
             "ON Review.subjectId = Subject._id;";
-    private static final String EXAM = "Exam";
-    private static final String PROJECT = "Project";
     private static final String NAME = "name";
     private static final String TYPE = "type";
     private static final String DESCRIPTION = "description";
@@ -44,10 +37,17 @@ public class ReviewDaoImpl implements ReviewDao {
     private static final String SUBJECTID = "subjectId";
     private static final String CAMPOID = "_id=?";
 
+    public static final String EXAM = "Exam";
+    public static final String PROJECT = "Project";
+
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
-    private final BDHelper db = BDHelper.getInstance();
+    private final BDHelper db;
+
+    public ReviewDaoImpl() {
+        db = BDHelper.getInstance();
+    }
 
     /**
      * Metodo que recupera todas las reviews de la base de datos

@@ -23,7 +23,7 @@ public interface ReviewUpdateView {
 
     void showDialog(DialogFragment fragment);
 
-    void setTaskDate(String dateString);
+    void setReviewDate(String dateString);
 
-    void setTaskTime(String timeString);
+    void setReviewTime(String timeString);
 }

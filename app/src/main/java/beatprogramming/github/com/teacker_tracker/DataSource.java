@@ -1,7 +1,5 @@
 package beatprogramming.github.com.teacker_tracker;
 
-import android.provider.BaseColumns;
-
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -56,9 +54,9 @@ public class DataSource {
 
     static {
 
-        SCORE.add(new Score(5.3f, "Aprobado", (Student) STUDENT.get(0)));
-        SCORE.add(new Score(4.0f, "Suspenso", (Student) STUDENT.get(1)));
-        SCORE.add(new Score(9.1f, "Sobresaliente", (Student) STUDENT.get(2)));
+        SCORE.add(new Score(5.3f, "Aprobado", (Student) STUDENT.get(0), (Review) REVIEW.get(0)));
+        SCORE.add(new Score(4.0f, "Suspenso", (Student) STUDENT.get(1), (Review) REVIEW.get(1)));
+        SCORE.add(new Score(9.1f, "Sobresaliente", (Student) STUDENT.get(2), (Review) REVIEW.get(2)));
 
     }
 
