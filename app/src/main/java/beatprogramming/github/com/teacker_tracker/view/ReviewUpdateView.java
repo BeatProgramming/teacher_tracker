@@ -26,4 +26,14 @@ public interface ReviewUpdateView {
     void setReviewDate(String dateString);
 
     void setReviewTime(String timeString);
+
+    void setReviewId(int id);
+
+    void setReviewName(String name);
+
+    void setSubject(int subjectId);
+
+    void selectType(int examType);
+
+    void loadScoreFragment();
 }

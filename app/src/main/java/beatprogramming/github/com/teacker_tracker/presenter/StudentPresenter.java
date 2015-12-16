@@ -25,6 +25,7 @@ public class StudentPresenter implements OnLoadFinishListener {
     }
 
     public void onResume() {
+        view.showLoading();
         subjectDao.findStudents(this);
     }
 
@@ -36,9 +37,10 @@ public class StudentPresenter implements OnLoadFinishListener {
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setItems((List<Student>) items);
+        view.hideLoading();
     }
 
-    public void onFloatingButtonClick() {
+    public void onCreateStudent() {
         view.loadStudentUpdateFragment(null);
     }
 }

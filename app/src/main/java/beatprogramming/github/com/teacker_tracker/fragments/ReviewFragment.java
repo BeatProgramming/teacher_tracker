@@ -3,8 +3,6 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +16,6 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.ReviewAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
-import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
 
@@ -58,7 +55,7 @@ public class ReviewFragment extends ListFragment implements ReviewView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onFloatingButtonClick();
+                presenter.onCreateReview();
             }
         });
 

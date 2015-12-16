@@ -32,7 +32,6 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     private EditText nameEditText;
     private EditText descriptionEditText;
     private EditText courseEditText;
-    private EditText classRoomEditText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,8 +66,7 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
         idTextView = (TextView) view.findViewById(R.id.subjectId);
         nameEditText = (EditText) view.findViewById(R.id.subjectName);
         descriptionEditText = (EditText) view.findViewById(R.id.subjectDescription);
-        courseEditText = (EditText) view.findViewById(R.id.subjectCurse);
-        classRoomEditText = (EditText) view.findViewById(R.id.subjectAula);
+        courseEditText = (EditText) view.findViewById(R.id.subjectCourse);
 
         Bundle args = getArguments();
         if (args != null) {
@@ -111,8 +109,7 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         descriptionEditText.getText().toString(),
-                        courseEditText.getText().toString(),
-                        classRoomEditText.getText().toString());
+                        courseEditText.getText().toString());
                 break;
             case R.id.button_delete:
                 presenter.delete(Integer.parseInt(idTextView.getText().toString()));

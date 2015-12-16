@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,13 +22,12 @@ import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
-import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.TaskUpdateView;
 
 /**
  * Created by malkomich on 27/11/15.
  */
-public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View.OnClickListener {
+public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = TaskUpdateFragment.class.getName();
     private static final String TASK = "BUNDLE_TASK";
@@ -38,21 +38,9 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     private TextView idTextView;
     private TextView dateTextView;
     private TextView timeTextView;
-    private EditText descriptionEditText;
+    private EditText nameEditText;
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        presenter = new TaskUpdatePresenter(this);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.onResume();
-    }
 
     /**
      * Instantiate the fragment with an existing subject to modify.
@@ -73,6 +61,18 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new TaskUpdatePresenter(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_task_update, container, false);
@@ -81,36 +81,17 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         idTextView = (TextView) view.findViewById(R.id.tasktId);
         dateTextView = (TextView) view.findViewById(R.id.taskDate);
         timeTextView = (TextView) view.findViewById(R.id.taskHour);
-        descriptionEditText = (EditText) view.findViewById(R.id.taskDescription);
+        nameEditText = (EditText) view.findViewById(R.id.taskName);
         subjectSpinner = (Spinner) view.findViewById(R.id.taskSubject);
         subjectIdTextView = (TextView) view.findViewById(R.id.taskSubjectId);
 
         timeTextView.setOnClickListener(this);
         dateTextView.setOnClickListener(this);
+        subjectSpinner.setOnItemSelectedListener(this);
 
         Bundle args = getArguments();
-        if (args != null) {
-
-            Task task = (Task) args.getSerializable(TASK);
-
-            idTextView.setText(Integer.toString(task.getId()));
-            dateTextView.setText(DateTimeFormatter.dateTimeToDateString(task.getDateTime()));
-            timeTextView.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
-            descriptionEditText.setText(task.getNombre());
-
-            int subjectId = task.getSubject().getId();
-            subjectIdTextView.setText(Integer.toString(subjectId));
-            if (subjectId > 0) {
-                for (int i = 0; i < subjectSpinner.getAdapter().getCount(); i++) {
-                    Subject subject = (Subject) subjectSpinner.getAdapter().getItem(i);
-                    if (subject.getId() == subjectId) {
-                        subjectSpinner.setSelection(i);
-                        break;
-                    }
-                }
-            }
-
-        }
+        Task task = (args != null) ? (Task) args.getSerializable(TASK) : null;
+        presenter.fillView(task);
 
         Button submit = (Button) view.findViewById(R.id.button);
         submit.setOnClickListener(this);
@@ -140,7 +121,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         switch (v.getId()) {
             case R.id.button:
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
-                        descriptionEditText.getText().toString(),
+                        nameEditText.getText().toString(),
                         dateTextView.getText().toString() + " " + timeTextView.getText().toString(),
                         Integer.parseInt(subjectIdTextView.getText().toString()));
                 break;
@@ -195,8 +176,39 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         timeTextView.setText(timeString);
     }
 
+    @Override
+    public void setTaskId(int id) {
+        idTextView.setText(Integer.toString(id));
+    }
+
+    @Override
+    public void setTaskName(String name) {
+        nameEditText.setText(name);
+    }
+
+    @Override
+    public void setSubject(int subjectId) {
+
+        for (int i = 0; i < subjectSpinner.getAdapter().getCount(); i++) {
+            Subject subject = (Subject) subjectSpinner.getAdapter().getItem(i);
+            if (subject.getId() == subjectId) {
+                subjectSpinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
     private void showToastMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        presenter.onSubjectSelected(subjectSpinner.getAdapter().getItem(position));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        presenter.onSubjectSelected(null);
+    }
 }

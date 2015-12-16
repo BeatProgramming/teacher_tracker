@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -10,6 +12,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListene
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.fragments.DatePickerFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TimePickerFragment;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
@@ -42,8 +45,13 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
     }
 
     public void submit(int id, String name, String dateTimeString, int subjectId) {
-        DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
-        taskDao.updateTask(id, name, subjectId, dateTime, this);
+
+        if (name.equals("") || subjectId == 0)
+            view.setError("Completa todos los campos");
+        else {
+            DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
+            taskDao.updateTask(id, name, subjectId, dateTime, this);
+        }
     }
 
     public void delete(int id) {
@@ -88,5 +96,36 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setSubjectItems((List<Subject>) items);
+    }
+
+    public void fillView(Task task) {
+
+        DateTime dateTime = new DateTime();
+
+        if (task != null) {
+
+            view.setTaskId(task.getId());
+            dateTime = task.getDateTime();
+
+            view.setTaskName(task.getNombre());
+
+            int subjectId = task.getSubject().getId();
+            view.setSubject(subjectId);
+        }
+
+        onDatePicked(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+        onTimePicked(dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+
+    }
+
+    public void onSubjectSelected(Object item) {
+
+        if (item != null) {
+            Subject subject = (Subject) item;
+            view.setSubjectId(subject.getId());
+        } else {
+            Log.d(TAG, "onSubjectSelected, nothing selected.");
+            // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
+        }
     }
 }

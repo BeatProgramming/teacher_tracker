@@ -53,7 +53,7 @@
     <!-- TASK ACTIVITY -->
     <string name="title_activity_task">Crear tarea</string>
     <string name="taskHour">Hora</string>
-    <string name="taskDescription">Descripción tarea..</string>
+    <string name="taskDescription">Nombre tarea..</string>
     <string name="taskRoom">Aula tarea..</string>
     <string name="taskSubject">Asignatura..</string>
     <string name="button_add_task">CONFIRMAR</string>

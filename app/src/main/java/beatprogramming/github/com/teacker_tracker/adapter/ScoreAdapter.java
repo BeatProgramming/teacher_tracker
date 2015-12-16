@@ -4,7 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -16,20 +19,20 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
 /**
  * Created by malkomich on 13/11/15.
  */
-public class ScoreAdapter extends ArrayAdapter {
+public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
 
     private final String TAG = ScoreAdapter.class.getName();
 
     private final Context context;
     private final int resource;
-    private final List<Score> values;
+    private final List<Student> studentList;
 
 
-    public ScoreAdapter(Context context, int resource, List objects) {
-        super(context, resource, objects);
+    public ScoreAdapter(Context context, int resource, List students) {
+        super(context, resource);
         this.resource = resource;
         this.context = context;
-        this.values = objects;
+        this.studentList = students;
     }
 
     @Override
@@ -40,17 +43,61 @@ public class ScoreAdapter extends ArrayAdapter {
 
         View rowView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
-        TextView studentTextView = (TextView) rowView.findViewById(R.id.item_score_student);
+        Spinner studentSpinner = (Spinner) rowView.findViewById(R.id.item_score_student);
         TextView scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
+        ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
 
-        Student student = values.get(position).getStudent();
-        String name = student.getSurname() + ", " + student.getName();
-        float score = values.get(position).getCalificacion();
+        final Score score = (Score) getItem(position);
+        Student student = score.getStudent();
+        Float scoreValue = score.getCalificacion();
+        String comment = score.getComentario();
 
-        studentTextView.setText(name);
-        scoreTextView.setText(String.valueOf(score));
+        studentSpinner.setAdapter(new ArrayAdapter<Student>(context,
+                R.layout.textview, studentList));
+        if(student != null) {
+            for (int i = 0; i < studentSpinner.getAdapter().getCount(); i++) {
+                Student st = (Student) studentSpinner.getAdapter().getItem(i);
+                if (st.getId() == student.getId()) {
+                    studentSpinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+        studentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Student st = (Student) parent.getItemAtPosition(position);
+                score.setStudent(st);
+                studentList.remove(st);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        if(scoreValue != null)
+            scoreTextView.setText(Float.toString(scoreValue));
+        scoreTextView.setOnClickListener(this);
+
+        commentImageView.setOnClickListener(this);
 
         return rowView;
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.item_score_score:
+                break;
+            case R.id.item_score_comment:
+                break;
+            default:
+                break;
+
+        }
+    }
 }

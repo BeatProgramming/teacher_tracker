@@ -40,7 +40,7 @@ public class SubjectPresenter implements OnLoadFinishListener {
         view.hideLoading();
     }
 
-    public void onFloatingButtonClick() {
+    public void onCreateSubject() {
         view.loadSubjectUpdateFragment(null);
     }
 

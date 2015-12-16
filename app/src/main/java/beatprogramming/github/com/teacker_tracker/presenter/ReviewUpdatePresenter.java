@@ -11,6 +11,9 @@ import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListe
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
+import beatprogramming.github.com.teacker_tracker.domain.Exam;
+import beatprogramming.github.com.teacker_tracker.domain.Project;
+import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.fragments.DatePickerFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TimePickerFragment;
@@ -47,8 +50,13 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     public void submit(int id, String name, int subjectId, String dateTimeString,  String
             typeValue) {
-        DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
-        reviewDao.updateReview(id, name, subjectId, dateTime, typeValue, this);
+
+        if(name.equals("") || subjectId == 0 || typeValue.equals(""))
+            view.setError("Completa todos los campos");
+        else {
+            DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
+            reviewDao.updateReview(id, name, subjectId, dateTime, typeValue, this);
+        }
     }
 
     public void delete(int id) {
@@ -62,7 +70,7 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     @Override
     public void onSuccess() {
-        view.loadReviewFragment();
+        view.loadScoreFragment();
     }
 
     @Override
@@ -79,6 +87,7 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
         if(item != null) {
             Subject subject = (Subject) item;
             view.setSubjectId(subject.getId());
+            Log.d(TAG, "onSubjectSelected, selected: " + subject.toString());
         } else {
             Log.d(TAG, "onSubjectSelected, nothing selected.");
             // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
@@ -120,5 +129,30 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
     @Override
     public void onTimePicked(int hour, int minute) {
         view.setReviewTime(DateTimeFormatter.timeToString(hour, minute));
+    }
+
+    public void fillView(Review review) {
+
+        DateTime dateTime = new DateTime();
+
+        if (review != null) {
+
+            view.setReviewId(review.getId());
+            dateTime = review.getDateTime();
+
+            view.setReviewName(review.getName());
+
+            int subjectId = review.getSubject().getId();
+            view.setSubject(subjectId);
+
+            if (review instanceof Exam)
+                view.selectType(RADIO_EXAM);
+            else if(review instanceof Project)
+                view.selectType(RADIO_PROJECT);
+        }
+
+        onDatePicked(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
+        onTimePicked(dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
+
     }
 }

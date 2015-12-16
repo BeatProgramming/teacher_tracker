@@ -43,7 +43,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         //Obtiene instancias de los text views
         TextView subject = (TextView) listItemView.findViewById(R.id.subject_main);
-        TextView classroom = (TextView) listItemView.findViewById(R.id.classroom_main);
         TextView hour = (TextView) listItemView.findViewById(R.id.hour_main);
         ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNote);
 
@@ -56,14 +55,12 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         });
 
         //Obtiene una instancia de la Task en la posición actual
-        Task item = (Task) getItem(position);
+        Task item = getItem(position);
 
         Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
                 .getNombre() + ", " + item.getNote());
 
         subject.setText(item.getSubject().toString());
-        classroom.setText("A101");
-        //classroom.setText(item.getSubject().getAula());
         hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
 
         return listItemView;

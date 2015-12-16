@@ -25,6 +25,7 @@ public class ReviewPresenter implements OnLoadFinishListener {
     }
 
     public void onResume() {
+        view.showLoading();
         reviewDao.findReviews(this);
     }
 
@@ -36,9 +37,10 @@ public class ReviewPresenter implements OnLoadFinishListener {
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setItems((List<Review>) items);
+        view.hideLoading();
     }
 
-    public void onFloatingButtonClick() {
+    public void onCreateReview() {
         view.loadReviewUpdateFragment(null);
     }
 }

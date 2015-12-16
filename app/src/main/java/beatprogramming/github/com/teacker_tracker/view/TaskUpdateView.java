@@ -26,4 +26,9 @@ public interface TaskUpdateView {
 
     void setTaskTime(String timeString);
 
+    void setTaskId(int id);
+
+    void setTaskName(String name);
+
+    void setSubject(int subjectId);
 }

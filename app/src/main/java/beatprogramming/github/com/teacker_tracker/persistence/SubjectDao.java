@@ -11,7 +11,7 @@ public interface SubjectDao {
 
     void findSubjects(OnLoadFinishListener listener);
 
-    void updateSubject(int id, String name, String description, String course, String classRoom,
+    void updateSubject(int id, String name, String description, String course,
                        OnUpdateFinishListener listener);
 
     void deleteSubject(int id, OnDeleteFinishListener listener);

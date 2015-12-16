@@ -67,11 +67,10 @@ public class SubjectDaoImpl implements SubjectDao {
      * @param name
      * @param description
      * @param course
-     * @param classRoom
      * @param listener
      */
     @Override
-    public void updateSubject(int id, String name, String description, String course, String classRoom, OnUpdateFinishListener listener) {
+    public void updateSubject(int id, String name, String description, String course, OnUpdateFinishListener listener) {
 
         try{
             sqldb = db.getWritableDatabase();

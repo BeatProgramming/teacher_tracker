@@ -3,8 +3,6 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,7 +55,7 @@ public class StudentFragment extends ListFragment implements StudentView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onFloatingButtonClick();
+                presenter.onCreateStudent();
             }
         });
 

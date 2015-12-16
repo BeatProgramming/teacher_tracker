@@ -21,9 +21,12 @@ public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
         subjectDao = new SubjectDaoImpl();
     }
 
-    public void submit(int id, String name, String description, String course, String
-            classRoom) {
-        subjectDao.updateSubject(id, name, description, course, classRoom, this);
+    public void submit(int id, String name, String description, String course) {
+
+        if(name.equals("") || description.equals("") || course.equals(""))
+            view.setError("Completa todos los campos");
+        else
+            subjectDao.updateSubject(id, name, description, course, this);
     }
 
     public void delete(int id) {

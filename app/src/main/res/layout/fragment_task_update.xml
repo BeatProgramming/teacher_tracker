@@ -47,7 +47,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/taskDescription"
+            android:id="@+id/taskName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/dateTime"
@@ -57,6 +57,7 @@
             android:layout_below="@+id/dateTime"
             android:layout_marginTop="20dp"
             android:focusable="true"
+            android:singleLine="true"
             android:hint="@string/taskDescription" />
 
         <Spinner
@@ -65,7 +66,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/taskDescription" />
+            android:layout_below="@+id/taskName"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"/>
 
         <TextView
             android:id="@+id/taskSubjectId"

@@ -54,19 +54,23 @@
             android:layout_below="@+id/review_type"
             android:layout_marginTop="40dp"
             android:focusable="true"
+            android:singleLine="true"
             android:hint="@string/reviewName" />
 
         <Spinner
             android:id="@+id/review_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/review_name" />
+            android:layout_below="@+id/review_name"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"/>
 
         <TextView
             android:id="@+id/review_subject_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:text="0"/>
 
         <LinearLayout
             android:id="@+id/dateTime"

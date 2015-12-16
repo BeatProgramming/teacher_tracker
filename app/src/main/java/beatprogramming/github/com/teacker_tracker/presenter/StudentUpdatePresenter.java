@@ -22,9 +22,14 @@ public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
     }
 
     public void submit(int id, String name, String surname, String iconPath) {
-        if(iconPath.equals(""))
-            iconPath = null;
-        studentDao.updateStudent(id, name, surname, iconPath, this);
+
+        if(name.equals("") || surname.equals(""))
+            view.setError("Completa todos los campos");
+        else {
+            if (iconPath.equals(""))
+                iconPath = null;
+            studentDao.updateStudent(id, name, surname, iconPath, this);
+        }
     }
 
     public void delete(int id) {

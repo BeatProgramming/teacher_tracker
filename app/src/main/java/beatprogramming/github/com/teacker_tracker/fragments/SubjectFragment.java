@@ -55,7 +55,7 @@ public class SubjectFragment extends ListFragment implements SubjectView {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.onFloatingButtonClick();
+                presenter.onCreateSubject();
             }
         });
 

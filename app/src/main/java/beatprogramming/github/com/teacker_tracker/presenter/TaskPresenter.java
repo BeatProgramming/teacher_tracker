@@ -25,6 +25,7 @@ public class TaskPresenter implements OnLoadFinishListener {
     }
 
     public void onResume() {
+        view.showLoading();
         subjectDao.findTasks(this);
     }
 
@@ -36,9 +37,10 @@ public class TaskPresenter implements OnLoadFinishListener {
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setItems((List<Task>) items);
+        view.hideLoading();
     }
 
-    public void onFloatingButtonClick() {
+    public void onCreateTask() {
         view.loadTaskUpdateFragment(null);
     }
 }
