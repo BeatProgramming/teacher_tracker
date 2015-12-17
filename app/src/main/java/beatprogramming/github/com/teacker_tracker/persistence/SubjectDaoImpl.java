@@ -12,6 +12,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListene
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Asignatura.
@@ -23,6 +24,7 @@ public class SubjectDaoImpl implements SubjectDao {
     //Contantes de los campos de la tabla subject
     private static final String SUBJECT = "Subject";
     private static final String FINDQUERY = "SELECT * FROM Subject";
+    private static final String ID = "_id";
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
@@ -53,6 +55,7 @@ public class SubjectDaoImpl implements SubjectDao {
                 Subject s = new Subject(c.getString(c.getColumnIndex(NAME)),
                         c.getString(c.getColumnIndex(DESCRIPTION)),
                         c.getString(c.getColumnIndex(COURSE)));
+                SecureSetter.setId(s,c.getInt(c.getColumnIndex(ID)));
                 subjects.add(s);
             }while(c.moveToNext());
         }

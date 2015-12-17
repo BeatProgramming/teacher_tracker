@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 public class ScheduleDaoImpl implements ScheduleDao {
 
@@ -26,7 +28,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
     private static String SCHEDULE = "Schedule";
     private static final String FINDQUERY = "SELECT * FROM Task LEFT JOIN Subject " +
             "ON Task.subjectId = Subject._id;";
-    private static String NAME = "name";
+    private static final String ID = "_id";
+    private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
     private static final String SUBJECTID = "subjectId";
@@ -61,6 +64,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                        c.getString(c.getColumnIndex(COURSE)));
                 Schedule sc = new Schedule(s, new DateTime(c.getString(c.getColumnIndex(DATETIME))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
+                SecureSetter.setId((Serializable) sc, c.getInt(c.getColumnIndex(ID)));
                 schedules.add(sc);
             }while(c.moveToNext());
         }

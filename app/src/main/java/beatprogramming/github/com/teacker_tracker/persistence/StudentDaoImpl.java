@@ -13,6 +13,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListene
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Alumno.
@@ -22,6 +23,7 @@ public class StudentDaoImpl implements StudentDao {
     private static String TAG = StudentDaoImpl.class.getName();
     private static String STUDENT = "Student";
     private static final String FINDQUERY = "SELECT * FROM Student";
+    private static String ID = "_id";
     private static String NAME = "name";
     private static String SURNAME = "surname";
     private static String ICONPATH = "iconPath";
@@ -52,6 +54,7 @@ public class StudentDaoImpl implements StudentDao {
                 Student s =  new Student(c.getString(c.getColumnIndex(NAME)),
                             c.getString(c.getColumnIndex(SURNAME)));
                 s.setIconPath(c.getString(c.getColumnIndex(ICONPATH)));
+                SecureSetter.setId(s, c.getInt(c.getColumnIndex(ID)));
                 students.add(s);
             }while(c.moveToNext());
         }

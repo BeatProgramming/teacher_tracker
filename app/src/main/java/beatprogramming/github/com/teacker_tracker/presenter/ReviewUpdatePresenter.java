@@ -51,9 +51,9 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
     public void submit(int id, String name, int subjectId, String dateTimeString,  String
             typeValue) {
 
-        if(name.equals("") || subjectId == 0 || typeValue.equals(""))
+        if(name.equals("") || subjectId == 0 || typeValue.equals("")) {
             view.setError("Completa todos los campos");
-        else {
+        }else {
             DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
             reviewDao.updateReview(id, name, subjectId, dateTime, typeValue, this);
         }

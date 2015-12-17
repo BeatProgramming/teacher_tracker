@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Project;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
@@ -29,6 +31,7 @@ public class ReviewDaoImpl implements ReviewDao {
     private static final String REVIEW = "review";
     private static final String FINDQUERY = "SELECT * FROM Review LEFT JOIN Subject " +
             "ON Review.subjectId = Subject._id;";
+    private static final String ID = "_id";
     private static final String NAME = "name";
     private static final String TYPE = "type";
     private static final String DESCRIPTION = "description";
@@ -69,6 +72,7 @@ public class ReviewDaoImpl implements ReviewDao {
                             c.getString(c.getColumnIndex(COURSE)));
                     Project p = new Project(c.getString(c.getColumnIndex(NAME)),
                             s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                    SecureSetter.setId(p, c.getInt(c.getColumnIndex(ID)));
                     reviews.add(p);
                 } else{
                     Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),

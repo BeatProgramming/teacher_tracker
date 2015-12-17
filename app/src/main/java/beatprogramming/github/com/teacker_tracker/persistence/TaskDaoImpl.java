@@ -16,6 +16,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
+import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Tarea.
@@ -28,6 +29,7 @@ public class TaskDaoImpl implements TaskDao {
     private static final String TASK = "Task";
     private static final String FINDQUERY = "SELECT * FROM Task LEFT JOIN Subject " +
             "ON Task.subjectId = Subject._id;";
+    private static final String ID = "_id";
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
@@ -62,6 +64,7 @@ public class TaskDaoImpl implements TaskDao {
                     c.getString(c.getColumnIndex(DESCRIPTION)),
                     c.getString(c.getColumnIndex(COURSE)));
                 Task t = new Task(name, s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                SecureSetter.setId(t, c.getInt(c.getColumnIndex(ID)));
                 tasks.add(t);
             }while(c.moveToNext());
         }
