@@ -20,26 +20,33 @@ import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
  */
 public class StudentDaoImpl implements StudentDao {
 
-    private static String TAG = StudentDaoImpl.class.getName();
+    //Tabla objetivo
     private static String STUDENT = "Student";
+
+    //Consultas sql
     private static final String FINDQUERY = "SELECT * FROM Student";
-    private static String ID = "_id";
-    private static String NAME = "name";
-    private static String SURNAME = "surname";
-    private static String ICONPATH = "iconPath";
+
+    //Campos de la tabla student
+    private static final String ID = "_id";
+    private static final String NAME = "name";
+    private static final String SURNAME = "surname";
+    private static final String ICONPATH = "iconPath";
 
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
     private final BDHelper db;
 
+    /**
+     * Constructor que inicia el DBHelper
+     */
     public StudentDaoImpl() {
         db = BDHelper.getInstance();
     }
 
     /**
      * Metodo que devuelve todos los estudiantes de la base de datos
-     * @param listener
+     * @param listener instancia del listener
      */
     @Override
     public void findStudents(OnLoadFinishListener listener) {
@@ -66,11 +73,11 @@ public class StudentDaoImpl implements StudentDao {
      * Metodo que actualiza un estudiante en la base de datos.
      * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
      * se crea un nuevo estudiante
-     * @param id
-     * @param name
-     * @param surname
-     * @param iconPath
-     * @param listener
+     * @param id id del estudiante
+     * @param name nombre del estudiante
+     * @param surname apellido del estudiante
+     * @param iconPath iconPath del estudiante
+     * @param listener instancia del listener
      */
     @Override
     public void updateStudent(int id, String name, String surname, String iconPath,
@@ -102,8 +109,8 @@ public class StudentDaoImpl implements StudentDao {
 
     /**
      * Metodo que borra un estudiante de la base de datos.
-     * @param id
-     * @param listener
+     * @param id id del estudiante a borrar
+     * @param listener instancia del listener
      */
     @Override
     public void deleteStudent(int id, OnDeleteFinishListener listener) {

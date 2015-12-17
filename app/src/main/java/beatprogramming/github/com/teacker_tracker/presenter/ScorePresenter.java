@@ -41,7 +41,7 @@ public class ScorePresenter implements OnLoadFinishListener {
                 view.createAdapter((List<Student>) items);
             }
         });
-        // scoreDao.findScoreByReview(this);
+        scoreDao.findScoreByReview(review, this);
     }
 
     @Override

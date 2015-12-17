@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
+import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -25,21 +25,28 @@ import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
  */
 public class ReviewDaoImpl implements ReviewDao {
 
-    private static String TAG = ReviewDaoImpl.class.getName();
-
-    //Contantes de los campos de la tabla review
+    //Tabla objetivo
     private static final String REVIEW = "review";
-    private static final String FINDQUERY = "SELECT * FROM Review LEFT JOIN Subject " +
-            "ON Review.subjectId = Subject._id;";
-    private static final String ID = "_id";
-    private static final String NAME = "name";
-    private static final String TYPE = "type";
-    private static final String DESCRIPTION = "description";
-    private static final String COURSE = "course";
-    private static final String DATETIME = "dateTime";
-    private static final String SUBJECTID = "subjectId";
-    private static final String CAMPOID = "_id=?";
 
+    //Consultas sql
+    private static final String FINDQUERY = "SELECT Review._id AS ReviewId, Review.name AS nameReview, Review.subjectId," +
+            " Review.dateTime, Review.type, Subject.name AS nameSubject, Subject.description, Subject.course" +
+            " FROM Review LEFT JOIN Subject " +
+            " ON Review.subjectId = Subject._id;";
+
+    //Campos de la tabla Review
+    private static final String REVIEWID = "ReviewId";
+    private static final String NAMEREVIEW = "nameReview";
+    private static final String TYPE = "type";
+    private static final String SUBJECTID = "subjectId";
+    private static final String DATETIME = "dateTime";
+
+    //Campos de la tabla Subject
+    private static final String NAMESUBJECT = "nameSubject";
+    private static final String COURSE = "course";
+    private static final String DESCRIPTION = "description";
+
+    //Tipos de review
     public static final String EXAM = "Exam";
     public static final String PROJECT = "Project";
 
@@ -55,7 +62,7 @@ public class ReviewDaoImpl implements ReviewDao {
     /**
      * Metodo que recupera todas las reviews de la base de datos
      *
-     * @param listener
+     * @param listener instancia del listener
      */
     @Override
     public void findReviews(OnLoadFinishListener listener) {
@@ -66,22 +73,22 @@ public class ReviewDaoImpl implements ReviewDao {
         List reviews = new ArrayList<Review>();
         if(c.moveToFirst()){
             do{
+                Review r = null;
                 if (c.getString(c.getColumnIndex(TYPE)) == PROJECT){
-                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
-                    Project p = new Project(c.getString(c.getColumnIndex(NAME)),
+                    r = new Project(c.getString(c.getColumnIndex(NAMEREVIEW)),
                             s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
-                    SecureSetter.setId(p, c.getInt(c.getColumnIndex(ID)));
-                    reviews.add(p);
                 } else{
-                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+                    Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
-                    Exam e = new Exam(c.getString(c.getColumnIndex(NAME)),
+                    r= new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
                             s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
-                    reviews.add(e);
                 }
+                SecureSetter.setId(r, c.getInt(c.getColumnIndex(REVIEWID)));
+                reviews.add(r);
 
             }while(c.moveToNext());
         }
@@ -93,12 +100,12 @@ public class ReviewDaoImpl implements ReviewDao {
      * Metodo que actualiza una review de la base de datos.
      * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
      * se crea una nueva review
-     * @param id
-     * @param name
-     * @param subjectId
-     * @param dateTime
-     * @param type
-     * @param listener
+     * @param id id de la evaluacion
+     * @param name nombre de la evaluacion
+     * @param subjectId id de la asignatura asociada a la evaluacion
+     * @param dateTime dateTime de la evaluacion
+     * @param type tipo de la evaluacion, pueden ser exam o project
+     * @param listener instancia del listener
      */
     @Override
     public void updateReview(int id, String name, int subjectId, DateTime dateTime, String type,
@@ -116,7 +123,7 @@ public class ReviewDaoImpl implements ReviewDao {
 
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update(REVIEW, reviews, CAMPOID , x);
+                sqldb.update(REVIEW, reviews, ScriptBD.ID_EVALUACION + "=?", x);
             }
             listener.onSuccess();
 
@@ -128,8 +135,8 @@ public class ReviewDaoImpl implements ReviewDao {
 
     /**
      *Metodo que borra una review de la base de datos
-     * @param id
-     * @param listener
+     * @param id id de la evaluacion a borrar
+     * @param listener instancia del listener
      */
     @Override
     public void deleteReview(int id, OnDeleteFinishListener listener) {
@@ -138,7 +145,7 @@ public class ReviewDaoImpl implements ReviewDao {
         if(id > 0) {
             //- Borrar review
             String[] value = new String[]{String.valueOf(id)};
-            sqldb.delete(REVIEW, CAMPOID, value);
+            sqldb.delete(REVIEW, ScriptBD.ID_EVALUACION + "=?", value);
         }
         listener.onDeleteFinish();
 

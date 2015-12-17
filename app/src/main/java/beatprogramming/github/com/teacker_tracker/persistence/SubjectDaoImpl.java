@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.BDHelper;
+import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -19,28 +20,33 @@ import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
  */
 public class SubjectDaoImpl implements SubjectDao {
 
-    private static String TAG = SubjectDaoImpl.class.getName();
-
-    //Contantes de los campos de la tabla subject
+    //Tabla objetivo
     private static final String SUBJECT = "Subject";
+
+    //Consultas sql
     private static final String FINDQUERY = "SELECT * FROM Subject";
+
+    //Campos de la tabla subject
     private static final String ID = "_id";
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
-    private static final String CAMPOID = "_id=?";
 
+    //Variables sql
     private final BDHelper db;
     private static SQLiteDatabase sqldb;
     private static Cursor c;
 
+    /**
+     * Constructor que incia del DBHelper
+     */
     public SubjectDaoImpl() {
         db = BDHelper.getInstance();
     }
 
     /**
      * Metodo que recupera todas las subjects de la base de datos
-     * @param listener
+     * @param listener instancia del listener
      */
     @Override
     public void findSubjects(OnLoadFinishListener listener) {
@@ -66,11 +72,11 @@ public class SubjectDaoImpl implements SubjectDao {
      * Metodo que actualiza una subject de la base de datos.
      * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
      * se crea una nueva subject
-     * @param id
-     * @param name
-     * @param description
-     * @param course
-     * @param listener
+     * @param id id de la asignatura
+     * @param name nombre de la asignatura
+     * @param description descripcion de la asignatura
+     * @param course curso de la asignatura
+     * @param listener instancia del listener
      */
     @Override
     public void updateSubject(int id, String name, String description, String course, OnUpdateFinishListener listener) {
@@ -87,7 +93,7 @@ public class SubjectDaoImpl implements SubjectDao {
                 sqldb.insert(SUBJECT, null, subjects);
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update(SUBJECT, subjects, CAMPOID, x);
+                sqldb.update(SUBJECT, subjects, ScriptBD.ID_ASIGNATURA+ "=?", x);
             }
             listener.onSuccess();
 
@@ -99,8 +105,8 @@ public class SubjectDaoImpl implements SubjectDao {
 
     /**
      * Metodo que borra una subject de la base de datos
-     * @param id
-     * @param listener
+     * @param id id de la asignatura a borrar
+     * @param listener instancia del listener
      */
     @Override
     public void deleteSubject(int id, OnDeleteFinishListener listener) {
@@ -108,7 +114,7 @@ public class SubjectDaoImpl implements SubjectDao {
         sqldb = db.getWritableDatabase();
         if(id > 0) {
             String[] value = new String[]{String.valueOf(id)};
-            sqldb.delete(SUBJECT, CAMPOID, value);
+            sqldb.delete(SUBJECT, ScriptBD.ID_ASIGNATURA+ "=?", value);
         }
         listener.onDeleteFinish();
 

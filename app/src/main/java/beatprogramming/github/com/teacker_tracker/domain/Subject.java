@@ -7,19 +7,19 @@ import java.io.Serializable;
  */
 public class Subject implements Serializable {
 
-            private int id;
-            private String nombre;
-            private String descripcion;
-            private String curso;
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private String curso;
 
-            public Subject() {
+    public Subject() {
 
-            }
+    }
 
-            public Subject(String nombre, String descripcion, String curso) {
-                this.nombre=nombre;
-                this.descripcion = descripcion;
-                this.curso=curso;
+    public Subject(String nombre, String descripcion, String curso) {
+        this.nombre=nombre;
+        this.descripcion = descripcion;
+        this.curso=curso;
     }
 
     public String getNombre() {

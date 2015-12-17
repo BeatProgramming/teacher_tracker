@@ -24,30 +24,41 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     private static String TAG = ScheduleDaoImpl.class.getName();
 
-    //Contantes de los campos de la tabla schedule
+    //Tabla objetivo
     private static String SCHEDULE = "Schedule";
-    private static final String FINDQUERY = "SELECT * FROM Task LEFT JOIN Subject " +
-            "ON Task.subjectId = Subject._id;";
-    private static final String ID = "_id";
-    private static final String NAME = "name";
-    private static final String DESCRIPTION = "description";
-    private static final String COURSE = "course";
+
+    //Consultas sql
+    private static final String FINDQUERY = "SELECT Schedule._id AS scheduleId, Schedule.subjectId, Schedule.dateTime, Schedule.classroom" +
+            " Subject.name AS nameSubject, Subject.description, Subject.course " +
+            " FROM Schedule LEFT JOIN Subject " +
+            "ON Schedule.subjectId = Subject._id;";
+
+    //Campos de la tabla schedule
+    private static final String SCHEDULEID = "scheduleId";
     private static final String SUBJECTID = "subjectId";
     private static final String DATETIME = "dateTime";
     private static final String CLASSROOM = "classroom";
+
+    //Campos de la tabla subject
+    private static final String NAMESUBJECT = "nameSubject";
+    private static final String DESCRIPTION = "description";
+    private static final String COURSE = "course";
 
     //Variables sql
     private static SQLiteDatabase sqldb;
     private static Cursor c;
     private final BDHelper db;
 
+    /**
+     * Constructor que inicia el DBHelper
+     */
     public ScheduleDaoImpl() {
         db = BDHelper.getInstance();
     }
 
     /**
      * Metodo que devuelve todos los horarios de la base de datos.
-     * @param listener
+     * @param listener instancia del listener
      */
     @Override
     public void findSchedule(OnLoadFinishListener listener) {
@@ -59,12 +70,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
         List schedules = new ArrayList<Schedule>();
         if(c.moveToFirst()){
             do{
-               Subject s =  new Subject(c.getString(c.getColumnIndex(NAME)),
+               Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                        c.getString(c.getColumnIndex(DESCRIPTION)),
                        c.getString(c.getColumnIndex(COURSE)));
                 Schedule sc = new Schedule(s, new DateTime(c.getString(c.getColumnIndex(DATETIME))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
-                SecureSetter.setId((Serializable) sc, c.getInt(c.getColumnIndex(ID)));
+                SecureSetter.setId((Serializable) sc, c.getInt(c.getColumnIndex(SCHEDULEID)));
                 schedules.add(sc);
             }while(c.moveToNext());
         }
@@ -75,18 +86,18 @@ public class ScheduleDaoImpl implements ScheduleDao {
      * Metodo que actualiza un horario en la base de datos.
      * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
      * se crea un nuevo horario
-     * @param id
-     * @param name
-     * @param subjectId
-     * @param dateTime
-     * @param classroom
-     * @param listener
+     * @param id id del horario
+     * @param name nombre del horario
+     * @param subjectId id de la asignatura asociada al horario
+     * @param dateTime dateTime del horario
+     * @param classroom aula del horario
+     * @param listener instancia del listener
      */
     @Override
     public void updateSchedule(int id, String name, int subjectId, DateTime dateTime, String classroom, OnUpdateFinishListener listener) {
         sqldb = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(NAME,name);
+        values.put(NAMESUBJECT,name);
         values.put(SUBJECTID,subjectId);
         values.put(DATETIME,dateTime.getMillis());
         values.put(CLASSROOM,classroom);
@@ -108,8 +119,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     /**
      * Metodo que borra un horario de la base de datos.
-     * @param id
-     * @param listener
+     * @param id id del horario a borrar
+     * @param listener instancia del listener
      */
     @Override
     public void deleteShedule(int id, OnDeleteFinishListener listener) {
