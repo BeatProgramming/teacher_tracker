@@ -31,7 +31,8 @@ public class ReviewPresenter implements OnLoadFinishListener {
 
     public void onItemClicked(int position) {
         Review review = view.getReviewFromAdapter(position);
-        view.loadReviewUpdateFragment(review);
+//        view.loadReviewUpdateFragment(review);
+        view.loadScoreFragment(review);
     }
 
     @Override

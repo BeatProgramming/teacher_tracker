@@ -4,6 +4,7 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -21,9 +22,10 @@ import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 public class ScoreDaoImpl implements ScoreDao {
+
+    private static String TAG = ScoreDaoImpl.class.getName();
 
     //Tabla objetivo
     private static final String SCORE = "Score";
@@ -34,11 +36,14 @@ public class ScoreDaoImpl implements ScoreDao {
             "Score.calification, Score.comment, Score.stundentId, Score._id AS scoreId" +
             "FROM Review LEFT JOIN Score ON Score.studentid  = Review._id) AS T " +
             "LEFT JOIN Student ON T.studentId = Student._id;";
+
     private static final String FINDBYREVIEW = "SELECT T.*, Student.name AS nameStudent, Student.surname, Student.iconPath FROM " +
-            "(SELECT Review._id AS reviewId, Review.name AS nameReview, Review.subjectId, Review.dateTime, Review.type," +
-            "Score.calification, Score.comment, Score.stundentId, Score._id AS scoreId" +
-            "FROM Review LEFT JOIN Score ON Score.studentid  = Review._id) AS T " +
+            "(SELECT T2.*, Score.calification, Score.comment, Score.stundentId, Score._id AS scoreId" +
+            "FROM (SELECT Review._id AS reviewId, Review.name AS nameReview, Review.subjectId, Review.dateTime, Review.type," +
+            " Subject.name AS nameSubject, Subject.description, Subject.course" +
+            " FROM Review LEFT JOIN Subject ON Review.subjectId=Subject._id) AS T2 LEFT JOIN Score ON Score.studentid  = T2.reviewId) AS T " +
             "LEFT JOIN Student ON T.studentId = Student._id WHERE T.reviewId = ?;";
+
     private static final String FINDBYSTUDENT = "SELECT T.*, Student.name AS nameStudent, Student.surname, Student.iconPath FROM " +
             "(SELECT Review._id AS reviewId, Review.name AS nameReview, Review.subjectId, Review.dateTime, Review.type," +
             "Score.calification, Score.comment, Score.stundentId, Score._id AS scoreId" +
@@ -51,6 +56,11 @@ public class ScoreDaoImpl implements ScoreDao {
     private static final String TYPE = "type";
     private static final String REVIEWID = "reviewId";
     private static final String SUBJECTID="subjectId";
+
+    //Campos de la tabla subject
+    private static final String NAMESUBJECT = "nameSubject";
+    private static final String DESCRIPTION = "description";
+    private static final String COURSE = "course";
 
     //Campos de la tabla student
     private static final String NAMESTUDENT = "nameStudent";
@@ -93,20 +103,23 @@ public class ScoreDaoImpl implements ScoreDao {
         if(c.moveToFirst()){
             do{
                 Student st =  new Student(c.getString(c.getColumnIndex(NAMESTUDENT)), c.getString(c.getColumnIndex(SURNAME)));
-                SecureSetter.setId(st, c.getInt(c.getColumnIndex(STUDENTID)));
+                st.setId(c.getInt(c.getColumnIndex(STUDENTID)));
+                Subject subject =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                        c.getString(c.getColumnIndex(DESCRIPTION)),
+                        c.getString(c.getColumnIndex(COURSE)));
+                subject.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
                 Review r;
                 if (c.getString(c.getColumnIndex(TYPE)) == PROJECT){
                     r = new Project(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            new Subject(),
-                            new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                            subject, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 } else{
                     r = new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            new Subject(),
-                            new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                            subject, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 }
+                r.setId(c.getInt(c.getColumnIndex(REVIEWID)));
                 Score s =  new Score(c.getFloat(c.getColumnIndex(CALIFICATION)),
                         c.getString(c.getColumnIndex(COMMENT)), st, r);
-                SecureSetter.setId(s, c.getInt(c.getColumnIndex(REVIEWID)));
+                s.setId(c.getInt(c.getColumnIndex(SCOREID)));
                 scores.add(s);
             }while(c.moveToNext());
         }
@@ -173,26 +186,34 @@ public class ScoreDaoImpl implements ScoreDao {
     @Override
     public void findScoreByReview(Review review, OnLoadFinishListener listener) {
         sqldb = db.getReadableDatabase();
-        c = sqldb.rawQuery(FINDBYREVIEW, new String[] {Integer.toString(review.getId())});
+        Log.d(TAG, "findScoreByReview, review: " + review.toString());
+        c = sqldb.rawQuery(FINDBYREVIEW, new String[]{Integer.toString(review.getId())});
         //Lista de reviews
         List scores = new ArrayList<Score>();
         if(c.moveToFirst()){
             do{
                 Student st =  new Student(c.getString(c.getColumnIndex(NAMESTUDENT)), c.getString(c.getColumnIndex(SURNAME)));
-                SecureSetter.setId(st, c.getInt(c.getColumnIndex(STUDENTID)));
+                st.setId(c.getInt(c.getColumnIndex(STUDENTID)));
+
+                Subject subject =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                        c.getString(c.getColumnIndex(DESCRIPTION)),
+                        c.getString(c.getColumnIndex(COURSE)));
+                subject.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
+
                 Review r;
                 if (c.getString(c.getColumnIndex(TYPE)) == PROJECT){
                     r = new Project(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            new Subject(),
+                            subject,
                             new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 } else{
                     r = new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            new Subject(),
+                            subject,
                             new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 }
+                r.setId(c.getInt(c.getColumnIndex(REVIEWID)));
                 Score s =  new Score(c.getFloat(c.getColumnIndex(CALIFICATION)),
                         c.getString(c.getColumnIndex(COMMENT)), st, r);
-                SecureSetter.setId(s, c.getInt(c.getColumnIndex(REVIEWID)));
+                s.setId(c.getInt(c.getColumnIndex(REVIEWID)));
                 scores.add(s);
 
             }while(c.moveToNext());

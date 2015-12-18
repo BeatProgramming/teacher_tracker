@@ -3,6 +3,7 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +73,12 @@ public class ReviewFragment extends ListFragment implements ReviewView {
     public void hideLoading() {
         progressBar.setVisibility(View.INVISIBLE);
         getListView().setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void loadScoreFragment(Review review) {
+        Fragment fragment = ScoreFragment.newInstance(review);
+        callback.replaceFragment(fragment);
     }
 
     @Override

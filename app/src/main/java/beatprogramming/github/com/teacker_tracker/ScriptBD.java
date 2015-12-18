@@ -106,4 +106,29 @@ public class ScriptBD {
                     FECHA_HORARIO + " integer," +
                     CLASE_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
+
+    //- Creacion insercion datos asignatura por defecto
+    public static final String INSERT_ASIGNATURA_SCRIPT =
+            "insert into " + ASIGNATURA + " values (" +
+                    "null," +
+                    "\"Lengua\"," +
+                    "\"1 ESO\"," +
+                    "\"Asignatura básica Lengua\")";
+
+    //- Creacion insercion datos examen por defecto
+    public static final String INSERT_REVIEW_SCRIPT =
+            "insert into " + EVALUACION + " values (" +
+                    "null," +
+                    "\"Primer parcial\"," +
+                    "\"20151010\"," +
+                    "\"Lengua\")";
+
+    //- Creación insercion datos tarea por defecto
+    public static final String INSERT_TAREA_SCRIPT =
+            "insert into " + TAREA + " values (" +
+                    "null," +
+                    "\"8:00\"," +
+                    "\"Tema 2\"," +
+                    "0," +
+                    "\"Hoy impartimos la clase de Lengua\")";
 }

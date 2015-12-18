@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.joda.time.DateTime;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 public class ScheduleDaoImpl implements ScheduleDao {
 
@@ -75,7 +73,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                        c.getString(c.getColumnIndex(COURSE)));
                 Schedule sc = new Schedule(s, new DateTime(c.getString(c.getColumnIndex(DATETIME))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
-                SecureSetter.setId((Serializable) sc, c.getInt(c.getColumnIndex(SCHEDULEID)));
+                sc.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
                 schedules.add(sc);
             }while(c.moveToNext());
         }
@@ -94,10 +92,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
      * @param listener instancia del listener
      */
     @Override
-    public void updateSchedule(int id, String name, int subjectId, DateTime dateTime, String classroom, OnUpdateFinishListener listener) {
+    public void updateSchedule(int id, int subjectId, DateTime dateTime, String classroom, OnUpdateFinishListener listener) {
         sqldb = db.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(NAMESUBJECT,name);
         values.put(SUBJECTID,subjectId);
         values.put(DATETIME,dateTime.getMillis());
         values.put(CLASSROOM,classroom);

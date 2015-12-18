@@ -33,6 +33,8 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
     private TaskDao taskDao;
     private SubjectDao subjectDao;
 
+    private Task task;
+
     public TaskUpdatePresenter(TaskUpdateView view) {
         this.view = view;
         taskDao = new TaskDaoImpl();
@@ -42,6 +44,7 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
 
     public void onResume() {
         subjectDao.findSubjects(this);
+        fillView();
     }
 
     public void submit(int id, String name, String dateTimeString, int subjectId) {
@@ -98,7 +101,7 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
         view.setSubjectItems((List<Subject>) items);
     }
 
-    public void fillView(Task task) {
+    public void fillView() {
 
         DateTime dateTime = new DateTime();
 
@@ -127,5 +130,9 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
             Log.d(TAG, "onSubjectSelected, nothing selected.");
             // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
         }
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 }

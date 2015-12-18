@@ -90,8 +90,10 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         subjectSpinner.setOnItemSelectedListener(this);
 
         Bundle args = getArguments();
-        Task task = (args != null) ? (Task) args.getSerializable(TASK) : null;
-        presenter.fillView(task);
+        if(args != null) {
+            Task task = (Task) args.getSerializable(TASK);
+            presenter.setTask(task);
+        }
 
         Button submit = (Button) view.findViewById(R.id.button);
         submit.setOnClickListener(this);

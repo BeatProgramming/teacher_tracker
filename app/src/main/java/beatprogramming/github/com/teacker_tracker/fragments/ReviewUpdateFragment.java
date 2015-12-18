@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +94,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
 
         Bundle args = getArguments();
         Review review = (args != null) ? (Review) args.getSerializable(REVIEW) : null;
-        presenter.fillView(review);
+        presenter.setReview(review);
 
         Button submit = (Button) view.findViewById(R.id.button);
         submit.setOnClickListener(this);
@@ -246,11 +247,13 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        presenter.onSubjectSelected(subjectSpinner.getAdapter().getItem(position));
+        presenter.onSubjectSelected(position);
+        Log.d(TAG, "onItemSelected, " + position);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        presenter.onSubjectSelected(null);
+        presenter.onSubjectSelected(0);
+        Log.d(TAG, "onNothingSelected ");
     }
 }

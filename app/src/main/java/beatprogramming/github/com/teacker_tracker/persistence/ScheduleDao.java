@@ -11,7 +11,7 @@ public interface ScheduleDao {
 
     void findSchedule(OnLoadFinishListener listener);
 
-    void updateSchedule(int id, String name,int subjectId,DateTime dateTime,String classroom,
+    void updateSchedule(int id,int subjectId,DateTime dateTime,String classroom,
                        OnUpdateFinishListener listener);
 
     void deleteShedule(int id, OnDeleteFinishListener listener);

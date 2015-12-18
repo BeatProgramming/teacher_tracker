@@ -27,7 +27,7 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     private static String TAG = ScoreFragment.class.getName();
 
-    public static final String REVIEW = "Prueba";
+    private static final String REVIEW = "BUNDLE_REVIEW";
 
     private FragmentCallback callback;
 
@@ -37,6 +37,17 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     private List<Score> items;
     private ScoreAdapter adapter;
+
+    public static ScoreFragment newInstance(Review review) {
+
+        ScoreFragment fragment = new ScoreFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(REVIEW, review);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -37,6 +37,9 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
     private ReviewUpdateView view;
     private ReviewDao reviewDao;
     private SubjectDao subjectDao;
+    private List<Subject> subjectList;
+
+    private Review review;
 
     public ReviewUpdatePresenter(ReviewUpdateView view) {
         this.view = view;
@@ -46,15 +49,19 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     public void onResume() {
         subjectDao.findSubjects(this);
+        fillView();
     }
 
     public void submit(int id, String name, int subjectId, String dateTimeString,  String
             typeValue) {
 
+        Log.d(TAG, "submit, id: " + id + ", name: " + name + ", subjectId: " + subjectId + ", typeValue: " + typeValue);
+
         if(name.equals("") || subjectId == 0 || typeValue.equals("")) {
             view.setError("Completa todos los campos");
         }else {
             DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
+
             reviewDao.updateReview(id, name, subjectId, dateTime, typeValue, this);
         }
     }
@@ -70,7 +77,7 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     @Override
     public void onSuccess() {
-        view.loadScoreFragment();
+        view.loadReviewFragment();
     }
 
     @Override
@@ -80,12 +87,13 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
 
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
-        view.setSubjectItems((List<Subject>) items);
+        subjectList = (List<Subject>) items;
+        view.setSubjectItems(subjectList);
     }
 
-    public void onSubjectSelected(Object item) {
-        if(item != null) {
-            Subject subject = (Subject) item;
+    public void onSubjectSelected(int position) {
+        if(position >= 0) {
+            Subject subject = subjectList.get(position);
             view.setSubjectId(subject.getId());
             Log.d(TAG, "onSubjectSelected, selected: " + subject.toString());
         } else {
@@ -131,7 +139,7 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
         view.setReviewTime(DateTimeFormatter.timeToString(hour, minute));
     }
 
-    public void fillView(Review review) {
+    public void fillView() {
 
         DateTime dateTime = new DateTime();
 
@@ -154,5 +162,9 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
         onDatePicked(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth());
         onTimePicked(dateTime.getHourOfDay(), dateTime.getMinuteOfHour());
 
+    }
+
+    public void setReview(Review review) {
+        this.review = review;
     }
 }

@@ -18,7 +18,6 @@ import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Project;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
@@ -87,7 +86,7 @@ public class ReviewDaoImpl implements ReviewDao {
                     r= new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
                             s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 }
-                SecureSetter.setId(r, c.getInt(c.getColumnIndex(REVIEWID)));
+                r.setId(c.getInt(c.getColumnIndex(REVIEWID)));
                 reviews.add(r);
 
             }while(c.moveToNext());
@@ -114,16 +113,17 @@ public class ReviewDaoImpl implements ReviewDao {
         try{
             sqldb = db.getWritableDatabase();
 
-            ContentValues reviews = new ContentValues();
-            reviews.put(SUBJECTID, subjectId);
-            reviews.put(DATETIME, dateTime.getMillis());
-            reviews.put(TYPE, type);
+            ContentValues review = new ContentValues();
+            review.put("name", name);
+            review.put(SUBJECTID, subjectId);
+            review.put(DATETIME, dateTime.getMillis());
+            review.put(TYPE, type);
             if(id == 0) {
-                sqldb.insert(REVIEW, null, reviews);
+                sqldb.insert(REVIEW, null, review);
 
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update(REVIEW, reviews, ScriptBD.ID_EVALUACION + "=?", x);
+                sqldb.update(REVIEW, review, ScriptBD.ID_EVALUACION + "=?", x);
             }
             listener.onSuccess();
 

@@ -61,12 +61,11 @@ public class StudentDaoImpl implements StudentDao {
                 Student s =  new Student(c.getString(c.getColumnIndex(NAME)),
                             c.getString(c.getColumnIndex(SURNAME)));
                 s.setIconPath(c.getString(c.getColumnIndex(ICONPATH)));
-                SecureSetter.setId(s, c.getInt(c.getColumnIndex(ID)));
+                s.setId(c.getInt(c.getColumnIndex(ID)));
                 students.add(s);
             }while(c.moveToNext());
         }
         listener.onLoadFinish(students);
-        //listener.onLoadFinish(DataSource.STUDENT);
     }
 
     /**

@@ -60,7 +60,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
                 .getNombre() + ", " + item.getNote());
 
-        subject.setText(item.getSubject().toString());
+        subject.setText(item.toString());
         hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
 
         return listItemView;

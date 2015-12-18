@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
  */
 public class Schedule {
 
+    private int id;
     private Subject subject;
     private DateTime dateTime;
     private String aula;
@@ -40,6 +41,14 @@ public class Schedule {
 
     public void setAula(String aula) {
         this.aula = aula;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

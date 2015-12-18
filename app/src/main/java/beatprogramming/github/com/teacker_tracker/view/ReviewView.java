@@ -19,4 +19,5 @@ public interface ReviewView {
 
     void hideLoading();
 
+    void loadScoreFragment(Review review);
 }

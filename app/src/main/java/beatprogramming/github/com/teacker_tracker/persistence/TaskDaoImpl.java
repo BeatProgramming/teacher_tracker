@@ -3,6 +3,7 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -22,6 +23,8 @@ import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
  * Implementación en SQLite del acceso a base de datos para manejar datos de Tarea.
  */
 public class TaskDaoImpl implements TaskDao {
+
+    private static String TAG = TaskDaoImpl.class.getName();
 
     //Tabla objetivo
     private static final String TASK = "Task";
@@ -74,8 +77,9 @@ public class TaskDaoImpl implements TaskDao {
                     c.getString(c.getColumnIndex(COURSE)));
                 SecureSetter.setId(s, c.getInt(c.getColumnIndex(SUBJECTID)));
                 Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
-                SecureSetter.setId(t, c.getInt(c.getColumnIndex(TASKID)));
+                t.setId(c.getInt(c.getColumnIndex(TASKID)));
                 tasks.add(t);
+                Log.d(TAG, "findTasks, " + t.toString());
             }while(c.moveToNext());
         }
         listener.onLoadFinish(tasks);
@@ -98,10 +102,10 @@ public class TaskDaoImpl implements TaskDao {
         sqldb = db.getWritableDatabase();
         //Valores para la busqueda en la base de datos
         ContentValues values = new ContentValues();
-        values.put(TASKID, id);
-        values.put(NAMETASK,name);
+        values.put("name",name);
         values.put(SUBJECTID,subjectId);
         values.put(DATETIME,dateTime.getMillis());
+        Log.d(TAG, "updateTask, id: " + id + ", name: " + name + ", subjectId: " + subjectId + ", dateTime: " + dateTime.toString());
         try{
             if(id == 0) {
                 //- Insertar tarea

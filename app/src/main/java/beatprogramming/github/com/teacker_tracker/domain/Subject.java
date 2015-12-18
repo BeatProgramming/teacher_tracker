@@ -50,12 +50,12 @@ public class Subject implements Serializable {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Override
     public String toString(){
-        return this.nombre + " " + this.curso;
+        return nombre + ", " + curso;
     }
 }
