@@ -75,7 +75,7 @@ public class TaskDaoImpl implements TaskDao {
                 Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                     c.getString(c.getColumnIndex(DESCRIPTION)),
                     c.getString(c.getColumnIndex(COURSE)));
-                SecureSetter.setId(s, c.getInt(c.getColumnIndex(SUBJECTID)));
+                s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
                 Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                 t.setId(c.getInt(c.getColumnIndex(TASKID)));
                 tasks.add(t);

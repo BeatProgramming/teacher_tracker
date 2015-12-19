@@ -113,6 +113,7 @@ public class SubjectDaoImpl implements SubjectDao {
     @Override
     public void deleteSubject(int id, OnDeleteFinishListener listener) {
 
+        //IMPORTANTE BORRAR EN CASCADA
         sqldb = db.getWritableDatabase();
         if(id > 0) {
             String[] value = new String[]{String.valueOf(id)};

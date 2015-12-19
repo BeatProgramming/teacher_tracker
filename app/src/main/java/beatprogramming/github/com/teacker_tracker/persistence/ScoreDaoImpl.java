@@ -37,12 +37,11 @@ public class ScoreDaoImpl implements ScoreDao {
             "FROM Review LEFT JOIN Score ON Score.studentid  = Review._id) AS T " +
             "LEFT JOIN Student ON T.studentId = Student._id;";
 
-    private static final String FINDBYREVIEW = "SELECT T.*, Student.name AS nameStudent, Student.surname, Student.iconPath FROM " +
-            "(SELECT T2.*, Score.calification, Score.comment, Score.stundentId, Score._id AS scoreId" +
-            "FROM (SELECT Review._id AS reviewId, Review.name AS nameReview, Review.subjectId, Review.dateTime, Review.type," +
-            " Subject.name AS nameSubject, Subject.description, Subject.course" +
-            " FROM Review LEFT JOIN Subject ON Review.subjectId=Subject._id) AS T2 LEFT JOIN Score ON Score.studentid  = T2.reviewId) AS T " +
-            "LEFT JOIN Student ON T.studentId = Student._id WHERE T.reviewId = ?;";
+    private static final String FINDBYREVIEW = "SELECT T.*, Student.name AS nameStudent, Student.surname AS surname, Student.iconPath AS iconPath " +
+            "FROM (SELECT T2.*, Score.calification, Score.comment ,Score.studentId, Score._id AS scoreId " +
+            "FROM (SELECT Review._id AS reviewId, Review.dateTime, Review.name AS nameReview, Review.subjectId, Review.type, " +
+            "Subject.course, Subject.description, Subject.name AS nameSubject FROM Review LEFT JOIN Subject ON Review.subjectId = Subject._id) AS T2" +
+            " LEFT JOIN Score ON Score.reviewId = T2.reviewId ) AS T LEFT JOIN Student ON Student._id = T.studentId WHERE T.reviewId = ?;";
 
     private static final String FINDBYSTUDENT = "SELECT T.*, Student.name AS nameStudent, Student.surname, Student.iconPath FROM " +
             "(SELECT Review._id AS reviewId, Review.name AS nameReview, Review.subjectId, Review.dateTime, Review.type," +
@@ -218,6 +217,8 @@ public class ScoreDaoImpl implements ScoreDao {
 
             }while(c.moveToNext());
         }
+        Log.d(TAG, "findScoreByReview, numero de scores: " + scores.size());
+
         listener.onLoadFinish(scores);
     }
 }

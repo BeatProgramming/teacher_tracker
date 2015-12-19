@@ -33,6 +33,22 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL(ScriptBD.CALIFICACION_SCRIPT);
         db.execSQL(ScriptBD.TAREA_SCRIPT);
         db.execSQL(ScriptBD.HORARIO_SCRIPT);
+
+        //- Inserts predefinidos
+        db.execSQL(ScriptBD.INSERT_ASIGNATURA1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_ASIGNATURA2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_TAREA1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_TAREA2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_TAREA3_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_REVIEW1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_REVIEW2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_ALUMNO1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_ALUMNO2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_CALIFICACION1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_CALIFICACION2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_CALIFICACION3_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_CALIFICACION4_SCRIPT);
+
     }
 
     @Override

@@ -108,27 +108,109 @@ public class ScriptBD {
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
 
     //- Creacion insercion datos asignatura por defecto
-    public static final String INSERT_ASIGNATURA_SCRIPT =
+    public static final String INSERT_ASIGNATURA1_SCRIPT =
             "insert into " + ASIGNATURA + " values (" +
                     "null," +
                     "\"Lengua\"," +
-                    "\"1 ESO\"," +
-                    "\"Asignatura básica Lengua\")";
+                    "\"Asignatura básica Lengua\"," +
+                    "\"1 ESO\")";
+
+    public static final String INSERT_ASIGNATURA2_SCRIPT =
+            "insert into " + ASIGNATURA + " values (" +
+                    "null," +
+                    "\"Matematicas\"," +
+                    "\"Asignatura básica Matematicas\"," +
+                    "\"1 ESO\")";
 
     //- Creacion insercion datos examen por defecto
-    public static final String INSERT_REVIEW_SCRIPT =
+    public static final String INSERT_REVIEW1_SCRIPT =
             "insert into " + EVALUACION + " values (" +
                     "null," +
                     "\"Primer parcial\"," +
+                    "1," +
                     "\"20151010\"," +
-                    "\"Lengua\")";
+                    "\"Exam\")";
+
+    public static final String INSERT_REVIEW2_SCRIPT =
+            "insert into " + EVALUACION + " values (" +
+                    "null," +
+                    "\"Segundo parcial\"," +
+                    "1," +
+                    "20151010," +
+                    "\"Exam\")";
 
     //- Creación insercion datos tarea por defecto
-    public static final String INSERT_TAREA_SCRIPT =
+    public static final String INSERT_TAREA1_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"8:00\"," +
-                    "\"Tema 2\"," +
-                    "0," +
-                    "\"Hoy impartimos la clase de Lengua\")";
+                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "1," +
+                    "3648723647823," +
+                    "\"Nueva nota\")";
+
+    //- Creación insercion datos tarea por defecto
+    public static final String INSERT_TAREA2_SCRIPT =
+            "insert into " + TAREA + " values (" +
+                    "null," +
+                    "\"Hoy impartimos la clase de Matematicas\"," +
+                    "2," +
+                    "086976876," +
+                    "\"Nueva nota\")";
+
+    //- Creación insercion datos tarea por defecto
+    public static final String INSERT_TAREA3_SCRIPT =
+            "insert into " + TAREA + " values (" +
+                    "null," +
+                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "1," +
+                    "18731623," +
+                    "null)";
+
+    //- Creación insercion datos alumno por defecto
+    public static final String INSERT_ALUMNO1_SCRIPT =
+            "insert into " + ALUMNO + " values (" +
+                    "null," +
+                    "\"Adrian\"," +
+                    "\"Martin\"," +
+                    "null)";
+
+    public static final String INSERT_ALUMNO2_SCRIPT =
+            "insert into " + ALUMNO + " values (" +
+                    "null," +
+                    "\"Oscar\"," +
+                    "\"Fernandez\"," +
+                    "null)";
+
+
+    public static final String INSERT_CALIFICACION1_SCRIPT =
+            "insert into " + CALIFICACION + " values (" +
+                "null," +
+                "7.5," +
+                "\"Muchas faltas de ortografia\"," +
+                "1," +
+                "1)";
+
+    public static final String INSERT_CALIFICACION2_SCRIPT =
+            "insert into " + CALIFICACION + " values (" +
+                    "null," +
+                    "4," +
+                    "\"NOOOOOOB\"," +
+                    "1," +
+                    "2)";
+
+    public static final String INSERT_CALIFICACION3_SCRIPT =
+            "insert into " + CALIFICACION + " values (" +
+                    "null," +
+                    "1," +
+                    "\"NOOOOOOB\"," +
+                    "2," +
+                    "1)";
+
+    public static final String INSERT_CALIFICACION4_SCRIPT =
+            "insert into " + CALIFICACION + " values (" +
+                    "null," +
+                    "8," +
+                    "\"NOOOOOOB\"," +
+                    "2," +
+                    "2)";
 }
