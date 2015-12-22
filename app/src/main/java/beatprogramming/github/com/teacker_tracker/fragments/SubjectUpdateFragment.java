@@ -2,18 +2,25 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import org.joda.time.DateTime;
 
 import beatprogramming.github.com.teacker_tracker.R;
+import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.presenter.SubjectUpdatePresenter;
 
@@ -28,10 +35,22 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     private FragmentCallback callback;
     private SubjectUpdatePresenter presenter;
 
-    private TextView idTextView;
+    private TextView idSubjectTextView;
     private EditText nameEditText;
     private EditText descriptionEditText;
     private EditText courseEditText;
+    private EditText classRoomEditText;
+    private ToggleButton monToggleButton;
+    private ToggleButton tueToggleButton;
+    private ToggleButton wedToggleButton;
+    private ToggleButton thuToggleButton;
+    private ToggleButton friToggleButton;
+    private ToggleButton satToggleButton;
+    private ToggleButton sunToggleButton;
+    private TextView idScheduleTextView;
+
+    private Boolean[] days;
+    private TextView timeTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,20 +82,39 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
         View view = inflater.inflate(R.layout.fragment_subject_update, container, false);
 
         // Identify all fields of the form.
-        idTextView = (TextView) view.findViewById(R.id.subjectId);
+        idSubjectTextView = (TextView) view.findViewById(R.id.subjectId);
         nameEditText = (EditText) view.findViewById(R.id.subjectName);
         descriptionEditText = (EditText) view.findViewById(R.id.subjectDescription);
         courseEditText = (EditText) view.findViewById(R.id.subjectCourse);
+        idScheduleTextView = (TextView) view.findViewById(R.id.scheduleId);
+        classRoomEditText = (EditText) view.findViewById(R.id.subjectClassroom);
+        monToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonMon);
+        tueToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonTue);
+        wedToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonWed);
+        thuToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonThu);
+        friToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonFri);
+        satToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonSat);
+        sunToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonSun);
+        timeTextView = (TextView) view.findViewById(R.id.scheduleHour);
+
 
         Bundle args = getArguments();
         if (args != null) {
 
             Subject subject = (Subject) args.getSerializable(SUBJECT);
+            ScheduleDaoImpl s = new ScheduleDaoImpl();
+            Schedule schedule = s.findScheduleBySubjectId(subject.getId());
 
-            idTextView.setText(Integer.toString(subject.getId()));
+            if (schedule != null){
+                classRoomEditText.setText(schedule.getAula());
+                idScheduleTextView.setText(Integer.toString(schedule.getId()));
+            }
+            timeTextView.setOnClickListener(this);
+            idSubjectTextView.setText(Integer.toString(subject.getId()));
             nameEditText.setText(subject.getNombre());
             descriptionEditText.setText(subject.getDescripcion());
             courseEditText.setText(subject.getCurso());
+
         }
 
         Button submit = (Button) view.findViewById(R.id.button);
@@ -106,13 +144,28 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
 
         switch (v.getId()) {
             case R.id.button:
-                presenter.submit(Integer.parseInt(idTextView.getText().toString()),
+                days[0] = monToggleButton.isChecked();
+                days[1] = tueToggleButton.isChecked();
+                days[2] = wedToggleButton.isChecked();
+                days[3] = thuToggleButton.isChecked();
+                days[4] = friToggleButton.isChecked();
+                days[5] = satToggleButton.isChecked();
+                days[6] = sunToggleButton.isChecked();
+                presenter.submit(Integer.parseInt(idSubjectTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         descriptionEditText.getText().toString(),
-                        courseEditText.getText().toString());
+                        courseEditText.getText().toString(),
+                        Integer.parseInt(idScheduleTextView.getText().toString()),
+                        new DateTime(),
+                        days,
+                        classRoomEditText.getText().toString()
+                        );
                 break;
             case R.id.button_delete:
-                presenter.delete(Integer.parseInt(idTextView.getText().toString()));
+                presenter.delete(Integer.parseInt(idSubjectTextView.getText().toString()));
+                break;
+            case R.id.scheduleHour:
+                presenter.showTimePicker();
                 break;
             default:
                 break;
@@ -124,6 +177,12 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     public void loadSubjectFragment() {
         callback.goBack();
     }
+
+    @Override
+    public void showDialog(DialogFragment fragment) {
+        callback.showDialog(fragment);
+    }
+
 
     @Override
     public void setError(String message) {

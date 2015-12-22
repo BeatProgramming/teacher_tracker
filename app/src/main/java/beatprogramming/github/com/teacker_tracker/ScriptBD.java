@@ -50,6 +50,8 @@ public class ScriptBD {
     public static final String ID_ASIGNATURA_HORARIO = "subjectId";
     public static final String FECHA_HORARIO = "dateTime";
     public static final String CLASE_HORARIO = "classroom";
+    public static final String DIAS_HORARIO = "days";
+
 
     //- Creacion tabla ASIGNATURA
     public static final String ASIGNATURA_SCRIPT =
@@ -105,6 +107,7 @@ public class ScriptBD {
                     ID_ASIGNATURA_HORARIO + " integer," +
                     FECHA_HORARIO + " integer," +
                     CLASE_HORARIO + " text null," +
+                    DIAS_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
 
     //- Creacion insercion datos asignatura por defecto
@@ -143,7 +146,7 @@ public class ScriptBD {
     public static final String INSERT_TAREA1_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "\"A101\"," +
                     "1," +
                     "3648723647823," +
                     "\"Nueva nota\")";
@@ -152,7 +155,7 @@ public class ScriptBD {
     public static final String INSERT_TAREA2_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Matematicas\"," +
+                    "\"A102\"," +
                     "2," +
                     "086976876," +
                     "\"Nueva nota\")";
@@ -161,7 +164,7 @@ public class ScriptBD {
     public static final String INSERT_TAREA3_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "\"A101\"," +
                     "1," +
                     "18731623," +
                     "null)";
@@ -213,4 +216,21 @@ public class ScriptBD {
                     "\"NOOOOOOB\"," +
                     "2," +
                     "2)";
+
+    public static final String INSERT_SCHEDULE1_SCRIPT =
+            "insert into " + HORARIO + " values (" +
+                    "null," +
+                    "1," +
+                    "26478624," +
+                    "\"A101\"," +
+                    "\"LMXJV\")";
+
+    public static final String INSERT_SCHEDULE2_SCRIPT =
+            "insert into " + HORARIO + " values (" +
+                    "null," +
+                    "2," +
+                    "26478624," +
+                    "\"A101\"," +
+                    "\"LMXJV\")";
+
 }

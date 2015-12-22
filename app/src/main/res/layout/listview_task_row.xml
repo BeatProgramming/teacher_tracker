@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_vertical"
+    android:gravity="left"
     android:padding="5dp">
 
     <TextView
@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="left"
         android:layout_weight="0.50">
 
         <TextView
@@ -24,13 +25,19 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Holo.Large"
             android:textStyle="bold" />
-
+        <TextView
+            android:id="@+id/classroom_main"
+            android:layout_width="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Holo.Small"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/newNote"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:background="@drawable/note"/>
 
 </LinearLayout>

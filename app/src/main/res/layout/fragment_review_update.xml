@@ -18,10 +18,19 @@
             android:text="0"
             android:visibility="gone" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textType"
+            android:text="@string/textType"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
+
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/review_type"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/textType"
             android:orientation="vertical">
 
             <RadioButton
@@ -43,6 +52,16 @@
             android:layout_height="wrap_content"
             android:visibility="gone" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textNameReview"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/review_type"
+            android:text="@string/textNameReview"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
+
         <EditText
             android:id="@+id/review_name"
             android:layout_width="wrap_content"
@@ -51,17 +70,26 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/review_type"
-            android:layout_marginTop="40dp"
+            android:layout_below="@+id/textNameReview"
             android:focusable="true"
             android:singleLine="true"
             android:hint="@string/reviewName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textSubjectTask"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/review_name"
+            android:text="@string/textSubjectTask"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
 
         <Spinner
             android:id="@+id/review_subject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/review_name"
+            android:layout_below="@id/textSubjectTask"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
 
@@ -73,6 +101,38 @@
             android:text="0"/>
 
         <LinearLayout
+            android:id="@+id/dateTexts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_below="@id/review_subject"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:id="@+id/textDateTask"
+                android:text="@string/textDateTask"
+                android:textSize="@dimen/descriptionTexts"
+                android:textColor="#0145FF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:id="@+id/textTimerTask"
+                android:text="@string/textTimerTask"
+                android:textSize="@dimen/descriptionTexts"
+                android:textColor="#0145FF"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/dateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,8 +140,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/review_subject"
-            android:layout_marginTop="40dp"
+            android:layout_below="@id/dateTexts"
             android:orientation="horizontal">
 
             <TextView
@@ -102,26 +161,28 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dateTime"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:text="@string/button_submit"
-            android:textColor="#0D2A54" />
+            android:layout_below="@id/dateTime"
+            android:layout_marginTop="25dp"
+            android:id="@+id/layoutButtons">
 
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/button_delete"
-            android:textColor="#FF0000" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_submit"
+                android:textColor="#0D2A54" />
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button"
+                android:text="@string/button_delete"
+                android:textColor="#FF0000" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -83,7 +83,13 @@ public class TaskFragment extends ListFragment implements TaskView {
 
     @Override
     public void setItems(List<Task> items) {
+        items = ordenarPorHora(items);
         setListAdapter(new TaskAdapter(getActivity(), R.layout.listview_task_row, items));
+    }
+
+    private List<Task> ordenarPorHora(List<Task> items) {
+
+        return items;
     }
 
     @Override

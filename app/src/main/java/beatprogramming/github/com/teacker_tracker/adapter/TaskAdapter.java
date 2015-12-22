@@ -44,6 +44,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         //Obtiene instancias de los text views
         TextView subject = (TextView) listItemView.findViewById(R.id.subject_main);
         TextView hour = (TextView) listItemView.findViewById(R.id.hour_main);
+        TextView classroom = (TextView) listItemView.findViewById(R.id.classroom_main);
         ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNote);
 
         //Accion del newNoteButton
@@ -60,8 +61,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
                 .getNombre() + ", " + item.getNote());
 
-        subject.setText(item.toString());
+        subject.setText(item.getSubject().getNombre() + " " + item.getSubject().getCurso());
         hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
+        classroom.setText(item.getNombre());
 
         return listItemView;
     }
