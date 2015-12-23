@@ -63,4 +63,9 @@ public class Score implements Serializable {
     public void setReview(Review review) {
         this.review = review;
     }
+
+    @Override
+    public String toString() {
+        return ((student != null) ? student.toString() : "New student") + " (" + ((review != null) ? review.toString() : "New review") + ") --> " + calificacion;
+    }
 }

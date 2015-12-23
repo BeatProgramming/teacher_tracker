@@ -1,6 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
+import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
 /**
  * Created by malkomich on 13/11/15.
  */
-public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
+public class ScoreAdapter extends ArrayAdapter<Score> implements View.OnClickListener {
 
     private final String TAG = ScoreAdapter.class.getName();
 
@@ -28,11 +30,11 @@ public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
     private final List<Student> studentList;
 
 
-    public ScoreAdapter(Context context, int resource, List students) {
+    public ScoreAdapter(Context context, int resource, List<Student> students) {
         super(context, resource);
         this.resource = resource;
         this.context = context;
-        this.studentList = students;
+        studentList = students;
     }
 
     @Override
@@ -48,7 +50,9 @@ public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
         ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
 
         final Score score = (Score) getItem(position);
+
         Student student = score.getStudent();
+        Review review = score.getReview();
         Float scoreValue = score.getCalificacion();
         String comment = score.getComentario();
 
@@ -68,8 +72,7 @@ public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Student st = (Student) parent.getItemAtPosition(position);
                 score.setStudent(st);
-                studentList.remove(st);
-                notifyDataSetChanged();
+//                studentList.remove(st);
             }
 
             @Override
@@ -83,6 +86,8 @@ public class ScoreAdapter extends ArrayAdapter implements View.OnClickListener {
         scoreTextView.setOnClickListener(this);
 
         commentImageView.setOnClickListener(this);
+
+        Log.d(TAG, "getView, score: " + score.toString());
 
         return rowView;
     }

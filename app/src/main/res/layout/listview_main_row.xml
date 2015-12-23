@@ -15,7 +15,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/subject_main"
+        android:id="@+id/task_main"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/hour_main"
         android:textAppearance="@android:style/TextAppearance.Holo.Large"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/classroom_main"
-        android:layout_below="@+id/subject_main"
+        android:layout_below="@+id/task_main"
         android:layout_toRightOf="@+id/hour_main"
         android:layout_alignParentBottom="true" />
 

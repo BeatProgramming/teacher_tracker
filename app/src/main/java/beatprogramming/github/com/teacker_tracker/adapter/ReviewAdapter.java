@@ -2,6 +2,7 @@ package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,11 @@ public class ReviewAdapter extends ArrayAdapter {
 
     private final Context context;
     private final int resource;
-    private final List<Review> values;
-
 
     public ReviewAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
         this.resource = resource;
         this.context = context;
-        this.values = objects;
     }
 
     @Override
@@ -46,9 +44,11 @@ public class ReviewAdapter extends ArrayAdapter {
         TextView nameTextView = (TextView) rowView.findViewById(R.id.item_review_name);
         TextView subjectTextView = (TextView) rowView.findViewById(R.id.item_review_subject);
 
-        int iconResource = (values.get(position) instanceof Exam) ? R.drawable.exam : R.drawable.work;
-        String name = values.get(position).getName();
-        String subject = values.get(position).getSubject().getNombre();
+        Review review = (Review) getItem(position);
+
+        int iconResource = (review instanceof Exam) ? R.drawable.exam : R.drawable.work;
+        String name = review.getName();
+        String subject = review.getSubject().getNombre();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             iconView.setImageDrawable(context.getDrawable(iconResource));
@@ -57,6 +57,8 @@ public class ReviewAdapter extends ArrayAdapter {
         }
         nameTextView.setText(name);
         subjectTextView.setText(subject);
+
+        Log.d(TAG, "getView, name: " + name + ", subject: " + subject.toString());
 
         return rowView;
     }

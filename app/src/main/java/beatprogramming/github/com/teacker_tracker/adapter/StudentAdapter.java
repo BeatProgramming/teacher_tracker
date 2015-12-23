@@ -25,14 +25,11 @@ public class StudentAdapter extends ArrayAdapter {
 
     private Context context;
     private int resource;
-    private final List<Student> values;
-
 
     public StudentAdapter(Context context, int resource, List objects) {
         super(context, resource, objects);
         this.resource = resource;
         this.context = context;
-        this.values = objects;
     }
 
     @Override
@@ -47,9 +44,11 @@ public class StudentAdapter extends ArrayAdapter {
         TextView nameTextView = (TextView) rowView.findViewById(R.id.item_student_name);
         TextView surnameTextView = (TextView) rowView.findViewById(R.id.item_student_surname);
 
-        String name = values.get(position).getName();
-        String surname = values.get(position).getSurname();
-        String iconPath = values.get(position).getIconPath();
+        Student student = (Student) getItem(position);
+
+        String name = student.getName();
+        String surname = student.getSurname();
+        String iconPath = student.getIconPath();
         if(iconPath != null) {
             Drawable icon = Drawable.createFromPath(iconPath);
             iconButton.setImageDrawable(icon);

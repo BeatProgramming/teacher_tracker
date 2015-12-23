@@ -9,7 +9,7 @@
     <string name="action_settings_app">Configuración app</string>
     <string name="action_settings_personal">Configuración personal</string>
 
-    <!-- TITLE ACTIVITIES -->
+    <!-- TITLE FRAGMENTS -->
     <string name="title_activity_subject">Crear Asignatura</string>
     <string name="title_activity_edit_subject">Asignaturas</string>
     <string name="title_activity_modify_subject">Editar Asignatura</string>
@@ -19,7 +19,7 @@
     <string name="title_activity_create_exam">Añadir examen</string>
     <string name="title_activity_notes">Notas</string>
 
-    <!-- SUBJECT ACTIVITY -->
+    <!-- SUBJECT FRAGMENT -->
     <string name="subjectName">Nombre de la asignatura</string>
     <string name="subjectDescription">Descripción de la asignatura</string>
     <string name="subjectCurse">Curso de la asignatura</string>
@@ -27,32 +27,38 @@
     <string name="submit">Confirmar</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
-    <string name="titleSubject">Asignatura</string>
+    <string name="app_description">La comodidad en tus manos</string>
+
+    <string name="subject_section">Asignaturas</string>
+    <string name="task_section">Tareas</string>
+    <string name="score_section">Calificaciones</string>
     <string name="students_title">Alumnos</string>
     <string name="export_students">Exportar</string>
     <string name="manage_students">Gestionar</string>
 
-    <!-- EDIT SUBJECT ACTIVITY -->
+    <!-- EDIT SUBJECT FRAGMENT -->
     <string name="subjects_editSubject">Asignaturas</string>
 
-    <!-- MODIFY ACTIVITY -->
+    <!-- UPDATE FRAGMENTS -->
     <string name="button_submit">Guardar</string>
     <string name="button_delete">Borrar</string>
 
-    <!-- SUBMIT SCORE ACTIVITY -->
+    <string name="hourField">Hora</string>
+    <string name="dateField">Fecha</string>
+
+    <!-- SUBMIT SCORE FRAGMENT -->
     <string name="examName">Nombre exámen</string>
     <string name="examDate">Fecha exámen</string>
     <string name="examNameSubject">Nombre asignatura</string>
     <string name="add_button">Confirmar</string>
 
-    <!-- STUDENTS ACTIVITY -->
+    <!-- STUDENTS FRAGMENT -->
     <string name="title_activity_new_students">Alumnos</string>
     <string name="student_name_label">Nombre</string>
     <string name="student_surname_label">Apellidos</string>
 
-    <!-- TASK ACTIVITY -->
+    <!-- TASK FRAGMENT -->
     <string name="title_activity_task">Crear tarea</string>
-    <string name="taskHour">Hora</string>
     <string name="taskDescription">Nombre tarea..</string>
     <string name="taskRoom">Aula tarea..</string>
     <string name="taskSubject">Asignatura..</string>
@@ -62,14 +68,15 @@
     <string name="csv_name">Nombre</string>
     <string name="csv_surname">Apellidos</string>
 
+    <!-- REVIEW UPDATE FRAGMENT -->
     <string name="reviewName">Nombre del examen o práctica</string>
     <string name="review_type_exam">Examen</string>
     <string name="review_type_project">Práctica</string>
+
+    <!-- STUDENTS UPDATE -->
     <string name="image_intent_title">Selecciona una foto</string>
-    <string name="app_description">La comodidad en tus manos</string>
-    <string name="subject_section">Asignaturas</string>
-    <string name="task_section">Tareas</string>
-    <string name="score_section">Calificaciones</string>
-    <string name="taskDate">Fecha</string>
+
+    <!-- SCORES UPDATE -->
+    <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>
 
 </resources>

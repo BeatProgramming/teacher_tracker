@@ -31,9 +31,9 @@
     <string name="subject_section">Sujets</string>
     <string name="subjects_editSubject">Sujets</string>
     <string name="submit">Confirmer</string>
-    <string name="taskDate">Date</string>
+    <string name="dateField">Date</string>
     <string name="taskDescription">Description</string>
-    <string name="taskHour">Temps</string>
+    <string name="hourField">Temps</string>
     <string name="title_activity_task">Créer une tâche </string>
     <string name="title_activity_submit_score">Créer un avis </string>
     <string name="title_activity_subject">Créer un cours </string>

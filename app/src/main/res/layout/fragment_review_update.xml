@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:layout_weight=".5"
-                android:text="@string/taskDate" />
+                android:text="@string/dateField" />
 
             <TextView
                 android:id="@+id/taskHour"
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:layout_weight=".5"
-                android:text="@string/taskHour" />
+                android:text="@string/hourField" />
 
         </LinearLayout>
 

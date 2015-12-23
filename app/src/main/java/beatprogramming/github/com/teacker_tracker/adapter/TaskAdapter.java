@@ -42,8 +42,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         View listItemView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
         //Obtiene instancias de los text views
-        TextView subject = (TextView) listItemView.findViewById(R.id.subject_main);
-        TextView hour = (TextView) listItemView.findViewById(R.id.hour_main);
+        TextView nameTextView = (TextView) listItemView.findViewById(R.id.task_main);
+        TextView subjectTextView = (TextView) listItemView.findViewById(R.id.task_subject);
+        TextView hourTextView = (TextView) listItemView.findViewById(R.id.hour_main);
         ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNote);
 
         //Accion del newNoteButton
@@ -55,13 +56,14 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         });
 
         //Obtiene una instancia de la Task en la posición actual
-        Task item = getItem(position);
+        Task task = getItem(position);
 
-        Log.d(TAG, "getView, " + item.getId() + ", " + item.getDateTime() + ", " + item
-                .getNombre() + ", " + item.getNote());
+        nameTextView.setText(task.toString());
+        subjectTextView.setText(task.getSubject().toString());
+        hourTextView.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
 
-        subject.setText(item.toString());
-        hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
+        Log.d(TAG, "getView, " + task.getId() + ", " + task.getDateTime() + ", " + task
+                .getNombre() + ", " + task.getNote());
 
         return listItemView;
     }

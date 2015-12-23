@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:padding="5dp">
 
     <TextView
@@ -15,15 +15,26 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="0.50">
+        android:layout_weight="0.50"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/subject_main"
+            android:id="@+id/task_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="8"
+            android:maxLines="2"
             android:textAppearance="@android:style/TextAppearance.Holo.Large"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/task_subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:ems="8"
+            android:singleLine="true" />
 
     </LinearLayout>
 
@@ -31,6 +42,6 @@
         android:id="@+id/newNote"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:background="@drawable/note"/>
+        android:background="@drawable/note" />
 
 </LinearLayout>

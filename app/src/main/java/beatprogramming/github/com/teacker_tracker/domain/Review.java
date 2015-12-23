@@ -73,4 +73,8 @@ public abstract class Review implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String toString() {
+        return name + " (" + subject.toString() + ")";
+    }
 }

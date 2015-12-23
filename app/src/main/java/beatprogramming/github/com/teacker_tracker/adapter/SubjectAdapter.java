@@ -1,6 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,10 +45,12 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         TextView name = (TextView) listItemView.findViewById(R.id.item_subject);
         TextView course = (TextView) listItemView.findViewById(R.id.item_course);
 
-        Subject item = (Subject) getItem(position);
+        Subject subject = (Subject) getItem(position);
 
-        name.setText(item.getNombre());
-        course.setText(item.getCurso());
+        name.setText(subject.getNombre());
+        course.setText(subject.getCurso());
+
+        Log.d(TAG, "getView, subject: " + subject.toString());
 
         //Devuelve al ListView la fila creada
         return listItemView;

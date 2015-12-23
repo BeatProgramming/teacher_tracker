@@ -184,8 +184,11 @@ public class ScoreDaoImpl implements ScoreDao {
      */
     @Override
     public void findScoreByReview(Review review, OnLoadFinishListener listener) {
+
         sqldb = db.getReadableDatabase();
+
         Log.d(TAG, "findScoreByReview, review: " + review.toString());
+
         c = sqldb.rawQuery(FINDBYREVIEW, new String[]{Integer.toString(review.getId())});
         //Lista de reviews
         List scores = new ArrayList<Score>();
@@ -217,6 +220,7 @@ public class ScoreDaoImpl implements ScoreDao {
 
             }while(c.moveToNext());
         }
+
         Log.d(TAG, "findScoreByReview, numero de scores: " + scores.size());
 
         listener.onLoadFinish(scores);

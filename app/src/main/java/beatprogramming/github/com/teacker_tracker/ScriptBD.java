@@ -75,7 +75,7 @@ public class ScriptBD {
                     ID_ASIGNATURA_EVALUACION + " integer," +
                     FECHA_EVALUACION + " integer," +
                     TIPO_EVALUACION + " text not null," +
-                    "foreign key (" + ID_ASIGNATURA_EVALUACION + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
+                    "foreign key (" + ID_ASIGNATURA_EVALUACION + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla CALIFICACION
     public static final String CALIFICACION_SCRIPT =
@@ -85,8 +85,8 @@ public class ScriptBD {
                     COMENTARIO_CALIFICACION + " text," +
                     ID_EVALUACION_CALIFICACION + " integer," +
                     ID_ALUMNO_CALIFICACION + " integer," +
-                    "foreign key (" + ID_EVALUACION_CALIFICACION + ") references " + EVALUACION + "(" + ID_EVALUACION + ")," +
-                    "foreign key (" + ID_ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO_CALIFICACION + "))";
+                    "foreign key (" + ID_EVALUACION_CALIFICACION + ") references " + EVALUACION + "(" + ID_EVALUACION + ") ON DELETE CASCADE," +
+                    "foreign key (" + ID_ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO_CALIFICACION + ") ON DELETE CASCADE)";
 
     //- Creacion tabla TAREA
     public static final String TAREA_SCRIPT =
@@ -96,7 +96,7 @@ public class ScriptBD {
                     ID_ASIGNATURA_TAREA + " integer," +
                     FECHA_TAREA + " integer," +
                     NOTA_TAREA + " text," +
-                    "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
+                    "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla HORARIO
     public static final String HORARIO_SCRIPT =
@@ -105,7 +105,7 @@ public class ScriptBD {
                     ID_ASIGNATURA_HORARIO + " integer," +
                     FECHA_HORARIO + " integer," +
                     CLASE_HORARIO + " text null," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
+                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion insercion datos asignatura por defecto
     public static final String INSERT_ASIGNATURA1_SCRIPT =
@@ -184,11 +184,11 @@ public class ScriptBD {
 
     public static final String INSERT_CALIFICACION1_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
-                "null," +
-                "7.5," +
-                "\"Muchas faltas de ortografia\"," +
-                "1," +
-                "1)";
+                    "null," +
+                    "7.5," +
+                    "\"Muchas faltas de ortografia\"," +
+                    "1," +
+                    "1)";
 
     public static final String INSERT_CALIFICACION2_SCRIPT =
             "insert into " + CALIFICACION + " values (" +

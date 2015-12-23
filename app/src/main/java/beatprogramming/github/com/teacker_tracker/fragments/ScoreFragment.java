@@ -3,6 +3,7 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,6 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     private ProgressBar progressBar;
 
-    private List<Score> items;
     private ScoreAdapter adapter;
 
     public static ScoreFragment newInstance(Review review) {
@@ -94,9 +94,12 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     @Override
     public void setItems(List<Score> items) {
-        this.items = items;
-        if(adapter != null)
+
+        if(adapter != null) {
+            Log.d(TAG, "setItems, " + items.size() + " Score items added.");
             adapter.addAll(items);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -113,15 +116,14 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     @Override
     public void newItem() {
-        items.add(new Score());
-        ScoreAdapter adapter = ((ScoreAdapter) getListAdapter());
+        adapter.add(new Score());
         adapter.notifyDataSetChanged();
-        setSelection(adapter.getCount() - 1);
     }
 
     @Override
     public void createAdapter(List<Student> studentList) {
         adapter = new ScoreAdapter(getContext(), R.layout.listview_score_row, studentList);
+        setListAdapter(adapter);
     }
 
 }
