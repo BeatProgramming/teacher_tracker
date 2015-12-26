@@ -1,6 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Clase que modela una asignatura de la base de datos.
@@ -11,6 +12,7 @@ public class Subject implements Serializable {
     private String nombre;
     private String descripcion;
     private String curso;
+    private List<Student> studentList;
 
     public Subject() {
 
@@ -52,6 +54,14 @@ public class Subject implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void addStudent(Student student) {
+        studentList.add(student);
     }
 
     @Override

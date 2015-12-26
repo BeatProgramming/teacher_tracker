@@ -11,6 +11,7 @@ public class ScriptBD {
     public static final String CALIFICACION = "Score";
     public static final String TAREA = "Task";
     public static final String HORARIO = "Schedule";
+    public static final String MATRICULA = "Enrollment";
 
     //- Campos tabla ASIGNATURA
     public static final String ID_ASIGNATURA = BaseColumns._ID;
@@ -50,6 +51,10 @@ public class ScriptBD {
     public static final String ID_ASIGNATURA_HORARIO = "subjectId";
     public static final String FECHA_HORARIO = "dateTime";
     public static final String CLASE_HORARIO = "classroom";
+
+    //- Campo tabla MATRICULA
+    public static final String ID_ASIGNATURA_MATRICULA = "subjectId";
+    public static final String ID_ALUMNO_MATRICULA = "studentId";
 
     //- Creacion tabla ASIGNATURA
     public static final String ASIGNATURA_SCRIPT =
@@ -99,6 +104,15 @@ public class ScriptBD {
                     "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla HORARIO
+    public static final String MATRICULA_SCRIPT =
+            "create table " + MATRICULA + "(" +
+                    ID_ASIGNATURA_MATRICULA + " integer," +
+                    ID_ALUMNO_MATRICULA + " integer," +
+                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE," +
+                    "foreign key (" + ID_ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
+                    "primary key(" + ID_ASIGNATURA_MATRICULA + "," + ID_ALUMNO_MATRICULA + ") )";
+
+    //- Creacion tabla MATRICULA
     public static final String HORARIO_SCRIPT =
             "create table " + HORARIO + "(" +
                     ID_HORARIO + " integer primary key autoincrement," +
@@ -211,6 +225,21 @@ public class ScriptBD {
                     "null," +
                     "8," +
                     "\"NOOOOOOB\"," +
+                    "2," +
+                    "2)";
+
+    public static final String INSERT_MATRICULA1_SCRIPT =
+            "insert into " + MATRICULA + " values (" +
+                    "1," +
+                    "1)";
+
+    public static final String INSERT_MATRICULA2_SCRIPT =
+            "insert into " + MATRICULA + " values (" +
+                    "1," +
+                    "2)";
+
+    public static final String INSERT_MATRICULA3_SCRIPT =
+            "insert into " + MATRICULA + " values (" +
                     "2," +
                     "2)";
 }
