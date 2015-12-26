@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
+import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.presenter.SubjectUpdatePresenter;
 
@@ -97,10 +99,9 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
         sunToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonSun);
         timeTextView = (TextView) view.findViewById(R.id.scheduleHour);
 
-
         Bundle args = getArguments();
-        if (args != null) {
 
+        if (args != null) {
             Subject subject = (Subject) args.getSerializable(SUBJECT);
             ScheduleDaoImpl s = new ScheduleDaoImpl();
             Schedule schedule = s.findScheduleBySubjectId(subject.getId());
@@ -108,6 +109,15 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
             if (schedule != null){
                 classRoomEditText.setText(schedule.getAula());
                 idScheduleTextView.setText(Integer.toString(schedule.getId()));
+                days = schedule.getDias();
+                monToggleButton.setChecked(days[0]);
+                tueToggleButton.setChecked(days[1]);
+                wedToggleButton.setChecked(days[2]);
+                thuToggleButton.setChecked(days[3]);
+                friToggleButton.setChecked(days[4]);
+                satToggleButton.setChecked(days[5]);
+                sunToggleButton.setChecked(days[6]);
+                timeTextView.setText(schedule.getDateTime());
             }
             timeTextView.setOnClickListener(this);
             idSubjectTextView.setText(Integer.toString(subject.getId()));
@@ -144,6 +154,7 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
 
         switch (v.getId()) {
             case R.id.button:
+                if (days==null){ days = new Boolean[7];}
                 days[0] = monToggleButton.isChecked();
                 days[1] = tueToggleButton.isChecked();
                 days[2] = wedToggleButton.isChecked();
@@ -151,12 +162,14 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
                 days[4] = friToggleButton.isChecked();
                 days[5] = satToggleButton.isChecked();
                 days[6] = sunToggleButton.isChecked();
+                Log.d(TAG, "update Subject, days: " + days[0] + days[1] + days[2] + days[3] + days[4] + days[5] + days[6]);
+
                 presenter.submit(Integer.parseInt(idSubjectTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         descriptionEditText.getText().toString(),
                         courseEditText.getText().toString(),
                         Integer.parseInt(idScheduleTextView.getText().toString()),
-                        new DateTime(),
+                        timeTextView.getText().toString(),
                         days,
                         classRoomEditText.getText().toString()
                         );

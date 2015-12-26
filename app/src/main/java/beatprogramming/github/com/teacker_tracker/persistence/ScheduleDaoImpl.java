@@ -4,6 +4,7 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.joda.time.DateTime;
 
@@ -30,7 +31,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
             " Subject.name AS nameSubject, Subject.description, Subject.course " +
             " FROM Schedule LEFT JOIN Subject " +
             "ON Schedule.subjectId = Subject._id;";
-private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS scheduleId, Schedule.subjectId, Schedule.dateTime, Schedule.classroom, Schedule.days," +
+    private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS scheduleId, Schedule.subjectId, Schedule.dateTime, Schedule.classroom, Schedule.days," +
             " Subject.name AS nameSubject, Subject.description, Subject.course " +
             " FROM Schedule LEFT JOIN Subject " +
             "ON Schedule.subjectId = Subject._id WHERE Schedule.subjectId = ?;";
@@ -78,7 +79,7 @@ private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS schedul
                Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                        c.getString(c.getColumnIndex(DESCRIPTION)),
                        c.getString(c.getColumnIndex(COURSE)));
-                Schedule sc = new Schedule(s, new DateTime(c.getString(c.getColumnIndex(DATETIME))),
+                Schedule sc = new Schedule(s, c.getString(c.getColumnIndex(DATETIME)),
                         crearBooleanDias(c.getString(c.getColumnIndex(DAYS))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
                 sc.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
@@ -104,6 +105,7 @@ private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS schedul
         dias[4] = d.contains("V");
         dias[5] = d.contains("S");
         dias[6] = d.contains("D");
+        Log.d(TAG,"Modificado" + d + " a " + dias[0] + dias[1] + dias[2] + dias[3] + dias[4] + dias[5] +dias[6]);
         return dias;
     }
 
@@ -120,9 +122,10 @@ private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS schedul
         if (d[1]){ dias=dias+"M";}
         if (d[2]){ dias=dias+"X";}
         if (d[3]){ dias=dias+"J";}
-        if (d[0]){ dias=dias+"V";}
-        if (d[0]){ dias=dias+"S";}
-        if (d[0]){ dias=dias+"D";}
+        if (d[4]){ dias=dias+"V";}
+        if (d[5]){ dias=dias+"S";}
+        if (d[6]){ dias=dias+"D";}
+        Log.d(TAG,"Transformado: " + dias + " de " + d[0] + d[1] + d[2] + d[3] + d[4] + d[5] +d[6]);
         return dias;
     }
 
@@ -137,11 +140,11 @@ private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS schedul
      * @param listener instancia del listener
      */
     @Override
-    public void updateSchedule(int id, int subjectId, DateTime dateTime, String classroom, Boolean[] days, OnUpdateFinishListener listener) {
+    public void updateSchedule(int id, int subjectId, String dateTime, String classroom, Boolean[] days, OnUpdateFinishListener listener) {
         sqldb = db.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(SUBJECTID,subjectId);
-        values.put(DATETIME,dateTime.getMillis());
+        values.put(DATETIME,dateTime);
         values.put(CLASSROOM,classroom);
         values.put(DAYS, crearStringDias(days));
         try{
@@ -181,18 +184,21 @@ private static final String FINDQUERYBYSUBJECT = "SELECT Schedule._id AS schedul
     public Schedule findScheduleBySubjectId(int id) { //- Buscar todos los horarios
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERYBYSUBJECT, new String[]{Integer.toString(id)});
-        Schedule sc = null;
+        Schedule schedule = null;
         if(c.moveToFirst()){
             do{
-                Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                Subject subject =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                         c.getString(c.getColumnIndex(DESCRIPTION)),
                         c.getString(c.getColumnIndex(COURSE)));
-                sc = new Schedule(s, new DateTime(c.getString(c.getColumnIndex(DATETIME))),
+                subject.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
+                schedule = new Schedule(subject, c.getString(c.getColumnIndex(DATETIME)),
                         crearBooleanDias(c.getString(c.getColumnIndex(DAYS))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
-                sc.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
+                schedule.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
+                Log.d(TAG, "findScheduleBySubjectId, Schedule: " + schedule.toString());
+                Log.d(TAG, "findScheduleBySubjectId, Subject: " + subject.toString());
             }while(c.moveToNext());
         }
-        return sc;
+        return schedule;
     }
 }

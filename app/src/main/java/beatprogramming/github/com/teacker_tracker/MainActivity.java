@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
 
             if (newStudents != null) {
                 // Add students to database.
+               // for(int i=0;i<newStudents.size();i++){  }
             }
 
             frag = new StudentFragment();

@@ -7,6 +7,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListene
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.fragments.TimePickerFragment;
 import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDao;
+import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
@@ -25,10 +26,11 @@ public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
     public SubjectUpdatePresenter(SubjectUpdateView view) {
         this.view = view;
         subjectDao = new SubjectDaoImpl();
+        scheduleDao = new ScheduleDaoImpl();
     }
 
     public void submit(int idSubject, String name, String description, String course,
-                       int idSchedule, DateTime time,Boolean[] days, String classroom) {
+                       int idSchedule, String time,Boolean[] days, String classroom) {
 
         if(name.equals("") || description.equals("") || course.equals(""))
             view.setError("Completa todos los campos");
