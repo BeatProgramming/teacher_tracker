@@ -48,12 +48,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNote);
 
         //Accion del newNoteButton
-        newNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Sin implementar", Toast.LENGTH_SHORT).show();
-            }
-        });
+        newNoteButton.setOnClickListener(iconListener);
 
         //Obtiene una instancia de la Task en la posición actual
         Task task = getItem(position);
@@ -67,4 +62,12 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         return listItemView;
     }
+
+    View.OnClickListener iconListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Introduccion de un comentario de tarea.
+            Toast.makeText(getContext(), "No implementado", Toast.LENGTH_SHORT).show();
+        }
+    };
 }

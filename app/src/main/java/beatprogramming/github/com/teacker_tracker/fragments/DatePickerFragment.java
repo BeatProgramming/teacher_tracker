@@ -23,6 +23,7 @@ public class DatePickerFragment extends DialogFragment
     private OnDateTimePickedListener listener;
 
     public static DatePickerFragment newInstance(OnDateTimePickedListener listener) {
+
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setListener(listener);
         return fragment;

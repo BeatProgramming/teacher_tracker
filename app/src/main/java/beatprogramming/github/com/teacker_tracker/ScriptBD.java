@@ -85,13 +85,13 @@ public class ScriptBD {
     //- Creacion tabla CALIFICACION
     public static final String CALIFICACION_SCRIPT =
             "create table " + CALIFICACION + "(" +
-                    ID_CALIFICACION + " integer primary key autoincrement," +
                     CALIFICACION_CALIFICACION + " real," +
                     COMENTARIO_CALIFICACION + " text," +
                     ID_EVALUACION_CALIFICACION + " integer," +
                     ID_ALUMNO_CALIFICACION + " integer," +
                     "foreign key (" + ID_EVALUACION_CALIFICACION + ") references " + EVALUACION + "(" + ID_EVALUACION + ") ON DELETE CASCADE," +
-                    "foreign key (" + ID_ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO_CALIFICACION + ") ON DELETE CASCADE)";
+                    "foreign key (" + ID_ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO_CALIFICACION + ") ON DELETE CASCADE," +
+                    "primary key (" + ID_EVALUACION_CALIFICACION + "," + ID_ALUMNO_CALIFICACION + ") )";
 
     //- Creacion tabla TAREA
     public static final String TAREA_SCRIPT =
@@ -104,15 +104,6 @@ public class ScriptBD {
                     "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla HORARIO
-    public static final String MATRICULA_SCRIPT =
-            "create table " + MATRICULA + "(" +
-                    ID_ASIGNATURA_MATRICULA + " integer," +
-                    ID_ALUMNO_MATRICULA + " integer," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE," +
-                    "foreign key (" + ID_ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
-                    "primary key(" + ID_ASIGNATURA_MATRICULA + "," + ID_ALUMNO_MATRICULA + ") )";
-
-    //- Creacion tabla MATRICULA
     public static final String HORARIO_SCRIPT =
             "create table " + HORARIO + "(" +
                     ID_HORARIO + " integer primary key autoincrement," +
@@ -120,6 +111,15 @@ public class ScriptBD {
                     FECHA_HORARIO + " integer," +
                     CLASE_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
+
+    //- Creacion tabla MATRICULA
+    public static final String MATRICULA_SCRIPT =
+            "create table " + MATRICULA + "(" +
+                    ID_ASIGNATURA_MATRICULA + " integer," +
+                    ID_ALUMNO_MATRICULA + " integer," +
+                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE," +
+                    "foreign key (" + ID_ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
+                    "primary key (" + ID_ASIGNATURA_MATRICULA + ", " + ID_ALUMNO_MATRICULA + ") )";
 
     //- Creacion insercion datos asignatura por defecto
     public static final String INSERT_ASIGNATURA1_SCRIPT =
@@ -198,7 +198,6 @@ public class ScriptBD {
 
     public static final String INSERT_CALIFICACION1_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
-                    "null," +
                     "7.5," +
                     "\"Muchas faltas de ortografia\"," +
                     "1," +
@@ -206,7 +205,6 @@ public class ScriptBD {
 
     public static final String INSERT_CALIFICACION2_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
-                    "null," +
                     "4," +
                     "\"NOOOOOOB\"," +
                     "1," +
@@ -214,7 +212,6 @@ public class ScriptBD {
 
     public static final String INSERT_CALIFICACION3_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
-                    "null," +
                     "1," +
                     "\"NOOOOOOB\"," +
                     "2," +
@@ -222,7 +219,6 @@ public class ScriptBD {
 
     public static final String INSERT_CALIFICACION4_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
-                    "null," +
                     "8," +
                     "\"NOOOOOOB\"," +
                     "2," +

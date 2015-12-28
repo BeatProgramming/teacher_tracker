@@ -7,7 +7,6 @@ import java.io.Serializable;
  */
 public class Score implements Serializable {
 
-    private int id;
     private Float calificacion;
     private String comentario;
     private Student student;
@@ -17,7 +16,7 @@ public class Score implements Serializable {
 
     }
 
-    public Score(float calificacion, String comentario, Student student, Review review) {
+    public Score(Float calificacion, String comentario, Student student, Review review) {
         this.calificacion = calificacion;
         this.comentario = comentario;
         this.student = student;
@@ -36,7 +35,7 @@ public class Score implements Serializable {
         return calificacion;
     }
 
-    public void setCalificacion(float calificacion) {
+    public void setCalificacion(Float calificacion) {
         this.calificacion = calificacion;
     }
 
@@ -46,14 +45,6 @@ public class Score implements Serializable {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Review getReview() {
@@ -67,5 +58,13 @@ public class Score implements Serializable {
     @Override
     public String toString() {
         return ((student != null) ? student.toString() : "New student") + " (" + ((review != null) ? review.toString() : "New review") + ") --> " + calificacion;
+    }
+
+    public int getReviewId() {
+        return review.getId();
+    }
+
+    public int getStudentId() {
+        return student.getId();
     }
 }

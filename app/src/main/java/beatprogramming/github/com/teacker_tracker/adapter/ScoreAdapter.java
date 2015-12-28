@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,20 +22,19 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
 /**
  * Created by malkomich on 13/11/15.
  */
-public class ScoreAdapter extends ArrayAdapter<Score> implements View.OnClickListener {
+public class ScoreAdapter extends ArrayAdapter<Score> {
 
     private final String TAG = ScoreAdapter.class.getName();
 
     private final Context context;
     private final int resource;
-    private final List<Student> studentList;
 
+    TextView scoreTextView;
 
-    public ScoreAdapter(Context context, int resource, List<Student> students) {
-        super(context, resource);
+    public ScoreAdapter(Context context, int resource, List<Score> items) {
+        super(context, resource, items);
         this.resource = resource;
         this.context = context;
-        studentList = students;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class ScoreAdapter extends ArrayAdapter<Score> implements View.OnClickLis
 
         View rowView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
-        Spinner studentSpinner = (Spinner) rowView.findViewById(R.id.item_score_student);
-        TextView scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
+        TextView studentTextView = (TextView) rowView.findViewById(R.id.item_score_student);
+        scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
         ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
 
         final Score score = (Score) getItem(position);
@@ -56,53 +56,31 @@ public class ScoreAdapter extends ArrayAdapter<Score> implements View.OnClickLis
         Float scoreValue = score.getCalificacion();
         String comment = score.getComentario();
 
-        studentSpinner.setAdapter(new ArrayAdapter<Student>(context,
-                R.layout.textview, studentList));
-        if(student != null) {
-            for (int i = 0; i < studentSpinner.getAdapter().getCount(); i++) {
-                Student st = (Student) studentSpinner.getAdapter().getItem(i);
-                if (st.getId() == student.getId()) {
-                    studentSpinner.setSelection(i);
-                    break;
-                }
-            }
-        }
-        studentSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Student st = (Student) parent.getItemAtPosition(position);
-                score.setStudent(st);
-//                studentList.remove(st);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        studentTextView.setText(student.toString());
 
         if(scoreValue != null)
             scoreTextView.setText(Float.toString(scoreValue));
-        scoreTextView.setOnClickListener(this);
+        else
+            scoreTextView.setText("NP");
 
-        commentImageView.setOnClickListener(this);
+        commentImageView.setOnClickListener(iconListener);
 
         Log.d(TAG, "getView, score: " + score.toString());
 
         return rowView;
     }
 
-    @Override
-    public void onClick(View v) {
+    View.OnClickListener iconListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-        switch (v.getId()) {
-            case R.id.item_score_score:
-                break;
-            case R.id.item_score_comment:
-                break;
-            default:
-                break;
-
+            if(scoreTextView.getText() == "NP")
+                Toast.makeText(context, context.getString(R.string.score_comment_toast), Toast.LENGTH_SHORT).show();
+            else {
+                // Introduccion de un comentario de nota.
+                Toast.makeText(context, "No implementado", Toast.LENGTH_SHORT).show();
+            }
         }
-    }
+    };
+
 }

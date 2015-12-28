@@ -78,5 +78,9 @@
 
     <!-- SCORES UPDATE -->
     <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>
+    <string name="score_picker_title">La nota es...</string>
+    <string name="score_picker_ok">OK</string>
+    <string name="score_picker_cancel">No Presentado</string>
+    <string name="score_comment_toast">Debes introducir una calificación primero.</string>
 
 </resources>

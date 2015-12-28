@@ -1,9 +1,11 @@
 package beatprogramming.github.com.teacker_tracker.view;
 
+
+import android.support.v4.app.DialogFragment;
+
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Score;
-import beatprogramming.github.com.teacker_tracker.domain.Student;
 
 /**
  * Created by malkomich on 01/12/2015.
@@ -16,7 +18,10 @@ public interface ScoreView {
 
     void hideLoading();
 
-    void newItem();
+    void showDialog(DialogFragment fragment);
 
-    void createAdapter(List<Student> studentList);
+    void setScoreValue(Float scoreValue, int position);
+
+    Float getScoreValue(int position);
+
 }

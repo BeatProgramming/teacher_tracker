@@ -8,6 +8,10 @@ import org.joda.time.DateTime;
  */
 public class Exam extends Review{
 
+    public Exam() {
+        super();
+    }
+
     public Exam(String name, Subject subject, DateTime dateTime) {
         super(name, subject, dateTime);
     }

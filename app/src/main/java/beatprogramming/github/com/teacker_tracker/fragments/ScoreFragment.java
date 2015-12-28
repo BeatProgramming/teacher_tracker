@@ -1,7 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +18,6 @@ import beatprogramming.github.com.teacker_tracker.adapter.ScoreAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
-import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.presenter.ScorePresenter;
 import beatprogramming.github.com.teacker_tracker.view.ScoreView;
 
@@ -51,6 +51,7 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         Bundle args = getArguments();
@@ -65,65 +66,84 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     @Override
     public void onResume() {
+
         super.onResume();
         presenter.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+
+        super.onPause();
+        for(int i=0; i < adapter.getCount(); i++){
+            Log.d(TAG, "onPause, Saving item " + i);
+            presenter.saveRecord(adapter.getItem(i));
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate (R.layout.fragment_listview, container, false);
+        View view = inflater.inflate (R.layout.fragment_listview_score, container, false);
 
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onCreateScore();
-            }
-        });
 
         return view;
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        callback = (FragmentCallback) context;
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
         presenter.onItemClicked(position);
     }
 
     @Override
     public void setItems(List<Score> items) {
 
-        if(adapter != null) {
-            Log.d(TAG, "setItems, " + items.size() + " Score items added.");
-            adapter.addAll(items);
-            adapter.notifyDataSetChanged();
-        }
+        adapter = new ScoreAdapter(getContext(), R.layout.listview_score_row, items);
+        setListAdapter(adapter);
+
     }
 
     @Override
     public void showLoading() {
+
         progressBar.setVisibility(View.VISIBLE);
         getListView().setVisibility(View.INVISIBLE);
+
     }
 
     @Override
     public void hideLoading() {
+
         progressBar.setVisibility(View.INVISIBLE);
         getListView().setVisibility(View.VISIBLE);
+
     }
 
     @Override
-    public void newItem() {
-        adapter.add(new Score());
+    public void showDialog(DialogFragment fragment) {
+        callback.showDialog(fragment);
+    }
+
+    @Override
+    public void setScoreValue(Float scoreValue, int position) {
+        adapter.getItem(position).setCalificacion(scoreValue);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void createAdapter(List<Student> studentList) {
-        adapter = new ScoreAdapter(getContext(), R.layout.listview_score_row, studentList);
-        setListAdapter(adapter);
+    public Float getScoreValue(int position) {
+        return adapter.getItem(position).getCalificacion();
     }
 
 }

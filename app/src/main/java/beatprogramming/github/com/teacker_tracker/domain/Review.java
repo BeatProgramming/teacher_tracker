@@ -75,6 +75,6 @@ public abstract class Review implements Serializable {
     }
 
     public String toString() {
-        return name + " (" + subject.toString() + ")";
+        return name + " (" + ((subject != null) ? subject.toString(): "New Subject") + ")";
     }
 }
