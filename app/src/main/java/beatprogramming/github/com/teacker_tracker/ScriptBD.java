@@ -105,7 +105,7 @@ public class ScriptBD {
             "create table " + HORARIO + "(" +
                     ID_HORARIO + " integer primary key autoincrement," +
                     ID_ASIGNATURA_HORARIO + " integer," +
-                    FECHA_HORARIO + " integer," +
+                    FECHA_HORARIO + " text," +
                     CLASE_HORARIO + " text null," +
                     DIAS_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
@@ -184,7 +184,7 @@ public class ScriptBD {
                     "\"Fernandez\"," +
                     "null)";
 
-
+    //- Creación insercion datos calificaciones por defecto
     public static final String INSERT_CALIFICACION1_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
                 "null," +
@@ -217,11 +217,12 @@ public class ScriptBD {
                     "2," +
                     "2)";
 
+    //- Creación insercion datos horario por defecto
     public static final String INSERT_SCHEDULE1_SCRIPT =
             "insert into " + HORARIO + " values (" +
                     "null," +
                     "1," +
-                    "26478624," +
+                    "\"8:00\"," +
                     "\"A101\"," +
                     "\"LXJV\")";
 
@@ -229,7 +230,7 @@ public class ScriptBD {
             "insert into " + HORARIO + " values (" +
                     "null," +
                     "2," +
-                    "26478624," +
+                    "\"10:00\"," +
                     "\"A101\"," +
                     "\"LXJV\")";
 

@@ -12,7 +12,7 @@ public interface ScheduleDao {
 
     void findSchedule(OnLoadFinishListener listener);
 
-    void updateSchedule(int id,int subjectId,DateTime dateTime,String classroom, Boolean[] days,
+    void updateSchedule(int id,int subjectId,String dateTime,String classroom, Boolean[] days,
                        OnUpdateFinishListener listener);
 
     void deleteShedule(int id, OnDeleteFinishListener listener);

@@ -24,8 +24,8 @@
     <dimen name="review_suject">100dp</dimen>
     <dimen name="icon_dimen">50dp</dimen>
     <dimen name="icon_big_dimen">100dp</dimen>
-    <dimen name="toggleTextDay">10dp</dimen>
-    <dimen name="toggleDays">50dp</dimen>
+    <dimen name="toggleTextDay">8dp</dimen>
+    <dimen name="toggleDays">40dp</dimen>
     <dimen name="descriptionTexts">20dp</dimen>
 
 </resources>
