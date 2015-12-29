@@ -223,7 +223,7 @@ public class ScriptBD {
                     "1," +
                     "26478624," +
                     "\"A101\"," +
-                    "\"LMXJV\")";
+                    "\"LXJV\")";
 
     public static final String INSERT_SCHEDULE2_SCRIPT =
             "insert into " + HORARIO + " values (" +
@@ -231,6 +231,6 @@ public class ScriptBD {
                     "2," +
                     "26478624," +
                     "\"A101\"," +
-                    "\"LMXJV\")";
+                    "\"LXJV\")";
 
 }
