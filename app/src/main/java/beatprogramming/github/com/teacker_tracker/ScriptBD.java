@@ -131,7 +131,7 @@ public class ScriptBD {
                     "null," +
                     "\"Primer parcial\"," +
                     "1," +
-                    "\"20151010\"," +
+                    "\"1451474455580\"," +
                     "\"Exam\")";
 
     public static final String INSERT_REVIEW2_SCRIPT =
@@ -139,7 +139,7 @@ public class ScriptBD {
                     "null," +
                     "\"Segundo parcial\"," +
                     "1," +
-                    "20151010," +
+                    "1451474455501," +
                     "\"Exam\")";
 
     //- Creación insercion datos tarea por defecto
@@ -148,7 +148,7 @@ public class ScriptBD {
                     "null," +
                     "\"A101\"," +
                     "1," +
-                    "3648723647823," +
+                    "1451474455520," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
@@ -157,7 +157,7 @@ public class ScriptBD {
                     "null," +
                     "\"A102\"," +
                     "2," +
-                    "086976876," +
+                    "1451474455300," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
@@ -166,7 +166,7 @@ public class ScriptBD {
                     "null," +
                     "\"A101\"," +
                     "1," +
-                    "18731623," +
+                    "1451474455501," +
                     "null)";
 
     //- Creación insercion datos alumno por defecto

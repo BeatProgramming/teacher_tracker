@@ -14,13 +14,13 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
-import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
-import beatprogramming.github.com.teacker_tracker.view.TaskView;
+import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskPresenter;
+import beatprogramming.github.com.teacker_tracker.view.TaskView;
 
 
-/**
+/** Fragmento de tareas
  * Created by adrian on 27/11/2015.
  */
 public class TaskFragment extends ListFragment implements TaskView {
@@ -88,7 +88,6 @@ public class TaskFragment extends ListFragment implements TaskView {
     }
 
     private List<Task> ordenarPorHora(List<Task> items) {
-
         return items;
     }
 

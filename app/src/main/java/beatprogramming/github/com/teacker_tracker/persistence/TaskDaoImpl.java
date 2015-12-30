@@ -62,7 +62,7 @@ public class TaskDaoImpl implements TaskDao {
      */
     public TaskDaoImpl() {
         db = BDHelper.getInstance();
-        listaFinalTask = new ArrayList<Task>();
+        listaFinalTask = new ArrayList<>();
     }
 
     /**
@@ -75,7 +75,7 @@ public class TaskDaoImpl implements TaskDao {
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
         //Lista de tareas
-        List tasks = new ArrayList<Task>();
+        List tasks = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
@@ -101,17 +101,30 @@ public class TaskDaoImpl implements TaskDao {
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
         //Lista de tareas
+        DateTime fechaTarea;
+        DateTime fechaActual= new DateTime();
         Log.d(TAG, "Elementos en la lista: " + listaFinalTask.size());
         if(c.moveToFirst()){
             do{
-                Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
-                        c.getString(c.getColumnIndex(DESCRIPTION)),
-                        c.getString(c.getColumnIndex(COURSE)));
-                s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
-                Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
-                t.setId(c.getInt(c.getColumnIndex(TASKID)));
-                listaFinalTask.add(t);
-                Log.d(TAG, "findTasks, " + t.toString());
+                fechaTarea = new DateTime(c.getInt(c.getColumnIndex(DATETIME)));
+                if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
+                        fechaTarea.getYear() == fechaActual.getYear() &&
+                        fechaTarea.getMonthOfYear() == fechaActual.getMonthOfYear() ) {
+                    Subject s = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                            c.getString(c.getColumnIndex(DESCRIPTION)),
+                            c.getString(c.getColumnIndex(COURSE)));
+                    s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
+                    Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
+                    t.setId(c.getInt(c.getColumnIndex(TASKID)));
+                    listaFinalTask.add(t);
+                    Log.d(TAG, "findTasks, " + t.toString());
+                } else{
+                    Log.d(TAG, "Fecha tarea: " + fechaTarea.getYear() + ":" + fechaTarea.getMonthOfYear() + ":" + fechaTarea.getDayOfWeek());
+                    Log.d(TAG, "Fecha actual: " + fechaActual.getYear() + ":" + fechaActual.getMonthOfYear() + ":" + fechaActual.getDayOfWeek());
+                    Log.d(TAG, "Millis tarea: " + fechaTarea.getMillis());
+                    Log.d(TAG, "Millis actual: " + fechaActual.getMillis());
+
+                }
             }while(c.moveToNext());
         }
         Log.d(TAG, "Elementos en la lista: " + listaFinalTask.size());
@@ -124,15 +137,18 @@ public class TaskDaoImpl implements TaskDao {
                 DateTime dt = new DateTime();
                 Boolean [] dias;
                 Task task;
+                String [] stringHour;
                 for (int i=0;i<items.size();i++){
+                    Log.d(TAG, "Tiempo: "+ dt.getMillis());
                     sc = (Schedule) items.get(i);
+                    stringHour = sc.getDateTime().split(":");
+                    dt = dt.withTime(Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]),0, 0);
                     dias =  sc.getDias();
-                    if (dias[dt.getDayOfWeek()]){
+                    if (dias[dt.getDayOfWeek()+1]){
                         task = new Task(sc.getAula(), sc.getSubject(), dt);
                         listaFinalTask.add(task);
                     }
                 }
-
             }
         };
         scheduleDao.findSchedule(scheduleListener);
