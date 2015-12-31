@@ -218,6 +218,7 @@ public class ScoreDaoImpl implements ScoreDao {
             } while (c.moveToNext());
         }
 
+
         Log.d(TAG, "findScoreByReview, numero de scores: " + scores.size());
 
         listener.onLoadFinish(scores);

@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <TextView
+        android:id="@+id/item_score_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".7" />
+
+    <TextView
+        android:id="@+id/item_score_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight=".25"
+        android:clickable="true" />
+
+    <ImageView
+        android:id="@+id/item_score_comment"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/note" />
+
+</LinearLayout>

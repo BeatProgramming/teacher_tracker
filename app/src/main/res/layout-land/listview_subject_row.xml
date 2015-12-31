@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/item_subject"
+        android:layout_width="@dimen/subject_name"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/item_course"
+        android:layout_width="@dimen/subject_course"
+        android:layout_height="wrap_content" />
+</LinearLayout>
