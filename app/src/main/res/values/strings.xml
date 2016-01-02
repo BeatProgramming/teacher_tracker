@@ -25,6 +25,14 @@
     <string name="subjectCurse">Curso de la asignatura</string>
     <string name="subjectAula">Aula de la asignatura</string>
     <string name="submit">Confirmar</string>
+    <string name="lunes">Lun</string>
+    <string name="martes">Mar</string>
+    <string name="miercoles">Mie</string>
+    <string name="jueves">Jue</string>
+    <string name="viernes">Vie</string>
+    <string name="sabado">Sab</string>
+    <string name="domingo">Dom</string>
+    <string name="textDays">Dias de la semana a repetir</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
     <string name="app_description">La comodidad en tus manos</string>
@@ -75,6 +83,24 @@
 
     <!-- STUDENTS UPDATE -->
     <string name="image_intent_title">Selecciona una foto</string>
+    <string name="app_description">La comodidad en tus manos</string>
+    <string name="subject_section">Asignaturas</string>
+    <string name="task_section">Tareas</string>
+    <string name="score_section">Calificaciones</string>
+    <string name="taskDate">Fecha</string>
+    <string name="textClassroom">Aula en la que se imparte</string>
+    <string name="textCourse">Curso de la asignatura</string>
+    <string name="textDescription">Descripcion de la asignatura</string>
+    <string name="textSubject">Nombre de la asignatura</string>
+    <string name="textHoraInicio">Hora de inicio</string>
+    <string name="textSchedule">Horario</string>
+    <string name="button_newSchedule">Nuevo horario</string>
+    <string name="textTimerTask">Hora</string>
+    <string name="textDateTask">Fecha</string>
+    <string name="textNameTask">Nombre de la tarea</string>
+    <string name="textSubjectTask">Asignatura</string>
+    <string name="textType">Tipo de</string>
+    <string name="textNameReview">Nombre de la</string>
 
     <!-- SCORES UPDATE -->
     <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>

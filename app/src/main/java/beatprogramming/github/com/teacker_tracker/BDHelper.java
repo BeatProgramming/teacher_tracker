@@ -52,6 +52,8 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL(ScriptBD.INSERT_MATRICULA1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_MATRICULA2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_MATRICULA3_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_SCHEDULE1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_SCHEDULE2_SCRIPT);
 
     }
 

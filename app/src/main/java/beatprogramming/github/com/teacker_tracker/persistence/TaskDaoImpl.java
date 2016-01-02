@@ -7,6 +7,7 @@ import android.util.Log;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,9 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
+import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
-import beatprogramming.github.com.teacker_tracker.util.SecureSetter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Tarea.
@@ -30,8 +31,8 @@ public class TaskDaoImpl implements TaskDao {
     private static final String TASK = "Task";
 
     //Consultas sql
-    private static final String FINDQUERY = "SELECT Task._id AS taskId, Task.subjectId, Task.name AS nameTask, Task.dateTime, Task.note," +
-            " Subject.name AS nameSubject, Subject.description, Subject.course " +
+    private static final String FINDQUERY = "SELECT Task._id AS taskId, Task.subjectId, Task.name AS nameTask, Task.dateTime, Task.note, Task.año," +
+            " Task.mes, Task.dia, Task.hora, Subject.name AS nameSubject, Subject.description, Subject.course " +
             " FROM Task LEFT JOIN Subject " +
             "ON Task.subjectId = Subject._id;";
 
@@ -40,6 +41,10 @@ public class TaskDaoImpl implements TaskDao {
     private static final String NAMETASK = "nameTask";
     private static final String NOTE = "note";
     private static final String DATETIME = "dateTime";
+    private static final String AÑO = "año";
+    private static final String MES = "mes";
+    private static final String DIA = "dia";
+    private static final String HORA = "hora";
     private static final String SUBJECTID = "subjectId";
 
     //Campos de la tabla Subject
@@ -52,11 +57,16 @@ public class TaskDaoImpl implements TaskDao {
     private static SQLiteDatabase sqldb;
     private static Cursor c;
 
+    //Schedule
+    private ScheduleDao scheduleDao;
+    private OnLoadFinishListener scheduleListener;
+    private static List<Task> listaFinalTask;
     /**
      * Contructor que inicializa el DBHelper
      */
     public TaskDaoImpl() {
         db = BDHelper.getInstance();
+        listaFinalTask = new ArrayList<>();
     }
 
     /**
@@ -69,7 +79,7 @@ public class TaskDaoImpl implements TaskDao {
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
         //Lista de tareas
-        List tasks = new ArrayList<Task>();
+        List tasks = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
@@ -83,6 +93,63 @@ public class TaskDaoImpl implements TaskDao {
             }while(c.moveToNext());
         }
         listener.onLoadFinish(tasks);
+    }
+
+    /**
+     * Metodo que devuelte todas las tareas de la base de datos.
+     * @param listener instancia del listener
+     */
+    @Override
+    public void findTasksAndSchedules(OnLoadFinishListener listener) {
+        //- Buscar todas las tareas
+        sqldb = db.getReadableDatabase();
+        c = sqldb.rawQuery(FINDQUERY, null);
+        //Lista de tareas
+        DateTime fechaTarea;
+        DateTime fechaActual= new DateTime();
+        String [] stringHour;
+        if(c.moveToFirst()){
+            do{
+                stringHour = c.getString(c.getColumnIndex(HORA)).split(":");
+                fechaTarea = new DateTime(c.getInt(c.getColumnIndex(AÑO)), c.getInt(c.getColumnIndex(MES)), c.getInt(c.getColumnIndex(DIA)),
+                        Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]));
+                if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
+                        fechaTarea.getYear() == fechaActual.getYear() &&
+                        fechaTarea.getMonthOfYear() == fechaActual.getMonthOfYear() ) {
+                    Subject s = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                            c.getString(c.getColumnIndex(DESCRIPTION)),
+                            c.getString(c.getColumnIndex(COURSE)));
+                    s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
+                    Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
+                    t.setId(c.getInt(c.getColumnIndex(TASKID)));
+                    listaFinalTask.add(t);
+                }
+            }while(c.moveToNext());
+        }
+        //- Buscar todos los horarios
+        scheduleDao = new ScheduleDaoImpl();
+        scheduleListener = new OnLoadFinishListener() {
+            @Override
+            public void onLoadFinish(List<? extends Serializable> items) {
+                Schedule sc;
+                DateTime dt = new DateTime();
+                Boolean [] dias;
+                Task task;
+                String [] stringHour;
+                for (int i=0;i<items.size();i++){
+                    sc = (Schedule) items.get(i);
+                    stringHour = sc.getDateTime().split(":");
+                    dt = dt.withTime(Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]),0, 0);
+                    dias =  sc.getDias();
+                    if (dias[dt.getDayOfWeek()]){
+                        task = new Task(sc.getAula(), sc.getSubject(), dt);
+                        listaFinalTask.add(task);
+                    }
+                }
+            }
+        };
+        scheduleDao.findSchedule(scheduleListener);
+        listener.onLoadFinish(listaFinalTask);
     }
 
     /**

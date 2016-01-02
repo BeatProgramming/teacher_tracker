@@ -9,14 +9,24 @@ public class Schedule {
 
     private int id;
     private Subject subject;
-    private DateTime dateTime;
+    private String dateTime;
+    private Boolean[] dias;
     private String aula;
 
 
-    public Schedule(Subject subject, DateTime dateTime, String aula) {
+    public Schedule(Subject subject, String dateTime, Boolean[] dias, String aula) {
         this.subject = subject;
         this.dateTime = dateTime;
         this.aula = aula;
+        this.dias=dias;
+    }
+
+    public Boolean[] getDias() {
+        return dias;
+    }
+
+    public void setDias(Boolean[] dias) {
+        this.dias = dias;
     }
 
     public Subject getSubject() {
@@ -27,11 +37,11 @@ public class Schedule {
         this.subject = subject;
     }
 
-    public DateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(DateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 

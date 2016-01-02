@@ -16,19 +16,42 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:visibility="gone" />
+        <TextView
+            android:id="@+id/scheduleId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textSubject"
+            android:text="@string/textSubject"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
 
         <EditText
             android:id="@+id/subjectName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/textSubject"
             android:layout_alignParentEnd="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="40dp"
             android:focusable="true"
             android:singleLine="true"
             android:hint="@string/subjectName" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjectName"
+            android:id="@+id/textDescription"
+            android:text="@string/textDescription"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
 
         <EditText
             android:id="@+id/subjectDescription"
@@ -38,10 +61,18 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/subjectName"
-            android:layout_below="@+id/subjectName"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textDescription"
             android:focusable="true"
             android:hint="@string/subjectDescription" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjectDescription"
+            android:id="@+id/textCourse"
+            android:text="@string/textCourse"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
 
         <EditText
             android:id="@+id/subjectCourse"
@@ -51,30 +82,164 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignRight="@+id/subjectDescription"
-            android:layout_below="@+id/subjectDescription"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textCourse"
             android:focusable="true"
             android:singleLine="true"
             android:hint="@string/subjectCurse" />
 
-        <Button
-            android:id="@+id/button"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/subjectCourse"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:text="@string/button_submit"
-            android:textColor="#0D2A54" />
+            android:layout_below="@id/subjectCourse"
+            android:textSize="@dimen/descriptionTexts"
+            android:id="@+id/textSchedule"
+            android:layout_marginTop="10dp"
+            android:text="@string/textSchedule"
+            android:textColor="#0145FF"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textSchedule"
+            android:layout_marginTop="10dp"
+            android:id="@+id/textClassroom"
+            android:text="@string/textClassroom"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
+
+        <EditText
+            android:id="@+id/subjectClassroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/subjectCourse"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/textClassroom"
+            android:layout_below="@+id/textClassroom"
+            android:focusable="true"
+            android:singleLine="true"
+            android:hint="@string/subjectAula" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjectClassroom"
+            android:id="@+id/textDays"
+            android:text="@string/textDays"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textDays"
+            android:id="@+id/linearLayoutDays"
+            android:orientation="horizontal">
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonMon"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/lunes"
+                android:textOff="@string/lunes"/>
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonTue"
+                android:layout_toRightOf="@+id/ToggleButtonMon"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/martes"
+                android:textOff="@string/martes"/>
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonWed"
+                android:layout_toRightOf="@+id/ToggleButtonTue"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/miercoles"
+                android:textOff="@string/miercoles"/>
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonThu"
+                android:layout_toRightOf="@+id/ToggleButtonWed"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/jueves"
+                android:textOff="@string/jueves"/>
+            <ToggleButton
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonFri"
+                android:layout_toRightOf="@+id/ToggleButtonThu"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/viernes"
+                android:textOff="@string/viernes"/>
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonSat"
+                android:layout_toRightOf="@+id/ToggleButtonFri"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/sabado"
+                android:textOff="@string/sabado"/>
+            <ToggleButton
+                android:layout_width="@dimen/toggleDays"
+                android:layout_height="wrap_content"
+                android:id="@+id/ToggleButtonSun"
+                android:layout_toRightOf="@+id/ToggleButtonSat"
+                android:textSize="@dimen/toggleTextDay"
+                android:textOn="@string/domingo"
+                android:textOff="@string/domingo"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linearLayoutDays"
+            android:id="@+id/textHoraInicio"
+            android:text="@string/textHoraInicio"
+            android:textSize="@dimen/descriptionTexts"
+            android:textColor="#0145FF"/>
+
+        <TextView
+            android:id="@+id/scheduleHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:layout_below="@id/textHoraInicio"
+            android:clickable="true"
+            android:text="@string/taskHour" />
 
         <Button
-            android:id="@+id/button_delete"
-            android:layout_width="match_parent"
+            android:id="@+id/button_newSchedule"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
-            android:layout_marginTop="50dp"
-            android:text="@string/button_delete"
-            android:textColor="#FF0000" />
+            android:layout_below="@id/scheduleHour"
+            android:text="@string/button_newSchedule"
+            android:textColor="#0D2A54" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_newSchedule"
+            android:id="@+id/layoutButtons">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_submit"
+                android:textColor="#0D2A54" />
+
+            <Button
+                android:id="@+id/button_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/button"
+                android:text="@string/button_delete"
+                android:textColor="#FF0000" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

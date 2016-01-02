@@ -48,4 +48,21 @@
     <string name="title_activity_subject">Create subject</string>
     <string name="title_activity_submit_score">Create exam</string>
     <string name="title_activity_task">Create task</string>
+    <string name="jueves">Thu</string>
+    <string name="lunes">Mon</string>
+    <string name="martes">Tue</string>
+    <string name="miercoles">Wen</string>
+    <string name="sabado">Sat</string>
+    <string name="viernes">Fri</string>
+    <string name="domingo">Sun</string>
+    <string name="button_newSchedule">New schedule</string>
+    <string name="textTimerTask">Hour</string>
+    <string name="textDateTask">Date</string>
+    <string name="textSchedule">Schedule</string>
+    <string name="textSubject">Name of the subject</string>
+    <string name="textHoraInicio">Start hour</string>
+    <string name="textDescription">Description of subject</string>
+    <string name="textDays">Days to repeat</string>
+    <string name="textCourse">Course of the subject</string>
+    <string name="textClassroom">Classroom</string>
 </resources>

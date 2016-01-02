@@ -44,6 +44,10 @@ public class ScriptBD {
     public static final String NOMBRE_TAREA = "name";
     public static final String ID_ASIGNATURA_TAREA = "subjectId";
     public static final String FECHA_TAREA = "dateTime";
+    private static final String AÑO = "año";
+    private static final String MES = "mes";
+    private static final String DIA = "dia";
+    private static final String HORA = "hora";
     public static final String NOTA_TAREA = "note";
 
     //- Campo tabla HORARIO
@@ -51,6 +55,7 @@ public class ScriptBD {
     public static final String ID_ASIGNATURA_HORARIO = "subjectId";
     public static final String FECHA_HORARIO = "dateTime";
     public static final String CLASE_HORARIO = "classroom";
+    public static final String DIAS_HORARIO = "days";
 
     //- Campo tabla MATRICULA
     public static final String ID_ASIGNATURA_MATRICULA = "subjectId";
@@ -100,6 +105,10 @@ public class ScriptBD {
                     NOMBRE_TAREA + " text not null," +
                     ID_ASIGNATURA_TAREA + " integer," +
                     FECHA_TAREA + " integer," +
+                    AÑO + " integer," +
+                    MES + " integer," +
+                    DIA + " integer," +
+                    HORA + " text," +
                     NOTA_TAREA + " text," +
                     "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
@@ -108,9 +117,11 @@ public class ScriptBD {
             "create table " + HORARIO + "(" +
                     ID_HORARIO + " integer primary key autoincrement," +
                     ID_ASIGNATURA_HORARIO + " integer," +
-                    FECHA_HORARIO + " integer," +
+                    FECHA_HORARIO + " text," +
                     CLASE_HORARIO + " text null," +
                     "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
+                    DIAS_HORARIO + " text null," +
+                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
 
     //- Creacion tabla MATRICULA
     public static final String MATRICULA_SCRIPT =
@@ -142,7 +153,7 @@ public class ScriptBD {
                     "null," +
                     "\"Primer parcial\"," +
                     "1," +
-                    "\"20151010\"," +
+                    "\"1451474455580\"," +
                     "\"Exam\")";
 
     public static final String INSERT_REVIEW2_SCRIPT =
@@ -150,34 +161,46 @@ public class ScriptBD {
                     "null," +
                     "\"Segundo parcial\"," +
                     "1," +
-                    "20151010," +
+                    "1451474455501," +
                     "\"Exam\")";
 
     //- Creación insercion datos tarea por defecto
     public static final String INSERT_TAREA1_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "\"A101\"," +
                     "1," +
-                    "3648723647823," +
+                    "1451474455520," +
+                    "2016," +
+                    "1," +
+                    "6," +
+                    "\"8:00\"," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
     public static final String INSERT_TAREA2_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Matematicas\"," +
+                    "\"A102\"," +
                     "2," +
-                    "086976876," +
+                    "1451474455300," +
+                    "2016," +
+                    "1," +
+                    "6," +
+                    "\"9:00\"," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
     public static final String INSERT_TAREA3_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
-                    "\"Hoy impartimos la clase de Lengua\"," +
+                    "\"A101\"," +
                     "1," +
-                    "18731623," +
+                    "1451474455501," +
+                    "2016," +
+                    "1," +
+                    "7," +
+                    "\"12:00\"," +
                     "null)";
 
     //- Creación insercion datos alumno por defecto
@@ -195,7 +218,7 @@ public class ScriptBD {
                     "\"Fernandez\"," +
                     "null)";
 
-
+    //- Creación insercion datos calificaciones por defecto
     public static final String INSERT_CALIFICACION1_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
                     "7.5," +
@@ -238,4 +261,22 @@ public class ScriptBD {
             "insert into " + MATRICULA + " values (" +
                     "2," +
                     "2)";
+
+    //- Creación insercion datos horario por defecto
+    public static final String INSERT_SCHEDULE1_SCRIPT =
+            "insert into " + HORARIO + " values (" +
+                    "null," +
+                    "1," +
+                    "\"8:00\"," +
+                    "\"A101\"," +
+                    "\"LXJV\")";
+
+    public static final String INSERT_SCHEDULE2_SCRIPT =
+            "insert into " + HORARIO + " values (" +
+                    "null," +
+                    "2," +
+                    "\"10:00\"," +
+                    "\"A101\"," +
+                    "\"LXJV\")";
+
 }

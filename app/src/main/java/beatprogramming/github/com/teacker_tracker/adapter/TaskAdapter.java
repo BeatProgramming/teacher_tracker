@@ -42,6 +42,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         View listItemView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
         //Obtiene instancias de los text views
+        TextView subject = (TextView) listItemView.findViewById(R.id.subject_main);
+        TextView hour = (TextView) listItemView.findViewById(R.id.hour_main);
+        TextView classroom = (TextView) listItemView.findViewById(R.id.classroom_main);
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.task_main);
         TextView subjectTextView = (TextView) listItemView.findViewById(R.id.task_subject);
         TextView hourTextView = (TextView) listItemView.findViewById(R.id.hour_main);
@@ -59,6 +62,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         Log.d(TAG, "getView, " + task.getId() + ", " + task.getDateTime() + ", " + task
                 .getNombre() + ", " + task.getNote());
+        subject.setText(task.getSubject().getNombre() + " " + item.getSubject().getCurso());
+        hour.setText(DateTimeFormatter.dateTimeToTimeString(item.getDateTime()));
+        classroom.setText(task.getNombre());
 
         return listItemView;
     }

@@ -13,6 +13,8 @@ public interface TaskDao {
 
     void findTasks(OnLoadFinishListener listener);
 
+    void findTasksAndSchedules(OnLoadFinishListener listener);
+
     void updateTask(int id, String name,int subjectId,DateTime dateTime,
                     OnUpdateFinishListener listener);
 
