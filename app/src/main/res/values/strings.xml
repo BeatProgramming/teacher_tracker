@@ -83,10 +83,6 @@
 
     <!-- STUDENTS UPDATE -->
     <string name="image_intent_title">Selecciona una foto</string>
-    <string name="app_description">La comodidad en tus manos</string>
-    <string name="subject_section">Asignaturas</string>
-    <string name="task_section">Tareas</string>
-    <string name="score_section">Calificaciones</string>
     <string name="taskDate">Fecha</string>
     <string name="textClassroom">Aula en la que se imparte</string>
     <string name="textCourse">Curso de la asignatura</string>
@@ -108,5 +104,6 @@
     <string name="score_picker_ok">OK</string>
     <string name="score_picker_cancel">No Presentado</string>
     <string name="score_comment_toast">Debes introducir una calificación primero.</string>
+    <string name="taskHour">hora</string>
 
 </resources>

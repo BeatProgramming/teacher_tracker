@@ -119,9 +119,8 @@ public class ScriptBD {
                     ID_ASIGNATURA_HORARIO + " integer," +
                     FECHA_HORARIO + " text," +
                     CLASE_HORARIO + " text null," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
                     DIAS_HORARIO + " text null," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + "))";
+                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla MATRICULA
     public static final String MATRICULA_SCRIPT =
