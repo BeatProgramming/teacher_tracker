@@ -111,7 +111,7 @@ public class TaskDaoImpl implements TaskDao {
         if(c.moveToFirst()){
             do{
                 stringHour = c.getString(c.getColumnIndex(HORA)).split(":");
-                fechaTarea = new DateTime(c.getInt(c.getColumnIndex(AÑO)), c.getInt(c.getColumnIndex(MES)), c.getInt(c.getColumnIndex(DIA)) - 1,
+                fechaTarea = new DateTime(c.getInt(c.getColumnIndex(AÑO)), c.getInt(c.getColumnIndex(MES)), c.getInt(c.getColumnIndex(DIA)),
                         Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]));
                 if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
                         fechaTarea.getYear() == fechaActual.getYear() &&
