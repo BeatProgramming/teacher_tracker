@@ -24,7 +24,7 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
-/**
+/** Clase presenter para reviewUpdate
  * Responsible object for handling all UI events on behalf of the view.
  */
 public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener, OnDateTimePickedListener {

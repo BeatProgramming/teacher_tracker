@@ -22,7 +22,7 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 
-/**
+/** Clase que coge una imagen
  * Created by malkomich on 1/12/15.
  */
 public class ImageGetter {

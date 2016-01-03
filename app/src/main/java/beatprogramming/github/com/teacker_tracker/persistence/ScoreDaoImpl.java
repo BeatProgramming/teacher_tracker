@@ -100,7 +100,7 @@ public class ScoreDaoImpl implements ScoreDao {
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
         //Lista de reviews
-        List scores = new ArrayList<Score>();
+        List scores = new ArrayList<>();
         if (c.moveToFirst()) {
             do {
                 Student st = new Student(c.getString(c.getColumnIndex(NAMESTUDENT)), c.getString(c.getColumnIndex(SURNAME)));

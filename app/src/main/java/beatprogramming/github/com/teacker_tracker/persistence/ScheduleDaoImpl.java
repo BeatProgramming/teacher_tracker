@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
     private static final String DATETIME = "dateTime";
     private static final String CLASSROOM = "classroom";
     private static final String DAYS = "days";
-
 
     //Campos de la tabla subject
     private static final String NAMESUBJECT = "nameSubject";
@@ -105,7 +102,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
         dias[4] = d.contains("V");
         dias[5] = d.contains("S");
         dias[6] = d.contains("D");
-        Log.d(TAG,"Modificado" + d + " a " + dias[0] + dias[1] + dias[2] + dias[3] + dias[4] + dias[5] +dias[6]);
         return dias;
     }
 
@@ -125,7 +121,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
         if (d[4]){ dias=dias+"V";}
         if (d[5]){ dias=dias+"S";}
         if (d[6]){ dias=dias+"D";}
-        Log.d(TAG,"Transformado: " + dias + " de " + d[0] + d[1] + d[2] + d[3] + d[4] + d[5] +d[6]);
         return dias;
     }
 

@@ -11,12 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -158,13 +154,15 @@ public class MainActivity extends AppCompatActivity
 
     private void exportStudentList() {
 
-        List<Student> studentsExample = new ArrayList<Student>();
+        List<Student> studentsExample = new ArrayList<>();
         studentsExample.add(new Student("Juan Carlos", "González"));
         File dir = getExternalFilesDir(null);
         String outputMessage = null;
         try {
             CSVManager.getInstance(this).exportStudents(dir, studentsExample);
-            outputMessage = "Alumnos exportados a " + dir.getAbsolutePath();
+            if (dir != null) {
+                outputMessage = "Alumnos exportados a " + dir.getAbsolutePath();
+            }
         } catch (CSVException e) {
             outputMessage = e.getMessage();
         }

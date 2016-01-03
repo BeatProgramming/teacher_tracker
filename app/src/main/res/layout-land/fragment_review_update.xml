@@ -2,10 +2,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/fragment_review_update"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,114 +16,167 @@
             android:id="@+id/reviewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/idDefValue"
             android:visibility="gone" />
-
-        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/review_type"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/review_type_exam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/review_type_exam" />
-
-            <RadioButton
-                android:id="@+id/review_type_project"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/review_type_project" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/review_type_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <EditText
-            android:id="@+id/review_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/review_type"
-            android:layout_marginTop="40dp"
-            android:focusable="true"
-            android:singleLine="true"
-            android:hint="@string/reviewName" />
-
-        <Spinner
-            android:id="@+id/review_subject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/review_name"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown"/>
 
         <TextView
             android:id="@+id/review_subject_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="0"/>
+            android:text="@string/idDefValue"/>
 
         <LinearLayout
-            android:id="@+id/dateTime"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/review_subject"
-            android:layout_marginTop="40dp"
-            android:orientation="horizontal">
-
+            android:layout_weight=".5"
+            android:orientation="vertical">
             <TextView
-                android:id="@+id/taskDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_weight=".5"
-                android:text="@string/dateField" />
+                android:text="@string/textType"
+                android:textSize="@dimen/descriptionTexts"
+                android:textColor="#0145FF"/>
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/review_type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/review_type_exam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_type_exam" />
+
+                <RadioButton
+                    android:id="@+id/review_type_project"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_type_project" />
+            </RadioGroup>
 
             <TextView
-                android:id="@+id/taskHour"
+                android:id="@+id/review_type_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:layout_weight=".5"
-                android:text="@string/hourField" />
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/textNameReview"
+                android:textSize="@dimen/descriptionTexts"
+                android:textColor="#0145FF"/>
+
+            <EditText
+                android:id="@+id/review_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:singleLine="true"
+                android:hint="@string/textNameReview" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:id="@+id/layoutButtons">
+
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_submit"
+                    android:textColor="#0D2A54" />
+
+                <Button
+                    style="?android:attr/button"
+                    android:id="@+id/button_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/button_delete"
+                    android:textColor="#FF0000" />
+            </LinearLayout>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/dateTime"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:text="@string/button_submit"
-            android:textColor="#0D2A54" />
+            android:layout_weight=".5"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subject"
+                android:textSize="@dimen/descriptionTexts"
+                android:textColor="#0145FF"/>
 
-        <Button
-            android:id="@+id/button_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/button_delete"
-            android:textColor="#FF0000" />
+            <Spinner
+                android:id="@+id/review_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"/>
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/dateTexts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:text="@string/textDateTask"
+                    android:textSize="@dimen/descriptionTexts"
+                    android:textColor="#0145FF"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:text="@string/textTimerTask"
+                    android:textSize="@dimen/descriptionTexts"
+                    android:textColor="#0145FF"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/taskDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_weight=".5"
+                    android:text="@string/dateField" />
+
+                <TextView
+                    android:id="@+id/taskHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:layout_weight=".5"
+                    android:text="@string/hourField" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </ScrollView>

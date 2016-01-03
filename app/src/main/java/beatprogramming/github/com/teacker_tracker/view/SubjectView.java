@@ -4,7 +4,7 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
-/**
+/** Interfaz
  * Created by malkomich on 01/12/2015.
  */
 public interface SubjectView {

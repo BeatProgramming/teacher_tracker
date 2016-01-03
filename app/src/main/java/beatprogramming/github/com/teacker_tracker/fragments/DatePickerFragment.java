@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -42,7 +43,8 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        listener.onDatePicked(year, month, day);
+        Log.d("OnDateSet", "año " + year + " mes" + month+1 + " dia " + day);
+        listener.onDatePicked(year, month+1, day);
     }
 
     public void setListener(OnDateTimePickedListener listener) {

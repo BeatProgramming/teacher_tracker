@@ -44,10 +44,6 @@ public class ScriptBD {
     public static final String NOMBRE_TAREA = "name";
     public static final String ID_ASIGNATURA_TAREA = "subjectId";
     public static final String FECHA_TAREA = "dateTime";
-    private static final String AÑO = "año";
-    private static final String MES = "mes";
-    private static final String DIA = "dia";
-    private static final String HORA = "hora";
     public static final String NOTA_TAREA = "note";
 
     //- Campo tabla HORARIO
@@ -105,10 +101,6 @@ public class ScriptBD {
                     NOMBRE_TAREA + " text not null," +
                     ID_ASIGNATURA_TAREA + " integer," +
                     FECHA_TAREA + " integer," +
-                    AÑO + " integer," +
-                    MES + " integer," +
-                    DIA + " integer," +
-                    HORA + " text," +
                     NOTA_TAREA + " text," +
                     "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
@@ -170,10 +162,6 @@ public class ScriptBD {
                     "\"A101\"," +
                     "1," +
                     "1451474455520," +
-                    "2016," +
-                    "1," +
-                    "6," +
-                    "\"8:00\"," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
@@ -183,10 +171,6 @@ public class ScriptBD {
                     "\"A102\"," +
                     "2," +
                     "1451474455300," +
-                    "2016," +
-                    "1," +
-                    "6," +
-                    "\"9:00\"," +
                     "\"Nueva nota\")";
 
     //- Creación insercion datos tarea por defecto
@@ -196,10 +180,6 @@ public class ScriptBD {
                     "\"A101\"," +
                     "1," +
                     "1451474455501," +
-                    "2016," +
-                    "1," +
-                    "7," +
-                    "\"12:00\"," +
                     "null)";
 
     //- Creación insercion datos alumno por defecto
@@ -268,7 +248,7 @@ public class ScriptBD {
                     "1," +
                     "\"8:00\"," +
                     "\"A101\"," +
-                    "\"LXJV\")";
+                    "\"LMXJV\")";
 
     public static final String INSERT_SCHEDULE2_SCRIPT =
             "insert into " + HORARIO + " values (" +
@@ -276,6 +256,6 @@ public class ScriptBD {
                     "2," +
                     "\"10:00\"," +
                     "\"A101\"," +
-                    "\"LXJV\")";
+                    "\"LMXJVSD\")";
 
 }

@@ -8,7 +8,7 @@ import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
 
-/**
+/** Clase para csv
  * Created by malkomich on 03/12/2015.
  */
 public class FileUtil {
@@ -19,8 +19,13 @@ public class FileUtil {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
 
         Cursor cursor = context.getContentResolver().query(Uri.parse(path), null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        int idx = 0;
+        if (cursor != null) {
+            idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        }
         return cursor.getString(idx);
     }
 

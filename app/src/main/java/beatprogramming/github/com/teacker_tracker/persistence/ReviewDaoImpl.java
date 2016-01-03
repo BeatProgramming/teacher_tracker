@@ -70,6 +70,7 @@ public class ReviewDaoImpl implements ReviewDao {
 
         //Lista de reviews
         List reviews = new ArrayList<Review>();
+        DateTime fechaReview = new DateTime();
         if(c.moveToFirst()){
             do{
                 Review r = null;
@@ -77,14 +78,16 @@ public class ReviewDaoImpl implements ReviewDao {
                     Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
+                    fechaReview = fechaReview.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
                     r = new Project(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                            s, fechaReview);
                 } else{
                     Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
+                    fechaReview = fechaReview.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
                     r= new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
-                            s, new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
+                            s, fechaReview);
                 }
                 r.setId(c.getInt(c.getColumnIndex(REVIEWID)));
                 reviews.add(r);

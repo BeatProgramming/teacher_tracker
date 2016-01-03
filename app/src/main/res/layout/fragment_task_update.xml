@@ -2,9 +2,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -14,24 +15,25 @@
             android:id="@+id/tasktId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/idDefValue"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/taskSubjectId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/dateTexts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:id="@+id/textDateTask"
                 android:text="@string/textDateTask"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
@@ -40,23 +42,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:id="@+id/textTimerTask"
                 android:text="@string/textTimerTask"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/dateTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/dateTexts"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
@@ -81,8 +76,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textNameTask"
-            android:layout_below="@id/dateTime"
             android:layout_marginTop="25dp"
             android:text="@string/textNameTask"
             android:textSize="@dimen/descriptionTexts"
@@ -90,24 +83,17 @@
 
         <EditText
             android:id="@+id/taskName"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/dateTime"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/dateTime"
-            android:layout_below="@+id/textNameTask"
             android:focusable="true"
             android:singleLine="true"
-            android:hint="@string/taskDescription" />
+            android:hint="@string/textNameTask" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textSubjectTask"
             android:layout_marginTop="25dp"
-            android:layout_below="@id/taskName"
-            android:text="@string/textSubjectTask"
+            android:text="@string/subject"
             android:textSize="@dimen/descriptionTexts"
             android:textColor="#0145FF"/>
 
@@ -115,26 +101,18 @@
             android:id="@+id/taskSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textSubjectTask"
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"/>
 
-        <TextView
-            android:id="@+id/taskSubjectId"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/taskSubject"
+            android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:id="@+id/layoutButtons">
 
             <Button
+                style="?android:attr/button"
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,13 +120,13 @@
                 android:textColor="#0D2A54" />
 
             <Button
+                style="?android:attr/button"
                 android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/button"
                 android:text="@string/button_delete"
                 android:textColor="#FF0000" />
-        </RelativeLayout>
-    </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

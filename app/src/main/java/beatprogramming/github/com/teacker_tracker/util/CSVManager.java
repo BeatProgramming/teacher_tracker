@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public class CSVManager {
         String path = directory.getAbsolutePath() + CSV_FILE;
         Log.d(TAG, path);
 
-        FileWriter file = null;
+        FileWriter file;
         try {
             file = new FileWriter(path);
         } catch (IOException e) {
@@ -96,7 +95,7 @@ public class CSVManager {
 
         CSVReader csvReader = null;
         List content = null;
-        List<Student> studentList = new ArrayList<Student>();
+        List<Student> studentList = new ArrayList<>();
 
         try {
             csvReader = new CSVReader(new FileReader(path), ',');
@@ -106,27 +105,33 @@ public class CSVManager {
         }
 
         int initialRow = 0;
-        if (!content.isEmpty()) {
-            List<String> headers = Arrays.asList((String[]) content.get(0));
-            if (headers.contains("Nombre") || headers.contains("Name")) {
-                initialRow = 1;
-                setHeaderPositions(headers);
-            } else
-                setHeaderPositions();
+        if (content != null) {
+            if (!content.isEmpty()) {
+                List<String> headers = Arrays.asList((String[]) content.get(0));
+                if (headers.contains("Nombre") || headers.contains("Name")) {
+                    initialRow = 1;
+                    setHeaderPositions(headers);
+                } else
+                    setHeaderPositions();
+            }
         }
 
-        for (int i = initialRow; i < content.size(); i++) {
-            String[] row = (String[]) content.get(i);
+        if (content != null) {
+            for (int i = initialRow; i < content.size(); i++) {
+                String[] row = (String[]) content.get(i);
 
-            Student student = new Student();
-            student.setName(row[headerPos.get(name)]);
-            student.setSurname(row[headerPos.get(surname)]);
+                Student student = new Student();
+                student.setName(row[headerPos.get(name)]);
+                student.setSurname(row[headerPos.get(surname)]);
 
-            studentList.add(student);
+                studentList.add(student);
+            }
         }
 
         try {
-            csvReader.close();
+            if (csvReader != null) {
+                csvReader.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -136,7 +141,7 @@ public class CSVManager {
 
     private void setHeaderPositions(List<String> headers) {
 
-        headerPos = new HashMap<String, Integer>();
+        headerPos = new HashMap<>();
 
         for (int i = 0; i < headers.size(); i++) {
             String value = headers.get(i);
@@ -170,14 +175,13 @@ public class CSVManager {
      * defining the values required.
      */
     private List<String[]> toStringArray(List<Student> students) {
-        List<String[]> records = new ArrayList<String[]>();
+        List<String[]> records;
+        records = new ArrayList<>();
 
         // Set headers
         records.add(new String[]{name, surname});
 
-        Iterator<Student> it = students.iterator();
-        while (it.hasNext()) {
-            Student student = it.next();
+        for (Student student : students) {
             records.add(new String[]{student.getName(), student.getSurname()});
         }
         return records;

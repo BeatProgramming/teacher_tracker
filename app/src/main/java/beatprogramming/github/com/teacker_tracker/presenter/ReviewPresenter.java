@@ -9,7 +9,7 @@ import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDaoImpl;
 
-/**
+/** Clase presenter para reviews
  * Responsible object for handling all UI events on behalf of the view.
  */
 public class ReviewPresenter implements OnLoadFinishListener {

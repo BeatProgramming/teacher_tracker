@@ -95,8 +95,8 @@
     <string name="textDateTask">Fecha</string>
     <string name="textNameTask">Nombre de la tarea</string>
     <string name="textSubjectTask">Asignatura</string>
-    <string name="textType">Tipo de</string>
-    <string name="textNameReview">Nombre de la</string>
+    <string name="textType">Tipo de la evaluación</string>
+    <string name="textNameReview">Nombre de la evaluacion</string>
 
     <!-- SCORES UPDATE -->
     <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>
@@ -104,6 +104,17 @@
     <string name="score_picker_ok">OK</string>
     <string name="score_picker_cancel">No Presentado</string>
     <string name="score_comment_toast">Debes introducir una calificación primero.</string>
+
     <string name="taskHour">hora</string>
+    <string name="idDefValue">0</string>
+    <string name="textNameSubject">Nombre de la asignatura</string>
+    <string name="subject">Asignatura</string>
+    <string name="schedule">Horario</string>
+    <string name="textSubjectName">Nombre de la asignatura</string>
+    <string name="textSubjectDescription">Descripcion de la asignatura</string>
+    <string name="textSubjectCourse">Curso de la asignatura</string>
+    <string name="imageDescription">Imagen del alumno</string>
+    <string name="titleSubject">Asignatura</string>
+    <string name="noteImageDescription">Imagen para crear una nueva nota</string>
 
 </resources>

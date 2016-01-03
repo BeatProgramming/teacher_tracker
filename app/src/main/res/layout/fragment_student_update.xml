@@ -4,7 +4,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -16,7 +16,7 @@
             android:id="@+id/studentId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
+            android:text="@string/idDefValue"
             android:visibility="gone" />
 
         <ImageView
@@ -24,7 +24,8 @@
             android:layout_width="@dimen/icon_big_dimen"
             android:layout_height="@dimen/icon_big_dimen"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:src="@drawable/user_default" />
+            android:src="@drawable/user_default"
+            android:contentDescription="@string/imageDescription"/>
 
         <TextView
             android:id="@+id/student_icon_path"
@@ -77,26 +78,30 @@
                 android:inputType="text" />
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/surname_row"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:id="@+id/layoutButtons">
+
             <Button
+                style="?android:attr/button"
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/button_submit"
                 android:textColor="#0D2A54" />
+
             <Button
+                style="?android:attr/button"
                 android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/button"
                 android:text="@string/button_delete"
                 android:textColor="#FF0000" />
-        </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
