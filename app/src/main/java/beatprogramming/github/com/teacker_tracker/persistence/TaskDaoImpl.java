@@ -101,7 +101,7 @@ public class TaskDaoImpl implements TaskDao {
         c = sqldb.rawQuery(FINDQUERY, null);
         DateTime fechaTarea = new DateTime();
         DateTime fechaActual= new DateTime();
-
+        listaFinalTask = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 fechaTarea = fechaTarea.withMillis(c.getLong(c.getColumnIndex(DATETIME)));

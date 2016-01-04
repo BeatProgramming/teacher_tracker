@@ -48,4 +48,11 @@
     <string name="task_section">Devoirs</string>
     <string name="taskSubject">Sujet</string>
     <string name="taskRoom">Salle de classe </string>
+    <string name="domingo">D</string>
+    <string name="idDefValue">0</string>
+    <string name="jueves">J</string>
+    <string name="lunes">L</string>
+    <string name="score_picker_ok">OK</string>
+    <string name="subject">Sujets</string>
+    <string name="viernes">V</string>
 </resources>

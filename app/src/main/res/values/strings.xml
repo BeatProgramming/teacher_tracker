@@ -25,13 +25,13 @@
     <string name="subjectCurse">Curso de la asignatura</string>
     <string name="subjectAula">Aula de la asignatura</string>
     <string name="submit">Confirmar</string>
-    <string name="lunes">Lun</string>
-    <string name="martes">Mar</string>
-    <string name="miercoles">Mie</string>
-    <string name="jueves">Jue</string>
-    <string name="viernes">Vie</string>
-    <string name="sabado">Sab</string>
-    <string name="domingo">Dom</string>
+    <string name="lunes">L</string>
+    <string name="martes">M</string>
+    <string name="miercoles">X</string>
+    <string name="jueves">J</string>
+    <string name="viernes">V</string>
+    <string name="sabado">S</string>
+    <string name="domingo">D</string>
     <string name="textDays">Dias de la semana a repetir</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
@@ -105,7 +105,7 @@
     <string name="score_picker_cancel">No Presentado</string>
     <string name="score_comment_toast">Debes introducir una calificación primero.</string>
 
-    <string name="taskHour">hora</string>
+    <string name="taskHour">Hora</string>
     <string name="idDefValue">0</string>
     <string name="textNameSubject">Nombre de la asignatura</string>
     <string name="subject">Asignatura</string>
