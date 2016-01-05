@@ -28,34 +28,34 @@ public class ScriptBD {
     //- Campos tabla EVALUACION
     public static final String ID_EVALUACION = BaseColumns._ID;
     public static final String NOMBRE_EVALUACION = "name";
-    public static final String ID_ASIGNATURA_EVALUACION = "subjectId";
+    public static final String ASIGNATURA_EVALUACION = "subjectId";
     public static final String FECHA_EVALUACION = "dateTime";
     public static final String TIPO_EVALUACION = "type";
 
     //- Campos tabla CALIFICACION
     public static final String ID_CALIFICACION = BaseColumns._ID;
-    public static final String CALIFICACION_CALIFICACION = "calification";
+    public static final String NOTA_CALIFICACION = "calification";
     public static final String COMENTARIO_CALIFICACION = "comment";
-    public static final String ID_EVALUACION_CALIFICACION = "reviewId";
-    public static final String ID_ALUMNO_CALIFICACION = "studentId";
+    public static final String EVALUACION_CALIFICACION = "reviewId";
+    public static final String ALUMNO_CALIFICACION = "studentId";
 
     //- Campo tabla TAREA
     public static final String ID_TAREA = BaseColumns._ID;
     public static final String NOMBRE_TAREA = "name";
-    public static final String ID_ASIGNATURA_TAREA = "subjectId";
+    public static final String ASIGNATURA_TAREA = "subjectId";
     public static final String FECHA_TAREA = "dateTime";
     public static final String NOTA_TAREA = "note";
 
     //- Campo tabla HORARIO
     public static final String ID_HORARIO = BaseColumns._ID;
-    public static final String ID_ASIGNATURA_HORARIO = "subjectId";
+    public static final String ASIGNATURA_HORARIO = "subjectId";
     public static final String FECHA_HORARIO = "dateTime";
     public static final String CLASE_HORARIO = "classroom";
     public static final String DIAS_HORARIO = "days";
 
     //- Campo tabla MATRICULA
-    public static final String ID_ASIGNATURA_MATRICULA = "subjectId";
-    public static final String ID_ALUMNO_MATRICULA = "studentId";
+    public static final String ASIGNATURA_MATRICULA = "subjectId";
+    public static final String ALUMNO_MATRICULA = "studentId";
 
     //- Creacion tabla ASIGNATURA
     public static final String ASIGNATURA_SCRIPT =
@@ -71,57 +71,58 @@ public class ScriptBD {
                     ID_ALUMNO + " integer primary key autoincrement," +
                     NOMBRE_ALUMNO + " text not null," +
                     APELLIDO_ALUMNO + " text not null," +
-                    ICONO_ALUMNO + " text null)";
+                    ICONO_ALUMNO + " text null," +
+                    "unique(" + NOMBRE_ALUMNO + "," + APELLIDO_ALUMNO + "))";
 
     //- Creacion tabla EVALUACION
     public static final String EVALUACION_SCRIPT =
             "create table " + EVALUACION + "(" +
                     ID_EVALUACION + " integer primary key autoincrement," +
                     NOMBRE_EVALUACION + " text not null," +
-                    ID_ASIGNATURA_EVALUACION + " integer," +
+                    ASIGNATURA_EVALUACION + " integer," +
                     FECHA_EVALUACION + " integer," +
                     TIPO_EVALUACION + " text not null," +
-                    "foreign key (" + ID_ASIGNATURA_EVALUACION + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
+                    "foreign key (" + ASIGNATURA_EVALUACION + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla CALIFICACION
     public static final String CALIFICACION_SCRIPT =
             "create table " + CALIFICACION + "(" +
-                    CALIFICACION_CALIFICACION + " real," +
+                    NOTA_CALIFICACION + " real," +
                     COMENTARIO_CALIFICACION + " text," +
-                    ID_EVALUACION_CALIFICACION + " integer," +
-                    ID_ALUMNO_CALIFICACION + " integer," +
-                    "foreign key (" + ID_EVALUACION_CALIFICACION + ") references " + EVALUACION + "(" + ID_EVALUACION + ") ON DELETE CASCADE," +
-                    "foreign key (" + ID_ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO_CALIFICACION + ") ON DELETE CASCADE," +
-                    "primary key (" + ID_EVALUACION_CALIFICACION + "," + ID_ALUMNO_CALIFICACION + ") )";
+                    EVALUACION_CALIFICACION + " integer," +
+                    ALUMNO_CALIFICACION + " integer," +
+                    "foreign key (" + EVALUACION_CALIFICACION + ") references " + EVALUACION + "(" + ID_EVALUACION + ") ON DELETE CASCADE," +
+                    "foreign key (" + ALUMNO_CALIFICACION + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
+                    "primary key (" + EVALUACION_CALIFICACION + "," + ALUMNO_CALIFICACION + ") )";
 
     //- Creacion tabla TAREA
     public static final String TAREA_SCRIPT =
             "create table " + TAREA + "(" +
                     ID_TAREA + " integer primary key autoincrement," +
                     NOMBRE_TAREA + " text not null," +
-                    ID_ASIGNATURA_TAREA + " integer," +
+                    ASIGNATURA_TAREA + " integer," +
                     FECHA_TAREA + " integer," +
                     NOTA_TAREA + " text," +
-                    "foreign key (" + ID_ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
+                    "foreign key (" + ASIGNATURA_TAREA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla HORARIO
     public static final String HORARIO_SCRIPT =
             "create table " + HORARIO + "(" +
                     ID_HORARIO + " integer primary key autoincrement," +
-                    ID_ASIGNATURA_HORARIO + " integer," +
+                    ASIGNATURA_HORARIO + " integer," +
                     FECHA_HORARIO + " text," +
                     CLASE_HORARIO + " text null," +
                     DIAS_HORARIO + " text null," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
+                    "foreign key (" + ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE)";
 
     //- Creacion tabla MATRICULA
     public static final String MATRICULA_SCRIPT =
             "create table " + MATRICULA + "(" +
-                    ID_ASIGNATURA_MATRICULA + " integer," +
-                    ID_ALUMNO_MATRICULA + " integer," +
-                    "foreign key (" + ID_ASIGNATURA_HORARIO + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE," +
-                    "foreign key (" + ID_ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
-                    "primary key (" + ID_ASIGNATURA_MATRICULA + ", " + ID_ALUMNO_MATRICULA + ") )";
+                    ASIGNATURA_MATRICULA + " integer," +
+                    ALUMNO_MATRICULA + " integer," +
+                    "foreign key (" + ASIGNATURA_MATRICULA + ") references " + ASIGNATURA + "(" + ID_ASIGNATURA + ") ON DELETE CASCADE," +
+                    "foreign key (" + ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
+                    "primary key (" + ASIGNATURA_MATRICULA + ", " + ALUMNO_MATRICULA + ") )";
 
     //- Eliminacion tabla ASIGNATURA
     public static final String DROP_ASIGNATURA =
@@ -241,13 +242,6 @@ public class ScriptBD {
                     "2)";
 
     public static final String INSERT_CALIFICACION3_SCRIPT =
-            "insert into " + CALIFICACION + " values (" +
-                    "1," +
-                    "\"NOOOOOOB\"," +
-                    "2," +
-                    "1)";
-
-    public static final String INSERT_CALIFICACION4_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
                     "8," +
                     "\"NOOOOOOB\"," +
