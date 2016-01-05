@@ -147,7 +147,7 @@ public class TaskDaoImpl implements TaskDao {
     private void añadirEnPosicion(Task task) {
         int posicion=0;
         for(int i = 0; i<listaFinalTask.size();i++){
-            if (listaFinalTask.get(i).getDateTime().getHourOfDay() > task.getDateTime().getHourOfDay()){
+            if (listaFinalTask.get(i).getDateTime().getMillis() > task.getDateTime().getMillis()){
                 break;
             }
             posicion+=1;

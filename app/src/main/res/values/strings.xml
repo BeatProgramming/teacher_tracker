@@ -10,14 +10,13 @@
     <string name="action_settings_personal">Configuración personal</string>
 
     <!-- TITLE FRAGMENTS -->
-    <string name="title_activity_subject">Crear Asignatura</string>
-    <string name="title_activity_edit_subject">Asignaturas</string>
-    <string name="title_activity_modify_subject">Editar Asignatura</string>
-    <string name="title_activity_score">Calificar asignatura</string>
-    <string name="title_activity_add_score">Calificación alumno</string>
-    <string name="title_activity_submit_score">Crear examen</string>
-    <string name="title_activity_create_exam">Añadir examen</string>
-    <string name="title_activity_notes">Notas</string>
+    <string name="scoreTitle">Calificaciones</string>
+    <string name="subjectUpdateTitle">Nueva asignatura</string>
+    <string name="subjectTitle">Asignaturas</string>
+    <string name="studentUpdateTitle">Modificar estudiante</string>
+    <string name="studentTitle">Estudiantes</string>
+    <string name="reviewUpdateTitle">Nueva evaluación</string>
+    <string name="reviewTitle">Evaluaciones</string>
 
     <!-- SUBJECT FRAGMENT -->
     <string name="subjectName">Nombre de la asignatura</string>
@@ -25,13 +24,6 @@
     <string name="subjectCurse">Curso de la asignatura</string>
     <string name="subjectAula">Aula de la asignatura</string>
     <string name="submit">Confirmar</string>
-    <string name="lunes">L</string>
-    <string name="martes">M</string>
-    <string name="miercoles">X</string>
-    <string name="jueves">J</string>
-    <string name="viernes">V</string>
-    <string name="sabado">S</string>
-    <string name="domingo">D</string>
     <string name="textDays">Dias de la semana a repetir</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
@@ -100,7 +92,7 @@
 
     <!-- SCORES UPDATE -->
     <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>
-    <string name="score_picker_title">La nota es...</string>
+    <string name="score_picker_title">La nota es…</string>
     <string name="score_picker_ok">OK</string>
     <string name="score_picker_cancel">No Presentado</string>
     <string name="score_comment_toast">Debes introducir una calificación primero.</string>
@@ -116,19 +108,20 @@
     <string name="imageDescription">Imagen del alumno</string>
     <string name="titleSubject">Asignatura</string>
     <string name="noteImageDescription">Imagen para crear una nueva nota</string>
-    <string name="scoreTitle">Calificaciones</string>
-    <string name="subjectUpdateTitle">Nueva asignatura</string>
-    <string name="subjectTitle">Asignaturas</string>
-    <string name="studentUpdateTitle">Modificar estudiante</string>
-    <string name="studentTitle">Estudiantes</string>
-    <string name="reviewUpdateTitle">Nueva evaluación</string>
-    <string name="reviewTitle">Evaluaciones</string>
+
+    <!-- Dias de la semana -->
     <string name="Lunes">Lunes</string>
     <string name="Martes">Martes</string>
     <string name="Miercoles">Miercoles</string>
     <string name="Viernes">Viernes</string>
     <string name="Sabado">Sabado</string>
     <string name="Jueves">Jueves</string>
-    <string name="Domingo">Domingo</string>
+    <string name="lunesAbrv">L</string>
+    <string name="martesAbrv">M</string>
+    <string name="miercolesAbrv">X</string>
+    <string name="juevesAbrv">J</string>
+    <string name="viernesAbrv">V</string>
+    <string name="sabadoAbrv">S</string>
+    <string name="domingoAbrv">D</string>
 
 </resources>

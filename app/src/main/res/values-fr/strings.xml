@@ -55,4 +55,14 @@
     <string name="score_picker_ok">OK</string>
     <string name="subject">Sujets</string>
     <string name="viernes">V</string>
+    <string name="Domingo">Dimanche</string>
+    <string name="Jueves">Jeudi</string>
+    <string name="Lunes">Lundi</string>
+    <string name="Martes">Mardi</string>
+    <string name="Miercoles">Mercredi</string>
+    <string name="Sabado">Samedi</string>
+    <string name="Viernes">Vendredi</string>
+    <string name="martes">M</string>
+    <string name="miercoles">X</string>
+    <string name="sabado">S</string>
 </resources>
