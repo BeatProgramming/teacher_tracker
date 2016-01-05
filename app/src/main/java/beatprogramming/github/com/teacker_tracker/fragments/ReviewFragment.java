@@ -42,6 +42,7 @@ public class ReviewFragment extends ListFragment implements ReviewView {
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.reviewTitle));
         presenter.onResume();
     }
 

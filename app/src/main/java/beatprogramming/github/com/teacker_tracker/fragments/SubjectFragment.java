@@ -42,6 +42,7 @@ public class SubjectFragment extends ListFragment implements SubjectView {
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.subjectTitle));
         presenter.onResume();
     }
 

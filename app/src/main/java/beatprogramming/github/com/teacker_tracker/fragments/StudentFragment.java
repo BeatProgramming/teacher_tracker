@@ -58,6 +58,7 @@ public class StudentFragment extends ListFragment implements StudentView {
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.studentTitle));
         presenter.findStudents(subject);
     }
 

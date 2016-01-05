@@ -123,56 +123,56 @@
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonMon"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/lunes"
-                    android:textOff="@string/lunes"/>
+                    android:textOn="@string/lunesAbrv"
+                    android:textOff="@string/lunesAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonTue"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/martes"
-                    android:textOff="@string/martes"/>
+                    android:textOn="@string/martesAbrv"
+                    android:textOff="@string/martesAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonWed"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/miercoles"
-                    android:textOff="@string/miercoles"/>
+                    android:textOn="@string/miercolesAbrv"
+                    android:textOff="@string/miercolesAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonThu"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/jueves"
-                    android:textOff="@string/jueves"/>
+                    android:textOn="@string/juevesAbrv"
+                    android:textOff="@string/juevesAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonFri"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/viernes"
-                    android:textOff="@string/viernes"/>
+                    android:textOn="@string/viernesAbrv"
+                    android:textOff="@string/viernesAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonSat"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/sabado"
-                    android:textOff="@string/sabado"/>
+                    android:textOn="@string/sabadoAbrv"
+                    android:textOff="@string/sabadoAbrv"/>
                 <ToggleButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="7"
                     android:id="@+id/ToggleButtonSun"
                     android:textSize="@dimen/toggleTextDay"
-                    android:textOn="@string/domingo"
-                    android:textOff="@string/domingo"/>
+                    android:textOn="@string/domingoAbrv"
+                    android:textOff="@string/domingoAbrv"/>
             </LinearLayout>
 
             <TextView

@@ -72,4 +72,11 @@
     <string name="subject">Subject</string>
     <string name="taskDate">Date</string>
     <string name="taskHour">Hour</string>
+    <string name="Domingo">Sunday</string>
+    <string name="Lunes">Monday</string>
+    <string name="Jueves">Thursday</string>
+    <string name="Martes">Tuesday</string>
+    <string name="Miercoles">Wednesday</string>
+    <string name="Sabado">Saturday</string>
+    <string name="Viernes">Friday</string>
 </resources>

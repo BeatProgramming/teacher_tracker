@@ -68,6 +68,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.reviewUpdateTitle));
         presenter.onResume();
     }
 

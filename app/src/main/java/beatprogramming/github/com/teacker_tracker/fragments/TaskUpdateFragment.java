@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import beatprogramming.github.com.teacker_tracker.MainActivity;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
@@ -69,6 +70,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     @Override
     public void onResume() {
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.scoreTitle));
         presenter.onResume();
     }
 
