@@ -79,6 +79,12 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.subjectUpdateTitle));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_subject_update, container, false);

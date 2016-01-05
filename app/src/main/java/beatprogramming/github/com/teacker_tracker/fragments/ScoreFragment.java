@@ -66,8 +66,8 @@ public class ScoreFragment extends ListFragment implements ScoreView {
 
     @Override
     public void onResume() {
-
         super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.scoreTitle));
         presenter.onResume();
 
     }

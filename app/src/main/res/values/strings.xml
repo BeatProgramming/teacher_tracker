@@ -116,5 +116,19 @@
     <string name="imageDescription">Imagen del alumno</string>
     <string name="titleSubject">Asignatura</string>
     <string name="noteImageDescription">Imagen para crear una nueva nota</string>
+    <string name="scoreTitle">Calificaciones</string>
+    <string name="subjectUpdateTitle">Nueva asignatura</string>
+    <string name="subjectTitle">Asignaturas</string>
+    <string name="studentUpdateTitle">Modificar estudiante</string>
+    <string name="studentTitle">Estudiantes</string>
+    <string name="reviewUpdateTitle">Nueva evaluación</string>
+    <string name="reviewTitle">Evaluaciones</string>
+    <string name="Lunes">Lunes</string>
+    <string name="Martes">Martes</string>
+    <string name="Miercoles">Miercoles</string>
+    <string name="Viernes">Viernes</string>
+    <string name="Sabado">Sabado</string>
+    <string name="Jueves">Jueves</string>
+    <string name="Domingo">Domingo</string>
 
 </resources>

@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
@@ -42,7 +44,20 @@ public class TaskFragment extends ListFragment implements TaskView {
     @Override
     public void onResume() {
         super.onResume();
+        DateTime date = new DateTime();
+        getActivity().setTitle("   " + getDayString(date) + ", " + date.getDayOfMonth() + "-" +
+                date.getMonthOfYear() + "-" + date.getYear());
         presenter.onResume();
+    }
+
+    private String getDayString(DateTime date) {
+        if (date.getDayOfWeek()==1){ return getResources().getString(R.string.Lunes);}
+        else if (date.getDayOfWeek()==2){ return getResources().getString(R.string.Martes);}
+        else if (date.getDayOfWeek()==3){ return getResources().getString(R.string.Miercoles);}
+        else if (date.getDayOfWeek()==4){ return getResources().getString(R.string.Jueves);}
+        else if (date.getDayOfWeek()==5){ return getResources().getString(R.string.Viernes);}
+        else if (date.getDayOfWeek()==6){ return getResources().getString(R.string.Sabado);}
+        else return getResources().getString(R.string.Domingo);
     }
 
     @Override

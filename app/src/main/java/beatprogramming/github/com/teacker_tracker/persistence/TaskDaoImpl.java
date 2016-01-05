@@ -34,7 +34,7 @@ public class TaskDaoImpl implements TaskDao {
     private static final String FINDQUERY = "SELECT Task._id AS taskId, Task.subjectId, Task.name AS nameTask, Task.dateTime," +
             " Subject.name AS nameSubject, Subject.description, Subject.course " +
             " FROM Task LEFT JOIN Subject " +
-            "ON Task.subjectId = Subject._id;";
+            "ON Task.subjectId = Subject._id ORDER BY Task.dateTime;";
 
     //Campos de la tabla Task
     private static final String TASKID = "taskId";
@@ -135,13 +135,24 @@ public class TaskDaoImpl implements TaskDao {
                     dias = sc.getDias();
                     if (dias[dt.getDayOfWeek() - 1]) {
                         task = new Task(sc.getAula(), sc.getSubject(), dt);
-                        listaFinalTask.add(task);
+                        añadirEnPosicion(task);
                     }
                 }
             }
         };
         scheduleDao.findSchedule(scheduleListener);
         listener.onLoadFinish(listaFinalTask);
+    }
+
+    private void añadirEnPosicion(Task task) {
+        int posicion=0;
+        for(int i = 0; i<listaFinalTask.size();i++){
+            if (listaFinalTask.get(i).getDateTime().getHourOfDay() > task.getDateTime().getHourOfDay()){
+                break;
+            }
+            posicion+=1;
+        }
+        listaFinalTask.add(posicion, task);
     }
 
     /**

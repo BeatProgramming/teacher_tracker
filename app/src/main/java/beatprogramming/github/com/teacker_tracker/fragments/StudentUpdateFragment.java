@@ -62,6 +62,12 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("   " + getResources().getString(R.string.studentUpdateTitle));
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_student_update, container, false);
