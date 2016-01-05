@@ -11,7 +11,7 @@ public class BDHelper extends SQLiteOpenHelper {
     private static final String TAG = BDHelper.class.getName();
 
     private static final String DATABASE_NAME = "TEACHER_TRACKER.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static BDHelper bdHelper;
 
@@ -53,17 +53,16 @@ public class BDHelper extends SQLiteOpenHelper {
         //- Inserts predefinidos
         db.execSQL(ScriptBD.INSERT_ASIGNATURA1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_ASIGNATURA2_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_ALUMNO1_SCRIPT);
+        db.execSQL(ScriptBD.INSERT_ALUMNO2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_TAREA1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_TAREA2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_TAREA3_SCRIPT);
         db.execSQL(ScriptBD.INSERT_REVIEW1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_REVIEW2_SCRIPT);
-        db.execSQL(ScriptBD.INSERT_ALUMNO1_SCRIPT);
-        db.execSQL(ScriptBD.INSERT_ALUMNO2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_CALIFICACION1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_CALIFICACION2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_CALIFICACION3_SCRIPT);
-        db.execSQL(ScriptBD.INSERT_CALIFICACION4_SCRIPT);
         db.execSQL(ScriptBD.INSERT_MATRICULA1_SCRIPT);
         db.execSQL(ScriptBD.INSERT_MATRICULA2_SCRIPT);
         db.execSQL(ScriptBD.INSERT_MATRICULA3_SCRIPT);

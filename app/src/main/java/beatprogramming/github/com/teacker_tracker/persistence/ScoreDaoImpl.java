@@ -147,7 +147,7 @@ public class ScoreDaoImpl implements ScoreDao {
         values.put(REVIEWID, reviewId);
         values.put(STUDENTID, studentId);
 
-        sqldb.replace(SCORE, null, values);
+        sqldb.replace(SCORE, CALIFICATION, values);
     }
 
     /**
