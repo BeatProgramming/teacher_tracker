@@ -1,6 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +24,8 @@ public class Subject implements Serializable {
         this.nombre=nombre;
         this.descripcion = descripcion;
         this.curso=curso;
+
+        studentList = new ArrayList<Student>();
     }
 
     public String getNombre() {
@@ -60,12 +64,16 @@ public class Subject implements Serializable {
         return studentList;
     }
 
-    public void addStudent(Student student) {
-        studentList.add(student);
+    public void addStudents(Student... studentList) {
+        for(Student student: studentList) {
+            if(!this.studentList.contains(student))
+                this.studentList.add(student);
+        }
     }
 
     @Override
     public String toString(){
         return nombre + ", " + curso;
     }
+
 }

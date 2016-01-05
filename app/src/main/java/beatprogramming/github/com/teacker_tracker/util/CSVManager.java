@@ -1,12 +1,20 @@
 package beatprogramming.github.com.teacker_tracker.util;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,8 +23,11 @@ import java.util.Map;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
+import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
+import beatprogramming.github.com.teacker_tracker.persistence.StudentDaoImpl;
 
 
 public class CSVManager {
@@ -32,6 +43,8 @@ public class CSVManager {
     private static final String SURNAME_HEADER_DEFAULT = "Apellidos";
 
     private static CSVManager manager;
+
+    private StudentDao subjectDao;
 
     /*
      * Map wich associates each header name with the position in the file.
@@ -50,8 +63,9 @@ public class CSVManager {
             name = NAME_HEADER_DEFAULT;
             surname = SURNAME_HEADER_DEFAULT;
         }
-
         setHeaderPositions();
+
+        subjectDao = new StudentDaoImpl();
     }
 
     public static CSVManager getInstance(Context context) {
@@ -60,20 +74,25 @@ public class CSVManager {
         return manager;
     }
 
-    public void exportStudents(File directory, List<Student> students) throws CSVException {
+    public Intent exportStudents(File directory) throws CSVException {
 
         String path = directory.getAbsolutePath() + CSV_FILE;
         Log.d(TAG, path);
 
-        FileWriter file;
+        FileWriter fileWriter;
         try {
-            file = new FileWriter(path);
+            fileWriter = new FileWriter(path);
         } catch (IOException e) {
             throw new CSVException("Error accesing storage.");
         }
-        CSVWriter writer = new CSVWriter(file, ',');
-        List<String[]> data = toStringArray(students);
-        writer.writeAll(data);
+        final CSVWriter writer = new CSVWriter(fileWriter, ',');
+        subjectDao.findStudents(new OnLoadFinishListener() {
+            @Override
+            public void onLoadFinish(List<? extends Serializable> items) {
+                List<String[]> data = toStringArray((List<Student>) items);
+                writer.writeAll(data);
+            }
+        });
 
         try {
             writer.close();
@@ -81,8 +100,15 @@ public class CSVManager {
             throw new CSVException("Error closing file.");
         }
 
-        Log.d(TAG, writer.toString());
+        Intent sendIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sendIntent.setType("application/csv");
+        sendIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "");
+        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Students CSV");
+        File file = new File(path);
+        Uri uri = Uri.fromFile(file);
+        sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
+        return sendIntent;
     }
 
     /*

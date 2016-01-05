@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,8 +24,10 @@ import java.util.List;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
+import beatprogramming.github.com.teacker_tracker.fragments.ImportStudentsFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.ReviewFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.StudentFragment;
+import beatprogramming.github.com.teacker_tracker.fragments.StudentTabFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
@@ -58,7 +62,6 @@ public class MainActivity extends AppCompatActivity
         final Intent intent = getIntent();
 
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
-            //uri = intent.getStringExtra("URI");
             Uri uri = intent.getData();
 
             List<Student> newStudents = CSVManager.getInstance(this).importStudents(uri.getEncodedPath());
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity
                // for(int i=0;i<newStudents.size();i++){  }
             }
 
-            frag = new StudentFragment();
+            frag = ImportStudentsFragment.newInstance(newStudents);
 
         } else {
 
@@ -142,7 +145,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage_students) {
 
-            frag = new StudentFragment();
+            frag = new StudentTabFragment();
             replaceFragment(frag);
 
         }
@@ -154,15 +157,11 @@ public class MainActivity extends AppCompatActivity
 
     private void exportStudentList() {
 
-        List<Student> studentsExample = new ArrayList<>();
-        studentsExample.add(new Student("Juan Carlos", "González"));
         File dir = getExternalFilesDir(null);
         String outputMessage = null;
         try {
-            CSVManager.getInstance(this).exportStudents(dir, studentsExample);
-            if (dir != null) {
-                outputMessage = "Alumnos exportados a " + dir.getAbsolutePath();
-            }
+            Intent intent = CSVManager.getInstance(this).exportStudents(dir);
+            startActivity(Intent.createChooser(intent, "Send Mail"));
         } catch (CSVException e) {
             outputMessage = e.getMessage();
         }

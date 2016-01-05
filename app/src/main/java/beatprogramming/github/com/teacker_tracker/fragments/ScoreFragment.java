@@ -86,7 +86,7 @@ public class ScoreFragment extends ListFragment implements ScoreView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate (R.layout.fragment_listview_score, container, false);
+        View view = inflater.inflate (R.layout.fragment_listview_basic, container, false);
 
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
 

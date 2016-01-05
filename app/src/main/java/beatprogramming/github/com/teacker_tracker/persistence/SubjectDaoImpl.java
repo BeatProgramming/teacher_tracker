@@ -13,6 +13,7 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
+import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 /**
@@ -24,6 +25,7 @@ public class SubjectDaoImpl implements SubjectDao {
 
     //Tabla objetivo
     private static final String SUBJECT = "Subject";
+    private static final String ENROLLMENT = "Enrollment";
 
     //Consultas sql
     private static final String FINDQUERY = "SELECT * FROM Subject";
@@ -33,6 +35,9 @@ public class SubjectDaoImpl implements SubjectDao {
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
+
+    private static final String ENROLLMENT_SUBJECT = "subjectId";
+    private static final String ENROLLMENT_STUDENT = "studentId";
 
     //Variables sql
     private final BDHelper db;
@@ -106,6 +111,34 @@ public class SubjectDaoImpl implements SubjectDao {
     }
 
     /**
+     * Metodo que actualiza una subject de la base de datos.
+     * Si el id=0, quiere decir que no esta creada en la base de datos y en lugar de actualizar
+     * se crea una nueva subject
+     * @param subject
+     */
+    @Override
+    public void updateSubject(Subject subject, OnUpdateFinishListener listener) {
+
+        updateSubject(subject.getId(), subject.getNombre(), subject.getDescripcion(), subject.getCurso(), listener);
+
+        sqldb = db.getWritableDatabase();
+        for(Student student : subject.getStudentList()) {
+
+            try {
+                ContentValues enrollments = new ContentValues();
+                enrollments.put(ENROLLMENT_SUBJECT, subject.getId());
+                enrollments.put(ENROLLMENT_STUDENT, student.getId());
+
+                sqldb.insert(ENROLLMENT, null, enrollments);
+
+            } catch (Exception e) {
+                continue;
+            }
+        }
+
+    }
+
+    /**
      * Metodo que borra una subject de la base de datos
      * @param id id de la asignatura a borrar
      * @param listener instancia del listener
@@ -122,4 +155,5 @@ public class SubjectDaoImpl implements SubjectDao {
         listener.onDeleteFinish();
 
     }
+
 }

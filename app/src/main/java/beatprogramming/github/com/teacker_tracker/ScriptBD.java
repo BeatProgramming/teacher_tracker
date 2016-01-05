@@ -123,6 +123,34 @@ public class ScriptBD {
                     "foreign key (" + ID_ALUMNO_MATRICULA + ") references " + ALUMNO + "(" + ID_ALUMNO + ") ON DELETE CASCADE," +
                     "primary key (" + ID_ASIGNATURA_MATRICULA + ", " + ID_ALUMNO_MATRICULA + ") )";
 
+    //- Eliminacion tabla ASIGNATURA
+    public static final String DROP_ASIGNATURA =
+            "DROP TABLE IF EXISTS " + ASIGNATURA;
+
+    //- Eliminacion tabla ALUMNO
+    public static final String DROP_ALUMNO =
+            "DROP TABLE IF EXISTS " + ALUMNO;
+
+    //- Eliminacion tabla EVALUACION
+    public static final String DROP_EVALUACION =
+            "DROP TABLE IF EXISTS " + EVALUACION;
+
+    //- Eliminacion tabla CALIFICACION
+    public static final String DROP_CALIFICACION =
+            "DROP TABLE IF EXISTS " + CALIFICACION;
+
+    //- Eliminacion tabla TAREA
+    public static final String DROP_TAREA =
+            "DROP TABLE IF EXISTS " + TAREA;
+
+    //- Eliminacion tabla HORARIO
+    public static final String DROP_HORARIO =
+            "DROP TABLE IF EXISTS " + HORARIO;
+
+    //- Eliminacion tabla MATRICULA
+    public static final String DROP_MATRICULA =
+            "DROP TABLE IF EXISTS " + MATRICULA;
+
     //- Creacion insercion datos asignatura por defecto
     public static final String INSERT_ASIGNATURA1_SCRIPT =
             "insert into " + ASIGNATURA + " values (" +

@@ -3,12 +3,18 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TabHost;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,6 +22,7 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.StudentAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.view.StudentView;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
 
@@ -24,6 +31,7 @@ import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
  */
 public class StudentFragment extends ListFragment implements StudentView {
 
+    public static final String SUBJECT = "Subject";
     private static String TAG = StudentFragment.class.getName();
 
     private FragmentCallback callback;
@@ -32,16 +40,25 @@ public class StudentFragment extends ListFragment implements StudentView {
 
     private StudentPresenter presenter;
 
+    private Subject subject;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new StudentPresenter(this);
+
+        Bundle extras = getArguments();
+        if (extras != null) {
+            if (extras.containsKey(SUBJECT)) {
+                subject = (Subject) extras.getSerializable(SUBJECT);
+            }
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        presenter.onResume();
+        presenter.findStudents(subject);
     }
 
     @Override

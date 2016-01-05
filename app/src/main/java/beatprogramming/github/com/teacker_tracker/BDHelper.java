@@ -26,6 +26,16 @@ public class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        //- Limpiar BD
+        db.execSQL(ScriptBD.DROP_MATRICULA);
+        db.execSQL(ScriptBD.DROP_HORARIO);
+        db.execSQL(ScriptBD.DROP_TAREA);
+        db.execSQL(ScriptBD.DROP_CALIFICACION);
+        db.execSQL(ScriptBD.DROP_EVALUACION);
+        db.execSQL(ScriptBD.DROP_ASIGNATURA);
+        db.execSQL(ScriptBD.DROP_ALUMNO);
+
         //- Crear BD
         db.execSQL(ScriptBD.ASIGNATURA_SCRIPT);
         db.execSQL(ScriptBD.ALUMNO_SCRIPT);
@@ -59,7 +69,7 @@ public class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Actualizacion base de datos
+        onCreate(db);
     }
 
 }
