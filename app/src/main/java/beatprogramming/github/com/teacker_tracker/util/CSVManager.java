@@ -1,14 +1,18 @@
 package beatprogramming.github.com.teacker_tracker.util;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,6 +48,8 @@ public class CSVManager {
 
     private static CSVManager manager;
 
+    private final Context context;
+
     private StudentDao subjectDao;
 
     /*
@@ -56,13 +62,15 @@ public class CSVManager {
 
     private CSVManager(Context context) {
 
-        if (context != null) {
+        try {
             name = context.getString(context.getResources().getIdentifier("csv_name", "string", context.getPackageName()));
             surname = context.getString(context.getResources().getIdentifier("csv_surname", "string", context.getPackageName()));
-        } else {
+        } catch (Exception e) {
             name = NAME_HEADER_DEFAULT;
             surname = SURNAME_HEADER_DEFAULT;
         }
+
+        this.context = context;
         setHeaderPositions();
 
         subjectDao = new StudentDaoImpl();
@@ -117,14 +125,87 @@ public class CSVManager {
      * @param path
      * @return List of students
      */
-    public List<Student> importStudents(String path) {
+    public List<Student> importStudents(Uri uri) {
+
+        InputStream is = null;
+        FileOutputStream os = null;
+        String fullPath = null;
+
+        String scheme = uri.getScheme();
+        String filename = null;
+
+        try {
+            if (scheme.equals("file")) {
+                List<String> pathSegments = uri.getPathSegments();
+                if (pathSegments.size() > 0) {
+                    filename = pathSegments.get(pathSegments.size() - 1);
+                }
+            } else if (scheme.equals("content")) {
+                Cursor cursor = context.getContentResolver().query(uri, new String[]{
+                        MediaStore.MediaColumns.DISPLAY_NAME
+                }, null, null, null);
+                cursor.moveToFirst();
+                int nameIndex = cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME);
+                if (nameIndex >= 0) {
+                    filename = cursor.getString(nameIndex);
+                }
+            }
+
+            if (filename == null) {
+                return null;
+            }
+
+            int n = filename.lastIndexOf(".");
+            String fileName, fileExt;
+
+            if (n == -1) {
+                return null;
+            } else {
+                fileName = filename.substring(0, n);
+                fileExt = filename.substring(n);
+                if (!fileExt.equals(".csv")) {
+                    return null;
+                }
+            }
+
+            File dir = context.getExternalFilesDir(null);
+            fullPath = dir.getAbsolutePath() + CSV_FILE;
+
+            is = context.getContentResolver().openInputStream(uri);
+            os = new FileOutputStream(fullPath);
+
+            byte[] buffer = new byte[4096];
+            int count;
+            while ((count = is.read(buffer)) > 0) {
+                os.write(buffer, 0, count);
+            }
+            os.close();
+            is.close();
+        } catch (Exception e) {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (Exception e1) {
+                }
+            }
+            if (os != null) {
+                try {
+                    os.close();
+                } catch (Exception e1) {
+                }
+            }
+            if (fullPath != null) {
+                File f = new File(fullPath);
+                f.delete();
+            }
+        }
 
         CSVReader csvReader = null;
         List content = null;
         List<Student> studentList = new ArrayList<>();
 
         try {
-            csvReader = new CSVReader(new FileReader(path), ',');
+            csvReader = new CSVReader(new FileReader(fullPath), ',');
             content = csvReader.readAll();
         } catch (java.io.IOException e) {
             e.printStackTrace();
@@ -147,6 +228,7 @@ public class CSVManager {
                 String[] row = (String[]) content.get(i);
 
                 Student student = new Student();
+
                 student.setName(row[headerPos.get(name)]);
                 student.setSurname(row[headerPos.get(surname)]);
 
@@ -161,6 +243,8 @@ public class CSVManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Log.d(TAG, "exported");
 
         return studentList;
     }

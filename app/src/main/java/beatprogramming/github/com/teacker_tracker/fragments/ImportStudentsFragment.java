@@ -29,7 +29,7 @@ public class ImportStudentsFragment extends ListFragment implements ImportStuden
 
     private static String TAG = StudentFragment.class.getName();
 
-    private static final String STUDENTS = "BUNDLE_STUDENTS";
+    public static final String STUDENTS = "BUNDLE_STUDENTS";
 
     private FragmentCallback callback;
 

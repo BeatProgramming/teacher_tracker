@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -45,9 +47,11 @@ public class ImportStudentsPresenter implements OnLoadFinishListener, OnUpdateFi
 
         Subject subject = view.getSubjectFromAdapter(position);
         for(Student student: studentList) {
-            studentDao.updateStudent(student.getId(), student.getName(), student.getSurname(), student.getIconPath(), this);
+            Log.d(TAG, "onItemClicked, student: " + student.toString());
+            int id = studentDao.updateStudent(student.getId(), student.getName(), student.getSurname(), student.getIconPath(), this);
+            student.setId(id);
         }
-        subject.addStudents((Student[]) studentList.toArray());
+        subject.addStudents(studentList.toArray(new Student[studentList.size()]));
         subjectDao.updateSubject(subject, this);
         view.hideLoading();
         view.loadStudentFragment();

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,14 +65,19 @@ public class MainActivity extends AppCompatActivity
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
-            List<Student> newStudents = CSVManager.getInstance(this).importStudents(uri.getEncodedPath());
+            List<Student> newStudents = CSVManager.getInstance(this).importStudents(uri);
 
-            if (newStudents != null) {
-                // Add students to database.
-               // for(int i=0;i<newStudents.size();i++){  }
+            for(Student student: newStudents) {
+                Log.d(TAG, "onCreate, student: " + student.toString());
             }
 
             frag = ImportStudentsFragment.newInstance(newStudents);
+
+            if (newStudents != null) {
+                Bundle extras = new Bundle();
+                extras.putSerializable(ImportStudentsFragment.STUDENTS, (Serializable) newStudents);
+                getIntent().putExtras(extras);
+            }
 
         } else {
 
@@ -158,14 +164,12 @@ public class MainActivity extends AppCompatActivity
     private void exportStudentList() {
 
         File dir = getExternalFilesDir(null);
-        String outputMessage = null;
         try {
             Intent intent = CSVManager.getInstance(this).exportStudents(dir);
             startActivity(Intent.createChooser(intent, "Send Mail"));
         } catch (CSVException e) {
-            outputMessage = e.getMessage();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, outputMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override

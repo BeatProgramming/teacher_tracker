@@ -117,7 +117,7 @@ public class StudentDaoImpl implements StudentDao {
      * @param listener instancia del listener
      */
     @Override
-    public void updateStudent(int id, String name, String surname, String iconPath,
+    public int updateStudent(int id, String name, String surname, String iconPath,
                               OnUpdateFinishListener listener) {
 
         sqldb = db.getWritableDatabase();
@@ -130,7 +130,7 @@ public class StudentDaoImpl implements StudentDao {
         try {
             if (id == 0) {
                 //- Insertar alumno
-                sqldb.insert(STUDENT, null, values);
+                id = (int) sqldb.insert(STUDENT, null, values);
             } else {
                 //- Actualizar alumno
                 String[] selectionArgs = new String[]{Integer.toString(id)};
@@ -142,6 +142,7 @@ public class StudentDaoImpl implements StudentDao {
             listener.onError(e.getMessage());
         }
 
+        return id;
     }
 
     /**
