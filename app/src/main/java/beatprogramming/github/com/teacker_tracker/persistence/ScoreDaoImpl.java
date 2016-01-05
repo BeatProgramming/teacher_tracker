@@ -48,7 +48,7 @@ public class ScoreDaoImpl implements ScoreDao {
     private static final String ICONPATH = "iconPath";
     private static final String STUDENTID = "studentId";
 
-    private static final String ALIAS_STUDENT = "student";
+    private static final String ALIAS_STUDENT = "theStudent";
 
     //Campos de la tabla score
     private static final String CALIFICATION = "calification";
@@ -177,8 +177,6 @@ public class ScoreDaoImpl implements ScoreDao {
     public void findScoreByReview(Review review, OnLoadFinishListener listener) {
 
         sqldb = db.getReadableDatabase();
-
-        Log.d(TAG, "findScoreByReview, review(" + review.getId() + "): " + review.toString());
 
         c = sqldb.rawQuery(FINDBYREVIEW, new String[]{Integer.toString(review.getId())});
         //Lista de reviews

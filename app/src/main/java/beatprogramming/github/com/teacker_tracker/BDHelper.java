@@ -3,9 +3,12 @@ package beatprogramming.github.com.teacker_tracker;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 public class BDHelper extends SQLiteOpenHelper {
+
+    private static final String TAG = BDHelper.class.getName();
 
     private static final String DATABASE_NAME = "TEACHER_TRACKER.db";
     private static final int DATABASE_VERSION = 1;
@@ -26,6 +29,8 @@ public class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        Log.d(TAG, "onCreate");
 
         //- Limpiar BD
         db.execSQL(ScriptBD.DROP_MATRICULA);
@@ -69,7 +74,20 @@ public class BDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        Log.d(TAG, "onUpgrade");
+
         onCreate(db);
+
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        if (!db.isReadOnly()) {
+            // Enable foreign key constraints
+            db.execSQL("PRAGMA foreign_keys=ON;");
+        }
     }
 
 }

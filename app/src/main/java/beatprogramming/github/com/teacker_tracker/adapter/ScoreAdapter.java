@@ -29,7 +29,6 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
     private final Context context;
     private final int resource;
 
-    TextView scoreTextView;
 
     public ScoreAdapter(Context context, int resource, List<Score> items) {
         super(context, resource, items);
@@ -45,9 +44,9 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
 
         View rowView = (convertView == null) ? inflater.inflate(resource, parent, false) : convertView;
 
-        TextView studentTextView = (TextView) rowView.findViewById(R.id.item_score_student);
-        scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
-        ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
+        final TextView studentTextView = (TextView) rowView.findViewById(R.id.item_score_student);
+        final TextView scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
+        final ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
 
         final Score score = (Score) getItem(position);
 
@@ -63,24 +62,21 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
         else
             scoreTextView.setText("NP");
 
-        commentImageView.setOnClickListener(iconListener);
+        commentImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(scoreTextView.getText() == "NP")
+                    Toast.makeText(context, context.getString(R.string.score_comment_toast), Toast.LENGTH_SHORT).show();
+                else {
+                    // Introduccion de un comentario de nota.
+                    Toast.makeText(context, "No implementado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         Log.d(TAG, "getView, score: " + score.toString());
 
         return rowView;
     }
-
-    View.OnClickListener iconListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-            if(scoreTextView.getText() == "NP")
-                Toast.makeText(context, context.getString(R.string.score_comment_toast), Toast.LENGTH_SHORT).show();
-            else {
-                // Introduccion de un comentario de nota.
-                Toast.makeText(context, "No implementado", Toast.LENGTH_SHORT).show();
-            }
-        }
-    };
 
 }
