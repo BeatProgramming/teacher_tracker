@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Preferencias usuario -->
+    <PreferenceCategory android:title="Usuario">
+        <EditTextPreference
+            android:key="user_name"
+            android:title="Nombre"
+            android:singleLine="true"/>
+        <EditTextPreference
+            android:key="user_mail"
+            android:title="Correo electrónico"
+            android:singleLine="true"/>
+    </PreferenceCategory>
+    <!-- Preferencias notificaciones -->
+    <PreferenceCategory android:title="Notificaciones">
+        <CheckBoxPreference
+            android:key="notification"
+            android:title="Notificaciones"
+            android:defaultValue="true"/>
+    </PreferenceCategory>
+    <!-- Preferencias tareas -->
+    <PreferenceCategory android:title="Tareas">
+        <ListPreference
+        android:key="number_tasks"
+        android:title="Número de tareas"
+        android:entries="@array/task"
+        android:entryValues="@array/taskValues"
+        android:defaultValue="0"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

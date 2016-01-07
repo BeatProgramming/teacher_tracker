@@ -1,8 +1,10 @@
 package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -42,10 +44,13 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //- Valores predefinidos de las preferencias de la app
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        //- Carga de la BDD
         BDHelper.init(this);
-
         setContentView(R.layout.activity_main);
         //ScriptSQL sql = new ScriptSQL(this);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,6 +122,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this,Settings.class);
+            startActivity(intent);
+            return true;
+        }
+        if (id == R.id.action_help) {
             return true;
         }
 
