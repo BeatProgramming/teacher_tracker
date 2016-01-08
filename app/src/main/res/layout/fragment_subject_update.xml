@@ -187,6 +187,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                android:gravity="center"
+                android:textSize="@dimen/subjectHourDim"
                 android:text="@string/taskHour" />
 
         <LinearLayout

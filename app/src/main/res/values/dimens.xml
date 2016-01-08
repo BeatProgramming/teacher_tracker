@@ -27,5 +27,6 @@
     <dimen name="toggleTextDay">12sp</dimen>
     <dimen name="toggleDays">40sp</dimen>
     <dimen name="descriptionTexts">20sp</dimen>
+    <dimen name="subjectHourDim">30sp</dimen>
 
 </resources>

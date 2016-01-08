@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        Log.d(TAG,"Navigator set");
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
 
         TextView text = (TextView) header.findViewById(R.id.textView2);
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity
         String user_mail = pref.getString("user_mail","?");
         text.setText("Hi " + user_name + " (" + user_mail + ")");
         navigationView.addHeaderView(header);
+        Log.d(TAG, "fin");
 
         Fragment frag;
         final Intent intent = getIntent();

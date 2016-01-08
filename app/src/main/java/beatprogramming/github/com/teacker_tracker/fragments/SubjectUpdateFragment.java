@@ -104,7 +104,9 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
         satToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonSat);
         sunToggleButton = (ToggleButton) view.findViewById(R.id.ToggleButtonSun);
         timeTextView = (TextView) view.findViewById(R.id.scheduleHour);
-
+        timeTextView.setOnClickListener(this);
+        DateTime actual = new DateTime();
+        timeTextView.setText(DateTimeFormatter.timeToString(actual.getHourOfDay(), actual.getMinuteOfHour()));
         Bundle args = getArguments();
 
         if (args != null) {
@@ -125,7 +127,6 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
                 sunToggleButton.setChecked(days[6]);
                 timeTextView.setText(schedule.getDateTime());
             }
-            timeTextView.setOnClickListener(this);
             idSubjectTextView.setText(Integer.toString(subject.getId()));
             nameEditText.setText(subject.getNombre());
             descriptionEditText.setText(subject.getDescripcion());
@@ -153,6 +154,11 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
         super.onAttach(context);
 
         callback = (FragmentCallback) context;
+    }
+
+    @Override
+    public void setTaskTime(String timeString) {
+        timeTextView.setText(timeString);
     }
 
     @Override

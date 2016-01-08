@@ -51,7 +51,6 @@ public class ReviewDaoImpl implements ReviewDao {
 
     //Variables sql
     private static SQLiteDatabase sqldb;
-    private static Cursor c;
     private final BDHelper db;
 
     public ReviewDaoImpl() {
@@ -66,15 +65,15 @@ public class ReviewDaoImpl implements ReviewDao {
     @Override
     public void findReviews(OnLoadFinishListener listener) {
         sqldb = db.getReadableDatabase();
-        c = sqldb.rawQuery(FINDQUERY, null);
+        Cursor c = sqldb.rawQuery(FINDQUERY, null);
 
         //Lista de reviews
-        List reviews = new ArrayList<Review>();
+        List reviews = new ArrayList<>();
         DateTime fechaReview = new DateTime();
         if(c.moveToFirst()){
             do{
                 Review r = null;
-                if (c.getString(c.getColumnIndex(TYPE)) == PROJECT){
+                if (c.getString(c.getColumnIndex(TYPE)).equals(PROJECT)){
                     Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
