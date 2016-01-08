@@ -2,6 +2,7 @@ package beatprogramming.github.com.teacker_tracker;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.File;
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -62,16 +63,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        Log.d(TAG,"Navigator set");
-        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
 
-        TextView text = (TextView) header.findViewById(R.id.textView2);
+        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
+        navigationView.addHeaderView(header);
+        TextView text = (TextView) header.findViewById(R.id.textView3);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String user_name = pref.getString("user_name", "?");
         String user_mail = pref.getString("user_mail","?");
-        text.setText("Hi " + user_name + " (" + user_mail + ")");
-        navigationView.addHeaderView(header);
-        Log.d(TAG, "fin");
+        text.setText(user_name + " (" + user_mail + ")");
+
 
         Fragment frag;
         final Intent intent = getIntent();
@@ -132,11 +132,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this,Settings.class);
-            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-            String s = "Notificaciones: "+ pref.getBoolean("notification",true)
-                    +", Tareas: " + pref.getString("number_tasks","?") +
-                    "Nombre: " + pref.getString("user_name","?");
-            Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
             startActivity(intent);
             return true;
         }

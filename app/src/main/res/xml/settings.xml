@@ -22,12 +22,12 @@
             android:defaultValue="true"/>
     </PreferenceCategory>
     <!-- Preferencias tareas -->
-    <PreferenceCategory android:title="Tareas">
+    <PreferenceCategory android:title="CSV">
         <ListPreference
-        android:key="number_tasks"
-        android:title="Número de tareas"
-        android:entries="@array/task"
-        android:entryValues="@array/taskValues"
+        android:key="format"
+        android:title="Formato CSV"
+        android:entries="@array/order"
+        android:entryValues="@array/orderValues"
         android:defaultValue="0"/>
     </PreferenceCategory>
 
