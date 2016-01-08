@@ -6,10 +6,12 @@
         <EditTextPreference
             android:key="user_name"
             android:title="Nombre"
+            android:defaultValue="Nombre"
             android:singleLine="true"/>
         <EditTextPreference
             android:key="user_mail"
             android:title="Correo electrónico"
+            android:defaultValue="Nombre@teachertracker.es"
             android:singleLine="true"/>
     </PreferenceCategory>
     <!-- Preferencias notificaciones -->

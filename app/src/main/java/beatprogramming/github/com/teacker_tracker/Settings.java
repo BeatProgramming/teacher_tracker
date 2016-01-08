@@ -1,17 +1,24 @@
 package beatprogramming.github.com.teacker_tracker;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class Settings extends PreferenceActivity /*implements SharedPreferences.OnSharedPreferenceChangeListener*/ {
+
+    TextView nombre;
 
    @Override
    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Toast.makeText(Settings.this, "Los cambios se realizarán al reiniciar la aplicación", Toast.LENGTH_SHORT).show();
+        super.onBackPressed();  // optional depending on your needs
     }
 
 

@@ -8,28 +8,26 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 import beatprogramming.github.com.teacker_tracker.fragments.ImportStudentsFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.ReviewFragment;
-import beatprogramming.github.com.teacker_tracker.fragments.StudentFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.StudentTabFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
@@ -39,6 +37,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCallback {
 
     private static final String TAG = MainActivity.class.getName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         //ScriptSQL sql = new ScriptSQL(this);
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -63,6 +61,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
+
+        TextView text = (TextView) header.findViewById(R.id.textView2);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String user_name = pref.getString("user_name", "?");
+        String user_mail = pref.getString("user_mail","?");
+        text.setText("Hi " + user_name + " (" + user_mail + ")");
+        navigationView.addHeaderView(header);
 
         Fragment frag;
         final Intent intent = getIntent();
@@ -123,6 +130,11 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent intent = new Intent(this,Settings.class);
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+            String s = "Notificaciones: "+ pref.getBoolean("notification",true)
+                    +", Tareas: " + pref.getString("number_tasks","?") +
+                    "Nombre: " + pref.getString("user_name","?");
+            Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
             startActivity(intent);
             return true;
         }
