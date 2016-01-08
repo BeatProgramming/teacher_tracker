@@ -27,8 +27,6 @@ import beatprogramming.github.com.teacker_tracker.view.TaskView;
  */
 public class TaskFragment extends ListFragment implements TaskView {
 
-    private static String TAG = TaskFragment.class.getName();
-
     private FragmentCallback callback;
 
     private ProgressBar progressBar;

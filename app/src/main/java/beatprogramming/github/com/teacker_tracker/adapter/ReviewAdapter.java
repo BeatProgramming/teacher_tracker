@@ -16,9 +16,7 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 
-/**
- * Created by malkomich on 13/11/15.
- */
+
 public class ReviewAdapter extends ArrayAdapter {
 
     private final String TAG = ReviewAdapter.class.getName();
@@ -58,7 +56,7 @@ public class ReviewAdapter extends ArrayAdapter {
         nameTextView.setText(name);
         subjectTextView.setText(subject);
 
-        Log.d(TAG, "getView, name: " + name + ", subject: " + subject.toString());
+        Log.d(TAG, "getView, name: " + name + ", subject: " + subject);
 
         return rowView;
     }

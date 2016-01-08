@@ -1,30 +1,23 @@
 package beatprogramming.github.com.teacker_tracker.util;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
@@ -156,12 +149,11 @@ public class CSVManager {
             }
 
             int n = filename.lastIndexOf(".");
-            String fileName, fileExt;
+            String fileExt;
 
             if (n == -1) {
                 return null;
             } else {
-                fileName = filename.substring(0, n);
                 fileExt = filename.substring(n);
                 if (!fileExt.equals(".csv")) {
                     return null;

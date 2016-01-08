@@ -3,18 +3,13 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
-
 import java.util.Calendar;
-
 import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
-import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 
-/**
- * Created by malkomich on 04/12/2015.
- */
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
@@ -26,6 +21,7 @@ public class TimePickerFragment extends DialogFragment
         return fragment;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker

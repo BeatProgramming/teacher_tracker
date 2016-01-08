@@ -1,7 +1,6 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
 
 
-import org.joda.time.DateTime;
 
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;

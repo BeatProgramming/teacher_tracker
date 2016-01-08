@@ -25,9 +25,6 @@ import beatprogramming.github.com.teacker_tracker.util.FileUtil;
 import beatprogramming.github.com.teacker_tracker.util.ImageGetter;
 import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
 
-/**
- * Created by malkomich on 27/11/15.
- */
 public class StudentUpdateFragment extends Fragment implements StudentUpdateView, View.OnClickListener {
 
     private static String TAG = StudentUpdateFragment.class.getName();
@@ -116,7 +113,6 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
      * Called once the fragment is associated with its activity context.
      * It assigns this context to be responsible of the fragment transactions.
      *
-     * @param context
      */
     @Override
     public void onAttach(Context context) {
@@ -146,9 +142,6 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     /**
      * Called when the ImageGetter activity finish returning the chosen image.
      *
-     * @param requestCode
-     * @param resultCode
-     * @param imageReturnedIntent
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {

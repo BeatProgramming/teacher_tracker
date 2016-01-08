@@ -2,7 +2,6 @@ package beatprogramming.github.com.teacker_tracker.callback;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
 
 /**
  * Handler for the fragment transactions. It delegates the creation, replacement and other

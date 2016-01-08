@@ -1,7 +1,5 @@
 package beatprogramming.github.com.teacker_tracker.domain;
 
-import org.joda.time.DateTime;
-
 /**
  * Clase que modela un horario.
  */
@@ -25,9 +23,6 @@ public class Schedule {
         return dias;
     }
 
-    public void setDias(Boolean[] dias) {
-        this.dias = dias;
-    }
 
     public Subject getSubject() {
         return subject;
@@ -49,9 +44,6 @@ public class Schedule {
         return aula;
     }
 
-    public void setAula(String aula) {
-        this.aula = aula;
-    }
 
     public int getId() {
         return id;

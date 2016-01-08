@@ -27,9 +27,6 @@ public class Score implements Serializable {
         return comentario;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
 
     public Float getCalificacion() {
         return calificacion;

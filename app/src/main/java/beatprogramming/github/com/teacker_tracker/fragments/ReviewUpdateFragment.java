@@ -26,9 +26,6 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
-/**
- * Created by malkomich on 27/11/15.
- */
 public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, RadioGroup
         .OnCheckedChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 

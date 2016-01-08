@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.SubjectAdapter;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
@@ -25,7 +22,6 @@ import beatprogramming.github.com.teacker_tracker.presenter.SubjectPresenter;
  */
 public class SubjectFragment extends ListFragment implements SubjectView {
 
-    private static String TAG = SubjectFragment.class.getName();
 
     private FragmentCallback callback;
 
@@ -84,7 +80,6 @@ public class SubjectFragment extends ListFragment implements SubjectView {
     /**
      * Sets the list adapter which will fill the view.
      *
-     * @param items
      */
     @Override
     public void setItems(List<Subject> items) {
@@ -101,8 +96,6 @@ public class SubjectFragment extends ListFragment implements SubjectView {
     /**
      * Retrieves an specific item from the adapter.
      *
-     * @param position
-     * @return
      */
     @Override
     public Subject getSubjectFromAdapter(int position) {
@@ -113,7 +106,6 @@ public class SubjectFragment extends ListFragment implements SubjectView {
      * Called once the fragment is associated with its activity context.
      * It assigns this context to be responsible of the fragment transactions.
      *
-     * @param context
      */
     @Override
     public void onAttach(Context context) {

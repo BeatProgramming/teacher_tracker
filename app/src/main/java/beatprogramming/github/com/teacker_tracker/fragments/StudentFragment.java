@@ -3,21 +3,13 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TabHost;
-import android.widget.TextView;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.StudentAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
@@ -26,13 +18,9 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.view.StudentView;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
 
-/**
- * Created by malkomich on 30/11/15.
- */
 public class StudentFragment extends ListFragment implements StudentView {
 
     public static final String SUBJECT = "Subject";
-    private static String TAG = StudentFragment.class.getName();
 
     private FragmentCallback callback;
 

@@ -20,8 +20,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beatprogramming.github.com.teacker_tracker.R;
-
 /** Clase que coge una imagen
  * Created by malkomich on 1/12/15.
  */
@@ -29,6 +27,7 @@ public class ImageGetter {
 
     private static final String TAG = ImageGetter.class.getName();
 
+    private static final String FOTO = "Selecciona una foto";
     // Default width pixels
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;
 
@@ -49,7 +48,7 @@ public class ImageGetter {
 
         if (intentList.size() > 0) {
             chooserIntent = Intent.createChooser(intentList.remove(intentList.size() - 1),
-                    context.getString(R.string.image_intent_title));
+                    FOTO);
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
         }
 
@@ -190,8 +189,7 @@ public class ImageGetter {
         if (rotation != 0) {
             Matrix matrix = new Matrix();
             matrix.postRotate(rotation);
-            Bitmap bmOut = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-            return bmOut;
+            return Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
         }
         return bm;
     }

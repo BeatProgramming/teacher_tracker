@@ -12,12 +12,8 @@ import beatprogramming.github.com.teacker_tracker.persistence.ScoreDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ScoreDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ScoreView;
 
-/**
- * Created by malkomich on 03/12/2015.
- */
 public class ScorePresenter implements OnLoadFinishListener, OnScorePickedListener {
 
-    private static String TAG = ScorePresenter.class.getName();
 
     private ScoreView view;
     private ScoreDao scoreDao;

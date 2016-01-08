@@ -11,7 +11,6 @@ import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
  */
 public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener {
 
-    private static String TAG = StudentUpdatePresenter.class.getName();
 
     private StudentUpdateView view;
     private StudentDao studentDao;

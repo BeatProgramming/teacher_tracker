@@ -5,17 +5,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.BDHelper;
 import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
-import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Project;
 import beatprogramming.github.com.teacker_tracker.domain.Review;

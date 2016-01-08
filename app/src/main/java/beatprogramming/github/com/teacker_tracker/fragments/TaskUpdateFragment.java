@@ -14,10 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
-import beatprogramming.github.com.teacker_tracker.MainActivity;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
@@ -25,12 +22,8 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.view.TaskUpdateView;
 
-/**
- * Created by malkomich on 27/11/15.
- */
 public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private static final String TAG = TaskUpdateFragment.class.getName();
     private static final String TASK = "BUNDLE_TASK";
 
     private FragmentCallback callback;
@@ -46,8 +39,6 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     /**
      * Instantiate the fragment with an existing subject to modify.
      *
-     * @param task
-     * @return
      */
     public static TaskUpdateFragment newInstance(Task task) {
 
@@ -110,7 +101,6 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
      * Called once the fragment is associated with its activity context.
      * It assigns this context to be responsible of the fragment transactions.
      *
-     * @param context
      */
     @Override
     public void onAttach(Context context) {
@@ -156,7 +146,7 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
 
     @Override
     public void setSubjectItems(List<Subject> items) {
-        subjectSpinner.setAdapter(new ArrayAdapter<Subject>(getContext(),
+        subjectSpinner.setAdapter(new ArrayAdapter<>(getContext(),
                 R.layout.textview, items));
     }
 

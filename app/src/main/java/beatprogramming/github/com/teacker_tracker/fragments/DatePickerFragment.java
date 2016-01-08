@@ -2,22 +2,14 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.DatePicker;
-import android.widget.TimePicker;
-
 import java.util.Calendar;
-
 import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
-import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 
-/**
- * Created by malkomich on 04/12/2015.
- */
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
@@ -30,6 +22,7 @@ public class DatePickerFragment extends DialogFragment
         return fragment;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

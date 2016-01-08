@@ -20,12 +20,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
 
-/**
- * Created by malkomich on 27/11/15.
- */
 public class ReviewFragment extends ListFragment implements ReviewView {
-
-    private static String TAG = ReviewFragment.class.getName();
 
     private FragmentCallback callback;
 

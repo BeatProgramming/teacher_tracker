@@ -9,26 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
-import org.joda.time.DateTime;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
-import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.presenter.SubjectUpdatePresenter;
 
-/**
- * Created by malkomich on 27/11/15.
- */
 public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView, View.OnClickListener {
 
     private static final String TAG = SubjectUpdateFragment.class.getName();
@@ -63,8 +55,6 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     /**
      * Instantiate the fragment with an existing subject to modify.
      *
-     * @param subject
-     * @return
      */
     public static SubjectUpdateFragment newInstance(Subject subject) {
 
@@ -146,7 +136,6 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
      * Called once the fragment is associated with its activity context.
      * It assigns this context to be responsible of the fragment transactions.
      *
-     * @param context
      */
     @Override
     public void onAttach(Context context) {

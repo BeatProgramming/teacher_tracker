@@ -14,7 +14,6 @@ import beatprogramming.github.com.teacker_tracker.view.TaskView;
  */
 public class TaskPresenter implements OnLoadFinishListener {
 
-    private static String TAG = TaskPresenter.class.getName();
 
     private TaskView view;
     private TaskDao subjectDao;

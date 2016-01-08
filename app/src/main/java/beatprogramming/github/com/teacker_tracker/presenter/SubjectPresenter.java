@@ -14,7 +14,6 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
  */
 public class SubjectPresenter implements OnLoadFinishListener {
 
-    private static String TAG = SubjectPresenter.class.getName();
 
     private SubjectView view;
     private SubjectDao subjectDao;

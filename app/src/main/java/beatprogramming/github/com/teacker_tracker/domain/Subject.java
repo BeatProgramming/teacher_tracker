@@ -2,7 +2,6 @@ package beatprogramming.github.com.teacker_tracker.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class Subject implements Serializable {
         this.descripcion = descripcion;
         this.curso=curso;
 
-        studentList = new ArrayList<Student>();
+        studentList = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -40,17 +39,11 @@ public class Subject implements Serializable {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     public String getCurso() {
         return curso;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
 
     public int getId() {
         return id;

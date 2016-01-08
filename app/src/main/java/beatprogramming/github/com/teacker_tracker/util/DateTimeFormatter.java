@@ -22,14 +22,6 @@ public class DateTimeFormatter {
 
     }
 
-    public static String dateTimeToDateString(DateTime dateTime){
-
-        org.joda.time.format.DateTimeFormatter dtfOut = DateTimeFormat.forPattern(DATE_FORMAT);
-
-        return dtfOut.print(dateTime);
-
-    }
-
     public static String dateTimeToTimeString(DateTime dateTime){
 
         org.joda.time.format.DateTimeFormatter dtfOut = DateTimeFormat.forPattern(TIME_FORMAT);

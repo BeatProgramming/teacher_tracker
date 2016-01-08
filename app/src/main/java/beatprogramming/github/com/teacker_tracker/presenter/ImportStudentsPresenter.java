@@ -15,9 +15,6 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ImportStudentsView;
 
-/**
- * Created by malkomich on 04/01/2016.
- */
 public class ImportStudentsPresenter implements OnLoadFinishListener, OnUpdateFinishListener {
 
     private static String TAG = SubjectPresenter.class.getName();

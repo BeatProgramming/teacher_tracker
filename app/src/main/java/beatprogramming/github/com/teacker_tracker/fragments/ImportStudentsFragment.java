@@ -22,12 +22,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.ImportStudentsPresenter;
 import beatprogramming.github.com.teacker_tracker.view.ImportStudentsView;
 
-/**
- * Created by malkomich on 04/01/2016.
- */
 public class ImportStudentsFragment extends ListFragment implements ImportStudentsView {
-
-    private static String TAG = StudentFragment.class.getName();
 
     public static final String STUDENTS = "BUNDLE_STUDENTS";
 

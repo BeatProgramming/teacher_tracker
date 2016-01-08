@@ -1,15 +1,11 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
 import android.util.Log;
-
 import java.io.Serializable;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
-import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.StudentView;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDaoImpl;

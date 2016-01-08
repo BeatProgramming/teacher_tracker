@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 
 /**
  * Clase que modifica la clase ArrayAdapter para utilizarla en la actividad principal
@@ -45,7 +42,7 @@ public class SubjectAdapter extends ArrayAdapter<Subject> {
         TextView name = (TextView) listItemView.findViewById(R.id.item_subject);
         TextView course = (TextView) listItemView.findViewById(R.id.item_course);
 
-        Subject subject = (Subject) getItem(position);
+        Subject subject = getItem(position);
 
         name.setText(subject.getNombre());
         course.setText(subject.getCurso());

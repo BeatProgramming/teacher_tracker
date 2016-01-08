@@ -3,10 +3,9 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,9 +14,6 @@ import android.widget.EditText;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnScorePickedListener;
 
-/**
- * Created by malkomich on 28/12/2015.
- */
 public class ScorePickerFragment extends DialogFragment implements View.OnClickListener {
 
     private static final int MIN_VALUE = 0;
@@ -68,6 +64,7 @@ public class ScorePickerFragment extends DialogFragment implements View.OnClickL
         };
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //getting proper access to LayoutInflater is the trick. getLayoutInflater is a                   //Function
@@ -76,7 +73,7 @@ public class ScorePickerFragment extends DialogFragment implements View.OnClickL
         View view = inflater.inflate(R.layout.dialog_score_picker, null);
 
         upButton = (Button) view.findViewById(R.id.upButton);
-        ;
+
         downButton = (Button) view.findViewById(R.id.downButton);
         editText = (EditText) view.findViewById(R.id.numberEditText);
 

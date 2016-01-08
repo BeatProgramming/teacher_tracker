@@ -5,23 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
-/**
- * Created by malkomich on 13/11/15.
- */
+
 public class ScoreAdapter extends ArrayAdapter<Score> {
 
     private final String TAG = ScoreAdapter.class.getName();
@@ -48,12 +41,10 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
         final TextView scoreTextView = (TextView) rowView.findViewById(R.id.item_score_score);
         final ImageView commentImageView = (ImageView) rowView.findViewById(R.id.item_score_comment);
 
-        final Score score = (Score) getItem(position);
+        final Score score = getItem(position);
 
         Student student = score.getStudent();
-        Review review = score.getReview();
         Float scoreValue = score.getCalificacion();
-        String comment = score.getComentario();
 
         studentTextView.setText(student.toString());
 

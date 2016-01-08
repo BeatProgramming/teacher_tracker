@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.ScoreAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
@@ -21,9 +19,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.presenter.ScorePresenter;
 import beatprogramming.github.com.teacker_tracker.view.ScoreView;
 
-/**
- * Created by malkomich on 27/11/15.
- */
+
 public class ScoreFragment extends ListFragment implements ScoreView {
 
     private static String TAG = ScoreFragment.class.getName();

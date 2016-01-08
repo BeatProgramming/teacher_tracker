@@ -3,11 +3,8 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.BDHelper;
 import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;

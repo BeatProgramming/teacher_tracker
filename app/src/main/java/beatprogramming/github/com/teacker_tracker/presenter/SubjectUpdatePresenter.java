@@ -1,7 +1,5 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
-import org.joda.time.DateTime;
-
 import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -17,7 +15,6 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
  */
 public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnDateTimePickedListener {
 
-    private static String TAG = SubjectUpdatePresenter.class.getName();
 
     private SubjectUpdateView view;
     private SubjectDao subjectDao;

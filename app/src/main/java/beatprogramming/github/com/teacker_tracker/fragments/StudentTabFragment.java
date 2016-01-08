@@ -9,19 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.presenter.StudentPresenter;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentTabPresenter;
 import beatprogramming.github.com.teacker_tracker.view.StudentTabView;
 
-/**
- * Created by malkomich on 05/01/2016.
- */
+
 public class StudentTabFragment extends Fragment implements StudentTabView, TabHost.OnTabChangeListener {
 
     private static String TAG = StudentTabFragment.class.getName();
