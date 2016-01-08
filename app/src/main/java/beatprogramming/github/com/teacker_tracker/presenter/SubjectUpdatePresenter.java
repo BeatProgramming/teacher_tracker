@@ -6,6 +6,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListene
 import beatprogramming.github.com.teacker_tracker.fragments.TimePickerFragment;
 import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
+import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
@@ -60,12 +61,12 @@ public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
     }
 
     @Override
+    public void onTimePicked(int hour, int minute) {
+        view.setTaskTime(DateTimeFormatter.timeToString(hour, minute));
+    }
+    @Override
     public void onDatePicked(int year, int month, int day) {
 
     }
 
-    @Override
-    public void onTimePicked(int hour, int minute) {
-
-    }
 }

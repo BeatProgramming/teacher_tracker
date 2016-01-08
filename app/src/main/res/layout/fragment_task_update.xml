@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="2"
                 android:text="@string/textDateTask"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:text="@string/textTimerTask"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
@@ -59,16 +59,18 @@
                 android:id="@+id/taskDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="2"
                 android:clickable="true"
+                android:textSize="@dimen/subjectHourDim"
                 android:text="@string/dateField" />
 
             <TextView
                 android:id="@+id/taskHour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight=".5"
+                android:layout_weight="1"
                 android:clickable="true"
+                android:textSize="@dimen/subjectHourDim"
                 android:text="@string/hourField" />
 
         </LinearLayout>

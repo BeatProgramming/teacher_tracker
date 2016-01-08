@@ -33,8 +33,7 @@ public class TaskDaoImpl implements TaskDao {
     //Consultas sql
     private static final String FINDQUERY = "SELECT Task._id AS taskId, Task.subjectId, Task.name AS nameTask, Task.dateTime," +
             " Subject.name AS nameSubject, Subject.description, Subject.course " +
-            " FROM Task LEFT JOIN Subject " +
-            "ON Task.subjectId = Subject._id ORDER BY Task.dateTime;";
+            " FROM Task LEFT JOIN Subject ON Task.subjectId = Subject._id ORDER BY Task.dateTime;";
 
     //Campos de la tabla Task
     private static final String TASKID = "taskId";
