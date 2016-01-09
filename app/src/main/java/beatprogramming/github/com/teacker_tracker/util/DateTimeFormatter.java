@@ -4,8 +4,8 @@ package beatprogramming.github.com.teacker_tracker.util;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
-/** Clase para formatear las fechas
- * Created by malkomich on 04/12/2015.
+/**
+ * Clase para formatear las fechas
  */
 public class DateTimeFormatter {
 

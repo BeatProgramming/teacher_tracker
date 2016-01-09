@@ -26,7 +26,9 @@ import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDaoImpl;
 
-
+/**
+ * Clase para tratar un archivo CSV
+ */
 public class CSVManager {
 
     private static final String TAG = CSVManager.class.getName();

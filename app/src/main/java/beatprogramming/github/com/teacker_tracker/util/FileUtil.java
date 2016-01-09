@@ -8,8 +8,8 @@ import android.provider.MediaStore;
 
 import java.io.ByteArrayOutputStream;
 
-/** Clase para csv
- * Created by malkomich on 03/12/2015.
+/**
+ * Clase para csv
  */
 public class FileUtil {
 

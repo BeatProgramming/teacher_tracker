@@ -2,6 +2,10 @@ package beatprogramming.github.com.teacker_tracker;
 
 import android.provider.BaseColumns;
 
+/**
+ * Clase que contiene los scripts necesarios para la creacion de la base de datos
+ * de la aplicación. Contiene valor por defecto para las tablas
+ */
 public class ScriptBD {
 
     //- Tablas de la BD
@@ -152,7 +156,7 @@ public class ScriptBD {
     public static final String DROP_MATRICULA =
             "DROP TABLE IF EXISTS " + MATRICULA;
 
-    //- Creacion insercion datos asignatura por defecto
+    //-  Inserccion de datos de asignaturas
     public static final String INSERT_ASIGNATURA1_SCRIPT =
             "insert into " + ASIGNATURA + " values (" +
                     "null," +
@@ -167,7 +171,7 @@ public class ScriptBD {
                     "\"Asignatura básica Matematicas\"," +
                     "\"1 ESO\")";
 
-    //- Creacion insercion datos examen por defecto
+    //-  Inserccion de datos de evaluación
     public static final String INSERT_REVIEW1_SCRIPT =
             "insert into " + EVALUACION + " values (" +
                     "null," +
@@ -184,7 +188,7 @@ public class ScriptBD {
                     "1451474455501," +
                     "\"Exam\")";
 
-    //- Creación insercion datos tarea por defecto
+    //-  Inserccion de datos de tareas
     public static final String INSERT_TAREA1_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
@@ -193,7 +197,6 @@ public class ScriptBD {
                     "1451474455520," +
                     "\"Nueva nota\")";
 
-    //- Creación insercion datos tarea por defecto
     public static final String INSERT_TAREA2_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
@@ -202,7 +205,6 @@ public class ScriptBD {
                     "1451474455300," +
                     "\"Nueva nota\")";
 
-    //- Creación insercion datos tarea por defecto
     public static final String INSERT_TAREA3_SCRIPT =
             "insert into " + TAREA + " values (" +
                     "null," +
@@ -211,7 +213,7 @@ public class ScriptBD {
                     "1451474455501," +
                     "null)";
 
-    //- Creación insercion datos alumno por defecto
+    //-  Inserccion de datos de alumnos
     public static final String INSERT_ALUMNO1_SCRIPT =
             "insert into " + ALUMNO + " values (" +
                     "null," +
@@ -226,7 +228,7 @@ public class ScriptBD {
                     "\"Fernandez\"," +
                     "null)";
 
-    //- Creación insercion datos calificaciones por defecto
+    //-  Inserccion de datos de calificaciones
     public static final String INSERT_CALIFICACION1_SCRIPT =
             "insert into " + CALIFICACION + " values (" +
                     "7.5," +
@@ -248,6 +250,7 @@ public class ScriptBD {
                     "2," +
                     "2)";
 
+    //- Inserccion de datos de matriculas
     public static final String INSERT_MATRICULA1_SCRIPT =
             "insert into " + MATRICULA + " values (" +
                     "1," +
@@ -263,7 +266,7 @@ public class ScriptBD {
                     "2," +
                     "2)";
 
-    //- Creación insercion datos horario por defecto
+    //- Inserccion de datos de horarios
     public static final String INSERT_SCHEDULE1_SCRIPT =
             "insert into " + HORARIO + " values (" +
                     "null," +

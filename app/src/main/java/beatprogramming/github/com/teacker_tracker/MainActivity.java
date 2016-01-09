@@ -74,7 +74,10 @@ public class MainActivity extends AppCompatActivity
 
         //- Activado el modo ayuda
         if(help_mode)
-            HelpUtil.showIndexHelp(this);
+            HelpUtil.showIndexHelp(this, new String[] {getResources().getString(R.string.helpIndex1),
+                    getResources().getString(R.string.helpIndex2),getResources().getString(R.string.helpIndex3),
+                    getResources().getString(R.string.helpIndex4)
+            });
 
 
         Fragment frag;
@@ -157,7 +160,9 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(frag);
             //- Activado el modo ayuda
             if(help_mode)
-                HelpUtil.showTaskHelp(this);
+                HelpUtil.showTaskHelp(this, new String[] {getResources().getString(R.string.helpTask1),
+                        getResources().getString(R.string.helpTask2),getResources().getString(R.string.helpTask3)
+                });
         }
         if (id == R.id.nav_subject) {
 
@@ -165,7 +170,9 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(frag);
             //- Activado el modo ayuda
             if(help_mode)
-                HelpUtil.showSubjectHelp(this);
+                HelpUtil.showSubjectHelp(this,new String[] {getResources().getString(R.string.helpSubject1),
+                    getResources().getString(R.string.helpSubject2),getResources().getString(R.string.helpSubject3)
+            });
 
         } else if (id == R.id.nav_score) {
 
@@ -173,7 +180,9 @@ public class MainActivity extends AppCompatActivity
             replaceFragment(frag);
             //- Activado el modo ayuda
             if(help_mode)
-                HelpUtil.showScoreHelp(this);
+                HelpUtil.showScoreHelp(this, new String[] {getResources().getString(R.string.helpReview1),
+                        getResources().getString(R.string.helpReview2),getResources().getString(R.string.helpReview3)
+                });
 
         } else if (id == R.id.nav_export_students) {
 

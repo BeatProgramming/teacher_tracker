@@ -20,8 +20,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Clase que coge una imagen
- * Created by malkomich on 1/12/15.
+/**
+ * Clase que recoge una imagen
  */
 public class ImageGetter {
 

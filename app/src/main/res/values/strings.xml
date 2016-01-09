@@ -43,6 +43,7 @@
     <string name="button_submit">Guardar</string>
     <string name="button_delete">Borrar</string>
 
+    <!-- DATE FIELDS -->
     <string name="hourField">Hora</string>
     <string name="dateField">Fecha</string>
 
@@ -83,8 +84,6 @@
     <string name="textHoraInicio">Hora de inicio</string>
     <string name="textSchedule">Horario</string>
     <string name="button_newSchedule">Nuevo horario</string>
-    <string name="textTimerTask">Hora</string>
-    <string name="textDateTask">Fecha</string>
     <string name="textNameTask">Nombre de la tarea</string>
     <string name="textSubjectTask">Asignatura</string>
     <string name="textType">Tipo de la evaluación</string>
@@ -123,8 +122,25 @@
     <string name="viernesAbrv">V</string>
     <string name="sabadoAbrv">S</string>
     <string name="domingoAbrv">D</string>
-    <string name="title_activity_help">HelpActivity</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_help">HelpActivity</string>
+    
+    <!-- Text de la ayuda -->
+    <string name="helpIndex1">¡Bienvenido a TeacherTracker!</string>
+    <string name="helpIndex2">En el menú de la izquierda tendrás las funciones</string>
+    <string name="helpIndex3">En el menú de la derecha tendrás la configuración</string>
+    <string name="helpIndex4">¿Por qué no lo pruebas?</string>
+
+    <string name="helpTask1">En esta pantalla podrás crear/editar tareas</string>
+    <string name="helpTask2">Pulse el botón rosa para añadir tareas</string>
+    <string name="helpTask3">Pulse sobre una tarea para modificarla</string>
+
+    <string name="helpSubject1">En esta pantalla podrás crear/editar asignaturas</string>
+    <string name="helpSubject2">Pulse el botón rosa para añadir asignaturas</string>
+    <string name="helpSubject3">Pulse sobre una asignatura para modificarla</string>
+
+    <string name="helpReview1">En esta pantalla podrás crear/editar exámenes o prácticas</string>
+    <string name="helpReview2">Pulse el botón rosa para añadir un exámen o  práctica</string>
+    <string name="helpReview3">Pulse sobre una evaluación y a continuación podrás calificar a los alumnos</string>
 
 </resources>

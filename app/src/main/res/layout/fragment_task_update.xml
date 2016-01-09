@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@string/textDateTask"
+                android:text="@string/dateField"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
 
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/textTimerTask"
+                android:text="@string/hourField"
                 android:textSize="@dimen/descriptionTexts"
                 android:textColor="#0145FF"/>
 
