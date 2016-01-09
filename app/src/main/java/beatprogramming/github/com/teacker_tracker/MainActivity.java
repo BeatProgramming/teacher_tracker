@@ -32,12 +32,13 @@ import beatprogramming.github.com.teacker_tracker.fragments.StudentTabFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
+import beatprogramming.github.com.teacker_tracker.util.HelpUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCallback {
 
     private static final String TAG = MainActivity.class.getName();
-
+    private boolean help_mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class MainActivity extends AppCompatActivity
         //- Carga de la BDD
         BDHelper.init(this);
         setContentView(R.layout.activity_main);
-        //ScriptSQL sql = new ScriptSQL(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,13 +62,19 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //- Obtenemos los valores de las preferencias
         View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
         navigationView.addHeaderView(header);
         TextView text = (TextView) header.findViewById(R.id.textView3);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         String user_name = pref.getString("user_name", "?");
-        String user_mail = pref.getString("user_mail","?");
+        String user_mail = pref.getString("user_mail", "?");
+        help_mode = pref.getBoolean("help",true);
         text.setText(user_name + " (" + user_mail + ")");
+
+        //- Activado el modo ayuda
+        if(help_mode)
+            HelpUtil.showIndexHelp(this);
 
 
         Fragment frag;
@@ -133,9 +139,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }
-        if (id == R.id.action_help) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -149,18 +152,28 @@ public class MainActivity extends AppCompatActivity
         Fragment frag;
 
         if(id == R.id.nav_task) {
+
             frag = new TaskFragment();
             replaceFragment(frag);
+            //- Activado el modo ayuda
+            if(help_mode)
+                HelpUtil.showTaskHelp(this);
         }
         if (id == R.id.nav_subject) {
 
             frag = new SubjectFragment();
             replaceFragment(frag);
+            //- Activado el modo ayuda
+            if(help_mode)
+                HelpUtil.showSubjectHelp(this);
 
         } else if (id == R.id.nav_score) {
 
             frag = new ReviewFragment();
             replaceFragment(frag);
+            //- Activado el modo ayuda
+            if(help_mode)
+                HelpUtil.showScoreHelp(this);
 
         } else if (id == R.id.nav_export_students) {
 

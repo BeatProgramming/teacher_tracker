@@ -19,6 +19,10 @@
         <CheckBoxPreference
             android:key="notification"
             android:title="Notificaciones"
+            android:defaultValue="false"/>
+        <CheckBoxPreference
+            android:key="help"
+            android:title="Modo ayuda"
             android:defaultValue="true"/>
     </PreferenceCategory>
     <!-- Preferencias tareas -->

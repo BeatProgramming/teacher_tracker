@@ -123,5 +123,8 @@
     <string name="viernesAbrv">V</string>
     <string name="sabadoAbrv">S</string>
     <string name="domingoAbrv">D</string>
+    <string name="title_activity_help">HelpActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
