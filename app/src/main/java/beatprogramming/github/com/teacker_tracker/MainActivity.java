@@ -70,7 +70,9 @@ public class MainActivity extends AppCompatActivity
         String user_name = pref.getString("user_name", "?");
         String user_mail = pref.getString("user_mail", "?");
         help_mode = pref.getBoolean("help",true);
-        text.setText(user_name + " (" + user_mail + ")");
+        if (text!=null){
+            text.setText(user_name + " (" + user_mail + ")");
+        }
 
         //- Activado el modo ayuda
         if(help_mode)

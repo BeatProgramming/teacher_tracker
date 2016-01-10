@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Teacker Tracker</string>
+
+    <!-- SETTINGS -->
     <string name="action_settings">Paramètres</string>
     <string name="action_settings_app">Paramètres de cette appli</string>
     <string name="action_settings_personal"> Paramètres personnels</string>
+
+    <!-- DESCRIPTION TEXTS -->
+    <string name="textClassroom">Salle de classe dans laquelle est enseignée</string>
+    <string name="textCourse">Bien sûr Sujet</string>
+    <string name="textType">Type d\'évaluation</string>
+
+    <!-- TITLE FRAGMENTS -->
+    <string name="titleSubject">Asignaruta</string>
+    <string name="studentTitle">Etudiants</string>
+    <string name="studentUpdateTitle">Modifier étudiant</string>
+    <string name="subjectTitle">Sujets</string>
+    <string name="subjectUpdateTitle">Nouveau sujet</string>
+    <string name="reviewTitle">Evaluations </string>
+    <string name="reviewUpdateTitle">Réévaluation</string>
+    <string name="scoreTitle">Qualifications</string>
+
+    <!-- Dias de la semana -->
+    <string name="Lunes">Lundi</string>
+    <string name="Martes">Mardi</string>
+    <string name="Miercoles">Mercredi</string>
+    <string name="Jueves">Jeudi</string>
+    <string name="Viernes">Vendredi</string>
+    <string name="Sabado">Samedi</string>
+    <string name="Domingo">Dimanche</string>
+    <string name="lunesAbrv">L</string>
+    <string name="martesAbrv">M</string>
+    <string name="miercolesAbrv">X</string>
+    <string name="juevesAbrv">J</string>
+    <string name="viernesAbrv">V</string>
+    <string name="sabadoAbrv">S</string>
+    <string name="domingoAbrv">D</string>
+
+    <!-- Text de la ayuda -->
+    <string name="helpIndex1">¡Bienvenu à TeacherTracker!</string>
+    <string name="helpIndex2">Dans le menu sur la gauche , vous aurez les options</string>
+    <string name="helpIndex3"> Dans le menu sur la droite , vous aurez les options de configuration</string>
+    <string name="helpIndex4"> Pourquoi ne pas essayer</string>
+
+    <string name="helpReview1">ans cet écran, vous pouvez créer / modifier des tests ou des pratiques</string>
+    <string name="helpReview2">Appuyez sur le bouton rose pour ajouter un test ou à la pratique</string>
+    <string name="helpReview3">Cliquer sur une évaluation, puis les étudiants peuvent se qualifier </string>
+
+    <string name="helpSubject1">Dans cet écran, vous pouvez créer / modifier des cours </string>
+    <string name="helpSubject2">Appuyez sur le bouton rose à ajouter sujets </string>
+    <string name="helpSubject3">Cliquez sur un sujet pour modifier </string>
+
+    <string name="helpTask1">Dans cet écran, vous pouvez créer des tâches d\'édition / </string>
+    <string name="helpTask2">Appuyez sur le bouton rose pour ajouter des tâches </string>
+    <string name="helpTask3">Cliquez sur une tâche à modifier </string>
+
+
     <string name="add_button">Confirmer</string>
     <string name="app_description"> Le confort dans vos mains</string>
     <string name="button_add_task">Confirmer</string>
@@ -34,35 +87,42 @@
     <string name="dateField">Date</string>
     <string name="taskDescription">Description</string>
     <string name="hourField">Temps</string>
-    <string name="title_activity_task">Créer une tâche </string>
-    <string name="title_activity_submit_score">Créer un avis </string>
-    <string name="title_activity_subject">Créer un cours </string>
-    <string name="title_activity_score">Tarif sujet </string>
-    <string name="title_activity_notes">notes</string>
-    <string name="title_activity_new_students">École</string>
-    <string name="title_activity_modify_subject">Modifier l\'objet </string>
-    <string name="title_activity_edit_subject">Sujets</string>
-    <string name="title_activity_create_exam">Ajouter un commentaire</string>
-    <string name="title_activity_add_score">Tarif étudiant </string>
-    <string name="titleSubject">Asignaruta</string>
+
     <string name="task_section">Devoirs</string>
     <string name="taskSubject">Sujet</string>
     <string name="taskRoom">Salle de classe </string>
-    <string name="domingo">D</string>
     <string name="idDefValue">0</string>
-    <string name="jueves">J</string>
-    <string name="lunes">L</string>
     <string name="score_picker_ok">OK</string>
     <string name="subject">Sujets</string>
-    <string name="viernes">V</string>
-    <string name="Domingo">Dimanche</string>
-    <string name="Jueves">Jeudi</string>
-    <string name="Lunes">Lundi</string>
-    <string name="Martes">Mardi</string>
-    <string name="Miercoles">Mercredi</string>
-    <string name="Sabado">Samedi</string>
-    <string name="Viernes">Vendredi</string>
-    <string name="martes">M</string>
-    <string name="miercoles">X</string>
-    <string name="sabado">S</string>
+
+    <string name="button_newSchedule">Nouvel horaire</string>
+
+
+    <string name="imageDescription">L\'image de l\'étudiant </string>
+
+    <string name="noteImageDescription"> Image pour créer une nouvelle note</string>
+
+    <string name="score_picker_cancel">Pas déposé</string>
+    <string name="score_comment_toast">Vous devez entrer une qualification en premier.</string>
+    <string name="schedule">Horaires</string>
+    <string name="score_picker_title">la note est ...</string>
+    <string name="student_spinner"><![CDATA[< Nom de famille, Nom >]]></string>
+    <string name="taskHour">Heur</string>
+    <string name="taskDate">Date</string>
+
+    <string name="title_activity_new_students">École</string>
+    <string name="title_activity_task">Créer tâche</string>
+    <string name="title_activity_help">HelpActivity</string>
+    <string name="textSubjectTask">sujet</string>
+    <string name="textSubjectName">Titre du cours</string>
+    <string name="textDays">Jours de la semaine pour répéter</string>
+    <string name="textDescription">Description de l\'objet</string>
+    <string name="textHoraInicio">Heure de début</string>
+    <string name="textNameReview">Nom de l\'évaluation</string>
+    <string name="textNameSubject">Titre du cours</string>
+    <string name="textNameTask">Nom de la tâche</string>
+    <string name="textSchedule">Horaires</string>
+    <string name="textSubject">Titre du cours</string>
+    <string name="textSubjectCourse">Cours de golf</string>
+    <string name="textSubjectDescription">Description de l\'objet </string>
 </resources>

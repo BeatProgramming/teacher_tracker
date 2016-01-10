@@ -3,11 +3,28 @@
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="action_settings">Configuración</string>
 
     <!-- SETTINGS -->
+    <string name="action_settings">Configuración</string>
     <string name="action_settings_app">Configuración app</string>
     <string name="action_settings_personal">Configuración personal</string>
+
+    <!-- DESCRIPTION TEXTS -->
+    <string name="textDays">Dias de la semana a repetir</string>
+    <string name="textClassroom">Aula en la que se imparte</string>
+    <string name="textCourse">Curso de la asignatura</string>
+    <string name="textDescription">Descripcion de la asignatura</string>
+    <string name="textSubject">Nombre de la asignatura</string>
+    <string name="textHoraInicio">Hora de inicio</string>
+    <string name="textSchedule">Horario</string>
+    <string name="textNameTask">Nombre de la tarea</string>
+    <string name="textSubjectTask">Asignatura</string>
+    <string name="textType">Tipo de la evaluación</string>
+    <string name="textNameReview">Nombre de la evaluacion</string>
+    <string name="textNameSubject">Nombre de la asignatura</string>
+    <string name="textSubjectName">Nombre de la asignatura</string>
+    <string name="textSubjectDescription">Descripcion de la asignatura</string>
+    <string name="textSubjectCourse">Curso de la asignatura</string>
 
     <!-- TITLE FRAGMENTS -->
     <string name="scoreTitle">Calificaciones</string>
@@ -17,6 +34,7 @@
     <string name="studentTitle">Estudiantes</string>
     <string name="reviewUpdateTitle">Nueva evaluación</string>
     <string name="reviewTitle">Evaluaciones</string>
+    <string name="titleSubject">Asignatura</string>
 
     <!-- SUBJECT FRAGMENT -->
     <string name="subjectName">Nombre de la asignatura</string>
@@ -24,7 +42,6 @@
     <string name="subjectCurse">Curso de la asignatura</string>
     <string name="subjectAula">Aula de la asignatura</string>
     <string name="submit">Confirmar</string>
-    <string name="textDays">Dias de la semana a repetir</string>
 
     <!-- ACTIVITY MAIN DRAWER -->
     <string name="app_description">La comodidad en tus manos</string>
@@ -77,17 +94,8 @@
     <!-- STUDENTS UPDATE -->
     <string name="image_intent_title">Selecciona una foto</string>
     <string name="taskDate">Fecha</string>
-    <string name="textClassroom">Aula en la que se imparte</string>
-    <string name="textCourse">Curso de la asignatura</string>
-    <string name="textDescription">Descripcion de la asignatura</string>
-    <string name="textSubject">Nombre de la asignatura</string>
-    <string name="textHoraInicio">Hora de inicio</string>
-    <string name="textSchedule">Horario</string>
+
     <string name="button_newSchedule">Nuevo horario</string>
-    <string name="textNameTask">Nombre de la tarea</string>
-    <string name="textSubjectTask">Asignatura</string>
-    <string name="textType">Tipo de la evaluación</string>
-    <string name="textNameReview">Nombre de la evaluacion</string>
 
     <!-- SCORES UPDATE -->
     <string name="student_spinner">&lt; Apellidos, Nombre &gt;</string>
@@ -98,23 +106,20 @@
 
     <string name="taskHour">Hora</string>
     <string name="idDefValue">0</string>
-    <string name="textNameSubject">Nombre de la asignatura</string>
     <string name="subject">Asignatura</string>
     <string name="schedule">Horario</string>
-    <string name="textSubjectName">Nombre de la asignatura</string>
-    <string name="textSubjectDescription">Descripcion de la asignatura</string>
-    <string name="textSubjectCourse">Curso de la asignatura</string>
+
     <string name="imageDescription">Imagen del alumno</string>
-    <string name="titleSubject">Asignatura</string>
     <string name="noteImageDescription">Imagen para crear una nueva nota</string>
 
     <!-- Dias de la semana -->
     <string name="Lunes">Lunes</string>
     <string name="Martes">Martes</string>
     <string name="Miercoles">Miercoles</string>
+    <string name="Jueves">Jueves</string>
     <string name="Viernes">Viernes</string>
     <string name="Sabado">Sabado</string>
-    <string name="Jueves">Jueves</string>
+    <string name="Domingo">Domingo</string>
     <string name="lunesAbrv">L</string>
     <string name="martesAbrv">M</string>
     <string name="miercolesAbrv">X</string>
@@ -127,8 +132,8 @@
     
     <!-- Text de la ayuda -->
     <string name="helpIndex1">¡Bienvenido a TeacherTracker!</string>
-    <string name="helpIndex2">En el menú de la izquierda tendrás las funciones</string>
-    <string name="helpIndex3">En el menú de la derecha tendrás la configuración</string>
+    <string name="helpIndex2">En el menú de la izquierda tendrás las diferentes funciones</string>
+    <string name="helpIndex3">En el menú de la derecha tendrás las opciones de configuración</string>
     <string name="helpIndex4">¿Por qué no lo pruebas?</string>
 
     <string name="helpTask1">En esta pantalla podrás crear/editar tareas</string>
