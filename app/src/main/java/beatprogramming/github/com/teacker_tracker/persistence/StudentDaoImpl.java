@@ -2,9 +2,13 @@ package beatprogramming.github.com.teacker_tracker.persistence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import beatprogramming.github.com.teacker_tracker.BDHelper;
 import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
@@ -12,14 +16,18 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.presenter.SubjectPresenter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Alumno.
  */
 public class StudentDaoImpl implements StudentDao {
 
+    private static String TAG = StudentDaoImpl.class.getName();
+
     //Tabla objetivo
     private static String STUDENT = "Student";
+    private static final String ENROLLMENT = "Enrollment";
 
     //Campos de la tabla student
     private static final String ID = "_id";
@@ -30,6 +38,10 @@ public class StudentDaoImpl implements StudentDao {
     private static final String ALIAS_ID = "studentId";
     private static final String ALIAS_NAME = "studentName";
 
+    //Campos de la tabla enrollment
+    private static final String ENROLLMENT_SUBJECT = "subjectId";
+    private static final String ENROLLMENT_STUDENT = "studentId";
+
     //Consultas sql
     private static final String FINDQUERY = "SELECT * FROM " + STUDENT + " ORDER BY surname ASC";
 
@@ -37,6 +49,9 @@ public class StudentDaoImpl implements StudentDao {
             "," + STUDENT + "." + NAME + " AS " + ALIAS_NAME + "," + SURNAME + "," + ICONPATH +
             " FROM " + STUDENT + " LEFT JOIN Enrollment ON Student._id = Enrollment.studentId LEFT JOIN " +
             "Subject ON Enrollment.subjectId = Subject._id WHERE Subject._id = ? ORDER BY Student.surname ASC";
+
+    private static final String FIND_ID = "SELECT " + ID + " FROM " + STUDENT + " WHERE " + NAME +
+            "=? AND " + SURNAME + "=?";
 
     //Variables sql
     private static SQLiteDatabase sqldb;
@@ -79,7 +94,7 @@ public class StudentDaoImpl implements StudentDao {
      * Metodo que devuelve todos los estudiantes matriculados en una determinada asignatura
      *
      * @param listener instancia del listener
-     * @param subject asignatura a filtrar
+     * @param subject  asignatura a filtrar
      */
     @Override
     public void findStudentsBySubject(Subject subject, OnLoadFinishListener listener) {
@@ -114,8 +129,8 @@ public class StudentDaoImpl implements StudentDao {
      * @param listener instancia del listener
      */
     @Override
-    public int updateStudent(int id, String name, String surname, String iconPath,
-                              OnUpdateFinishListener listener) {
+    public int updateStudent(int id, String name, String surname, String iconPath, int subjectId,
+                             OnUpdateFinishListener listener) {
 
         sqldb = db.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -127,7 +142,7 @@ public class StudentDaoImpl implements StudentDao {
         try {
             if (id == 0) {
                 //- Insertar alumno
-                id = (int) sqldb.insert(STUDENT, null, values);
+                id = (int) sqldb.insertOrThrow(STUDENT, null, values);
             } else {
                 //- Actualizar alumno
                 String[] selectionArgs = new String[]{Integer.toString(id)};
@@ -135,8 +150,28 @@ public class StudentDaoImpl implements StudentDao {
             }
             listener.onSuccess();
 
-        } catch (Exception e) {
+        } catch (SQLiteConstraintException e) {
+
+            sqldb = db.getReadableDatabase();
+            c = sqldb.rawQuery(FIND_ID, new String[]{name, surname});
+            if (c.moveToFirst()) id = c.getInt(c.getColumnIndex(ID));
+
             listener.onError(e.getMessage());
+
+        } finally {
+
+            sqldb = db.getWritableDatabase();
+            try {
+                ContentValues enrollments = new ContentValues();
+                enrollments.put(ENROLLMENT_SUBJECT, subjectId);
+                enrollments.put(ENROLLMENT_STUDENT, id);
+
+                Log.d(TAG, "updateStudent, enrollment: Subject " + subjectId + ", Student " + id);
+                sqldb.insert(ENROLLMENT, null, enrollments);
+
+            } catch (Exception e) {
+                listener.onError(e.getMessage());
+            }
         }
 
         return id;

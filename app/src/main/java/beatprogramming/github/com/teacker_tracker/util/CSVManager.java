@@ -2,8 +2,10 @@ package beatprogramming.github.com.teacker_tracker.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import java.io.File;
@@ -40,6 +42,9 @@ public class CSVManager {
 
     private static final String NAME_HEADER_DEFAULT = "Nombre";
     private static final String SURNAME_HEADER_DEFAULT = "Apellidos";
+
+    private static final int NAME_SURNAME_ORDER = 0;
+    private static final int SURNAME_NAME_ORDER = 1;
 
     private static CSVManager manager;
 
@@ -282,12 +287,31 @@ public class CSVManager {
         List<String[]> records;
         records = new ArrayList<>();
 
-        // Set headers
-        records.add(new String[]{name, surname});
+        // Get csv order preference
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        int headerPref = Integer.parseInt(pref.getString("format", "?"));
 
-        for (Student student : students) {
-            records.add(new String[]{student.getName(), student.getSurname()});
+        switch (headerPref) {
+            case NAME_SURNAME_ORDER:
+                // Set headers
+                records.add(new String[]{name, surname});
+
+                for (Student student : students) {
+                    records.add(new String[]{student.getName(), student.getSurname()});
+                }
+                break;
+            case SURNAME_NAME_ORDER:
+                // Set headers
+                records.add(new String[]{surname, name});
+
+                for (Student student : students) {
+                    records.add(new String[]{student.getSurname(), student.getName()});
+                }
+                break;
+            default:
+                break;
         }
+
         return records;
     }
 }

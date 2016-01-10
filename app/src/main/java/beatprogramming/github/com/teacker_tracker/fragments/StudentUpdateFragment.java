@@ -11,21 +11,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
+import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.util.FileUtil;
 import beatprogramming.github.com.teacker_tracker.util.ImageGetter;
 import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
 
-public class StudentUpdateFragment extends Fragment implements StudentUpdateView, View.OnClickListener {
+public class StudentUpdateFragment extends Fragment implements StudentUpdateView, View.OnClickListener,
+        AdapterView.OnItemSelectedListener {
 
     private static String TAG = StudentUpdateFragment.class.getName();
 
@@ -40,6 +48,8 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     private EditText surnameEditText;
     private ImageView iconImageView;
     private TextView iconPathTextView;
+    private Spinner subjectSpinner;
+    private TextView subjectIdTextView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +72,7 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     public void onResume() {
         super.onResume();
         getActivity().setTitle("   " + getResources().getString(R.string.studentUpdateTitle));
+        presenter.onResume();
     }
 
     @Override
@@ -75,30 +86,23 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
         surnameEditText = (EditText) view.findViewById(R.id.surname_field);
         iconImageView = (ImageView) view.findViewById(R.id.student_icon);
         iconPathTextView = (TextView) view.findViewById(R.id.student_icon_path);
+        subjectSpinner = (Spinner) view.findViewById(R.id.student_subject);
+        subjectIdTextView = (TextView) view.findViewById(R.id.student_subject_id);
+
+        subjectSpinner.setOnItemSelectedListener(this);
 
         iconImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent chooseImageIntent = ImageGetter.getPickImageIntent(getActivity());
                 startActivityForResult(chooseImageIntent, IMAGE_INTENT);
+
             }
         });
 
         Bundle args = getArguments();
-        if (args != null) {
-
-            Student student = (Student) args.getSerializable(STUDENT);
-
-            String iconPath = student.getIconPath();
-            if(iconPath != null) {
-                iconPathTextView.setText(iconPath);
-                iconImageView.setImageDrawable(Drawable.createFromPath(iconPath));
-            }
-
-            nameEditText.setText(student.getName());
-            surnameEditText.setText(student.getSurname());
-
-        }
+        Student student = (args != null) ? (Student) args.getSerializable(STUDENT) : null;
+        presenter.setStudent(student);
 
         Button submit = (Button) view.findViewById(R.id.button);
         submit.setOnClickListener(this);
@@ -112,7 +116,6 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     /**
      * Called once the fragment is associated with its activity context.
      * It assigns this context to be responsible of the fragment transactions.
-     *
      */
     @Override
     public void onAttach(Context context) {
@@ -129,7 +132,8 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
                 presenter.submit(Integer.parseInt(idTextView.getText().toString()),
                         nameEditText.getText().toString(),
                         surnameEditText.getText().toString(),
-                        iconPathTextView.getText().toString());
+                        iconPathTextView.getText().toString(),
+                        Integer.parseInt(subjectIdTextView.getText().toString()));
                 break;
             case R.id.button_delete:
                 presenter.delete(Integer.parseInt(idTextView.getText().toString()));
@@ -141,7 +145,6 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
     /**
      * Called when the ImageGetter activity finish returning the chosen image.
-     *
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
@@ -177,5 +180,56 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
     private void showToastMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setSubjectItems(List<Subject> items) {
+        subjectSpinner.setAdapter(new ArrayAdapter<Subject>(getContext(),
+                R.layout.textview, items));
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        presenter.onSubjectSelected(position);
+        Log.d(TAG, "onItemSelected, " + position);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        presenter.onSubjectSelected(0);
+        Log.d(TAG, "onNothingSelected ");
+    }
+
+    @Override
+    public void setSubject(int subjectId) {
+
+        for (int i = 0; i < subjectSpinner.getAdapter().getCount(); i++) {
+            Subject subject = (Subject) subjectSpinner.getAdapter().getItem(i);
+            if (subject.getId() == subjectId) {
+                subjectSpinner.setSelection(i);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void setIconPath(String iconPath) {
+        iconPathTextView.setText(iconPath);
+        iconImageView.setImageDrawable(Drawable.createFromPath(iconPath));
+    }
+
+    @Override
+    public void setName(String name) {
+        nameEditText.setText(name);
+    }
+
+    @Override
+    public void setSurname(String surname) {
+        surnameEditText.setText(surname);
+    }
+
+    @Override
+    public void setSubjectId(int id) {
+        subjectIdTextView.setText(Integer.toString(id));
     }
 }

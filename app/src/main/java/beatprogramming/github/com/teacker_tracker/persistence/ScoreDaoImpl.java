@@ -183,21 +183,10 @@ public class ScoreDaoImpl implements ScoreDao {
                 student.setIconPath(c.getString(c.getColumnIndex(ICONPATH)));
                 student.setId(c.getInt(c.getColumnIndex(ALIAS_STUDENT)));
 
-//                Subject subject = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
-//                        c.getString(c.getColumnIndex(DESCRIPTION)),
-//                        c.getString(c.getColumnIndex(COURSE)));
-//                subject.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
-
                 Review r;
                 if (c.getString(c.getColumnIndex(TYPE)) == PROJECT) {
-//                    r = new Project(c.getString(c.getColumnIndex(NAMEREVIEW)),
-//                            subject,
-//                            new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                     r = new Project();
                 } else {
-//                    r = new Exam(c.getString(c.getColumnIndex(NAMEREVIEW)),
-//                            subject,
-//                            new DateTime(c.getInt(c.getColumnIndex(DATETIME))));
                     r = new Exam();
                 }
                 r.setId(c.getInt(c.getColumnIndex(REVIEWID)));

@@ -35,5 +35,4 @@ public interface ReviewUpdateView {
 
     void selectType(int examType);
 
-    void loadScoreFragment();
 }

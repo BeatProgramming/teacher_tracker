@@ -33,6 +33,7 @@ public class SubjectDaoImpl implements SubjectDao {
     private static final String DESCRIPTION = "description";
     private static final String COURSE = "course";
 
+    //Campos de la tabla enrollment
     private static final String ENROLLMENT_SUBJECT = "subjectId";
     private static final String ENROLLMENT_STUDENT = "studentId";
 
@@ -118,20 +119,20 @@ public class SubjectDaoImpl implements SubjectDao {
 
         updateSubject(subject.getId(), subject.getNombre(), subject.getDescripcion(), subject.getCurso(), listener);
 
-        sqldb = db.getWritableDatabase();
-        for(Student student : subject.getStudentList()) {
-
-            try {
-                ContentValues enrollments = new ContentValues();
-                enrollments.put(ENROLLMENT_SUBJECT, subject.getId());
-                enrollments.put(ENROLLMENT_STUDENT, student.getId());
-
-                sqldb.insert(ENROLLMENT, null, enrollments);
-
-            } catch (Exception e) {
-                continue;
-            }
-        }
+//        sqldb = db.getWritableDatabase();
+//        for(Student student : subject.getStudentList()) {
+//
+//            try {
+//                ContentValues enrollments = new ContentValues();
+//                enrollments.put(ENROLLMENT_SUBJECT, subject.getId());
+//                enrollments.put(ENROLLMENT_STUDENT, student.getId());
+//
+//                sqldb.insert(ENROLLMENT, null, enrollments);
+//
+//            } catch (Exception e) {
+//                continue;
+//            }
+//        }
 
     }
 

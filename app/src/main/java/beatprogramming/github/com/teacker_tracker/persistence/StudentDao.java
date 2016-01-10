@@ -14,7 +14,7 @@ public interface StudentDao {
 
     void findStudentsBySubject(Subject subject, OnLoadFinishListener listener);
 
-    int updateStudent(int id, String name, String surname, String iconPath,
+    int updateStudent(int id, String name, String surname, String iconPath, int subjectId,
                        OnUpdateFinishListener listener);
 
     void deleteStudent(int id, OnDeleteFinishListener listener);

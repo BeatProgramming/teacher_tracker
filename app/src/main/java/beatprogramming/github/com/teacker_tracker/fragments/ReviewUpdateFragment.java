@@ -234,11 +234,6 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
         }
     }
 
-    @Override
-    public void loadScoreFragment() {
-        callback.replaceFragment(new ScoreFragment());
-    }
-
     private void showToastMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }

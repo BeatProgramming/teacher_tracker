@@ -45,7 +45,7 @@ public class ImportStudentsPresenter implements OnLoadFinishListener, OnUpdateFi
         Subject subject = view.getSubjectFromAdapter(position);
         for(Student student: studentList) {
             Log.d(TAG, "onItemClicked, student: " + student.toString());
-            int id = studentDao.updateStudent(student.getId(), student.getName(), student.getSurname(), student.getIconPath(), this);
+            int id = studentDao.updateStudent(student.getId(), student.getName(), student.getSurname(), student.getIconPath(), subject.getId(), this);
             student.setId(id);
         }
         subject.addStudents(studentList.toArray(new Student[studentList.size()]));
