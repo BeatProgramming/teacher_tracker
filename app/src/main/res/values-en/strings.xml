@@ -126,4 +126,17 @@
     <string name="textNameTask">Task name</string>
     <string name="textNameSubject">Subject name</string>
     <string name="textNameReview">Review name</string>
+    <string name="onBackSettingsText">Changes will be modify after restart</string>
+    <string name="reviewCreateTitle">New schedule</string>
+    <string name="studentCreateTitle">New student</string>
+    <string name="subjectCreateTitle">New subject</string>
+    <string name="taskCreateTitle">New task</string>
+    <string name="taskUpdateTitle">Modify task</string>
+    <string name="title_csv_format">CSV Format</string>
+    <string name="title_help_mode">Help mode</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_settings">Preferences</string>
+    <string name="title_user">User</string>
+    <string name="title_user_mail">Email</string>
+    <string name="title_user_name">Name</string>
 </resources>

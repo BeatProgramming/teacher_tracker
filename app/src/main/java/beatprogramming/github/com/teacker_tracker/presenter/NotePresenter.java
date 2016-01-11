@@ -1,10 +1,6 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
-import android.text.Editable;
-
 import java.io.Serializable;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
@@ -13,16 +9,14 @@ import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.NoteView;
 
 /**
- * Created by adrian on 11/01/2016.
+ * - Controlador de las notas elaboradas para cada tarea
  */
 public class NotePresenter implements OnLoadFinishListener, OnUpdateFinishListener {
 
     private NoteView view;
     private TaskDao taskDao;
-
     private Task task;
-
-    private String note;
+    protected String note;
     public NotePresenter(NoteView view) {
         this.view=view;
         taskDao= new TaskDaoImpl();

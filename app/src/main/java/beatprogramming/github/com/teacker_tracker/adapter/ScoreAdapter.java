@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,14 +13,14 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
-
+/**
+ * - Implementación personalizada de ArrayAdapter respecto a calificaciones
+ */
 public class ScoreAdapter extends ArrayAdapter<Score> {
 
     private final String TAG = ScoreAdapter.class.getName();
-
     private final Context context;
     private final int resource;
-
 
     public ScoreAdapter(Context context, int resource, List<Score> items) {
         super(context, resource, items);

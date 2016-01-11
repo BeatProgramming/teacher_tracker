@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="PREFERENCIAS" android:layout="@layout/activity_title_settings">
+    <PreferenceCategory android:title="@string/title_settings" android:layout="@layout/activity_title_settings">
     </PreferenceCategory>
     <!-- Preferencias usuario -->
-    <PreferenceCategory android:title="Usuario">
+    <PreferenceCategory android:title="@string/title_user">
         <EditTextPreference
             android:key="user_name"
-            android:title="Nombre"
+            android:title="@string/title_user_name"
             android:defaultValue="Nombre"
             android:singleLine="true"/>
         <EditTextPreference
             android:key="user_mail"
-            android:title="Correo electrónico"
+            android:title="@string/title_user_mail"
             android:defaultValue="Nombre@teachertracker.es"
             android:singleLine="true"/>
     </PreferenceCategory>
     <!-- Preferencias notificaciones -->
-    <PreferenceCategory android:title="Notificaciones">
+    <PreferenceCategory android:title="@string/title_notifications">
         <CheckBoxPreference
             android:key="notification"
-            android:title="Notificaciones"
+            android:title="@string/title_notifications"
             android:defaultValue="false"/>
         <CheckBoxPreference
             android:key="help"
-            android:title="Modo ayuda"
+            android:title="@string/title_help_mode"
             android:defaultValue="true"/>
     </PreferenceCategory>
     <!-- Preferencias tareas -->
-    <PreferenceCategory android:title="CSV">
+    <PreferenceCategory android:title="@string/title_csv">
         <ListPreference
         android:key="format"
-        android:title="Formato CSV"
+        android:title="@string/title_csv_format"
         android:entries="@array/order"
         android:entryValues="@array/orderValues"
         android:defaultValue="0"/>

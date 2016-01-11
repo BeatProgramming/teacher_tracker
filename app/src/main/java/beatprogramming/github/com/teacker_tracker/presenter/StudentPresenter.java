@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import android.util.Log;
 import java.io.Serializable;
 import java.util.List;
@@ -11,12 +10,11 @@ import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDaoImpl;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de los estudiantes
  */
 public class StudentPresenter implements OnLoadFinishListener {
 
     private static String TAG = StudentPresenter.class.getName();
-
     private StudentView view;
     private StudentDao studentDao;
 

@@ -5,14 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
+/**
+ * - Crea la BD con el script creado en ScriptBD
+ */
 public class BDHelper extends SQLiteOpenHelper {
 
     private static final String TAG = BDHelper.class.getName();
-
     private static final String DATABASE_NAME = "TEACHER_TRACKER.db";
     private static final int DATABASE_VERSION = 2;
-
     private static BDHelper bdHelper;
 
     public BDHelper(Context context) {
@@ -27,6 +27,7 @@ public class BDHelper extends SQLiteOpenHelper {
         return bdHelper;
     }
 
+    //- Crea la BDD
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -71,11 +72,11 @@ public class BDHelper extends SQLiteOpenHelper {
 
     }
 
+    //- Actualiza la BDD
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         Log.d(TAG, "onUpgrade");
-
         onCreate(db);
 
     }

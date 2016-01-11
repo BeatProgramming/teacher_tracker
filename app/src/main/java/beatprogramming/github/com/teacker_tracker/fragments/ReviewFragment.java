@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,9 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.ReviewAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
@@ -20,12 +17,13 @@ import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
 
+/**
+ * - Implementa las evaluaciones (Exámenes/Prácticas)
+ */
 public class ReviewFragment extends ListFragment implements ReviewView {
 
     private FragmentCallback callback;
-
     private ProgressBar progressBar;
-
     private ReviewPresenter presenter;
 
     @Override

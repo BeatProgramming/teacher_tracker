@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import android.util.Log;
 
 import org.joda.time.DateTime;
@@ -24,21 +23,18 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
-/** Clase presenter para reviewUpdate
- * Responsible object for handling all UI events on behalf of the view.
+/**
+ * - Controlador de la actualización de evaluaciones (Exámenes/Prácticas)
  */
 public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener, OnDateTimePickedListener {
 
     private static String TAG = ReviewUpdatePresenter.class.getName();
-
     public static final int RADIO_EXAM = 0;
     public static final int RADIO_PROJECT = 1;
-
     private ReviewUpdateView view;
     private ReviewDao reviewDao;
     private SubjectDao subjectDao;
     private List<Subject> subjectList;
-
     private Review review;
 
     public ReviewUpdatePresenter(ReviewUpdateView view) {

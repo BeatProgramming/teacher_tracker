@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,11 +9,10 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 /**
- * Implementación en SQLite del acceso a base de datos para manejar datos de Asignatura.
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de asignaturas
  */
 public class SubjectDaoImpl implements SubjectDao {
 

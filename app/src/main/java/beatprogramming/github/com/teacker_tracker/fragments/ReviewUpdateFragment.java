@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -26,6 +25,9 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.ReviewUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.view.ReviewUpdateView;
 
+/**
+ * - Implementa la actualización de evaluaciones (Exámenes/Prácticas)
+ */
 public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, RadioGroup
         .OnCheckedChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 

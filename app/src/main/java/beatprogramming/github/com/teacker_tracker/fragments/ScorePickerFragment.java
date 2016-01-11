@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -14,20 +13,20 @@ import android.widget.EditText;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnScorePickedListener;
 
+/**
+ * - Implementa el contador de selección númerica para las calificaciones
+ */
 public class ScorePickerFragment extends DialogFragment implements View.OnClickListener {
 
     private static final int MIN_VALUE = 0;
     private static final int MAX_VALUE = 10;
     private static final float INCREMENT = 0.1f;
-
     private OnScorePickedListener listener;
     private int itemPosition;
-
     private Button upButton;
     private Button downButton;
     private EditText editText;
     private float value;
-
     private DialogInterface.OnClickListener positiveButtonListener;
     private DialogInterface.OnClickListener negativeButtonListener;
 

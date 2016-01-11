@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -13,10 +12,12 @@ import java.util.List;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 
+/**
+ * - Implementación personalizada de ArrayAdapter respecto a estudiantes
+ */
 public class StudentAdapter extends ArrayAdapter {
 
     private static final String TAG = StudentAdapter.class.getName();
-
     private Context context;
     private int resource;
 

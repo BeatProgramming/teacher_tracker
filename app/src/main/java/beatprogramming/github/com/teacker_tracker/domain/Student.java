@@ -1,9 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import java.io.Serializable;
 
 /**
- * Clase que modela un estudiante de la base de datos.
+ * - Modela un estudiante de la base de datos.
  */
 public class Student implements Serializable{
 

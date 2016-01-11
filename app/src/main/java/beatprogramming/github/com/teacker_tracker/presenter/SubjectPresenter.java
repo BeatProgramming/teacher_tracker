@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +9,9 @@ import beatprogramming.github.com.teacker_tracker.view.SubjectView;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de las asignaturas
  */
 public class SubjectPresenter implements OnLoadFinishListener {
-
 
     private SubjectView view;
     private SubjectDao subjectDao;

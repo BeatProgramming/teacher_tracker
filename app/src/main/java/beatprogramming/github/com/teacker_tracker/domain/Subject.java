@@ -1,11 +1,10 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que modela una asignatura de la base de datos.
+ * - Modela una asignatura de la base de datos.
  */
 public class Subject implements Serializable {
 

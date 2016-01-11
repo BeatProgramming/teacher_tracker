@@ -1,11 +1,10 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
 
 /**
- * Clase que modela una tarea de la base de datos.
+ * - Modela una tarea de la base de datos.
  */
 public class Task implements Serializable {
 

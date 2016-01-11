@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,7 +18,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 
 /**
- * Implementación en SQLite del acceso a base de datos para manejar datos de Tarea.
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de tareas
  */
 public class TaskDaoImpl implements TaskDao {
 

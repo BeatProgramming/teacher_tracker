@@ -1,6 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,8 +16,10 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.domain.Task;
 
+/**
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de horarios
+ */
 public class ScheduleDaoImpl implements ScheduleDao {
 
     private static String TAG = ScheduleDaoImpl.class.getName();

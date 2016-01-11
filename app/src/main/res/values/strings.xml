@@ -153,5 +153,6 @@
     <string name="reviewCreateTitle">Nueva evaluacion</string>
     <string name="studentCreateTitle">Nuevo estudiante</string>
     <string name="noteExampleNote">Esto es una nota...</string>
+    <string name="onBackSettingsText">Los cambios se realizarán al reiniciar la aplicación</string>
 
 </resources>

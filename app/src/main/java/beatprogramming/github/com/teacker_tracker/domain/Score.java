@@ -1,9 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import java.io.Serializable;
 
 /**
- * Clase que modela una puntuación de la base de datos.
+ * - Modela una puntuación de la base de datos.
  */
 public class Score implements Serializable {
 

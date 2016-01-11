@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.util;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,16 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que recoge una imagen
+ * - Recoge una imagen
  */
 public class ImageGetter {
 
     private static final String TAG = ImageGetter.class.getName();
-
     private static final String FOTO = "Selecciona una foto";
     // Default width pixels
     private static final int DEFAULT_MIN_WIDTH_QUALITY = 400;
-
     private static final String TEMP_IMAGE_NAME = "tempImage";
 
     public static Intent getPickImageIntent(Context context) {

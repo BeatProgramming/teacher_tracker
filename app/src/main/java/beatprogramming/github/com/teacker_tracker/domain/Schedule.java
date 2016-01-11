@@ -1,9 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import java.io.Serializable;
 
 /**
- * Clase que modela un horario.
+ * - Modela un horario.
  */
 public class Schedule implements Serializable{
 

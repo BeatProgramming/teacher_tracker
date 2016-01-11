@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -25,14 +24,15 @@ import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.SubjectUpdateView;
 import beatprogramming.github.com.teacker_tracker.presenter.SubjectUpdatePresenter;
 
+/**
+ * - Implementa la actualización de asignaturas
+ */
 public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView, View.OnClickListener {
 
     private static final String TAG = SubjectUpdateFragment.class.getName();
     private static final String SUBJECT = "BUNDLE_SUBJECT";
-
     private FragmentCallback callback;
     private SubjectUpdatePresenter presenter;
-
     private TextView idSubjectTextView;
     private EditText nameEditText;
     private EditText descriptionEditText;
@@ -46,10 +46,8 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     private ToggleButton satToggleButton;
     private ToggleButton sunToggleButton;
     private TextView idScheduleTextView;
-
     private Boolean[] days;
     private TextView timeTextView;
-
     // false para modificar, true para crear
     private boolean create;
 

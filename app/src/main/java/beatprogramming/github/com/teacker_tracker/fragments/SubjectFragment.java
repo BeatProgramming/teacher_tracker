@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,15 +17,12 @@ import beatprogramming.github.com.teacker_tracker.view.SubjectView;
 import beatprogramming.github.com.teacker_tracker.presenter.SubjectPresenter;
 
 /**
- * Fragment view for Subject's List
+ * - Implementa las asignaturas
  */
 public class SubjectFragment extends ListFragment implements SubjectView {
 
-
     private FragmentCallback callback;
-
     private ProgressBar progressBar;
-
     private SubjectPresenter presenter;
 
     @Override

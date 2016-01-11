@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,14 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.NotePresenter;
 import beatprogramming.github.com.teacker_tracker.view.NoteView;
 
 /**
- * Created by adrian on 11/01/2016.
+ * - Implementa la creación de notas de una tarea
  */
 public class NoteFragment extends Fragment implements NoteView {
 

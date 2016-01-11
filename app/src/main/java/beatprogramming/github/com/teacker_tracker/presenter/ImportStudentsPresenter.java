@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import android.util.Log;
 
 import java.io.Serializable;
@@ -15,14 +14,14 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ImportStudentsView;
 
+/**
+ * - Controlador de la importación de estudiantes
+ */
 public class ImportStudentsPresenter implements OnLoadFinishListener, OnUpdateFinishListener {
 
     private static String TAG = SubjectPresenter.class.getName();
-
     private List<Student> studentList;
-
     private ImportStudentsView view;
-
     private SubjectDao subjectDao;
     private StudentDao studentDao;
 

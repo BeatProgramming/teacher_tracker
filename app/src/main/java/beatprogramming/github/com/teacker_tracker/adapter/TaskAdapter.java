@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.io.Serializable;
 import java.util.List;
-
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnNoteClickedListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
@@ -18,12 +15,9 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 
 /**
- * Clase que modifica la clase ArrayAdapter para utilizarla en la actividad principal
- * Created by Adrian on 07/11/2015.
+ * - Implementación personalizada de ArrayAdapter respecto a tareas
  */
 public class TaskAdapter extends ArrayAdapter<Serializable> {
-
-    private static String TAG = TaskAdapter.class.getName();
 
     private Context context;
     private int resource;
