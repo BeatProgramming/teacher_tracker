@@ -24,4 +24,6 @@ public interface StudentUpdateView {
     void setName(String name);
 
     void setSurname(String surname);
+
+    void setId(int id);
 }

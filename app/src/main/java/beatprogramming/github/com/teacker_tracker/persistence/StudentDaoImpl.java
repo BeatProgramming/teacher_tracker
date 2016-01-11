@@ -16,32 +16,26 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
-import beatprogramming.github.com.teacker_tracker.presenter.SubjectPresenter;
 
 /**
  * Implementación en SQLite del acceso a base de datos para manejar datos de Alumno.
  */
 public class StudentDaoImpl implements StudentDao {
 
-    private static String TAG = StudentDaoImpl.class.getName();
-
-    //Tabla objetivo
-    private static String STUDENT = "Student";
     private static final String ENROLLMENT = "Enrollment";
-
     //Campos de la tabla student
     private static final String ID = "_id";
     private static final String NAME = "name";
     private static final String SURNAME = "surname";
     private static final String ICONPATH = "iconPath";
-
     private static final String ALIAS_ID = "studentId";
     private static final String ALIAS_NAME = "studentName";
-
     //Campos de la tabla enrollment
     private static final String ENROLLMENT_SUBJECT = "subjectId";
     private static final String ENROLLMENT_STUDENT = "studentId";
-
+    private static String TAG = StudentDaoImpl.class.getName();
+    //Tabla objetivo
+    private static String STUDENT = "Student";
     //Consultas sql
     private static final String FINDQUERY = "SELECT * FROM " + STUDENT + " ORDER BY surname ASC";
 
@@ -148,7 +142,6 @@ public class StudentDaoImpl implements StudentDao {
                 String[] selectionArgs = new String[]{Integer.toString(id)};
                 sqldb.update(STUDENT, values, ScriptBD.ID_ALUMNO + "=?", selectionArgs);
             }
-            listener.onSuccess();
 
         } catch (SQLiteConstraintException e) {
 
@@ -156,23 +149,17 @@ public class StudentDaoImpl implements StudentDao {
             c = sqldb.rawQuery(FIND_ID, new String[]{name, surname});
             if (c.moveToFirst()) id = c.getInt(c.getColumnIndex(ID));
 
-            listener.onError(e.getMessage());
-
-        } finally {
-
-            sqldb = db.getWritableDatabase();
-            try {
-                ContentValues enrollments = new ContentValues();
-                enrollments.put(ENROLLMENT_SUBJECT, subjectId);
-                enrollments.put(ENROLLMENT_STUDENT, id);
-
-                Log.d(TAG, "updateStudent, enrollment: Subject " + subjectId + ", Student " + id);
-                sqldb.insert(ENROLLMENT, null, enrollments);
-
-            } catch (Exception e) {
-                listener.onError(e.getMessage());
-            }
         }
+
+        sqldb = db.getWritableDatabase();
+        ContentValues enrollments = new ContentValues();
+        enrollments.put(ENROLLMENT_SUBJECT, subjectId);
+        enrollments.put(ENROLLMENT_STUDENT, id);
+
+        Log.d(TAG, "updateStudent, enrollment: Subject " + subjectId + ", Student " + id);
+        sqldb.insertWithOnConflict(ENROLLMENT, null, enrollments, SQLiteDatabase.CONFLICT_IGNORE);
+
+        listener.onSuccess();
 
         return id;
     }
@@ -191,6 +178,7 @@ public class StudentDaoImpl implements StudentDao {
             //- Borrar alumno
             String[] selectionArgs = new String[]{Integer.toString(id)};
             sql.delete(STUDENT, ScriptBD.ID_ALUMNO + "=?", selectionArgs);
+            Log.d(TAG, "bea tontina");
         }
         listener.onDeleteFinish();
 

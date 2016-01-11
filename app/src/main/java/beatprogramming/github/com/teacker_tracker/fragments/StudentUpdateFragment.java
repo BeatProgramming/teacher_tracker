@@ -24,7 +24,6 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
-import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentUpdatePresenter;
@@ -97,14 +96,7 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
         subjectSpinner.setOnItemSelectedListener(this);
 
-        iconImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent chooseImageIntent = ImageGetter.getPickImageIntent(getActivity());
-                startActivityForResult(chooseImageIntent, IMAGE_INTENT);
-
-            }
-        });
+        iconImageView.setOnClickListener(this);
 
         Bundle args = getArguments();
         Student student = (args != null) ? (Student) args.getSerializable(STUDENT) : null;
@@ -146,6 +138,9 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
             case R.id.button_delete:
                 presenter.delete(Integer.parseInt(idTextView.getText().toString()));
                 break;
+            case R.id.student_icon:
+                Intent chooseImageIntent = ImageGetter.getPickImageIntent(getActivity());
+                startActivityForResult(chooseImageIntent, IMAGE_INTENT);
             default:
                 break;
         }
@@ -234,6 +229,11 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     @Override
     public void setSurname(String surname) {
         surnameEditText.setText(surname);
+    }
+
+    @Override
+    public void setId(int id) {
+        idTextView.setText(String.valueOf(id));
     }
 
     @Override

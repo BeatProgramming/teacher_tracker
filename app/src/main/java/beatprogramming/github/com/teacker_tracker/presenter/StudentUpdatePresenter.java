@@ -8,7 +8,6 @@ import java.util.List;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Project;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
@@ -100,6 +99,7 @@ public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
                 view.setIconPath(iconPath);
             }
 
+            view.setId(student.getId());
             view.setName(student.getName());
             view.setSurname(student.getSurname());
 
