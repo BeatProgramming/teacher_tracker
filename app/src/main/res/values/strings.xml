@@ -152,5 +152,6 @@
     <string name="taskUpdateTitle">Modificar tarea</string>
     <string name="reviewCreateTitle">Nueva evaluacion</string>
     <string name="studentCreateTitle">Nuevo estudiante</string>
+    <string name="noteExampleNote">Esto es una nota...</string>
 
 </resources>

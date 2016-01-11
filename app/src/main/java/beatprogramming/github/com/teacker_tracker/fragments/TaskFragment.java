@@ -119,8 +119,8 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
 
     @Override
     public void setItems(List<Serializable> items) {
-        adapter.addAll(items);
-        adapter.notifyDataSetChanged();
+//        adapter.addAll(items);
+        adapter.orderAdd(items);
     }
 
     @Override

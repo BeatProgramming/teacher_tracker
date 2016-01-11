@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,6 +28,8 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
     private Context context;
     private int resource;
     private OnNoteClickedListener callback;
+
+    private List<Serializable> itemList;
 
     public TaskAdapter(Context context, int resource, List<Serializable> objects, OnNoteClickedListener callback) {
         super(context, resource, objects);
@@ -56,9 +57,11 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
 
         if(serializable instanceof Task) {
             final Task task = (Task) serializable;
+
             nameSubjectTextView.setText(task.getSubject().toString());
             nameTaskTextView.setText(task.toString());
             hourTextView.setText(DateTimeFormatter.dateTimeToTimeString(task.getDateTime()));
+
             //Accion del newNoteButton
             newNoteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,10 +70,13 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
                 }
             });
         } else {
+
             Schedule schedule = (Schedule) serializable;
+
             nameSubjectTextView.setText(schedule.getSubject().toString());
             nameTaskTextView.setText(schedule.getAula());
             hourTextView.setText(schedule.getDateTime());
+
             newNoteButton.setVisibility(View.INVISIBLE);
             newNoteButton.setClickable(false);
         }
@@ -78,4 +84,17 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
         return listItemView;
     }
 
+    public void orderAdd(List<Serializable> items) {
+
+        for(Serializable item: items) {
+
+            if(item instanceof Task) {
+
+            } else {
+
+            }
+        }
+
+        notifyDataSetChanged();
+    }
 }

@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8FF9C"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -14,7 +15,7 @@
         android:id="@+id/task_note"
         android:gravity="top|start"
         android:minLines="5"
-        android:hint="Esto es una nota..."
+        android:hint="@string/noteExampleNote"
         android:inputType="textMultiLine"/>
 
 </RelativeLayout>

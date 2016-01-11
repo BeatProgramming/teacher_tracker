@@ -11,10 +11,7 @@ import android.widget.EditText;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
-import beatprogramming.github.com.teacker_tracker.persistence.TaskDao;
-import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.presenter.NotePresenter;
-import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.view.NoteView;
 
 /**
@@ -52,7 +49,7 @@ public class NoteFragment extends Fragment implements NoteView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_notes, container, false);
+        View view = inflater.inflate(R.layout.fragment_notes, container, false);
 
         text = (EditText) view.findViewById(R.id.task_note);
         Bundle args = getArguments();
