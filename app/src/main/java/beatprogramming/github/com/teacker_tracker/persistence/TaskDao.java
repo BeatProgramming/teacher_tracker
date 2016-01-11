@@ -9,9 +9,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListene
  */
 public interface TaskDao {
 
-    void findTasks(OnLoadFinishListener listener);
-
-    void findTasksAndSchedules(OnLoadFinishListener listener);
+    void findTasks(DateTime dateTime, OnLoadFinishListener listener);
 
     void updateTask(int id, String name,int subjectId,DateTime dateTime, String note,
                     OnUpdateFinishListener listener);

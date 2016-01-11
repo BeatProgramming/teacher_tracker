@@ -22,6 +22,7 @@ import java.util.List;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnNoteClickedListener;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskPresenter;
@@ -30,10 +31,11 @@ import beatprogramming.github.com.teacker_tracker.view.TaskView;
 /**
  * - Implementa las tareas
  */
-public class TaskFragment extends ListFragment implements TaskView, OnNoteClickedListener {
+public class TaskFragment extends ListFragment implements TaskView, View.OnClickListener, OnDateTimePickedListener, OnNoteClickedListener {
 
     private FragmentCallback callback;
     private ProgressBar progressBar;
+    private View titleBar;
     private TaskPresenter presenter;
     private TaskAdapter adapter;
 
@@ -46,12 +48,8 @@ public class TaskFragment extends ListFragment implements TaskView, OnNoteClicke
     @Override
     public void onResume() {
         super.onResume();
-        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
-        setListAdapter(adapter);
-        DateTime date = new DateTime();
-        getActivity().setTitle("   " + getDayString(date) + ", " + date.getDayOfMonth() + "-" +
-                date.getMonthOfYear() + "-" + date.getYear());
-        presenter.onResume();
+
+        reloadItems(new DateTime());
     }
 
     private String getDayString(DateTime date) {
@@ -73,28 +71,19 @@ public class TaskFragment extends ListFragment implements TaskView, OnNoteClicke
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onCreateTask();
-            }
-        });
+        fab.setOnClickListener(this);
+
+        titleBar = getActivity().findViewById(R.id.toolbar);
+        titleBar.setClickable(true);
+        titleBar.setOnClickListener(this);
+
         return view;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
+    public void onStop() {
+        super.onStop();
+        titleBar.setClickable(false);
     }
 
     @Override
@@ -149,8 +138,41 @@ public class TaskFragment extends ListFragment implements TaskView, OnNoteClicke
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                presenter.onCreateTask();
+                break;
+            case R.id.toolbar:
+                callback.showDialog(DatePickerFragment.newInstance(this));
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onDatePicked(int year, int month, int day) {
+        DateTime dateTime = new DateTime().withDate(year, month, day);
+        reloadItems(dateTime);
+    }
+
+    @Override
+    public void onTimePicked(int hour, int minute) {
+        // No se aplica.
+    }
+
     public void onNoteClicked(Task task) {
         Fragment frag = NoteFragment.newInstance(task);
         callback.replaceFragment(frag);
+    }
+
+    public void reloadItems(DateTime dateTime) {
+        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
+        setListAdapter(adapter);
+
+        getActivity().setTitle("   " + getDayString(dateTime) + ", " + dateTime.getDayOfMonth() + "-" +
+                dateTime.getMonthOfYear() + "-" + dateTime.getYear());
+        presenter.reloadItems(dateTime);
     }
 }
