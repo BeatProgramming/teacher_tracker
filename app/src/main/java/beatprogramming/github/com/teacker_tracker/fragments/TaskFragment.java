@@ -17,6 +17,7 @@ import java.util.List;
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskPresenter;
 import beatprogramming.github.com.teacker_tracker.view.TaskView;
@@ -25,11 +26,12 @@ import beatprogramming.github.com.teacker_tracker.view.TaskView;
 /** Fragmento de tareas
  * Created by adrian on 27/11/2015.
  */
-public class TaskFragment extends ListFragment implements TaskView {
+public class TaskFragment extends ListFragment implements TaskView, View.OnClickListener, OnDateTimePickedListener {
 
     private FragmentCallback callback;
 
     private ProgressBar progressBar;
+    private View titleBar;
 
     private TaskPresenter presenter;
 
@@ -67,14 +69,19 @@ public class TaskFragment extends ListFragment implements TaskView {
         progressBar = (ProgressBar) view.findViewById(R.id.progress);
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.onCreateTask();
-            }
-        });
+        fab.setOnClickListener(this);
+
+        titleBar = getActivity().findViewById(R.id.toolbar);
+        titleBar.setClickable(true);
+        titleBar.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        titleBar.setClickable(false);
     }
 
     @Override
@@ -123,4 +130,27 @@ public class TaskFragment extends ListFragment implements TaskView {
         callback = (FragmentCallback) context;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                presenter.onCreateTask();
+                break;
+            case R.id.toolbar:
+                callback.showDialog(DatePickerFragment.newInstance(this));
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onDatePicked(int year, int month, int day) {
+        // Cambiar tareas a mostrar.
+    }
+
+    @Override
+    public void onTimePicked(int hour, int minute) {
+        // No se aplica.
+    }
 }
