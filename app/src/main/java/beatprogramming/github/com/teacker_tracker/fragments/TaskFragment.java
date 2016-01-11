@@ -114,8 +114,7 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
 
     @Override
     public void setItems(List<Serializable> items) {
-//        adapter.addAll(items);
-        adapter.orderAdd(items);
+        adapter.addAll(items);
     }
 
     @Override
@@ -168,7 +167,7 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
     }
 
     public void reloadItems(DateTime dateTime) {
-        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
+        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this);
         setListAdapter(adapter);
 
         getActivity().setTitle("   " + getDayString(dateTime) + ", " + dateTime.getDayOfMonth() + "-" +

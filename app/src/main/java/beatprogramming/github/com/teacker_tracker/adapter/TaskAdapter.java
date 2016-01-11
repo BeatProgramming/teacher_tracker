@@ -6,8 +6,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.io.Serializable;
 import java.util.List;
+
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.callback.OnNoteClickedListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
@@ -23,7 +25,6 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
     private int resource;
     private OnNoteClickedListener callback;
 
-    private List<Serializable> itemList;
 
     public TaskAdapter(Context context, int resource, List<Serializable> objects, OnNoteClickedListener callback) {
         super(context, resource, objects);
@@ -78,17 +79,4 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
         return listItemView;
     }
 
-    public void orderAdd(List<Serializable> items) {
-
-        for(Serializable item: items) {
-
-            if(item instanceof Task) {
-
-            } else {
-
-            }
-        }
-
-        notifyDataSetChanged();
-    }
 }

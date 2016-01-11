@@ -31,7 +31,7 @@ public class TaskPresenter implements OnLoadFinishListener {
     public void reloadItems(DateTime dateTime) {
         view.showLoading();
         taskDao.findTasks(dateTime, this);
-        scheduleDao.findSchedule(this);
+        scheduleDao.findSchedule(dateTime, this);
     }
 
       public void onItemClicked(int position) {

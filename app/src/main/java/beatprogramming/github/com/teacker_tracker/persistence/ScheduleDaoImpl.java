@@ -64,10 +64,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
     /**
      * Metodo que devuelve todos los horarios de la base de datos.
+     * @param filterDateTime fecha a filtrar
      * @param listener instancia del listener
      */
     @Override
-    public void findSchedule(OnLoadFinishListener listener) {
+    public void findSchedule(DateTime filterDateTime, OnLoadFinishListener listener) {
         //- Buscar todos los horarios
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
@@ -84,11 +85,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
                         crearBooleanDias(c.getString(c.getColumnIndex(DAYS))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
                 sc.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
-                String[] stringHour = sc.getDateTime().split(":");
-                DateTime dt = new DateTime();
-                dt.withTime(Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]), 0, 0);
                 Boolean[] dias = sc.getDias();
-                if (dias[dt.getDayOfWeek() - 1]) {
+                if (dias[filterDateTime.getDayOfWeek() - 1]) {
                     schedules.add(sc);
                 }
             }while(c.moveToNext());

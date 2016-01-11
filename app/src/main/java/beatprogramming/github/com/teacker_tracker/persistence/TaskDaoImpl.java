@@ -60,6 +60,7 @@ public class TaskDaoImpl implements TaskDao {
 
     /**
      * Metodo que devuelte todas las tareas de la base de datos.
+     * @param filterDateTime fecha a filtrar
      * @param listener instancia del listener
      */
     @Override
