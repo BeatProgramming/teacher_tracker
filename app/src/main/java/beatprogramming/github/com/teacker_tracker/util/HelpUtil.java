@@ -16,7 +16,7 @@ public class HelpUtil {
      */
     public static void showIndexHelp(Context context, String[] msg){
         for(String aHelp_msg: msg){
-            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
@@ -29,7 +29,7 @@ public class HelpUtil {
      */
     public static void showTaskHelp(Context context, String[] msg){
         for (String aHelp_msg : msg) {
-            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
@@ -42,7 +42,7 @@ public class HelpUtil {
      */
     public static void showSubjectHelp(Context context, String [] msg){
         for (String aHelp_msg : msg) {
-            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
@@ -55,7 +55,7 @@ public class HelpUtil {
      */
     public static void showScoreHelp(Context context, String [] msg){
         for (String aHelp_msg : msg) {
-            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(context, aHelp_msg, Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }
