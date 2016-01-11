@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         if (text!=null){
             text.setText(user_name + " (" + user_mail + ")");
         }
-
+        Log.d("debug", "onCrete de main");
         //- Activado el modo ayuda
         if(help_mode)
             HelpUtil.showIndexHelp(this, new String[] {getResources().getString(R.string.helpIndex1),

@@ -7,7 +7,7 @@
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/hour_main"
+        android:id="@+id/hourTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.25" />
@@ -19,7 +19,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/task_main"
+            android:id="@+id/taskSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -29,7 +29,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/task_subject"
+            android:id="@+id/taskName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/newNote"
+        android:id="@+id/newNoteTask"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="@drawable/note" />

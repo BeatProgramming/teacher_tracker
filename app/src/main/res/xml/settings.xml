@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <PreferenceCategory android:title="PREFERENCIAS" android:layout="@layout/activity_title_settings">
+    </PreferenceCategory>
     <!-- Preferencias usuario -->
     <PreferenceCategory android:title="Usuario">
         <EditTextPreference

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
+import beatprogramming.github.com.teacker_tracker.domain.Task;
 
 public class ScheduleDaoImpl implements ScheduleDao {
 
@@ -73,6 +76,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
         List schedules = new ArrayList<Schedule>();
         if(c.moveToFirst()){
             do{
+
                Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                        c.getString(c.getColumnIndex(DESCRIPTION)),
                        c.getString(c.getColumnIndex(COURSE)));
@@ -80,7 +84,13 @@ public class ScheduleDaoImpl implements ScheduleDao {
                         crearBooleanDias(c.getString(c.getColumnIndex(DAYS))),
                         c.getString(c.getColumnIndex(CLASSROOM)));
                 sc.setId(c.getInt(c.getColumnIndex(SCHEDULEID)));
-                schedules.add(sc);
+                String[] stringHour = sc.getDateTime().split(":");
+                DateTime dt = new DateTime();
+                dt.withTime(Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]), 0, 0);
+                Boolean[] dias = sc.getDias();
+                if (dias[dt.getDayOfWeek() - 1]) {
+                    schedules.add(sc);
+                }
             }while(c.moveToNext());
         }
         listener.onLoadFinish(schedules);
