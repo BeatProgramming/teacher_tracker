@@ -1,22 +1,30 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.adapter.TaskAdapter;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.callback.OnNoteClickedListener;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskPresenter;
 import beatprogramming.github.com.teacker_tracker.view.TaskView;
@@ -25,13 +33,15 @@ import beatprogramming.github.com.teacker_tracker.view.TaskView;
 /** Fragmento de tareas
  * Created by adrian on 27/11/2015.
  */
-public class TaskFragment extends ListFragment implements TaskView {
+public class TaskFragment extends ListFragment implements TaskView, OnNoteClickedListener {
 
     private FragmentCallback callback;
 
     private ProgressBar progressBar;
 
     private TaskPresenter presenter;
+
+    private TaskAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,8 @@ public class TaskFragment extends ListFragment implements TaskView {
     @Override
     public void onResume() {
         super.onResume();
+        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
+        setListAdapter(adapter);
         DateTime date = new DateTime();
         getActivity().setTitle("   " + getDayString(date) + ", " + date.getDayOfMonth() + "-" +
                 date.getMonthOfYear() + "-" + date.getYear());
@@ -73,8 +85,22 @@ public class TaskFragment extends ListFragment implements TaskView {
                 presenter.onCreateTask();
             }
         });
-
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -90,18 +116,23 @@ public class TaskFragment extends ListFragment implements TaskView {
     }
 
     @Override
+    public void makeToast() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+        boolean help_mode = pref.getBoolean("help",true);
+        if(help_mode){
+            Toast.makeText(getActivity().getApplicationContext(), "Para modificar un horario desde modificar asignatura" ,Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         presenter.onItemClicked(position);
     }
 
     @Override
-    public void setItems(List<Task> items) {
-        items = ordenarPorHora(items);
-        setListAdapter(new TaskAdapter(getActivity(), R.layout.listview_task_row, items));
-    }
-
-    private List<Task> ordenarPorHora(List<Task> items) {
-        return items;
+    public void setItems(List<Serializable> items) {
+        adapter.addAll(items);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -112,8 +143,8 @@ public class TaskFragment extends ListFragment implements TaskView {
     }
 
     @Override
-    public Task getTaskFromAdapter(int position) {
-        return (Task) getListAdapter().getItem(position);
+    public Serializable getTaskFromAdapter(int position) {
+        return (Serializable) getListAdapter().getItem(position);
     }
 
     @Override
@@ -123,4 +154,9 @@ public class TaskFragment extends ListFragment implements TaskView {
         callback = (FragmentCallback) context;
     }
 
+    @Override
+    public void onNoteClicked(Task task) {
+        Fragment frag = NoteFragment.newInstance(task);
+        callback.replaceFragment(frag);
+    }
 }

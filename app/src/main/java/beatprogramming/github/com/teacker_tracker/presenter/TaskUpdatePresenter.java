@@ -53,7 +53,7 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
             view.setError("Completa todos los campos");
         else {
             DateTime dateTime = DateTimeFormatter.stringToDateTime(dateTimeString);
-            taskDao.updateTask(id, name, subjectId, dateTime, this);
+            taskDao.updateTask(id, name, subjectId, dateTime, null,this);
         }
     }
 

@@ -32,7 +32,7 @@ public class TaskDaoImpl implements TaskDao {
 
     //Consultas sql
     private static final String FINDQUERY = "SELECT Task._id AS taskId, Task.subjectId, Task.name AS nameTask, Task.dateTime," +
-            " Subject.name AS nameSubject, Subject.description, Subject.course " +
+            " Task.note, Subject.name AS nameSubject, Subject.description, Subject.course " +
             " FROM Task LEFT JOIN Subject ON Task.subjectId = Subject._id ORDER BY Task.dateTime;";
 
     //Campos de la tabla Task
@@ -70,20 +70,28 @@ public class TaskDaoImpl implements TaskDao {
         //- Buscar todas las tareas
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
+
+        DateTime fechaTarea = new DateTime();
+        DateTime fechaActual= new DateTime();
         //Lista de tareas
         List tasks = new ArrayList<>();
-        DateTime fechaTarea = new DateTime();
         if(c.moveToFirst()){
             do{
-                Subject s =  new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
-                    c.getString(c.getColumnIndex(DESCRIPTION)),
-                    c.getString(c.getColumnIndex(COURSE)));
-                s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
                 fechaTarea = fechaTarea.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
-                Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
-                t.setId(c.getInt(c.getColumnIndex(TASKID)));
-                tasks.add(t);
-                Log.d(TAG, "findTasks, " + t.toString());
+                if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
+                        fechaTarea.getYear() == fechaActual.getYear() &&
+                        fechaTarea.getMonthOfYear() == fechaActual.getMonthOfYear() ) {
+                    Subject s = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
+                            c.getString(c.getColumnIndex(DESCRIPTION)),
+                            c.getString(c.getColumnIndex(COURSE)));
+                    s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
+                    fechaTarea = fechaTarea.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
+                    Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
+                    t.setId(c.getInt(c.getColumnIndex(TASKID)));
+                    t.setNote(c.getString(c.getColumnIndex(NOTE)));
+                    tasks.add(t);
+                    Log.d(TAG, "findTasks, " + t.toString());
+                }
             }while(c.moveToNext());
         }
         listener.onLoadFinish(tasks);
@@ -112,6 +120,7 @@ public class TaskDaoImpl implements TaskDao {
                             c.getString(c.getColumnIndex(COURSE)));
                     s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
                     Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
+                    t.setNote(c.getString(c.getColumnIndex(NOTE)));
                     t.setId(c.getInt(c.getColumnIndex(TASKID)));
                     listaFinalTask.add(t);
                 }
@@ -165,7 +174,7 @@ public class TaskDaoImpl implements TaskDao {
      * @param listener instancia del listener
      */
     @Override
-    public void updateTask(int id, String name, int subjectId, DateTime dateTime,
+    public void updateTask(int id, String name, int subjectId, DateTime dateTime, String note,
                            OnUpdateFinishListener listener) {
 
         sqldb = db.getWritableDatabase();
@@ -175,8 +184,10 @@ public class TaskDaoImpl implements TaskDao {
         values.put("name",name);
         values.put(SUBJECTID,subjectId);
         values.put(DATETIME,dateTime.getMillis());
+        values.put(NOTE, note);
 
-        Log.d(TAG, "updateTask, id: " + id + ", name: " + name + ", subjectId: " + subjectId + ", dateTime: " + dateTime.toString());
+        Log.d(TAG, "updateTask, id: " + id + ", name: " + name + ", subjectId: " + subjectId + ", dateTime: "
+                + dateTime.toString() + ",note: " + note);
         try{
             if(id == 0) {
                 //- Insertar tarea
