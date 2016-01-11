@@ -52,7 +52,7 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
         ImageView newNoteButton = (ImageView) listItemView.findViewById(R.id.newNoteTask);
 
         //Obtiene una instancia de la Task en la posición actual
-        final Serializable serializable = getItem(position);
+        Serializable serializable = getItem(position);
 
         if(serializable instanceof Task) {
             final Task task = (Task) serializable;
@@ -69,13 +69,11 @@ public class TaskAdapter extends ArrayAdapter<Serializable> {
         } else {
             Schedule schedule = (Schedule) serializable;
             nameSubjectTextView.setText(schedule.getSubject().toString());
-            nameTaskTextView.setText(schedule.toString());
+            nameTaskTextView.setText(schedule.getAula());
             hourTextView.setText(schedule.getDateTime());
             newNoteButton.setVisibility(View.INVISIBLE);
             newNoteButton.setClickable(false);
         }
-
-
 
         return listItemView;
     }

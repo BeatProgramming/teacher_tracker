@@ -47,8 +47,8 @@ public class NotePresenter implements OnLoadFinishListener, OnUpdateFinishListen
         note = (String) items.get(0);
     }
 
-    public void saveNote(Editable text) {
-        taskDao.updateTask(task.getId(),task.getNombre(),task.getSubject().getId(),task.getDateTime(),task.getNote(), this);
+    public void saveNote(String text) {
+        taskDao.updateTask(task.getId(),task.getNombre(),task.getSubject().getId(),task.getDateTime(), text, this);
     }
 
     @Override

@@ -3,6 +3,7 @@ package beatprogramming.github.com.teacker_tracker.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class NoteFragment extends Fragment implements NoteView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        presenter = new NotePresenter(this);
     }
 
     public static NoteFragment newInstance(Task task) {
@@ -54,19 +56,25 @@ public class NoteFragment extends Fragment implements NoteView {
 
         text = (EditText) view.findViewById(R.id.task_note);
         Bundle args = getArguments();
-
-        Task task = (args!= null) ? (Task) args.getSerializable(TASK) : null;
-        if (task.getNote()!=null){
-            text.setText(task.getNote());
+        Task task=null;
+        Log.d("debug", "args: " + args.toString());
+        if (args!=null){
+            task = (Task) args.getSerializable(TASK);
+            Log.d("debug", "task: " + task.toString());
+            if (task.getNote()!=null){
+                text.setText(task.getNote());
+            }
+            presenter.setTask(task);
+        } else{
+            Log.d("debug", "task es null");
         }
-        presenter.setTask(task);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.saveNote(text.getText());
+        presenter.saveNote(text.getText().toString());
     }
 
     @Override

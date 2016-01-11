@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.R;
@@ -45,13 +47,13 @@ public class TaskFragment extends ListFragment implements TaskView, OnNoteClicke
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new TaskPresenter(this);
-        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, null, this );
-        setListAdapter(adapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
+        setListAdapter(adapter);
         DateTime date = new DateTime();
         getActivity().setTitle("   " + getDayString(date) + ", " + date.getDayOfMonth() + "-" +
                 date.getMonthOfYear() + "-" + date.getYear());
@@ -83,8 +85,22 @@ public class TaskFragment extends ListFragment implements TaskView, OnNoteClicke
                 presenter.onCreateTask();
             }
         });
-
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onViewStateRestored(Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
