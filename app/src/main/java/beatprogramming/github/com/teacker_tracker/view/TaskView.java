@@ -1,5 +1,6 @@
 package beatprogramming.github.com.teacker_tracker.view;
 
+import java.io.Serializable;
 import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.domain.Task;
@@ -9,14 +10,15 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
  */
 public interface TaskView {
 
-    void setItems(List<Task> items);
+    void setItems(List<Serializable> items);
 
     void loadTaskUpdateFragment(Task task);
 
-    Task getTaskFromAdapter(int position);
+    Serializable getTaskFromAdapter(int position);
 
     void showLoading();
 
     void hideLoading();
 
+    void makeToast();
 }

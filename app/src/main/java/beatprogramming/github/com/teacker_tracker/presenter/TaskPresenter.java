@@ -5,6 +5,8 @@ import java.util.List;
 
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
+import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDao;
+import beatprogramming.github.com.teacker_tracker.persistence.ScheduleDaoImpl;
 import beatprogramming.github.com.teacker_tracker.persistence.TaskDao;
 import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.TaskView;
@@ -16,26 +18,36 @@ public class TaskPresenter implements OnLoadFinishListener {
 
 
     private TaskView view;
-    private TaskDao subjectDao;
+    private TaskDao taskDao;
+    private ScheduleDao scheduleDao;
+
+
 
     public TaskPresenter(TaskView view) {
         this.view = view;
-        subjectDao = new TaskDaoImpl();
+        taskDao = new TaskDaoImpl();
+        scheduleDao = new ScheduleDaoImpl();
     }
 
     public void onResume() {
         view.showLoading();
-        subjectDao.findTasksAndSchedules(this);
+        taskDao.findTasks(this);
+        scheduleDao.findSchedule(this);
     }
 
       public void onItemClicked(int position) {
-        Task task = view.getTaskFromAdapter(position);
-        view.loadTaskUpdateFragment(task);
+        Serializable serializable = view.getTaskFromAdapter(position);
+        if (serializable instanceof Task) {
+            Task task = (Task) serializable;
+            view.loadTaskUpdateFragment(task);
+        } else{
+            view.makeToast();
+        }
     }
 
     @Override
     public void onLoadFinish(List<? extends Serializable> items) {
-        view.setItems((List<Task>) items);
+        view.setItems((List<Serializable>) items);
         view.hideLoading();
     }
 
