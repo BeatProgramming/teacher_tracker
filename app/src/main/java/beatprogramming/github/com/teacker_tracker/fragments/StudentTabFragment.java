@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,15 +15,14 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.StudentTabPresenter;
 import beatprogramming.github.com.teacker_tracker.view.StudentTabView;
 
-
+/**
+ * - Implementa los estudiantes en función de la asignatura seleccionada
+ */
 public class StudentTabFragment extends Fragment implements StudentTabView, TabHost.OnTabChangeListener {
 
     private static String TAG = StudentTabFragment.class.getName();
-
     private FragmentCallback callback;
-
     private FragmentTabHost tabHost;
-
     protected StudentTabPresenter presenter;
 
     public StudentTabFragment() {}

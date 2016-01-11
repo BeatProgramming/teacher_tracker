@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -22,27 +21,23 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskUpdatePresenter;
 import beatprogramming.github.com.teacker_tracker.view.TaskUpdateView;
 
+/**
+ * - Implementa la actualización de tareas
+ */
 public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String TASK = "BUNDLE_TASK";
-
     private FragmentCallback callback;
     private TaskUpdatePresenter presenter;
-
     private TextView idTextView;
     private TextView dateTextView;
     private TextView timeTextView;
     private EditText nameEditText;
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
-
     // false para modificar, true para crear
     private boolean create;
 
-    /**
-     * Instantiate the fragment with an existing subject to modify.
-     *
-     */
     public static TaskUpdateFragment newInstance(Task task) {
 
         TaskUpdateFragment fragment = new TaskUpdateFragment();

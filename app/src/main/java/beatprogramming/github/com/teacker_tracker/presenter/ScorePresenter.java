@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,12 +11,13 @@ import beatprogramming.github.com.teacker_tracker.persistence.ScoreDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ScoreDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.ScoreView;
 
+/**
+ * - Controlador de las calificaciones
+ */
 public class ScorePresenter implements OnLoadFinishListener, OnScorePickedListener {
-
 
     private ScoreView view;
     private ScoreDao scoreDao;
-
     private Review review;
 
     public ScorePresenter(ScoreView view, Review review) {

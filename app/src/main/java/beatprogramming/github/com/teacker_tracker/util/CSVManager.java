@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.util;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,34 +28,25 @@ import beatprogramming.github.com.teacker_tracker.persistence.StudentDao;
 import beatprogramming.github.com.teacker_tracker.persistence.StudentDaoImpl;
 
 /**
- * Clase para tratar un archivo CSV
+ * - Para tratar un archivo CSV
  */
 public class CSVManager {
 
     private static final String TAG = CSVManager.class.getName();
-
     private static final String CSV_FILE = "/students.csv";
-
     private static final Integer NAME_POS_DEFAULT = 0;
     private static final Integer SURNAME_POS_DEFAULT = 1;
-
     private static final String NAME_HEADER_DEFAULT = "Nombre";
     private static final String SURNAME_HEADER_DEFAULT = "Apellidos";
-
     private static final int NAME_SURNAME_ORDER = 0;
     private static final int SURNAME_NAME_ORDER = 1;
-
     private static CSVManager manager;
-
     private final Context context;
-
     private StudentDao subjectDao;
-
     /*
      * Map wich associates each header name with the position in the file.
      */
     private Map<String, Integer> headerPos;
-
     private String name;
     private String surname;
 

@@ -1,10 +1,8 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
-
 import org.joda.time.DateTime;
 
-/** Clase que modela un examen, hereda de review
- *
+/**
+ * - Modela un examen, hereda de review
  */
 public class Exam extends Review{
 

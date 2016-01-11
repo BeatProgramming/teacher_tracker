@@ -12,10 +12,9 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDao;
 import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de la actualización de las asignaturas
  */
 public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnDateTimePickedListener {
-
 
     private SubjectUpdateView view;
     private SubjectDao subjectDao;

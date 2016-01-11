@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.adapter;
-
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
@@ -16,11 +15,12 @@ import beatprogramming.github.com.teacker_tracker.R;
 import beatprogramming.github.com.teacker_tracker.domain.Exam;
 import beatprogramming.github.com.teacker_tracker.domain.Review;
 
-
+/**
+ * - Implementación personalizada de ArrayAdapter respecto a evaluaciones
+ */
 public class ReviewAdapter extends ArrayAdapter {
 
     private final String TAG = ReviewAdapter.class.getName();
-
     private final Context context;
     private final int resource;
 

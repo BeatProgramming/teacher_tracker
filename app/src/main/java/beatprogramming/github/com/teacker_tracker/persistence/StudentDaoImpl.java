@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -18,7 +17,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 /**
- * Implementación en SQLite del acceso a base de datos para manejar datos de Alumno.
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de estudiantes
  */
 public class StudentDaoImpl implements StudentDao {
 

@@ -1,15 +1,12 @@
 package beatprogramming.github.com.teacker_tracker.util;
-
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 /**
- * Clase para formatear las fechas
+ * - Para formatear las fechas
  */
 public class DateTimeFormatter {
 
-    //private static final String DATETIME_ISO_FORMAT = "YYYY-MM-DD HH:MM:SS.SSS";
     private static final String DATETIME_JODA_FORMAT = "dd/MM/yyyy HH:mm";
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String TIME_FORMAT = "HH:mm";

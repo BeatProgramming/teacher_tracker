@@ -1,7 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.callback;
 
 /**
- * Delegates the actions to happen in the view after a data UPDATE operation has been done.
+ * - Define los métodos del evento de insertar registros
  */
 public interface OnUpdateFinishListener {
 

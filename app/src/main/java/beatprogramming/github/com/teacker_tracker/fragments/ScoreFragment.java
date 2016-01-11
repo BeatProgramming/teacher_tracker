@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -19,19 +18,16 @@ import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.presenter.ScorePresenter;
 import beatprogramming.github.com.teacker_tracker.view.ScoreView;
 
-
+/**
+ * - Implementa las calificaciones
+ */
 public class ScoreFragment extends ListFragment implements ScoreView {
 
     private static String TAG = ScoreFragment.class.getName();
-
     private static final String REVIEW = "BUNDLE_REVIEW";
-
     private FragmentCallback callback;
-
     private ScorePresenter presenter;
-
     private ProgressBar progressBar;
-
     private ScoreAdapter adapter;
 
     public static ScoreFragment newInstance(Review review) {

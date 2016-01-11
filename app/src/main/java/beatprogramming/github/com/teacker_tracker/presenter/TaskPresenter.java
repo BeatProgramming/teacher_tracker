@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,16 +11,13 @@ import beatprogramming.github.com.teacker_tracker.persistence.TaskDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.TaskView;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de las tareas
  */
 public class TaskPresenter implements OnLoadFinishListener {
-
 
     private TaskView view;
     private TaskDao taskDao;
     private ScheduleDao scheduleDao;
-
-
 
     public TaskPresenter(TaskView view) {
         this.view = view;

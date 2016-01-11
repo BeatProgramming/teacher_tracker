@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.util;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;

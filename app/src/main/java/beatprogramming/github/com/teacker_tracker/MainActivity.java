@@ -34,6 +34,11 @@ import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
 import beatprogramming.github.com.teacker_tracker.util.HelpUtil;
 
+/**
+ * - Activity principal de la app
+ *   Carga la BDD, las preferencias, el modo ayuda y los fragmentos
+ *   Implementa los metodos de selección del menú de configuración y navegación
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCallback {
 

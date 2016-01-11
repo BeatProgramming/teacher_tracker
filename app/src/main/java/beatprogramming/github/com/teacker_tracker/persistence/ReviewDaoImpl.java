@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +19,7 @@ import beatprogramming.github.com.teacker_tracker.domain.Review;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
 /**
- * Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de Prueba, ya sea Examen o Práctica.
  */
 public class ReviewDaoImpl implements ReviewDao {
 

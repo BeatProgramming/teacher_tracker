@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,17 +30,17 @@ import beatprogramming.github.com.teacker_tracker.util.FileUtil;
 import beatprogramming.github.com.teacker_tracker.util.ImageGetter;
 import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
 
+/**
+ * - Implementa la actualización de estudiantes
+ */
 public class StudentUpdateFragment extends Fragment implements StudentUpdateView, View.OnClickListener,
         AdapterView.OnItemSelectedListener {
 
     private static String TAG = StudentUpdateFragment.class.getName();
-
     public static final String STUDENT = "BUNDLE_STUDENT";
     private static final int IMAGE_INTENT = 666;
-
     private FragmentCallback callback;
     private StudentUpdatePresenter presenter;
-
     private TextView idTextView;
     private EditText nameEditText;
     private EditText surnameEditText;
@@ -49,9 +48,9 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     private TextView iconPathTextView;
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
-
     // false para modificar, true para crear
     private boolean create;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

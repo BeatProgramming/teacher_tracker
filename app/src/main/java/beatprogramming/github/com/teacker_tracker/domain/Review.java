@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.domain;
-
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -7,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Clase que modela las review de la base de datos. Es una clase abstracta
+ * - Modela las review de la base de datos. Es una clase abstracta
  */
 public abstract class Review implements Serializable {
 

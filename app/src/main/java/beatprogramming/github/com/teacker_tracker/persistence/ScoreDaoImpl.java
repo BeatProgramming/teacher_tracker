@@ -1,6 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.persistence;
-
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,6 +17,9 @@ import beatprogramming.github.com.teacker_tracker.domain.Score;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 
+/**
+ * - Implementación en SQLite del acceso a base de datos para manejar datos de calificaciones
+ */
 public class ScoreDaoImpl implements ScoreDao {
 
     private static String TAG = ScoreDaoImpl.class.getName();

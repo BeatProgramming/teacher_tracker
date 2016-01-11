@@ -152,5 +152,6 @@
     <string name="taskUpdateTitle">Modificar tarea</string>
     <string name="reviewCreateTitle">Nueva evaluacion</string>
     <string name="studentCreateTitle">Nuevo estudiante</string>
+    <string name="onBackSettingsText">Los cambios se realizarán al reiniciar la aplicación</string>
 
 </resources>

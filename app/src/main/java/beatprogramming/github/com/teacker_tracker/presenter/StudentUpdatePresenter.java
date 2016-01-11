@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import android.util.Log;
 
 import java.io.Serializable;
@@ -17,15 +16,13 @@ import beatprogramming.github.com.teacker_tracker.persistence.SubjectDaoImpl;
 import beatprogramming.github.com.teacker_tracker.view.StudentUpdateView;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de la actualización de estudiantes
  */
 public class StudentUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnLoadFinishListener {
 
     private static String TAG = StudentUpdatePresenter.class.getName();
-
     private StudentUpdateView view;
     private StudentDao studentDao;
-
     private SubjectDao subjectDao;
     private List<Subject> subjectList;
     private Student student;

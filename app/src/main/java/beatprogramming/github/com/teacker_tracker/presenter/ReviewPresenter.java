@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,12 +8,10 @@ import beatprogramming.github.com.teacker_tracker.view.ReviewView;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDao;
 import beatprogramming.github.com.teacker_tracker.persistence.ReviewDaoImpl;
 
-/** Clase presenter para reviews
- * Responsible object for handling all UI events on behalf of the view.
+/**
+ * Controlador de las evaluaciones (Exámenes/Prácticas)
  */
 public class ReviewPresenter implements OnLoadFinishListener {
-
-    private static String TAG = ReviewPresenter.class.getName();
 
     private ReviewView view;
     private ReviewDao reviewDao;

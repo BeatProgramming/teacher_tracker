@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,6 +9,9 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import beatprogramming.github.com.teacker_tracker.callback.OnDateTimePickedListener;
 
+/**
+ * - Implementa el cuadro horario al seleccionar sobre él
+ */
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 

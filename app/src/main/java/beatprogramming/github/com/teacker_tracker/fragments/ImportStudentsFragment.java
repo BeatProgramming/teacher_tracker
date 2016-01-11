@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +21,9 @@ import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.presenter.ImportStudentsPresenter;
 import beatprogramming.github.com.teacker_tracker.view.ImportStudentsView;
 
+/**
+ * - Implementa la importación de estudiantes
+ */
 public class ImportStudentsFragment extends ListFragment implements ImportStudentsView {
 
     public static final String STUDENTS = "BUNDLE_STUDENTS";

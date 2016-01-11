@@ -1,8 +1,10 @@
 package beatprogramming.github.com.teacker_tracker.view;
 
 /**
- * Created by adrian on 11/01/2016.
+ * - Define los métodos  sobre los que tiene control el presentador que conecta
+ *   la capa de persistencia con la vista.
  */
 public interface NoteView {
+
     void setTextNote();
 }

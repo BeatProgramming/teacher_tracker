@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.fragments;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,7 +6,6 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +27,14 @@ import beatprogramming.github.com.teacker_tracker.domain.Task;
 import beatprogramming.github.com.teacker_tracker.presenter.TaskPresenter;
 import beatprogramming.github.com.teacker_tracker.view.TaskView;
 
-
-/** Fragmento de tareas
- * Created by adrian on 27/11/2015.
+/**
+ * - Implementa las tareas
  */
 public class TaskFragment extends ListFragment implements TaskView, OnNoteClickedListener {
 
     private FragmentCallback callback;
-
     private ProgressBar progressBar;
-
     private TaskPresenter presenter;
-
     private TaskAdapter adapter;
 
     @Override

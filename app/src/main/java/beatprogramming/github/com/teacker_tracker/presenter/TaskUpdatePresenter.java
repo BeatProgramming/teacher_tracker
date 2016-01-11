@@ -1,5 +1,4 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
-
 import android.util.Log;
 
 import org.joda.time.DateTime;
@@ -23,16 +22,14 @@ import beatprogramming.github.com.teacker_tracker.util.DateTimeFormatter;
 import beatprogramming.github.com.teacker_tracker.view.TaskUpdateView;
 
 /**
- * Responsible object for handling all UI events on behalf of the view.
+ * - Controlador de la actualización de las tareas
  */
 public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFinishListener, OnDateTimePickedListener, OnLoadFinishListener {
 
     private static String TAG = TaskUpdatePresenter.class.getName();
-
     private TaskUpdateView view;
     private TaskDao taskDao;
     private SubjectDao subjectDao;
-
     private Task task;
 
     public TaskUpdatePresenter(TaskUpdateView view) {

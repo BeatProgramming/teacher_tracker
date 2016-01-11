@@ -1,10 +1,9 @@
 package beatprogramming.github.com.teacker_tracker.callback;
-
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Delegates the actions to happen in the view after a data GET operation has been done.
+ * - Define los métodos del evento de actualización de registros
  */
 public interface OnLoadFinishListener {
 
