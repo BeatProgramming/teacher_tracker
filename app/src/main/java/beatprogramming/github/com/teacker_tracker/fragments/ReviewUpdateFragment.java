@@ -44,6 +44,9 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     private TextView dateTextView;
     private TextView timeTextView;
 
+    // false para modificar, true para crear
+    private boolean create;
+
     public static ReviewUpdateFragment newInstance(Review review) {
 
         ReviewUpdateFragment fragment = new ReviewUpdateFragment();
@@ -65,7 +68,11 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("   " + getResources().getString(R.string.reviewUpdateTitle));
+        if (create){
+            getActivity().setTitle("   " + getResources().getString(R.string.reviewCreateTitle));
+        } else{
+            getActivity().setTitle("   " + getResources().getString(R.string.reviewUpdateTitle));
+        }
         presenter.onResume();
     }
 
@@ -92,6 +99,7 @@ public class ReviewUpdateFragment extends Fragment implements ReviewUpdateView, 
 
         Bundle args = getArguments();
         Review review = (args != null) ? (Review) args.getSerializable(REVIEW) : null;
+        create = (review != null) ? false : true;
         presenter.setReview(review);
 
         Button submit = (Button) view.findViewById(R.id.button);

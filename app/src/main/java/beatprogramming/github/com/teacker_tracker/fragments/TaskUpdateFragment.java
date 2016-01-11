@@ -36,6 +36,9 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
 
+    // false para modificar, true para crear
+    private boolean create;
+
     /**
      * Instantiate the fragment with an existing subject to modify.
      *
@@ -61,7 +64,11 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("   " + getResources().getString(R.string.scoreTitle));
+        if (create){
+            getActivity().setTitle("   " + getResources().getString(R.string.taskCreateTitle));
+        } else{
+            getActivity().setTitle("   " + getResources().getString(R.string.taskUpdateTitle));
+        }
         presenter.onResume();
     }
 
@@ -81,9 +88,10 @@ public class TaskUpdateFragment extends Fragment implements TaskUpdateView, View
         timeTextView.setOnClickListener(this);
         dateTextView.setOnClickListener(this);
         subjectSpinner.setOnItemSelectedListener(this);
-
+        create = true;
         Bundle args = getArguments();
         if(args != null) {
+            create = false;
             Task task = (Task) args.getSerializable(TASK);
             presenter.setTask(task);
         }

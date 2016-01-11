@@ -51,6 +51,8 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     private Spinner subjectSpinner;
     private TextView subjectIdTextView;
 
+    // false para modificar, true para crear
+    private boolean create;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,11 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("   " + getResources().getString(R.string.studentUpdateTitle));
+        if (create){
+            getActivity().setTitle("   " + getResources().getString(R.string.studentCreateTitle));
+        } else{
+            getActivity().setTitle("   " + getResources().getString(R.string.studentUpdateTitle));
+        }
         presenter.onResume();
     }
 
@@ -102,6 +108,8 @@ public class StudentUpdateFragment extends Fragment implements StudentUpdateView
 
         Bundle args = getArguments();
         Student student = (args != null) ? (Student) args.getSerializable(STUDENT) : null;
+        create = (student != null) ? false : true;
+
         presenter.setStudent(student);
 
         Button submit = (Button) view.findViewById(R.id.button);

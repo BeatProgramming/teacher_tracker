@@ -50,6 +50,9 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     private Boolean[] days;
     private TextView timeTextView;
 
+    // false para modificar, true para crear
+    private boolean create;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +78,12 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("   " + getResources().getString(R.string.subjectUpdateTitle));
+        if (create){
+            getActivity().setTitle("   " + getResources().getString(R.string.subjectCreateTitle));
+        } else{
+            getActivity().setTitle("   " + getResources().getString(R.string.subjectUpdateTitle));
+        }
+
     }
 
     @Override
@@ -83,6 +91,7 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
 
         View view = inflater.inflate(R.layout.fragment_subject_update, container, false);
 
+        create = true;
         // Identify all fields of the form.
         idSubjectTextView = (TextView) view.findViewById(R.id.subjectId);
         nameEditText = (EditText) view.findViewById(R.id.subjectName);
@@ -107,7 +116,7 @@ public class SubjectUpdateFragment extends Fragment implements SubjectUpdateView
             Subject subject = (Subject) args.getSerializable(SUBJECT);
             ScheduleDaoImpl s = new ScheduleDaoImpl();
             Schedule schedule = s.findScheduleBySubjectId(subject.getId());
-
+            create=false;
             if (schedule != null){
                 classRoomEditText.setText(schedule.getAula());
                 idScheduleTextView.setText(Integer.toString(schedule.getId()));
