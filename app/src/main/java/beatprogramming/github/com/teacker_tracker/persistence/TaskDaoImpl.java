@@ -7,7 +7,6 @@ import android.util.Log;
 
 import org.joda.time.DateTime;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,6 @@ import beatprogramming.github.com.teacker_tracker.ScriptBD;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
-import beatprogramming.github.com.teacker_tracker.domain.Schedule;
 import beatprogramming.github.com.teacker_tracker.domain.Subject;
 import beatprogramming.github.com.teacker_tracker.domain.Task;
 
@@ -66,21 +64,20 @@ public class TaskDaoImpl implements TaskDao {
      * @param listener instancia del listener
      */
     @Override
-    public void findTasks(OnLoadFinishListener listener) {
+    public void findTasks(DateTime filterDateTime, OnLoadFinishListener listener) {
         //- Buscar todas las tareas
         sqldb = db.getReadableDatabase();
         c = sqldb.rawQuery(FINDQUERY, null);
 
         DateTime fechaTarea = new DateTime();
-        DateTime fechaActual= new DateTime();
         //Lista de tareas
         List tasks = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 fechaTarea = fechaTarea.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
-                if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
-                        fechaTarea.getYear() == fechaActual.getYear() &&
-                        fechaTarea.getMonthOfYear() == fechaActual.getMonthOfYear() ) {
+                if (fechaTarea.getDayOfWeek() == filterDateTime.getDayOfWeek() &&
+                        fechaTarea.getYear() == filterDateTime.getYear() &&
+                        fechaTarea.getMonthOfYear() == filterDateTime.getMonthOfYear() ) {
                     Subject s = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
                             c.getString(c.getColumnIndex(DESCRIPTION)),
                             c.getString(c.getColumnIndex(COURSE)));
@@ -97,71 +94,6 @@ public class TaskDaoImpl implements TaskDao {
         listener.onLoadFinish(tasks);
     }
 
-    /**
-     * Metodo que devuelte todas las tareas de la base de datos.
-     * @param listener instancia del listener
-     */
-    @Override
-    public void findTasksAndSchedules(OnLoadFinishListener listener) {
-        //- Buscar todas las tareas
-        sqldb = db.getReadableDatabase();
-        c = sqldb.rawQuery(FINDQUERY, null);
-        DateTime fechaTarea = new DateTime();
-        DateTime fechaActual= new DateTime();
-        listaFinalTask = new ArrayList<>();
-        if(c.moveToFirst()){
-            do{
-                fechaTarea = fechaTarea.withMillis(c.getLong(c.getColumnIndex(DATETIME)));
-                if (fechaTarea.getDayOfWeek() == fechaActual.getDayOfWeek() &&
-                        fechaTarea.getYear() == fechaActual.getYear() &&
-                        fechaTarea.getMonthOfYear() == fechaActual.getMonthOfYear() ) {
-                    Subject s = new Subject(c.getString(c.getColumnIndex(NAMESUBJECT)),
-                            c.getString(c.getColumnIndex(DESCRIPTION)),
-                            c.getString(c.getColumnIndex(COURSE)));
-                    s.setId(c.getInt(c.getColumnIndex(SUBJECTID)));
-                    Task t = new Task(c.getString(c.getColumnIndex(NAMETASK)), s, fechaTarea);
-                    t.setNote(c.getString(c.getColumnIndex(NOTE)));
-                    t.setId(c.getInt(c.getColumnIndex(TASKID)));
-                    listaFinalTask.add(t);
-                }
-            }while(c.moveToNext());
-        }
-        //- Buscar todos los horarios
-        ScheduleDao scheduleDao = new ScheduleDaoImpl();
-        OnLoadFinishListener scheduleListener = new OnLoadFinishListener() {
-            @Override
-            public void onLoadFinish(List<? extends Serializable> items) {
-                Schedule sc;
-                DateTime dt = new DateTime();
-                Boolean[] dias;
-                Task task;
-                String[] stringHour;
-                for (int i = 0; i < items.size(); i++) {
-                    sc = (Schedule) items.get(i);
-                    stringHour = sc.getDateTime().split(":");
-                    dt = dt.withTime(Integer.parseInt(stringHour[0]), Integer.parseInt(stringHour[1]), 0, 0);
-                    dias = sc.getDias();
-                    if (dias[dt.getDayOfWeek() - 1]) {
-                        task = new Task(sc.getAula(), sc.getSubject(), dt);
-                        añadirEnPosicion(task);
-                    }
-                }
-            }
-        };
-        scheduleDao.findSchedule(scheduleListener);
-        listener.onLoadFinish(listaFinalTask);
-    }
-
-    private void añadirEnPosicion(Task task) {
-        int posicion=0;
-        for(int i = 0; i<listaFinalTask.size();i++){
-            if (listaFinalTask.get(i).getDateTime().getMillis() > task.getDateTime().getMillis()){
-                break;
-            }
-            posicion+=1;
-        }
-        listaFinalTask.add(posicion, task);
-    }
 
     /**
      * Metodo que actualiza una tarea de la base de datos.

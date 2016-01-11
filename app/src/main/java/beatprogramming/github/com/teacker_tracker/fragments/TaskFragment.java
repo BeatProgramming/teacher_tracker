@@ -53,12 +53,8 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
-        setListAdapter(adapter);
-        DateTime date = new DateTime();
-        getActivity().setTitle("   " + getDayString(date) + ", " + date.getDayOfMonth() + "-" +
-                date.getMonthOfYear() + "-" + date.getYear());
-        presenter.onResume();
+
+        reloadItems(new DateTime());
     }
 
     private String getDayString(DateTime date) {
@@ -162,7 +158,8 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
 
     @Override
     public void onDatePicked(int year, int month, int day) {
-        // Cambiar tareas a mostrar.
+        DateTime dateTime = new DateTime().withDate(year, month, day);
+        reloadItems(dateTime);
     }
 
     @Override
@@ -173,5 +170,14 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
     public void onNoteClicked(Task task) {
         Fragment frag = NoteFragment.newInstance(task);
         callback.replaceFragment(frag);
+    }
+
+    public void reloadItems(DateTime dateTime) {
+        adapter = new TaskAdapter(getActivity(), R.layout.listview_task_row, new ArrayList<Serializable>(), this );
+        setListAdapter(adapter);
+
+        getActivity().setTitle("   " + getDayString(dateTime) + ", " + dateTime.getDayOfMonth() + "-" +
+                dateTime.getMonthOfYear() + "-" + dateTime.getYear());
+        presenter.reloadItems(dateTime);
     }
 }

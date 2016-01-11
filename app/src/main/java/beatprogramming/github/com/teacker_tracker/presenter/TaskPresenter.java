@@ -1,5 +1,7 @@
 package beatprogramming.github.com.teacker_tracker.presenter;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,9 +31,9 @@ public class TaskPresenter implements OnLoadFinishListener {
         scheduleDao = new ScheduleDaoImpl();
     }
 
-    public void onResume() {
+    public void reloadItems(DateTime dateTime) {
         view.showLoading();
-        taskDao.findTasks(this);
+        taskDao.findTasks(dateTime, this);
         scheduleDao.findSchedule(this);
     }
 
