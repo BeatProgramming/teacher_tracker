@@ -14,15 +14,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
+
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
 import beatprogramming.github.com.teacker_tracker.database.BDHelper;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
@@ -43,7 +45,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentCallback {
 
     private static final String TAG = MainActivity.class.getName();
-    private boolean help_mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,33 +61,41 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
 
+                NavigationView navigationView = (NavigationView) drawerView.findViewById(R.id.nav_view);
+
+                LinearLayout header = (LinearLayout) navigationView.findViewById(R.id.nav_header);
+                if(header != null) {
+                    navigationView.removeHeaderView(header);
+                }
+
+                navigationView.inflateHeaderView(R.layout.nav_header_main);
+                TextView text = (TextView) drawerView.findViewById(R.id.textView3);
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                String user_name = pref.getString("user_name", "");
+                String user_mail = pref.getString("user_mail", "");
+
+                if (text != null){
+                    StringBuilder stb = new StringBuilder();
+                    if (!user_name.isEmpty()) {
+                        stb.append(user_name + " ");
+                    }
+                    if (!user_mail.isEmpty()) {
+                        stb.append("(" + user_mail + ")");
+                    }
+                    text.setText(stb.toString());
+                }
+            }
+        };
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //- Obtenemos los valores de las preferencias
-        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
-        navigationView.addHeaderView(header);
-        TextView text = (TextView) header.findViewById(R.id.textView3);
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String user_name = pref.getString("user_name", "");
-        String user_mail = pref.getString("user_mail", "");
-        help_mode = pref.getBoolean("help",true);
-
-        if (text != null){
-            StringBuilder stb = new StringBuilder();
-            if (!user_name.isEmpty()) {
-                stb.append(user_name + " ");
-            }
-            if (!user_mail.isEmpty()) {
-                stb.append("(" + user_mail + ")");
-            }
-            text.setText(stb.toString());
-        }
-        Log.d("debug", "onCrete de main");
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
         Fragment frag;
         final Intent intent = getIntent();
