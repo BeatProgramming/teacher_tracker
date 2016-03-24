@@ -37,7 +37,7 @@ public class ReviewDaoImpl implements ReviewDao {
             ProviderDB.SUBJECT_TABLE + "." + ProviderDB.SUBJECT_DESCRIPTION + "," + ProviderDB.SUBJECT_TABLE + "." +
             ProviderDB.SUBJECT_COURSE + " FROM " + ProviderDB.REVIEW_TABLE + " LEFT JOIN " + ProviderDB.SUBJECT_TABLE +
             " ON " + ProviderDB.REVIEW_TABLE + "." + ProviderDB.REVIEW_SUBJECT_ID + " = " + ProviderDB.SUBJECT_TABLE +
-            "." + ProviderDB.SUBJECT_ID;
+            "." + ProviderDB.SUBJECT_ID + " ORDER BY " + ProviderDB.REVIEW_DATE;
 
     // Review Types
     public static final String EXAM = "Exam";
