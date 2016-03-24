@@ -66,14 +66,6 @@ public class MainActivity extends AppCompatActivity
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-                NavigationView navigationView = (NavigationView) drawerView.findViewById(R.id.nav_view);
-
-                LinearLayout header = (LinearLayout) navigationView.findViewById(R.id.nav_header);
-                if(header != null) {
-                    navigationView.removeHeaderView(header);
-                }
-
-                navigationView.inflateHeaderView(R.layout.nav_header_main);
                 TextView text = (TextView) drawerView.findViewById(R.id.textView3);
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 String user_name = pref.getString("user_name", "");
@@ -92,6 +84,12 @@ public class MainActivity extends AppCompatActivity
             }
         };
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        LinearLayout header = (LinearLayout) navigationView.findViewById(R.id.nav_header);
+        if(header == null) {
+            navigationView.inflateHeaderView(R.layout.nav_header_main);
+        }
+
         navigationView.setNavigationItemSelectedListener(this);
 
         drawer.setDrawerListener(toggle);
