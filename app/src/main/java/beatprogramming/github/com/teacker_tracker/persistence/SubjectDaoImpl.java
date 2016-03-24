@@ -4,8 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
-import beatprogramming.github.com.teacker_tracker.BDHelper;
-import beatprogramming.github.com.teacker_tracker.ScriptBD;
+import beatprogramming.github.com.teacker_tracker.database.BDHelper;
+import beatprogramming.github.com.teacker_tracker.database.ProviderDB;
 import beatprogramming.github.com.teacker_tracker.callback.OnDeleteFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnLoadFinishListener;
 import beatprogramming.github.com.teacker_tracker.callback.OnUpdateFinishListener;
@@ -18,31 +18,12 @@ public class SubjectDaoImpl implements SubjectDao {
 
     private static String TAG = SubjectDaoImpl.class.getName();
 
-    //Tabla objetivo
-    private static final String SUBJECT = "Subject";
-    private static final String ENROLLMENT = "Enrollment";
+    private static final String FINDQUERY = "SELECT * FROM " + ProviderDB.SUBJECT_TABLE;
 
-    //Consultas sql
-    private static final String FINDQUERY = "SELECT * FROM Subject";
-
-    //Campos de la tabla subject
-    private static final String ID = "_id";
-    private static final String NAME = "name";
-    private static final String DESCRIPTION = "description";
-    private static final String COURSE = "course";
-
-    //Campos de la tabla enrollment
-    private static final String ENROLLMENT_SUBJECT = "subjectId";
-    private static final String ENROLLMENT_STUDENT = "studentId";
-
-    //Variables sql
     private final BDHelper db;
     private static SQLiteDatabase sqldb;
     private static Cursor c;
 
-    /**
-     * Constructor que incia del DBHelper
-     */
     public SubjectDaoImpl() {
         db = BDHelper.getInstance();
     }
@@ -61,10 +42,10 @@ public class SubjectDaoImpl implements SubjectDao {
         List subjects = new ArrayList<Subject>();
         if(c.moveToFirst()){
             do{
-                Subject s = new Subject(c.getString(c.getColumnIndex(NAME)),
-                        c.getString(c.getColumnIndex(DESCRIPTION)),
-                        c.getString(c.getColumnIndex(COURSE)));
-                s.setId(c.getInt(c.getColumnIndex(ID)));
+                Subject s = new Subject(c.getString(c.getColumnIndex(ProviderDB.SUBJECT_NAME)),
+                        c.getString(c.getColumnIndex(ProviderDB.SUBJECT_DESCRIPTION)),
+                        c.getString(c.getColumnIndex(ProviderDB.SUBJECT_COURSE)));
+                s.setId(c.getInt(c.getColumnIndex(ProviderDB.SUBJECT_ID)));
                 subjects.add(s);
             }while(c.moveToNext());
         }
@@ -88,15 +69,15 @@ public class SubjectDaoImpl implements SubjectDao {
             sqldb = db.getWritableDatabase();
 
             ContentValues subjects = new ContentValues();
-            subjects.put(NAME, name);
-            subjects.put(DESCRIPTION, description);
-            subjects.put(COURSE, course);
+            subjects.put(ProviderDB.SUBJECT_NAME, name);
+            subjects.put(ProviderDB.SUBJECT_DESCRIPTION, description);
+            subjects.put(ProviderDB.SUBJECT_COURSE, course);
 
             if(id == 0) {
-                sqldb.insert(SUBJECT, null, subjects);
+                sqldb.insert(ProviderDB.SUBJECT_TABLE, null, subjects);
             } else {
                 String[] x = new String[]{String.valueOf(id)};
-                sqldb.update(SUBJECT, subjects, ScriptBD.ID_ASIGNATURA+ "=?", x);
+                sqldb.update(ProviderDB.SUBJECT_TABLE, subjects, ProviderDB.SUBJECT_ID + "=?", x);
             }
             listener.onSuccess();
 
@@ -125,7 +106,7 @@ public class SubjectDaoImpl implements SubjectDao {
 //                enrollments.put(ENROLLMENT_SUBJECT, subject.getId());
 //                enrollments.put(ENROLLMENT_STUDENT, student.getId());
 //
-//                sqldb.insert(ENROLLMENT, null, enrollments);
+//                sqldb.insert(ENROLLMENT_TABLE, null, enrollments);
 //
 //            } catch (Exception e) {
 //                continue;
@@ -146,7 +127,7 @@ public class SubjectDaoImpl implements SubjectDao {
         sqldb = db.getWritableDatabase();
         if(id > 0) {
             String[] value = new String[]{String.valueOf(id)};
-            sqldb.delete(SUBJECT, ScriptBD.ID_ASIGNATURA+ "=?", value);
+            sqldb.delete(ProviderDB.SUBJECT_TABLE, ProviderDB.SUBJECT_ID + "=?", value);
         }
         listener.onDeleteFinish();
 

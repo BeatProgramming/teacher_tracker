@@ -103,7 +103,7 @@ public class TaskFragment extends ListFragment implements TaskView, View.OnClick
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
         boolean help_mode = pref.getBoolean("help",true);
         if(help_mode){
-            Toast.makeText(getActivity().getApplicationContext(), "Para modificar un horario desde modificar asignatura" ,Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Para modificar un horario desde modificar asignatura" ,Toast.LENGTH_LONG).show();
         }
     }
 

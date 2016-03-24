@@ -9,6 +9,18 @@
     <string name="action_settings_app">Configuración app</string>
     <string name="action_settings_personal">Configuración personal</string>
 
+    <!-- PREFERENCES -->
+    <string name="prefs_title">Preferencias</string>
+    <string name="prefs_section_user">Usuario</string>
+    <string name="prefs_user_name_label">Nombre</string>
+    <string name="prefs_user_name_hint">Nombre</string>
+    <string name="prefs_user_email_label">Correo electrónico</string>
+    <string name="prefs_user_email_hint">usuario@dominio</string>
+    <string name="prefs_section_notifications">Notificaciones</string>
+    <string name="prefs_notifications_enable_label">Activar/Desactivar</string>
+    <string name="prefs_section_data">Datos externos</string>
+    <string name="prefs_data_csv_format_label">Formato CSV</string>
+
     <!-- DESCRIPTION TEXTS -->
     <string name="textDays">Dias de la semana a repetir</string>
     <string name="textClassroom">Aula en la que se imparte</string>
@@ -36,7 +48,7 @@
     <string name="reviewTitle">Evaluaciones</string>
     <string name="titleSubject">Asignatura</string>
 
-    <!-- SUBJECT FRAGMENT -->
+    <!-- SUBJECT_TABLE FRAGMENT -->
     <string name="subjectName">Nombre de la asignatura</string>
     <string name="subjectDescription">Descripción de la asignatura</string>
     <string name="subjectCurse">Curso de la asignatura</string>
@@ -53,7 +65,7 @@
     <string name="export_students">Exportar</string>
     <string name="manage_students">Gestionar</string>
 
-    <!-- EDIT SUBJECT FRAGMENT -->
+    <!-- EDIT SUBJECT_TABLE FRAGMENT -->
     <string name="subjects_editSubject">Asignaturas</string>
 
     <!-- UPDATE FRAGMENTS -->
@@ -64,7 +76,7 @@
     <string name="hourField">Hora</string>
     <string name="dateField">Fecha</string>
 
-    <!-- SUBMIT SCORE FRAGMENT -->
+    <!-- SUBMIT SCORE_TABLE FRAGMENT -->
     <string name="examName">Nombre exámen</string>
     <string name="examDate">Fecha exámen</string>
     <string name="examNameSubject">Nombre asignatura</string>
@@ -75,7 +87,7 @@
     <string name="student_name_label">Nombre</string>
     <string name="student_surname_label">Apellidos</string>
 
-    <!-- TASK FRAGMENT -->
+    <!-- TASK_TABLE FRAGMENT -->
     <string name="title_activity_task">Crear tarea</string>
     <string name="taskDescription">Nombre tarea..</string>
     <string name="taskRoom">Aula tarea..</string>
@@ -86,7 +98,7 @@
     <string name="csv_name">Nombre</string>
     <string name="csv_surname">Apellidos</string>
 
-    <!-- REVIEW UPDATE FRAGMENT -->
+    <!-- REVIEW_TABLE UPDATE FRAGMENT -->
     <string name="reviewName">Nombre del examen o práctica</string>
     <string name="review_type_exam">Examen</string>
     <string name="review_type_project">Práctica</string>
@@ -131,22 +143,6 @@
     <string name="title_activity_help">HelpActivity</string>
     
     <!-- Text de la ayuda -->
-    <string name="helpIndex1">¡Bienvenido a TeacherTracker!</string>
-    <string name="helpIndex2">En el menú de la izquierda tendrás las diferentes funciones</string>
-    <string name="helpIndex3">En el menú de la derecha tendrás las opciones de configuración</string>
-    <string name="helpIndex4">¿Por qué no lo pruebas?</string>
-
-    <string name="helpTask1">En esta pantalla podrás crear/editar tareas</string>
-    <string name="helpTask2">Pulse el botón rosa para añadir tareas</string>
-    <string name="helpTask3">Pulse sobre una tarea para modificarla</string>
-
-    <string name="helpSubject1">En esta pantalla podrás crear/editar asignaturas</string>
-    <string name="helpSubject2">Pulse el botón rosa para añadir asignaturas</string>
-    <string name="helpSubject3">Pulse sobre una asignatura para modificarla</string>
-
-    <string name="helpReview1">En esta pantalla podrás crear/editar exámenes o prácticas</string>
-    <string name="helpReview2">Pulse el botón rosa para añadir un exámen o  práctica</string>
-    <string name="helpReview3">Pulse sobre una evaluación y a continuación podrás calificar a los alumnos</string>
     <string name="subjectCreateTitle">Nueva asignatura</string>
     <string name="taskCreateTitle">Nueva tarea</string>
     <string name="taskUpdateTitle">Modificar tarea</string>
@@ -154,5 +150,7 @@
     <string name="studentCreateTitle">Nuevo estudiante</string>
     <string name="noteExampleNote">Esto es una nota...</string>
     <string name="onBackSettingsText">Los cambios se realizarán al reiniciar la aplicación</string>
+
+    <string name="not_implemented">No implementado</string>
 
 </resources>

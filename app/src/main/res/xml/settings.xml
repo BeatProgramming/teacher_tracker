@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/title_settings" android:layout="@layout/activity_title_settings">
+    <PreferenceCategory android:title="@string/prefs_title" android:layout="@layout/activity_title_settings">
     </PreferenceCategory>
     <!-- Preferencias usuario -->
-    <PreferenceCategory android:title="@string/title_user">
+    <PreferenceCategory android:title="@string/prefs_section_user">
         <EditTextPreference
             android:key="user_name"
-            android:title="@string/title_user_name"
-            android:defaultValue="Nombre"
+            android:title="@string/prefs_user_name_label"
+            android:hint="@string/prefs_user_name_hint"
             android:singleLine="true"/>
         <EditTextPreference
             android:key="user_mail"
-            android:title="@string/title_user_mail"
-            android:defaultValue="Nombre@teachertracker.es"
+            android:title="@string/prefs_user_email_label"
+            android:hint="@string/prefs_user_email_hint"
             android:singleLine="true"/>
     </PreferenceCategory>
     <!-- Preferencias notificaciones -->
-    <PreferenceCategory android:title="@string/title_notifications">
+    <PreferenceCategory android:title="@string/prefs_section_notifications">
         <CheckBoxPreference
             android:key="notification"
-            android:title="@string/title_notifications"
+            android:title="@string/prefs_notifications_enable_label"
             android:defaultValue="false"/>
-        <CheckBoxPreference
-            android:key="help"
-            android:title="@string/title_help_mode"
-            android:defaultValue="true"/>
     </PreferenceCategory>
     <!-- Preferencias tareas -->
-    <PreferenceCategory android:title="@string/title_csv">
+    <PreferenceCategory android:title="@string/prefs_section_data">
         <ListPreference
         android:key="format"
-        android:title="@string/title_csv_format"
+        android:title="@string/prefs_data_csv_format_label"
         android:entries="@array/order"
         android:entryValues="@array/orderValues"
         android:defaultValue="0"/>

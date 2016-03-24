@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 import beatprogramming.github.com.teacker_tracker.callback.FragmentCallback;
+import beatprogramming.github.com.teacker_tracker.database.BDHelper;
 import beatprogramming.github.com.teacker_tracker.domain.Student;
 import beatprogramming.github.com.teacker_tracker.exception.CSVException;
 import beatprogramming.github.com.teacker_tracker.fragments.ImportStudentsFragment;
@@ -32,7 +33,6 @@ import beatprogramming.github.com.teacker_tracker.fragments.StudentTabFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.SubjectFragment;
 import beatprogramming.github.com.teacker_tracker.fragments.TaskFragment;
 import beatprogramming.github.com.teacker_tracker.util.CSVManager;
-import beatprogramming.github.com.teacker_tracker.util.HelpUtil;
 
 /**
  * - Activity principal de la app
@@ -72,20 +72,21 @@ public class MainActivity extends AppCompatActivity
         navigationView.addHeaderView(header);
         TextView text = (TextView) header.findViewById(R.id.textView3);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        String user_name = pref.getString("user_name", "?");
-        String user_mail = pref.getString("user_mail", "?");
+        String user_name = pref.getString("user_name", "");
+        String user_mail = pref.getString("user_mail", "");
         help_mode = pref.getBoolean("help",true);
-        if (text!=null){
-            text.setText(user_name + " (" + user_mail + ")");
+
+        if (text != null){
+            StringBuilder stb = new StringBuilder();
+            if (!user_name.isEmpty()) {
+                stb.append(user_name + " ");
+            }
+            if (!user_mail.isEmpty()) {
+                stb.append("(" + user_mail + ")");
+            }
+            text.setText(stb.toString());
         }
         Log.d("debug", "onCrete de main");
-        //- Activado el modo ayuda
-        if(help_mode)
-            HelpUtil.showIndexHelp(this, new String[] {getResources().getString(R.string.helpIndex1),
-                    getResources().getString(R.string.helpIndex2),getResources().getString(R.string.helpIndex3),
-                    getResources().getString(R.string.helpIndex4)
-            });
-
 
         Fragment frag;
         final Intent intent = getIntent();
@@ -165,31 +166,16 @@ public class MainActivity extends AppCompatActivity
 
             frag = new TaskFragment();
             replaceFragment(frag);
-            //- Activado el modo ayuda
-            if(help_mode)
-                HelpUtil.showTaskHelp(this, new String[] {getResources().getString(R.string.helpTask1),
-                        getResources().getString(R.string.helpTask2),getResources().getString(R.string.helpTask3)
-                });
-        }
-        if (id == R.id.nav_subject) {
+
+        } else if (id == R.id.nav_subject) {
 
             frag = new SubjectFragment();
             replaceFragment(frag);
-            //- Activado el modo ayuda
-            if(help_mode)
-                HelpUtil.showSubjectHelp(this,new String[] {getResources().getString(R.string.helpSubject1),
-                    getResources().getString(R.string.helpSubject2),getResources().getString(R.string.helpSubject3)
-            });
 
         } else if (id == R.id.nav_score) {
 
             frag = new ReviewFragment();
             replaceFragment(frag);
-            //- Activado el modo ayuda
-            if(help_mode)
-                HelpUtil.showScoreHelp(this, new String[] {getResources().getString(R.string.helpReview1),
-                        getResources().getString(R.string.helpReview2),getResources().getString(R.string.helpReview3)
-                });
 
         } else if (id == R.id.nav_export_students) {
 

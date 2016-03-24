@@ -125,7 +125,7 @@ public class TaskUpdatePresenter implements OnUpdateFinishListener, OnDeleteFini
             view.setSubjectId(subject.getId());
         } else {
             Log.d(TAG, "onSubjectSelected, nothing selected.");
-            // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
+            // ACCION CUANDO NO HAY SUBJECT_TABLE SELECIONADA.
         }
     }
 

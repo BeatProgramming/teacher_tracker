@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Strings -->
-    <string name="title_settings">Preferencias</string>
-    <string name="title_user">Usuario</string>
-    <string name="title_user_name">Nombre</string>
-    <string name="title_user_mail">Correo electrónico</string>
-    <string name="title_notifications">Notificaciones</string>
-    <string name="title_help_mode">Modo ayuda</string>
-    <string name="title_csv" translatable="false">CSV</string>
-    <string name="title_csv_format">Formato CSV</string>
-
-
     <!-- Arrays -->
     <string-array name="order">
         <item>Nombre,Apellidos</item>

@@ -29,7 +29,7 @@
     <string name="submit">Confirm</string>
 
 
-    <!-- SUBJECT FRAGMENT -->
+    <!-- SUBJECT_TABLE FRAGMENT -->
     <string name="subjectName">Name of subject</string>
     <string name="subjectDescription">Description</string>
     <string name="subjectCurse">Course</string>
@@ -132,11 +132,4 @@
     <string name="subjectCreateTitle">New subject</string>
     <string name="taskCreateTitle">New task</string>
     <string name="taskUpdateTitle">Modify task</string>
-    <string name="title_csv_format">CSV Format</string>
-    <string name="title_help_mode">Help mode</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_settings">Preferences</string>
-    <string name="title_user">User</string>
-    <string name="title_user_mail">Email</string>
-    <string name="title_user_name">Name</string>
 </resources>

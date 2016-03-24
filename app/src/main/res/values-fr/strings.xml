@@ -125,17 +125,10 @@
     <string name="textSubject">Titre du cours</string>
     <string name="textSubjectCourse">Cours de golf</string>
     <string name="textSubjectDescription">Description de l\'objet </string>
-    <string name="title_csv_format">Format CSV</string>
     <string name="taskUpdateTitle">Modifier la tâche</string>
     <string name="taskCreateTitle">Nouvelle tâche</string>
     <string name="subjectCreateTitle">Nouvelle sujet</string>
     <string name="studentCreateTitle">Nouvel étudiant</string>
     <string name="reviewCreateTitle">Réévaluation</string>
     <string name="onBackSettingsText">Les changements seront apportés pour redémarrer l\'application </string>
-    <string name="title_help_mode">Mode aide</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_settings">Préférences</string>
-    <string name="title_user">Utilisateur</string>
-    <string name="title_user_mail">Email</string>
-    <string name="title_user_name">Nom</string>
 </resources>

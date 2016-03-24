@@ -59,7 +59,7 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
                     Toast.makeText(context, context.getString(R.string.score_comment_toast), Toast.LENGTH_SHORT).show();
                 else {
                     // Introduccion de un comentario de nota.
-                    Toast.makeText(context, "No implementado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.not_implemented, Toast.LENGTH_SHORT).show();
                 }
             }
         });

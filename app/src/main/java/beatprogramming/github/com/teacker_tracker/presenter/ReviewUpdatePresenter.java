@@ -94,7 +94,7 @@ public class ReviewUpdatePresenter implements OnUpdateFinishListener, OnDeleteFi
             Log.d(TAG, "onSubjectSelected, selected: " + subject.toString());
         } else {
             Log.d(TAG, "onSubjectSelected, nothing selected.");
-            // ACCION CUANDO NO HAY ASIGNATURA SELECIONADA.
+            // ACCION CUANDO NO HAY SUBJECT_TABLE SELECIONADA.
         }
 
     }
