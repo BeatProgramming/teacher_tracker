@@ -20,7 +20,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"/>
 
     <TextView
-        android:id="@+id/item_review_subject"
+        android:id="@+id/item_review_subject_name"
         android:layout_width="@dimen/review_suject"
         android:layout_height="wrap_content" />
 

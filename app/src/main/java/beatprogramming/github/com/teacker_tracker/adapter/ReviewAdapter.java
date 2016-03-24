@@ -40,13 +40,17 @@ public class ReviewAdapter extends ArrayAdapter {
 
         ImageView iconView = (ImageView) rowView.findViewById(R.id.item_review_icon);
         TextView nameTextView = (TextView) rowView.findViewById(R.id.item_review_name);
-        TextView subjectTextView = (TextView) rowView.findViewById(R.id.item_review_subject);
+        TextView dateTextView = (TextView) rowView.findViewById(R.id.item_review_date);
+        TextView subjectNameTextView = (TextView) rowView.findViewById(R.id.item_review_subject_name);
+        TextView subjectCourseTextView = (TextView) rowView.findViewById(R.id.item_review_subject_course);
 
         Review review = (Review) getItem(position);
 
         int iconResource = (review instanceof Exam) ? R.drawable.exam : R.drawable.work;
         String name = review.getName();
+        String date = review.getDateTime().toString("E dd,MMM (HH:mm)");
         String subject = review.getSubject().getNombre();
+        String course = review.getSubject().getCurso();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             iconView.setImageDrawable(context.getDrawable(iconResource));
@@ -54,7 +58,9 @@ public class ReviewAdapter extends ArrayAdapter {
             iconView.setImageDrawable(context.getResources().getDrawable(iconResource));
         }
         nameTextView.setText(name);
-        subjectTextView.setText(subject);
+        dateTextView.setText(date);
+        subjectNameTextView.setText(subject);
+        subjectCourseTextView.setText(course);
 
         Log.d(TAG, "getView, name: " + name + ", subject: " + subject);
 

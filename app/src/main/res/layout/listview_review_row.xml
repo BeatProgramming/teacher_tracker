@@ -11,17 +11,66 @@
     <ImageView
         android:id="@+id/item_review_icon"
         android:layout_width="@dimen/icon_dimen"
-        android:layout_height="@dimen/icon_dimen" />
+        android:layout_height="@dimen/icon_dimen"
+        android:layout_gravity="center"
+    />
 
-    <TextView
-        android:id="@+id/item_review_name"
+    <LinearLayout
         android:layout_width="@dimen/review_name"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+    >
 
-    <TextView
-        android:id="@+id/item_review_subject"
+        <TextView
+            android:id="@+id/item_review_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textSize="16sp"
+        />
+
+        <TextView
+            android:id="@+id/item_review_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ligth_grey"
+            android:singleLine="true"
+            android:textSize="12sp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="@dimen/review_suject"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+    >
+
+        <TextView
+            android:id="@+id/item_review_subject_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+        />
+
+        <TextView
+            android:id="@+id/item_review_subject_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ligth_grey"
+            android:singleLine="true"
+            android:textSize="12sp"
+        />
+
+    </LinearLayout>
 
 </LinearLayout>
