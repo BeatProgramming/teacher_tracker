@@ -63,7 +63,7 @@ public class SubjectDaoImpl implements SubjectDao {
      * @param listener instancia del listener
      */
     @Override
-    public void updateSubject(int id, String name, String description, String course, OnUpdateFinishListener listener) {
+    public int updateSubject(int id, String name, String description, String course, OnUpdateFinishListener listener) {
 
         try{
             sqldb = db.getWritableDatabase();
@@ -74,7 +74,7 @@ public class SubjectDaoImpl implements SubjectDao {
             subjects.put(ProviderDB.SUBJECT_COURSE, course);
 
             if(id == 0) {
-                sqldb.insert(ProviderDB.SUBJECT_TABLE, null, subjects);
+                id = (int) sqldb.insert(ProviderDB.SUBJECT_TABLE, null, subjects);
             } else {
                 String[] x = new String[]{String.valueOf(id)};
                 sqldb.update(ProviderDB.SUBJECT_TABLE, subjects, ProviderDB.SUBJECT_ID + "=?", x);
@@ -82,8 +82,11 @@ public class SubjectDaoImpl implements SubjectDao {
             listener.onSuccess();
 
         } catch (Exception e) {
+            id = -1;
             listener.onError(e.getMessage());
         }
+
+        return id;
 
     }
 
@@ -94,9 +97,10 @@ public class SubjectDaoImpl implements SubjectDao {
      * @param subject
      */
     @Override
-    public void updateSubject(Subject subject, OnUpdateFinishListener listener) {
+    public int updateSubject(Subject subject, OnUpdateFinishListener listener) {
 
-        updateSubject(subject.getId(), subject.getNombre(), subject.getDescripcion(), subject.getCurso(), listener);
+        return updateSubject(subject.getId(), subject.getNombre(), subject.getDescripcion(), subject.getCurso(),
+            listener);
 
 //        sqldb = db.getWritableDatabase();
 //        for(Student student : subject.getStudentList()) {

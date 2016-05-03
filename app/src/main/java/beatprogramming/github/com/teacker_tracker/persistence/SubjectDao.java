@@ -11,10 +11,10 @@ public interface SubjectDao {
 
     void findSubjects(OnLoadFinishListener listener);
 
-    void updateSubject(int id, String name, String description, String course,
+    int updateSubject(int id, String name, String description, String course,
                        OnUpdateFinishListener listener);
 
-    void updateSubject(Subject subject, OnUpdateFinishListener listener);
+    int updateSubject(Subject subject, OnUpdateFinishListener listener);
 
     void deleteSubject(int id, OnDeleteFinishListener listener);
 

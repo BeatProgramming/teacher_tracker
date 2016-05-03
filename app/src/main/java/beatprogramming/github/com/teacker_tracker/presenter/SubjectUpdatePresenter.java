@@ -31,9 +31,10 @@ public class SubjectUpdatePresenter implements OnUpdateFinishListener, OnDeleteF
 
         if(name.equals("") || description.equals("") || course.equals(""))
             view.setError("Completa todos los campos");
-        else
-            subjectDao.updateSubject(idSubject, name, description, course, this);
-            scheduleDao.updateSchedule(idSchedule,idSubject,time,classroom, days, this);
+        else {
+            int subjectId = subjectDao.updateSubject(idSubject, name, description, course, this);
+            scheduleDao.updateSchedule(idSchedule, subjectId, time, classroom, days, this);
+        }
     }
 
     public void delete(int id) {
