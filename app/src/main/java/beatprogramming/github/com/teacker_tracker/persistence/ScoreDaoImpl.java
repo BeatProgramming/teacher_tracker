@@ -26,20 +26,33 @@ public class ScoreDaoImpl implements ScoreDao {
     // Aliases
     private static final String STUDENT_NAME_ALIAS = "nameStudent";
     private static final String STUDENT_ID_ALIAS = "theStudent";
+    private static final String SUBJECT_ID_ALIAS = "theSubject";
 
     // Review Types
     public static final String EXAM = "Exam";
     public static final String PROJECT = "Project";
 
-    private static final String FIND_BY_REVIEW =
-        "SELECT " + ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_ID + " AS " + STUDENT_ID_ALIAS + "," +
-            ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_NAME + " AS " + STUDENT_NAME_ALIAS + "," +
-            ProviderDB.STUDENT_SURNAME + ", " + ProviderDB.STUDENT_ICON + "," + ProviderDB.SCORE_TABLE + "." +
-            ProviderDB.SCORE_VALUE + "," + ProviderDB.SCORE_TABLE + "." + ProviderDB.SCORE_COMMENT + " FROM " +
-            ProviderDB.SCORE_TABLE + " LEFT JOIN " + ProviderDB.STUDENT_TABLE + " ON " + ProviderDB.SCORE_TABLE +
-            "." + ProviderDB.SCORE_STUDENT_ID + "=" + ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_ID +
-            " WHERE " + ProviderDB.SCORE_TABLE + "." + ProviderDB.SCORE_REVIEW_ID + "= ? ORDER BY " +
-            ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_SURNAME;
+    private static final String ENROLLMENT_QUERY =
+        "SELECT " + ProviderDB.SUBJECT_TABLE + "." + ProviderDB.SUBJECT_ID + " AS " + SUBJECT_ID_ALIAS + "," +
+            ProviderDB.ENROLLMENT_TABLE + "." + ProviderDB.ENROLLMENT_STUDENT_ID + " AS " + STUDENT_ID_ALIAS +
+            " FROM " + ProviderDB.ENROLLMENT_TABLE + " LEFT JOIN " + ProviderDB.SUBJECT_TABLE + " ON " +
+            ProviderDB.ENROLLMENT_TABLE + "." + ProviderDB.ENROLLMENT_SUBJECT_ID + "=" + ProviderDB.SUBJECT_TABLE +
+            "." + ProviderDB.SUBJECT_ID;
+
+    private static final String STUDENT_QUERY =
+        "SELECT " + ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_NAME + " AS " + STUDENT_NAME_ALIAS + "," +
+            ProviderDB.STUDENT_SURNAME + ", " + ProviderDB.STUDENT_ICON + ", enrollmentJoin.* FROM " +
+            ProviderDB.STUDENT_TABLE + " LEFT JOIN (" + ENROLLMENT_QUERY + ") AS enrollmentJoin ON " +
+            ProviderDB.STUDENT_TABLE + "." + ProviderDB.STUDENT_ID + "=enrollmentJoin." + STUDENT_ID_ALIAS;
+
+    private static final String SCORE_QUERY = "SELECT " + ProviderDB.SCORE_TABLE + "." + ProviderDB.SCORE_VALUE + "," +
+        ProviderDB.SCORE_TABLE + "." + ProviderDB.SCORE_COMMENT + "," + ProviderDB.SCORE_STUDENT_ID + " FROM " +
+        ProviderDB.SCORE_TABLE + " WHERE " + ProviderDB.SCORE_REVIEW_ID + "=?";
+
+    private static final String FIND_BY_REVIEW = "SELECT * FROM (" + STUDENT_QUERY + ") AS studentQuery " +
+        " LEFT JOIN (" + SCORE_QUERY + ") AS scoreJoin ON studentQuery." + STUDENT_ID_ALIAS + "=scoreJoin." +
+        ProviderDB.SCORE_STUDENT_ID + " WHERE studentQuery." + SUBJECT_ID_ALIAS + "= ? ORDER BY studentQuery." +
+        ProviderDB.STUDENT_SURNAME;
 
     private static SQLiteDatabase sqldb;
     private static Cursor cursor;
@@ -101,7 +114,8 @@ public class ScoreDaoImpl implements ScoreDao {
 
         sqldb = db.getReadableDatabase();
 
-        cursor = sqldb.rawQuery(FIND_BY_REVIEW, new String[]{ Integer.toString(review.getId()) });
+        cursor = sqldb.rawQuery(FIND_BY_REVIEW,
+            new String[]{ Integer.toString(review.getId()), Integer.toString(review.getSubject().getId()) });
         //Lista de reviews
         List scores = new ArrayList<Score>();
         if (cursor.moveToFirst()) {

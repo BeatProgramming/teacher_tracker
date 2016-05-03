@@ -28,7 +28,6 @@ public class ReviewPresenter implements OnLoadFinishListener {
 
     public void onItemClicked(int position) {
         Review review = view.getReviewFromAdapter(position);
-//        view.loadReviewUpdateFragment(review);
         view.loadScoreFragment(review);
     }
 
@@ -36,9 +35,15 @@ public class ReviewPresenter implements OnLoadFinishListener {
     public void onLoadFinish(List<? extends Serializable> items) {
         view.setItems((List<Review>) items);
         view.hideLoading();
+        view.setupListView();
     }
 
     public void onCreateReview() {
         view.loadReviewUpdateFragment(null);
+    }
+
+    public void onItemLongClick(int position) {
+        Review review = view.getReviewFromAdapter(position);
+        view.loadReviewUpdateFragment(review);
     }
 }

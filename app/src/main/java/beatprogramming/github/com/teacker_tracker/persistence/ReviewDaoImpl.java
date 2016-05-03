@@ -27,12 +27,14 @@ public class ReviewDaoImpl implements ReviewDao {
     // Aliases
     private static final String REVIEW_ID_ALIAS = "reviewId";
     private static final String REVIEW_NAME_ALIAS = "reviewName";
+    private static final String SUBJECT_ID_ALIAS = "subjectId";
     private static final String SUBJECT_NAME_ALIAS = "subjectName";
 
     private static final String FINDQUERY =
         "SELECT " + ProviderDB.REVIEW_TABLE + "." + ProviderDB.REVIEW_ID + " AS " + REVIEW_ID_ALIAS + "," +
             ProviderDB.REVIEW_TABLE + "." + ProviderDB.REVIEW_NAME + " AS " + REVIEW_NAME_ALIAS + "," +
             ProviderDB.REVIEW_SUBJECT_ID + "," + ProviderDB.REVIEW_DATE + "," + ProviderDB.REVIEW_TYPE + "," +
+            ProviderDB.SUBJECT_TABLE + "." + ProviderDB.SUBJECT_ID + " AS " + SUBJECT_ID_ALIAS + "," +
             ProviderDB.SUBJECT_TABLE + "." + ProviderDB.SUBJECT_NAME + " AS " + SUBJECT_NAME_ALIAS + "," +
             ProviderDB.SUBJECT_TABLE + "." + ProviderDB.SUBJECT_DESCRIPTION + "," + ProviderDB.SUBJECT_TABLE + "." +
             ProviderDB.SUBJECT_COURSE + " FROM " + ProviderDB.REVIEW_TABLE + " LEFT JOIN " + ProviderDB.SUBJECT_TABLE +
@@ -69,11 +71,13 @@ public class ReviewDaoImpl implements ReviewDao {
                 if (c.getString(c.getColumnIndex(ProviderDB.REVIEW_TYPE)).equals(PROJECT)) {
                     Subject s = new Subject(c.getString(c.getColumnIndex(SUBJECT_NAME_ALIAS)),
                         c.getString(c.getColumnIndex(ProviderDB.SUBJECT_DESCRIPTION)), c.getString(c.getColumnIndex(ProviderDB.SUBJECT_COURSE)));
+                    s.setId(c.getInt(c.getColumnIndex(SUBJECT_ID_ALIAS)));
                     fechaReview = fechaReview.withMillis(c.getLong(c.getColumnIndex(ProviderDB.REVIEW_DATE)));
                     r = new Project(c.getString(c.getColumnIndex(REVIEW_NAME_ALIAS)), s, fechaReview);
                 } else {
                     Subject s = new Subject(c.getString(c.getColumnIndex(SUBJECT_NAME_ALIAS)),
                         c.getString(c.getColumnIndex(ProviderDB.SUBJECT_DESCRIPTION)), c.getString(c.getColumnIndex(ProviderDB.SUBJECT_COURSE)));
+                    s.setId(c.getInt(c.getColumnIndex(SUBJECT_ID_ALIAS)));
                     fechaReview = fechaReview.withMillis(c.getLong(c.getColumnIndex(ProviderDB.REVIEW_DATE)));
                     r = new Exam(c.getString(c.getColumnIndex(REVIEW_NAME_ALIAS)), s, fechaReview);
                 }

@@ -7,6 +7,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import java.util.List;
@@ -20,7 +21,7 @@ import beatprogramming.github.com.teacker_tracker.presenter.ReviewPresenter;
 /**
  * - Implementa las evaluaciones (Exámenes/Prácticas)
  */
-public class ReviewFragment extends ListFragment implements ReviewView {
+public class ReviewFragment extends ListFragment implements ReviewView, AdapterView.OnItemLongClickListener {
 
     private FragmentCallback callback;
     private ProgressBar progressBar;
@@ -70,6 +71,11 @@ public class ReviewFragment extends ListFragment implements ReviewView {
     }
 
     @Override
+    public void setupListView() {
+        getListView().setOnItemLongClickListener(this);
+    }
+
+    @Override
     public void loadScoreFragment(Review review) {
         Fragment fragment = ScoreFragment.newInstance(review);
         callback.replaceFragment(fragment);
@@ -104,4 +110,9 @@ public class ReviewFragment extends ListFragment implements ReviewView {
         callback = (FragmentCallback) context;
     }
 
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        presenter.onItemLongClick(position);
+        return true;
+    }
 }
