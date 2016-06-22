@@ -46,6 +46,8 @@ public class BDHelper extends SQLiteOpenHelper {
         //- Inserts predefinidos
         db.execSQL(ProviderDB.INSERT_ASIGNATURA1_SCRIPT);
         db.execSQL(ProviderDB.INSERT_ASIGNATURA2_SCRIPT);
+        db.execSQL(ProviderDB.INSERT_ASIGNATURA3_SCRIPT);
+        db.execSQL(ProviderDB.INSERT_ASIGNATURA4_SCRIPT);
         db.execSQL(ProviderDB.INSERT_ALUMNO1_SCRIPT);
         db.execSQL(ProviderDB.INSERT_ALUMNO2_SCRIPT);
         db.execSQL(ProviderDB.INSERT_TAREA1_SCRIPT);
@@ -53,6 +55,7 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL(ProviderDB.INSERT_TAREA3_SCRIPT);
         db.execSQL(ProviderDB.INSERT_REVIEW1_SCRIPT);
         db.execSQL(ProviderDB.INSERT_REVIEW2_SCRIPT);
+        db.execSQL(ProviderDB.INSERT_REVIEW3_SCRIPT);
         db.execSQL(ProviderDB.INSERT_CALIFICACION1_SCRIPT);
         db.execSQL(ProviderDB.INSERT_CALIFICACION2_SCRIPT);
         db.execSQL(ProviderDB.INSERT_CALIFICACION3_SCRIPT);
@@ -61,6 +64,8 @@ public class BDHelper extends SQLiteOpenHelper {
         db.execSQL(ProviderDB.INSERT_MATRICULA3_SCRIPT);
         db.execSQL(ProviderDB.INSERT_SCHEDULE1_SCRIPT);
         db.execSQL(ProviderDB.INSERT_SCHEDULE2_SCRIPT);
+        db.execSQL(ProviderDB.INSERT_SCHEDULE3_SCRIPT);
+        db.execSQL(ProviderDB.INSERT_SCHEDULE4_SCRIPT);
 
     }
 

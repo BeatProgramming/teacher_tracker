@@ -160,22 +160,36 @@ public class ProviderDB {
     public static final String INSERT_ASIGNATURA1_SCRIPT =
             "INSERT INTO " + SUBJECT_TABLE + " values (" +
                     "null," +
-                    "\"Lengua\"," +
-                    "\"Asignatura básica Lengua\"," +
-                    "\"1 ESO\")";
+                    "\"Fundamentos de Computadoras\"," +
+                    "\"Principios básicos de la informática\"," +
+                    "\"1\")";
 
     public static final String INSERT_ASIGNATURA2_SCRIPT =
             "INSERT INTO " + SUBJECT_TABLE + " values (" +
                     "null," +
-                    "\"Matematicas\"," +
-                    "\"Asignatura básica Matematicas\"," +
-                    "\"1 ESO\")";
+                    "\"Inteligencia Artificial\"," +
+                    "\"Algoritmos de aprendizaje automático\"," +
+                    "\"3\")";
+
+    public static final String INSERT_ASIGNATURA3_SCRIPT =
+        "INSERT INTO " + SUBJECT_TABLE + " values (" +
+            "null," +
+            "\"Sistemas Operativos\"," +
+            "\"Fundamentos sobre el diseño e implementación de un sistema operativo\"," +
+            "\"2\")";
+
+    public static final String INSERT_ASIGNATURA4_SCRIPT =
+        "INSERT INTO " + SUBJECT_TABLE + " values (" +
+            "null," +
+            "\"Sistemas Móviles\"," +
+            "\"Diseño y desarrollo de aplicaciones de movilidad\"," +
+            "\"4\")";
 
     //-  Inserccion de datos de evaluación
     public static final String INSERT_REVIEW1_SCRIPT =
             "INSERT INTO " + REVIEW_TABLE + " values (" +
                     "null," +
-                    "\"Primer parcial\"," +
+                    "\"Examen tema 1\"," +
                     "1," +
                     "\"1451474455580\"," +
                     "\"Exam\")";
@@ -183,10 +197,18 @@ public class ProviderDB {
     public static final String INSERT_REVIEW2_SCRIPT =
             "INSERT INTO " + REVIEW_TABLE + " values (" +
                     "null," +
-                    "\"Segundo parcial\"," +
-                    "1," +
+                    "\"Examen Tema 3\"," +
+                    "3," +
                     "1451474455501," +
                     "\"Exam\")";
+
+    public static final String INSERT_REVIEW3_SCRIPT =
+        "INSERT INTO " + REVIEW_TABLE + " values (" +
+            "null," +
+            "\"Práctica 2\"," +
+            "2," +
+            "1451474455501," +
+            "\"Project\")";
 
     //-  Inserccion de datos de tareas
     public static final String INSERT_TAREA1_SCRIPT =
@@ -239,14 +261,14 @@ public class ProviderDB {
     public static final String INSERT_CALIFICACION2_SCRIPT =
             "INSERT INTO " + SCORE_TABLE + " values (" +
                     "4," +
-                    "\"NOOOOOOB\"," +
+                    "\"Muy mal\"," +
                     "1," +
                     "2)";
 
     public static final String INSERT_CALIFICACION3_SCRIPT =
             "INSERT INTO " + SCORE_TABLE + " values (" +
-                    "8," +
-                    "\"NOOOOOOB\"," +
+                    "9.5," +
+                    "\"La perfección no existe\"," +
                     "2," +
                     "2)";
 
@@ -273,14 +295,30 @@ public class ProviderDB {
                     "1," +
                     "\"8:00\"," +
                     "\"A101\"," +
-                    "\"LMXJV\")";
+                    "\"LMJ\")";
 
     public static final String INSERT_SCHEDULE2_SCRIPT =
             "INSERT INTO " + SCHEDULE_TABLE + " values (" +
                     "null," +
                     "2," +
                     "\"10:00\"," +
-                    "\"A101\"," +
-                    "\"LMXJVSD\")";
+                    "\"A102\"," +
+                    "\"LXV\")";
+
+    public static final String INSERT_SCHEDULE3_SCRIPT =
+        "INSERT INTO " + SCHEDULE_TABLE + " values (" +
+            "null," +
+            "3," +
+            "\"11:00\"," +
+            "\"A103\"," +
+            "\"MJV\")";
+
+    public static final String INSERT_SCHEDULE4_SCRIPT =
+        "INSERT INTO " + SCHEDULE_TABLE + " values (" +
+            "null," +
+            "4," +
+            "\"12:00\"," +
+            "\"A104\"," +
+            "\"LXJ\")";
 
 }
